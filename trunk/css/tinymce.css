@@ -1,0 +1,9 @@
+@import "default.css";
+
+body
+{
+	font-size:11px;
+	font-family:verdana;
+	background:#fff !important;
+	text-align:left !important;
+}
