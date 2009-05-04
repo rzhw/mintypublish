@@ -42,7 +42,7 @@ else
 	<img src="img/page_add.png" alt="" /> <a href="index.php?p=admin&amp;s=add">Add a page</a>
 	<img src="img/page_gear.png" alt="" /> <a href="index.php?p=admin&amp;s=man">Manage pages</a>
 	<img src="img/bug.png" alt="" /> <a href="index.php?p=admin&amp;s=reports">Manage bugs</a>
-	<img src="img/help.png" alt="" /> <a href="index.php?p=admin&amp;s=help">Help and layout guidelines</a><br />
+	<!--<img src="img/help.png" alt="" /> <a href="index.php?p=admin&amp;s=help">Help and layout guidelines</a><br />-->
 	<br />
 	<?php
 	if ($_GET["s"]=="add")
@@ -344,27 +344,6 @@ else
 		?>
 		<h2>Manage bugs</h2>
 		This function currently does not exist and how this will be implemented is still pending.
-		<?php
-	}
-	
-	if ($_GET["s"]=="help")
-	{
-		?>
-		<h2>Help and layout guidelines</h2>
-		<h3>Videos</h3>
-		To place videos on the website, you will need to ensure your video is in .flv (Adobe Flash Video) format or
-		.mp4 (MPEG-4) format. For now, you will need to give such files to the Science Intranet Team, preferably
-		using something such as a USB drive, as uploading and redownloading the videos would take too long and also
-		use up our download limits. To convert a video to flv/mp4 format, it is recommended you visit a website such
-		as www.media-convert.com - this website is brilliant. Browse to your video, scroll down and select the output
-		format as either flv/mp4. mp4 is preferred for higher quality videos. You can otherwise leave the options
-		as their defaults, and then click the blue "Go" button. Once conversion completes, download the video.<br />
-		<br />
-		<h3>Layout consistency</h3>
-		<ul>
-		<li>Image headers should be 1008 pixels wide and 196px pixels tall.</li>
-		<li>You need to style your tables: titles should be "table_title", and every second row should be "table_rowhi"</li>
-		</ul>
 		<?php
 	}
 }
