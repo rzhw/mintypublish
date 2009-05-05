@@ -1,4 +1,9 @@
 <?php
+if (!function_exists("json_encode"))
+{
+	exit("Sorry, but JSON support is required to run ZVFPCMS. It should be included with PHP 5.20 and above.");
+}
+
 $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
 
