@@ -59,8 +59,12 @@ else
 
 	if ($_GET["s"]=="add2")
 	{
-		// t variable only works on windows systems
-		// converts \n into \r\n
+		/*
+		this is just a comment for my reference - a2h
+		
+		t variable only works on windows systems
+		converts \n into \r\n
+		*/
 		
 		echo '<h2>Adding page...</h2>';
 		
@@ -74,20 +78,23 @@ else
 		if (fwrite($file,$contenttowrite) != false)
 			echo '<img src="img/tick.png" alt="" /> Success!';
 		else
-			echo '<img src="img/cross.png" alt="" /> Failure! (n.b. if your page has blank content this may happen)';
+			echo '<img src="img/cross.png" alt="" /> Failure! (n.b. if your page has blank content this may not be true)';
 			
 		echo '<br /><br />';
 			
 		fclose($file);
-
-		$file2 = fopen("content/pages.txt","a");
 		
-		$newmenuentry = '
-'.sizeof(file("content/pages.txt")).'|'.$_POST["theid"].'|'.$_POST["thetitle"];
+		$data = json_decode(file_get_contents("content/_pages.txt"),true);
+		$file2 = fopen("content/_pages.txt","w");
 		
-		echo 'Modifying menu... ';
+		// TODO: Subpage support
+		$data[sizeof($data)] = array(
+			"shortname" => $_POST["theid"],
+			"fullname" => $_POST["thetitle"],
+			"subpage" => -1
+		);
 		
-		if (fwrite($file2,$newmenuentry) != false)
+		if (fwrite($file2,json_encode($data)) != false)
 			echo '<img src="img/tick.png" alt="" /> Success!';
 		else
 			echo '<img src="img/cross.png" alt="" /> Failure!';
@@ -103,12 +110,7 @@ else
 		<h2>Manage pages</h2>
 		<br />
 		<?php
-		$pageinfo = file("content/pages.txt");
-
-		foreach($pageinfo as $key => $val) 
-		{ 
-		   $data[$key] = explode("|", $val);
-		}
+		$data = json_decode(file_get_contents("content/_pages.txt"),true);
 		
 		if (!isset($_GET["action"]))
 		{
@@ -116,22 +118,31 @@ else
 				This is the list of pages. Use <img src="img/arrow_up.png" alt="" />/<img src="img/arrow_down.png" alt="" /> to
 				move their order in the menu. Click on <img src="img/page_edit.png" alt="" /> to edit a page.<br />
 				Click on <img src="img/page_delete.png" alt="" /> to delete a page.<br /><br />';
-
-			for($i = 0; $i < sizeof($pageinfo); $i++) 
+				
+			for($i = 0; $i < sizeof($data); $i++) 
 			{
-				if ($i == 0)
+				// top item in list where there is more than one item
+				if ($i == 0 && sizeof($data) > 1)
 				{
-					template_page_man_entry("index.php?p=admin&amp;s=man",$data[$i][0],$data[$i][2],1,0);
+					template_page_man_entry("index.php?p=admin&amp;s=man",$i,$data[$i]["fullname"],1,0);
 					echo '<br />';
 				}
-				else if ($i == (sizeof($pageinfo)-1))
+				// the only item in the list
+				else if ($i == 0)
 				{
-					template_page_man_entry("index.php?p=admin&amp;s=man",$data[$i][0],$data[$i][2],0,1);
+					template_page_man_entry("index.php?p=admin&amp;s=man",$i,$data[$i]["fullname"],1,1);
 					echo '<br />';
 				}
+				// bottom item in list where there is more than one item
+				else if ($i == (sizeof($data)-1))
+				{
+					template_page_man_entry("index.php?p=admin&amp;s=man",$i,$data[$i]["fullname"],0,1);
+					echo '<br />';
+				}
+				// other items
 				else
 				{
-					template_page_man_entry("index.php?p=admin&amp;s=man",$data[$i][0],$data[$i][2],0,0);
+					template_page_man_entry("index.php?p=admin&amp;s=man",$i,$data[$i]["fullname"],0,0);
 					echo '<br />';
 				}
 			}
@@ -141,7 +152,7 @@ else
 			switch ($_GET["action"])
 			{
 				case "edt":
-					echo '<h3>Editing page "'.trim($data[$_GET["pid"]][2]).'"</h3>
+					echo '<h3>Editing page "'.trim($data[$_GET["pid"]]["fullname"]).'"</h3>
 					<form method="post" action="index.php?p=admin&amp;s=man&amp;action=edt2&amp;pid='.$_GET["pid"].'">';
 						
 					template_editor('index.php?p=admin&amp;s=man&amp;action=edt&amp;pid='.$_GET["pid"],trim($data[$_GET["pid"]][1]),trim($data[$_GET["pid"]][2]));
@@ -168,54 +179,25 @@ else
 					break;
 				case "del":
 					$delurl = 'index.php?p=admin&amp;s=man&amp;action=del2&amp;pid='.$_GET["pid"];
-					echo '<h3>Confirm deleting page "'.trim($data[$_GET["pid"]][2]).'"</h3>
+					echo '<h3>Confirm deleting page "'.trim($data[$_GET["pid"]]["fullname"]).'"</h3>
 					Are you <b>'.rand(100,500).'%</b> sure you want to do this?<br />
 					<br />
 					<img src="img/tick.png" alt="" /> <a href="'.$delurl.'">Yes</a> <img src="img/cross.png" alt="" /> <a href="javascript:history.back(1)">No</a>';
 					break;
-				case "del2":
-					$pageinfo = file("content/pages.txt");
-
-					foreach($pageinfo as $key => $val) 
-					{ 
-					   $data[$key] = explode("|", $val);
-					}
+				case "del2":					
+					echo '<h3>Deleting page "'.trim($data[$_GET["pid"]]["fullname"]).'"...</h3>';
 					
-					$textzors = '';
+					$file2del = $data[$_GET["pid"]]["shortname"];
 					
-					$file2del = '';
+					unset($data[$_GET["pid"]]);
 					
-					$deltd = false;
+					$data = array_values($data);
 					
-					for($i = 0; $i < sizeof($pageinfo); $i++) 
-					{
-						if ($data[$i][0] != $_GET["pid"])
-						{
-							if ($deltd)
-								$tehid = (($data[$i][0])-1);
-							else
-								$tehid = $data[$i][0];
-							
-							$textzors .= $tehid.'|'.$data[$i][1].'|'.$data[$i][2];
-						}
-						else
-						{
-							$file2del = $data[$i][1];
-							$deltd = true;
-						}
-					}
+					echo 'Resaving new menu... ';
 					
-					$textzors = trim($textzors);
+					$file = fopen("content/_pages.txt","w");
 					
-					echo '<h3>Deleting page "'.trim($data[$_GET["pid"]][2]).'"...</h3>
-					<img src="img/arrow_out.png" alt="" /> Output:<br />
-					<textarea rows="10" cols="50">'.$textzors.'</textarea><br />
-					<br />
-					Resaving new menu... ';
-					
-					$file = fopen("content/pages.txt","w");
-					
-					if (fwrite($file,$textzors) != false)
+					if (fwrite($file,json_encode($data)) != false)
 						echo '<img src="img/tick.png" alt="" /> Success!';
 					else
 						echo '<img src="img/cross.png" alt="" /> Failure!';
@@ -234,47 +216,18 @@ else
 					echo '<br /><br />Go to another page to view the changes.';
 					
 					break;
-				case "pup":
-					$pageinfo = file("content/pages.txt");
-
-					foreach($pageinfo as $key => $val) 
-					{ 
-					   $data[$key] = explode("|", $val);
-					}
+				case "pup":					
+					echo '<h3>Moving up page "'.trim($data[$_GET["pid"]]["fullname"]).'"...</h3>';
 					
-					$textzors = '';
+					$tempdata = $data[$_GET["pid"]];
+					$data[$_GET["pid"]] = $data[$_GET["pid"]-1];
+					$data[$_GET["pid"]-1] = $tempdata;
 					
-					$temptoecho = '';
+					echo 'Resaving new menu... ';
 					
-					for($i = 0; $i < sizeof($pageinfo); $i++) 
-					{
-						if ($data[$i][0] == (($_GET["pid"])-1))
-						{
-							$temptoecho = (($data[$i][0])+1).'|'.$data[$i][1].'|'.$data[$i][2];
-						}
-						else if ($data[$i][0] == $_GET["pid"])
-						{
-							$textzors .= (($data[$i][0])-1).'|'.$data[$i][1].'|'.trim($data[$i][2]).'
-';
-							$textzors .= $temptoecho;
-						}
-						else
-						{
-							$textzors .= $data[$i][0].'|'.$data[$i][1].'|'.$data[$i][2];
-						}
-					}
+					$file = fopen("content/_pages.txt","w");
 					
-					$textzors = trim($textzors);
-					
-					echo '<h3>Moving up page "'.trim($data[$_GET["pid"]][2]).'"...</h3>
-					<img src="img/arrow_out.png" alt="" /> Output:<br />
-					<textarea rows="10" cols="50">'.$textzors.'</textarea><br />
-					<br />
-					Resaving new menu... ';
-					
-					$file = fopen("content/pages.txt","w");
-					
-					if (fwrite($file,$textzors) != false)
+					if (fwrite($file,json_encode($data)) != false)
 						echo '<img src="img/tick.png" alt="" /> Success!';
 					else
 						echo '<img src="img/cross.png" alt="" /> Failure!';
@@ -282,48 +235,18 @@ else
 					fclose($file);
 					
 					break;
-				case "pdn":
-					$pageinfo = file("content/pages.txt");
-
-					foreach($pageinfo as $key => $val) 
-					{ 
-					   $data[$key] = explode("|", $val);
-					}
+				case "pdn":					
+					echo '<h3>Moving down page "'.trim($data[$_GET["pid"]]["fullname"]).'"...</h3>';
 					
-					$textzors = '';
+					$tempdata = $data[$_GET["pid"]];
+					$data[$_GET["pid"]] = $data[$_GET["pid"]+1];
+					$data[$_GET["pid"]+1] = $tempdata;
 					
-					$temptoecho = '';
+					echo 'Resaving new menu... ';
 					
-					for($i = 0; $i < sizeof($pageinfo); $i++) 
-					{
-						if ($data[$i][0] == (($_GET["pid"])+1))
-						{
-							$textzors .= (($data[$i][0])-1).'|'.$data[$i][1].'|'.trim($data[$i][2]).'
-';
-							$textzors .= $temptoecho;
-						}
-						else if ($data[$i][0] == $_GET["pid"])
-						{
-							$temptoecho = (($data[$i][0])+1).'|'.$data[$i][1].'|'.$data[$i][2];
-							
-						}
-						else
-						{
-							$textzors .= $data[$i][0].'|'.$data[$i][1].'|'.$data[$i][2];
-						}
-					}
+					$file = fopen("content/_pages.txt","w");
 					
-					$textzors = trim($textzors);
-					
-					echo '<h3>Moving down page "'.trim($data[$_GET["pid"]][2]).'"...</h3>
-					<img src="img/arrow_out.png" alt="" /> Output:<br />
-					<textarea rows="10" cols="50">'.$textzors.'</textarea><br />
-					<br />
-					Resaving new menu... ';
-					
-					$file = fopen("content/pages.txt","w");
-					
-					if (fwrite($file,$textzors) != false)
+					if (fwrite($file,json_encode($data)) != false)
 						echo '<img src="img/tick.png" alt="" /> Success!';
 					else
 						echo '<img src="img/cross.png" alt="" /> Failure!';

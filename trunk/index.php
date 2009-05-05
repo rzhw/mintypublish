@@ -25,24 +25,19 @@ require_once("functions.php");
 			<div id="menu_wrapper">
 				<div style="float:left;">
 					<?php
-						$pageinfo = file("content/pages.txt");
-
-						foreach($pageinfo as $key => $val) 
-						{ 
-						   $data[$key] = explode("|", $val);
-						}
+						$data = json_decode(file_get_contents("content/_pages.txt"),true);
 						
-						for($i = 0; $i < sizeof($pageinfo); $i++) 
+						for($i=0;$i<sizeof($data);$i++)
 						{
-							echo '<a href="index.php'.($data[$i][1]==null ? '' : '?p='.$data[$i][1]).'"'.($_GET["p"]==$data[$i][1] ? ' class="menu_current"' : '').'>'.$data[$i][2].'</a>';
+							echo '<a href="index.php'.($data[$i]["shortname"]==null ? '' : '?p='.$data[$i]).'"'.($_GET["p"]==$data[$i] ? ' class="menu_current"' : '').'>'.$data[$i]["fullname"].'</a>';
 							
-							if (!($i == (sizeof($pageinfo)-1)))
+							if ($i < (sizeof($data)-1))
 								echo ' | ';
 						}
 					?>
 				</div>
 				<div style="float:right;overflow:hidden;">
-					<a href="index.php?p=admin">admin</a>
+					<a href="index.php?p=_admin">admin</a>
 				</div>
 				<div style="clear:both;"></div>
 			</div>
