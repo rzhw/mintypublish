@@ -34,13 +34,14 @@
 /// $title as str - Title
 /// RETURNS
 /// Nothing
-function template_editor($currentpage,$shorttitle = null,$title = null)
+function template_editor($currentpage,$shorttitle = null,$title = null,$child = null)
 {
 	?>
 	If you want to edit the source click the "HTML" button.<br />
 	<br />
 	Short title <a href="javascript:void(0)" onclick="javascript:alert('no spaces, no capitals nothing eg testpg1 instead of test page 1')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a> <input type="text" name="theid" value="<?php echo $shorttitle; ?>" /><br />
 	Long title <a href="javascript:void(0)" onclick="javascript:alert('full name to appear as both title and menu name')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a> <input type="text" name="thetitle" value="<?php echo $title; ?>" /><br />
+	Child page of <a href="javascript:void(0)" onclick="javascript:alert('Type in the short title of the page you wish to set this page as the child of. If you do not wish to set this as a child of a page, leave this as -1.')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a> <input type="text" name="thechild" value="<?php echo (isset($child) ? $child : '-1') ?>" /> <b>NOT IMPLEMENTED</b><br />
 	<br />
 	<input type="submit" /><br /><br />
 	<script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
@@ -115,19 +116,16 @@ function template_editor($currentpage,$shorttitle = null,$title = null)
 /// Nothing
 function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
 {
-	if (!$top)
-		echo '<a href="'.$curpage.'&amp;action=pup&amp;pid='.$pid.'"><img src="img/arrow_up.png" alt="" style="width:12px;height:12px;" /></a>';
-	else
-		echo '<img src="img/blank-16.png" alt="" style="width:12px;height:12px;" />';
-	if (!$bottom)
-		echo '<a href="'.$curpage.'&amp;action=pdn&amp;pid='.$pid.'"><img src="img/arrow_down.png" alt="" style="width:12px;height:12px;" /></a>';
-	else
-		echo '<img src="img/blank-16.png" alt="" style="width:12px;height:12px;" />';
+	
+	echo '<a href="'.($top ? 'javascript:alert(\'You cannot move this page up; it already is on the top.\')' : $curpage.'&amp;action=pup&amp;pid='.$pid).'"><img src="img/arrow_up'.($top ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" /></a>';
+	echo '<a href="'.($bottom ? 'javascript:alert(\'You cannot move this page down; it already is on the bottom.\')' : $curpage.'&amp;action=pdn&amp;pid='.$pid).'"><img src="img/arrow_down'.($bottom ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" /></a>';
 	
 	echo '
 	<a href="'.$curpage.'&amp;action=edt&amp;pid='.$pid.'"><img src="img/page_edit.png" alt="" style="width:12px;height:12px;" /></a>
 	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="img/page_delete.png" alt="" style="width:12px;height:12px;" /></a>
-	<b>'.$ptitle.'</b>';
+	<a href="javascript:alert(\'This page is not a child page. Making it a child of a page is currently not implemented.\')"><img src="img/page_child_off.png" alt="" style="width:12px;height:12px;" /></a>
+	
+	<b>'.$pid.'. '.$ptitle.'</b>';
 
 }
 
