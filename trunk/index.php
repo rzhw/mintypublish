@@ -29,7 +29,7 @@ require_once("functions.php");
 						
 						for($i=0;$i<sizeof($data);$i++)
 						{
-							echo '<a href="index.php'.($data[$i]["shortname"]==null ? '' : '?p='.$data[$i]).'"'.($_GET["p"]==$data[$i] ? ' class="menu_current"' : '').'>'.$data[$i]["fullname"].'</a>';
+							echo '<a href="index.php'.($data[$i]["shortname"]==null ? '' : '?p='.$data[$i]["shortname"]).'"'.($_GET["p"]==$data[$i]["shortname"] ? ' class="menu_current"' : '').'>'.$data[$i]["fullname"].'</a>';
 							
 							if ($i < (sizeof($data)-1))
 								echo ' | ';
