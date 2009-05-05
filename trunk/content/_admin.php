@@ -25,6 +25,8 @@
 	http://zvfpcms.sourceforge.net/
 */
 
+$adminurl = 'index.php?p=_admin';
+
 if($lolcheese = 0)
 {
 	echo '<h1>Administration Panel</h1>
@@ -39,9 +41,9 @@ else
 	<div style="background:#E77471;border:1px solid #C24641;color:#fff;padding:2px;"><b>WARNING:</b> Do not change the any of the
 	titles of an existing page. You must get it changed manually.</div><br />
 	
-	<img src="img/page_add.png" alt="" /> <a href="index.php?p=admin&amp;s=add">Add a page</a>
-	<img src="img/page_gear.png" alt="" /> <a href="index.php?p=admin&amp;s=man">Manage pages</a>
-	<img src="img/bug.png" alt="" /> <a href="index.php?p=admin&amp;s=reports">Manage bugs</a>
+	<img src="img/page_add.png" alt="" /> <a href="<?php echo $adminurl; ?>&amp;s=add">Add a page</a>
+	<img src="img/page_gear.png" alt="" /> <a href="<?php echo $adminurl; ?>&amp;s=man">Manage pages</a>
+	<img src="img/bug.png" alt="" /> <a href="<?php echo $adminurl; ?>&amp;s=reports">Manage bugs</a>
 	<!--<img src="img/help.png" alt="" /> <a href="index.php?p=admin&amp;s=help">Help and layout guidelines</a><br />-->
 	<br />
 	<?php
@@ -51,8 +53,8 @@ else
 		<h2>Add a page</h2>
 		The page will be added to the end of the menu. Use the "Manage pages" section to move it.<br />
 		<br />
-		<form method="post" action="index.php?p=admin&amp;s=add2">
-			<?php template_editor("index.php?p=admin&amp;s=add"); ?>
+		<form method="post" action="<?php echo $adminurl; ?>&amp;s=add2">
+			<?php template_editor("$adminurl&amp;s=add"); ?>
 		</form>
 		<?php
 	}
@@ -124,25 +126,25 @@ else
 				// top item in list where there is more than one item
 				if ($i == 0 && sizeof($data) > 1)
 				{
-					template_page_man_entry("index.php?p=admin&amp;s=man",$i,$data[$i]["fullname"],1,0);
+					template_page_man_entry("$adminurl&amp;s=man",$i,$data[$i]["fullname"],1,0);
 					echo '<br />';
 				}
 				// the only item in the list
 				else if ($i == 0)
 				{
-					template_page_man_entry("index.php?p=admin&amp;s=man",$i,$data[$i]["fullname"],1,1);
+					template_page_man_entry("$adminurl&amp;s=man",$i,$data[$i]["fullname"],1,1);
 					echo '<br />';
 				}
 				// bottom item in list where there is more than one item
 				else if ($i == (sizeof($data)-1))
 				{
-					template_page_man_entry("index.php?p=admin&amp;s=man",$i,$data[$i]["fullname"],0,1);
+					template_page_man_entry("$adminurl&amp;s=man",$i,$data[$i]["fullname"],0,1);
 					echo '<br />';
 				}
 				// other items
 				else
 				{
-					template_page_man_entry("index.php?p=admin&amp;s=man",$i,$data[$i]["fullname"],0,0);
+					template_page_man_entry("$adminurl&amp;s=man",$i,$data[$i]["fullname"],0,0);
 					echo '<br />';
 				}
 			}
@@ -153,9 +155,9 @@ else
 			{
 				case "edt":
 					echo '<h3>Editing page "'.trim($data[$_GET["pid"]]["fullname"]).'"</h3>
-					<form method="post" action="index.php?p=admin&amp;s=man&amp;action=edt2&amp;pid='.$_GET["pid"].'">';
+					<form method="post" action="'.$adminurl.'&amp;s=man&amp;action=edt2&amp;pid='.$_GET["pid"].'">';
 						
-					template_editor('index.php?p=admin&amp;s=man&amp;action=edt&amp;pid='.$_GET["pid"],trim($data[$_GET["pid"]][1]),trim($data[$_GET["pid"]][2]));
+					template_editor("$adminurl&amp;s=man&amp;action=edt&amp;pid=".$_GET["pid"],trim($data[$_GET["pid"]][1]),trim($data[$_GET["pid"]][2]));
 					
 					echo '</form>';
 					break;
@@ -178,7 +180,7 @@ else
 						fclose($file);
 					break;
 				case "del":
-					$delurl = 'index.php?p=admin&amp;s=man&amp;action=del2&amp;pid='.$_GET["pid"];
+					$delurl = "$adminurl&amp;s=man&amp;action=del2&amp;pid=".$_GET["pid"];
 					echo '<h3>Confirm deleting page "'.trim($data[$_GET["pid"]]["fullname"]).'"</h3>
 					Are you <b>'.rand(100,500).'%</b> sure you want to do this?<br />
 					<br />
