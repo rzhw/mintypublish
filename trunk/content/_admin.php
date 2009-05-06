@@ -29,58 +29,55 @@ $adminurl = 'index.php?p=_admin';
 
 if($lolcheese = 0)
 {
-	echo '<h1>Administration Panel</h1>
-	You do not have proper permissions to access this page.';
+	// User doesn't have permissions to access
+	echo '<h1>'.$txt['admin_panel_title'].'</h1>
+	'.$txt['admin_panel_noperms'];
 }
 else
 {
-	?>
-	<h1>Administration Panel</h1>
-	Welcome to the administration panel.<br />
-	<br />
-	<div style="background:#E77471;border:1px solid #C24641;color:#fff;padding:2px;"><b>WARNING:</b> Do not change the any of the
-	titles of an existing page. You must get it changed manually.</div><br />
+	// Welcome the user :3
+	echo '<h1>'.$txt['admin_panel_title'].'</h1>
+	'.$txt['admin_panel_welcome'].'<br />
+	<br />';
 	
-	<img src="img/page_add.png" alt="" /> <a href="<?php echo $adminurl; ?>&amp;s=add">Add a page</a>
-	<img src="img/page_gear.png" alt="" /> <a href="<?php echo $adminurl; ?>&amp;s=man">Manage pages</a>
-	<img src="img/bug.png" alt="" /> <a href="<?php echo $adminurl; ?>&amp;s=reports">Manage bugs</a>
-	<!--<img src="img/help.png" alt="" /> <a href="index.php?p=admin&amp;s=help">Help and layout guidelines</a><br />-->
-	<br />
-	<?php
+	// TODO: Fix editing titles of existing pages
+	echo '<div class="msgbox_warning"><b>'.$txt['text_warning'].':</b> '.$txt['admin_panel_noedittitle'].'</div><br />';
+	
+	// Link the user to all the liddle pages...
+	echo '<img src="img/page_add.png" alt="" /> <a href="'.$adminurl.'&amp;s=add">'.$txt['admin_panel_addpage'].'</a>
+	<img src="img/page_gear.png" alt="" /> <a href="'.$adminurl.'&amp;s=man">'.$txt['admin_panel_manpages'].'</a>
+	<img src="img/bug.png" alt="" /> <a href="'.$adminurl.'&amp;s=reports">'.$txt['admin_panel_manbugs'].'</a>';
+	
+	// Add newlines! (Like a boss)
+	echo '<br />';
+	
 	if ($_GET["s"]=="add")
 	{
-		?>
-		<h2>Add a page</h2>
-		The page will be added to the end of the menu. Use the "Manage pages" section to move it.<br />
+		// Page add screen
+		echo '<h2>'.$txt['admin_panel_addpage'].'</h2>
+		'.$txt['admin_panel_addpage_desc'].'<br />
 		<br />
-		<form method="post" action="<?php echo $adminurl; ?>&amp;s=add2">
-			<?php template_editor("$adminurl&amp;s=add"); ?>
-		</form>
-		<?php
+		      <form method="post" action="'.$adminurl.'&amp;s=add2">';
+			     template_editor("$adminurl&amp;s=add");
+		echo '</form>';
 	}
 
 	if ($_GET["s"]=="add2")
 	{
-		/*
-		this is just a comment for my reference - a2h
-		
-		t variable only works on windows systems
-		converts \n into \r\n
-		*/
-		
-		echo '<h2>Adding page...</h2>';
+		// Add the page itself
+		echo '<h2>'.$txt['admin_panel_addpage_prog'].'</h2>';
 		
 		$file = fopen("content/".$_POST["theid"].".php","w");
 		
 		$contenttowrite = str_replace('\"','"',$_POST["thecontent"]);
 		$contenttowrite = str_replace("\'","'",$contenttowrite);
 		
-		echo 'Adding page... ';
+		echo $txt['admin_panel_addpage_savpr'].' ';
 		
 		if (fwrite($file,$contenttowrite) != false)
-			echo '<img src="img/tick.png" alt="" /> Success!';
+			echo '<img src="img/tick.png" alt="" /> '.$txt['text_success'];
 		else
-			echo '<img src="img/cross.png" alt="" /> Failure! (n.b. if your page has blank content this may not be true)';
+			echo '<img src="img/cross.png" alt="" /> '.$txt['text_failure'].' '.$txt['admin_panel_addpage_blnk'];
 			
 		echo '<br /><br />';
 			
@@ -96,30 +93,40 @@ else
 			"subpage" => -1
 		);
 		
+		echo $txt['admin_panel_modmenu_prog'].' ';
+		
 		if (fwrite($file2,json_encode($data)) != false)
-			echo '<img src="img/tick.png" alt="" /> Success!';
+			echo '<img src="img/tick.png" alt="" /> '.$txt['text_success'];
 		else
-			echo '<img src="img/cross.png" alt="" /> Failure!';
+			echo '<img src="img/cross.png" alt="" /> '.$txt['text_failure'];
 			
-		echo '<br /><br />Go to another page to view the changes.';
+		echo '<br /><br />'.$txt['admin_panel_changepage'];
 			
 		fclose($file2);
 	}
 
 	if ($_GET["s"]=="man")
 	{
-		?>
-		<h2>Manage pages</h2>
-		<br />
-		<?php
+		echo '<h2>'.$txt['admin_panel_manpages'].'</h2>
+		<br />';
+		
 		$data = json_decode(file_get_contents("content/_pages.txt"),true);
 		
 		if (!isset($_GET["action"]))
 		{
-			echo '<h3>Pages</h3>
-				This is the list of pages. Use <img src="img/arrow_up.png" alt="" />/<img src="img/arrow_down.png" alt="" /> to
-				move their order in the menu. Click on <img src="img/page_edit.png" alt="" /> to edit a page.<br />
-				Click on <img src="img/page_delete.png" alt="" /> to delete a page.<br /><br />';
+			echo '<h3>'.$txt['admin_panel_manpages_list'].'</h3>
+			'.$txt['admin_panel_manpages_desc'];
+			
+			// Move up/down instructions
+			echo ' '.str_replace('[v]','<img src="img/arrow_down.png" alt="" />',str_replace('[^]','<img src="img/arrow_up.png" alt="" />',$txt['admin_panel_manpages_ordr']));
+			
+			// Edit instructions
+			echo ' '.str_replace('[e]','<img src="img/page_edit.png" alt="" />',$txt['admin_panel_manpages_edit']);
+			
+			// Delete instructions
+			echo ' '.str_replace('[d]','<img src="img/page_delete.png" alt="" />',$txt['admin_panel_manpages_delt']);
+			
+			echo '<br /><br />';
 				
 			for($i = 0; $i < sizeof($data); $i++) 
 			{
@@ -157,34 +164,51 @@ else
 					echo '<h3>Editing page "'.trim($data[$_GET["pid"]]["fullname"]).'"</h3>
 					<form method="post" action="'.$adminurl.'&amp;s=man&amp;action=edt2&amp;pid='.$_GET["pid"].'">';
 						
-					template_editor("$adminurl&amp;s=man&amp;action=edt&amp;pid=".$_GET["pid"],trim($data[$_GET["pid"]][1]),trim($data[$_GET["pid"]][2]));
+					template_editor("$adminurl&amp;s=man&amp;action=edt&amp;pid=".$_GET["pid"],trim($data[$_GET["pid"]]["shortname"]),trim($data[$_GET["pid"]]["fullname"]));
 					
 					echo '</form>';
 					break;
 				case "edt2":
 					$file = fopen("content/".$_POST["theid"].".php","w");
 					
-					$contenttowrite = str_replace('\"','"',$_POST["thecontent"]);
+					/*$contenttowrite = str_replace('\"','"',$_POST["thecontent"]);
 					$contenttowrite = str_replace("\'","'",$contenttowrite);
 					$contenttowrite = str_replace("[DO NOT EDIT AFTER HERE]","<?php",$contenttowrite);
 					$contenttowrite = str_replace("[EDIT AFTER HERE]","?>",$contenttowrite);
-					$contenttowrite = str_replace('rel="','params="',$contenttowrite);
+					$contenttowrite = str_replace('rel="','params="',$contenttowrite);*/
 					
-					echo 'Saving page... ';
+					$find = array(
+						'\"',
+						"\'",
+						"[DO NOT EDIT AFTER HERE]",
+						"[EDIT AFTER HERE]",
+						'rel="'
+					);
+					$replace = array(
+						'"',
+						"'",
+						"<?php",
+						"?>",
+						'params="'
+					);
+					
+					$contenttowrite = str_replace($find,$replace,$_POST["thecontent"]);
+					
+					echo $txt['admin_panel_addpage_savpr'].' ';
 					
 					if (fwrite($file,$contenttowrite) != false)
-						echo '<img src="img/tick.png" alt="" /> Success!';
+						echo '<img src="img/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="img/cross.png" alt="" /> Failure!';
+						echo '<img src="img/cross.png" alt="" /> '.$txt['text_failure'];
 						
 						fclose($file);
 					break;
 				case "del":
 					$delurl = "$adminurl&amp;s=man&amp;action=del2&amp;pid=".$_GET["pid"];
 					echo '<h3>Confirm deleting page "'.trim($data[$_GET["pid"]]["fullname"]).'"</h3>
-					Are you <b>'.rand(100,500).'%</b> sure you want to do this?<br />
+					'.$txt['admin_panel_confirm'].'<br />
 					<br />
-					<img src="img/tick.png" alt="" /> <a href="'.$delurl.'">Yes</a> <img src="img/cross.png" alt="" /> <a href="javascript:history.back(1)">No</a>';
+					<img src="img/tick.png" alt="" /> <a href="'.$delurl.'">'.$txt['text_yes'].'</a> <img src="img/cross.png" alt="" /> <a href="javascript:history.back(1)">'.$txt['text_no'].'</a>';
 					break;
 				case "del2":					
 					echo '<h3>Deleting page "'.trim($data[$_GET["pid"]]["fullname"]).'"...</h3>';
@@ -195,27 +219,27 @@ else
 					
 					$data = array_values($data);
 					
-					echo 'Resaving new menu... ';
+					echo $txt['admin_panel_modmenu_prog'].' ';
 					
 					$file = fopen("content/_pages.txt","w");
 					
 					if (fwrite($file,json_encode($data)) != false)
-						echo '<img src="img/tick.png" alt="" /> Success!';
+						echo '<img src="img/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="img/cross.png" alt="" /> Failure!';
+						echo '<img src="img/cross.png" alt="" /> '.$txt['text_failure'];
 						
 					fclose($file);
 					
 					echo '<br />
 					<br />
-					Deleting file... ';
+					'.$txt['admin_panel_deleting'].' ';
 					
 					if (unlink("content/".$file2del.".php"))
-						echo '<img src="img/tick.png" alt="" /> Success!';
+						echo '<img src="img/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="img/cross.png" alt="" /> Failure!';
+						echo '<img src="img/cross.png" alt="" /> '.$txt['text_failure'];
 					
-					echo '<br /><br />Go to another page to view the changes.';
+					echo '<br /><br />'.$txt['admin_panel_changepage'];
 					
 					break;
 				case "pup":					
@@ -225,14 +249,14 @@ else
 					$data[$_GET["pid"]] = $data[$_GET["pid"]-1];
 					$data[$_GET["pid"]-1] = $tempdata;
 					
-					echo 'Resaving new menu... ';
+					echo $txt['admin_panel_modmenu_prog'].' ';
 					
 					$file = fopen("content/_pages.txt","w");
 					
 					if (fwrite($file,json_encode($data)) != false)
-						echo '<img src="img/tick.png" alt="" /> Success!';
+						echo '<img src="img/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="img/cross.png" alt="" /> Failure!';
+						echo '<img src="img/cross.png" alt="" /> '.$txt['text_failure'];
 						
 					fclose($file);
 					
@@ -244,21 +268,20 @@ else
 					$data[$_GET["pid"]] = $data[$_GET["pid"]+1];
 					$data[$_GET["pid"]+1] = $tempdata;
 					
-					echo 'Resaving new menu... ';
+					echo $txt['admin_panel_modmenu_prog'].' ';
 					
 					$file = fopen("content/_pages.txt","w");
 					
 					if (fwrite($file,json_encode($data)) != false)
-						echo '<img src="img/tick.png" alt="" /> Success!';
+						echo '<img src="img/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="img/cross.png" alt="" /> Failure!';
+						echo '<img src="img/cross.png" alt="" /> '.$txt['text_failure'];
 						
 					fclose($file);
 					
 					break;
 				default:
-					echo '<h3>What?</h3>
-					That action doesn\'t exist or isn\'t implemented.';
+					echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
 					break;
 			}
 		}

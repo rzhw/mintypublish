@@ -110,3 +110,10 @@ h2
 {
 	background:#66FF66;
 }
+.msgbox_warning
+{
+	background:#E77471;
+	border:1px solid #C24641;
+	color:#fff;
+	padding:2px;
+}

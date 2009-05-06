@@ -1,0 +1,60 @@
+<?php
+/*
+	Ze Very Flat Pancaek CMS test version
+	Copyright 2009 a2h - http://a2h.uni.cc/
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	
+	In case you're a lazy idiot who can't even at least get a basic
+	understanding of the license:
+	"You must retain, in the Source form of any Derivative Works that You
+	distribute, all copyright, patent, trademark, and attribution notices
+	from the Source form of the Work, excluding those notices that do not
+	pertain to any part of the Derivative Works"
+	
+	http://zvfpcms.sourceforge.net/
+*/
+
+$txt['text_warning']              = 'Warning';
+$txt['text_success']              = 'Success!';
+$txt['text_failure']              = 'Failure!';
+$txt['text_yes']                  = 'Yes';
+$txt['text_no']                   = 'No';
+
+$txt['zvfpcms_a2h']               = 'another creation from the strange mind of a2h';
+$txt['zvfpcms_powered']           = 'powered by zvfpcms';
+$txt['zvfpcms_generated']         = 'page generated in [t] seconds';
+
+$txt['admin_panel_title']         = 'Administration Panel';
+$txt['admin_panel_noperms']       = 'You do not have proper permissions to access this page.';
+$txt['admin_panel_welcome']       = 'Welcome to the administration panel.';
+$txt['admin_panel_noedittitle']   = 'Do not change the any of the titles of an existing page. You must get it changed manually.';
+$txt['admin_panel_changepage']    = 'Go to another page to view the changes.';
+$txt['admin_panel_addpage']       = 'Add a page';
+$txt['admin_panel_addpage_prog']  = 'Adding page...';
+$txt['admin_panel_addpage_savpr'] = 'Saving page...';
+$txt['admin_panel_addpage_desc']  = 'The page will be added to the end of the menu. Use the "Manage pages" section to move it.';
+$txt['admin_panel_addpage_blnk']  = '(n.b. if your page has blank content this may not be true)';
+$txt['admin_panel_manpages']      = 'Manage pages';
+$txt['admin_panel_manpages_list'] = 'Pages';
+$txt['admin_panel_manpages_desc'] = 'This is the list of pages.';
+$txt['admin_panel_manpages_ordr'] = 'Use [^]/[v] to move their order in the menu.';
+$txt['admin_panel_manpages_edit'] = 'Click on [e] to edit a page.';
+$txt['admin_panel_manpages_delt'] = 'Click on [d] to delete a page.';
+$txt['admin_panel_manbugs']       = 'Manage bugs';
+$txt['admin_panel_confirm']       = 'Are you sure you want to do this?';
+$txt['admin_panel_modmenu_prog']  = 'Modifying menu...';
+$txt['admin_panel_deleting']      = 'Deleting file...';
+$txt['admin_panel_actn_noexist']  = 'That action doesn\'t exist or isn\'t implemented.';
+$txt['admin_panel_what']          = 'What?';
+?>
