@@ -36,54 +36,28 @@
 /// Nothing
 function template_editor($currentpage,$shorttitle = null,$title = null,$child = null)
 {
-	?>
-	If you want to edit the source click the "HTML" button.<br />
+	echo $txt['admin_panel_edt_src'].'<br />
 	<br />
-	Short title <a href="javascript:void(0)" onclick="javascript:alert('no spaces, no capitals nothing eg testpg1 instead of test page 1')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a> <input type="text" name="theid" value="<?php echo $shorttitle; ?>" /><br />
-	Long title <a href="javascript:void(0)" onclick="javascript:alert('full name to appear as both title and menu name')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a> <input type="text" name="thetitle" value="<?php echo $title; ?>" /><br />
-	Child page of <a href="javascript:void(0)" onclick="javascript:alert('Type in the short title of the page you wish to set this page as the child of. If you do not wish to set this as a child of a page, leave this as -1.')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a> <input type="text" name="thechild" value="<?php echo (isset($child) ? $child : '-1') ?>" /> <b>NOT IMPLEMENTED</b><br />
+	
+	'.$txt['admin_panel_edt_srtnm'].'
+		<a href="javascript:alert(\''.$txt['admin_panel_edt_srtnm_dsc'].'\')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a>
+		<input type="text" name="theid" value="'.$shorttitle.'" /><br />
+		
+	'.$txt['admin_panel_edt_fllnm'].'
+		<a href="javascript:alert(\''.$txt['admin_panel_edt_fllnm_dsc'].'\')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a>
+		<input type="text" name="thetitle" value="'.$title.'" /><br />
+		
+	'.$txt['admin_panel_edt_child'].'
+		<a href="javascript:alert(\''.$txt['admin_panel_edt_child_dsc'].'\')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a>
+		<input type="text" name="thechild" value="'.(isset($child) ? $child : '-1').'" /> <b>NOT IMPLEMENTED</b><br />
+		
 	<br />
 	<input type="submit" /><br /><br />
 	<script type="text/javascript" src="js/tiny_mce/tiny_mce.js"></script>
-	<script type="text/javascript">
-	// O2k7 skin
-	tinyMCE.init({
-		// General options
-		mode : "exact",
-		elements : "thecontent",
-		theme : "advanced",
-		skin : "o2k7",
-		plugins : "safari,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,imagemanager,filemanager",
-
-		// Theme options
-		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,attribs,styleprops,|,styleselect,formatselect,fontselect,fontsizeselect",
-		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-		theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,media,advhr,|,fullscreen,|,template,blockquote,pagebreak,|,insertfile,insertimage",
-		theme_advanced_toolbar_location : "top",
-		theme_advanced_toolbar_align : "left",
-		theme_advanced_statusbar_location : "bottom",
-		theme_advanced_resizing : false,
-
-		// Example content CSS (should be your site CSS)
-		content_css : "css/tinymce.css",
-
-		// Drop lists for link/image/media/template dialogs
-		template_external_list_url : "js/template_list.js",
-		external_link_list_url : "js/link_list.js",
-		external_image_list_url : "js/image_list.js",
-		media_external_list_url : "js/media_list.js",
-
-		// Replace values for the template plugin
-		template_replace_values : {
-			username : "Some User",
-			staffid : "991234"
-		}
-	});
-	</script>
+	<script type="text/javascript" src="js/tiny_mce/tiny_mce_cfg.js"></script
 	
 	<div style="position:relative;left:-18px;">
-		<textarea id="thecontent" name="thecontent" style="width:1048px;height:512px;">
-			<?php
+		<textarea id="thecontent" name="thecontent" style="width:1048px;height:512px;">';
 			if ($shorttitle != null || $_GET["pid"] == "0")
 			{
 				if ($_GET["pid"] == "0")
@@ -96,10 +70,8 @@ function template_editor($currentpage,$shorttitle = null,$title = null,$child = 
 				$tehcontent = str_replace('params="', 'rel="', $tehcontent);
 				echo $tehcontent;
 			}
-			?>
-		</textarea>
-	</div>
-	<?php
+	echo '</textarea>
+	</div>';
 }
 
 /// FUNCTION:

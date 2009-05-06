@@ -25,6 +25,8 @@
 	http://zvfpcms.sourceforge.net/
 */
 
+// strings written from a2h and aren't translated (duh)
+
 $txt['text_warning']              = 'Warning';
 $txt['text_success']              = 'Success!';
 $txt['text_failure']              = 'Failure!';
@@ -57,4 +59,11 @@ $txt['admin_panel_modmenu_prog']  = 'Modifying menu...';
 $txt['admin_panel_deleting']      = 'Deleting file...';
 $txt['admin_panel_actn_noexist']  = 'That action doesn\'t exist or isn\'t implemented.';
 $txt['admin_panel_what']          = 'What?';
+$txt['admin_panel_edt_src']       = 'If you want to edit the source click the "HTML" button.';
+$txt['admin_panel_edt_srtnm']     = 'Short name';
+$txt['admin_panel_edt_srtnm_dsc'] = 'No spaces, no capitals nothing eg testpg1 instead of test page 1. ENGLISH LETTERS / NUMBERS ONLY.';
+$txt['admin_panel_edt_fllnm']     = 'Full name';
+$txt['admin_panel_edt_fllnm_dsc'] = 'Full name to appear as both title and menu name';
+$txt['admin_panel_edt_child']     = 'Child page of';
+$txt['admin_panel_edt_child_dsc'] = 'Type in the short title of the page you wish to set this page as the child of. If you do not wish to set this as a child of a page, leave this as -1.';
 ?>
