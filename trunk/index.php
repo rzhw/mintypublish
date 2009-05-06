@@ -9,7 +9,8 @@ require_once("zvfpcms/config.php");
 require_once("zvfpcms/lang/en.php");
 
 // NOW include the chosen language, so that non translated lines aren't broken
-require_once("zvfpcms/lang/".$cfg['lang'].".php");
+if ($cfg['lang'] != "en")
+	require_once("zvfpcms/lang/".$cfg['lang'].".php");
 
 // no json? D:
 if (!function_exists("json_encode"))
