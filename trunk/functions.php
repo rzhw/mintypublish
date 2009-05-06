@@ -49,7 +49,7 @@ function template_editor($currentpage,$shorttitle = null,$title = null,$child = 
 		
 	'.$txt['admin_panel_edt_child'].'
 		<a href="javascript:alert(\''.$txt['admin_panel_edt_child_dsc'].'\')"><img src="img/help.png" alt="" style="width:12px;height:12px;" /></a>
-		<input type="text" name="thechild" value="'.(isset($child) ? $child : '-1').'" /> <b>NOT IMPLEMENTED</b><br />
+		<input type="text" name="thechild" value="'.(isset($child) ? $child : '-1').'" /> <b>'.$txt['text_notimplemented'].'</b><br />
 		
 	<br />
 	<input type="submit" /><br /><br />
