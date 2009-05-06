@@ -36,9 +36,9 @@ $txt['text_yes']                  = 'はい';
 $txt['text_no']                   = 'いいえ';
 $txt['text_notimplemented']       = '実装されていません！';
 
-$txt['zvfpcms_a2h']               = 'another creation from the strange mind of a2h';
-$txt['zvfpcms_powered']           = 'powered by zvfpcms';
-$txt['zvfpcms_generated']         = 'page generated in [t] seconds';
+$txt['zvfpcms_a2h']               = 'a2h zvfpcmsから別のプロジェクトです';
+$txt['zvfpcms_powered']           = 'zvfpcmsによって供給';
+$txt['zvfpcms_generated']         = 'ページの生成[t]秒';
 
 $txt['page_noexist']              = 'あなたが存在しない場合は、リクエストされたページをご覧ください。';
 $txt['page_nojson']               = 'が、申し訳ありませんがJSONをサポートZVFPCMSを実行する必要があります。これはPHP 5.20以降に付属する必要があります。';

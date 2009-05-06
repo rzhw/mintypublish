@@ -34,8 +34,8 @@ $txt['text_yes']                  = 'Yes';
 $txt['text_no']                   = 'No';
 $txt['text_notimplemented']       = 'Not implemented!';
 
-$txt['zvfpcms_a2h']               = 'another creation from the strange mind of a2h';
 $txt['zvfpcms_powered']           = 'powered by zvfpcms';
+$txt['zvfpcms_a2h']               = 'zvfpcms is another project from a2h';
 $txt['zvfpcms_generated']         = 'page generated in [t] seconds';
 
 $txt['page_noexist']              = 'The page you requested doesn\'t exist.';

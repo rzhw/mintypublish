@@ -25,8 +25,6 @@
 	http://zvfpcms.sourceforge.net/
 */
 
-$adminurl = 'index.php?p=admin';
-
 if($lolcheese = 0)
 {
 	// User doesn't have permissions to access
@@ -44,9 +42,9 @@ else
 	echo '<div class="msgbox_warning"><b>'.$txt['text_warning'].':</b> '.$txt['admin_panel_noedittitle'].'</div><br />';
 	
 	// Link the user to all the liddle pages...
-	echo '<img src="zvfpcms/img/page_add.png" alt="" /> <a href="'.$adminurl.'&amp;s=add">'.$txt['admin_panel_addpage'].'</a>
-	<img src="zvfpcms/img/page_gear.png" alt="" /> <a href="'.$adminurl.'&amp;s=man">'.$txt['admin_panel_manpages'].'</a>
-	<img src="zvfpcms/img/bug.png" alt="" /> <a href="'.$adminurl.'&amp;s=reports">'.$txt['admin_panel_manbugs'].'</a>';
+	echo '<img src="'.$path['images'].'/page_add.png" alt="" /> <a href="'.$path['admin'].'&amp;s=add">'.$txt['admin_panel_addpage'].'</a>
+	<img src="'.$path['images'].'/page_gear.png" alt="" /> <a href="'.$path['admin'].'&amp;s=man">'.$txt['admin_panel_manpages'].'</a>
+	<img src="'.$path['images'].'/bug.png" alt="" /> <a href="'.$path['admin'].'&amp;s=reports">'.$txt['admin_panel_manbugs'].'</a>';
 	
 	// Add newlines! (Like a boss)
 	echo '<br />';
@@ -57,8 +55,8 @@ else
 		echo '<h2>'.$txt['admin_panel_addpage'].'</h2>
 		'.$txt['admin_panel_addpage_desc'].'<br />
 		<br />
-		      <form method="post" action="'.$adminurl.'&amp;s=add2">';
-			     template_editor("$adminurl&amp;s=add");
+		      <form method="post" action="'.$path['admin'].'&amp;s=add2">';
+			     template_editor($path['admin'].'&amp;s=add');
 		echo '</form>';
 	}
 
@@ -75,9 +73,9 @@ else
 		echo $txt['admin_panel_addpage_savpr'].' ';
 		
 		if (fwrite($file,$contenttowrite) != false)
-			echo '<img src="zvfpcms/img/tick.png" alt="" /> '.$txt['text_success'];
+			echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
 		else
-			echo '<img src="zvfpcms/img/cross.png" alt="" /> '.$txt['text_failure'].' '.$txt['admin_panel_addpage_blnk'];
+			echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'].' '.$txt['admin_panel_addpage_blnk'];
 			
 		echo '<br /><br />';
 			
@@ -96,9 +94,9 @@ else
 		echo $txt['admin_panel_modmenu_prog'].' ';
 		
 		if (fwrite($file2,json_encode($data)) != false)
-			echo '<img src="zvfpcms/img/tick.png" alt="" /> '.$txt['text_success'];
+			echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
 		else
-			echo '<img src="zvfpcms/img/cross.png" alt="" /> '.$txt['text_failure'];
+			echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'];
 			
 		echo '<br /><br />'.$txt['admin_panel_changepage'];
 			
@@ -118,13 +116,13 @@ else
 			'.$txt['admin_panel_manpages_desc'];
 			
 			// Move up/down instructions
-			echo ' '.str_replace('[v]','<img src="zvfpcms/img/arrow_down.png" alt="" />',str_replace('[^]','<img src="zvfpcms/img/arrow_up.png" alt="" />',$txt['admin_panel_manpages_ordr']));
+			echo ' '.str_replace('[v]','<img src="'.$path['images'].'/arrow_down.png" alt="" />',str_replace('[^]','<img src="'.$path['images'].'/arrow_up.png" alt="" />',$txt['admin_panel_manpages_ordr']));
 			
 			// Edit instructions
-			echo ' '.str_replace('[e]','<img src="zvfpcms/img/page_edit.png" alt="" />',$txt['admin_panel_manpages_edit']);
+			echo ' '.str_replace('[e]','<img src="'.$path['images'].'/page_edit.png" alt="" />',$txt['admin_panel_manpages_edit']);
 			
 			// Delete instructions
-			echo ' '.str_replace('[d]','<img src="zvfpcms/img/page_delete.png" alt="" />',$txt['admin_panel_manpages_delt']);
+			echo ' '.str_replace('[d]','<img src="'.$path['images'].'/page_delete.png" alt="" />',$txt['admin_panel_manpages_delt']);
 			
 			echo '<br /><br />';
 				
@@ -133,25 +131,25 @@ else
 				// top item in list where there is more than one item
 				if ($i == 0 && sizeof($data) > 1)
 				{
-					template_page_man_entry("$adminurl&amp;s=man",$i,$data[$i]["fullname"],1,0);
+					template_page_man_entry($path['admin'].'&amp;s=man',$i,$data[$i]["fullname"],1,0);
 					echo '<br />';
 				}
 				// the only item in the list
 				else if ($i == 0)
 				{
-					template_page_man_entry("$adminurl&amp;s=man",$i,$data[$i]["fullname"],1,1);
+					template_page_man_entry($path['admin'].'&amp;s=man',$i,$data[$i]["fullname"],1,1);
 					echo '<br />';
 				}
 				// bottom item in list where there is more than one item
 				else if ($i == (sizeof($data)-1))
 				{
-					template_page_man_entry("$adminurl&amp;s=man",$i,$data[$i]["fullname"],0,1);
+					template_page_man_entry($path['admin'].'&amp;s=man',$i,$data[$i]["fullname"],0,1);
 					echo '<br />';
 				}
 				// other items
 				else
 				{
-					template_page_man_entry("$adminurl&amp;s=man",$i,$data[$i]["fullname"],0,0);
+					template_page_man_entry($path['admin'].'&amp;s=man',$i,$data[$i]["fullname"],0,0);
 					echo '<br />';
 				}
 			}
@@ -162,9 +160,9 @@ else
 			{
 				case "edt":
 					echo '<h3>Editing page "'.trim($data[$_GET["pid"]]["fullname"]).'"</h3>
-					<form method="post" action="'.$adminurl.'&amp;s=man&amp;action=edt2&amp;pid='.$_GET["pid"].'">';
+					<form method="post" action="'.$path['admin'].'&amp;s=man&amp;action=edt2&amp;pid='.$_GET["pid"].'">';
 						
-					template_editor("$adminurl&amp;s=man&amp;action=edt&amp;pid=".$_GET["pid"],trim($data[$_GET["pid"]]["shortname"]),trim($data[$_GET["pid"]]["fullname"]));
+					template_editor($path['admin'].'&amp;s=man&amp;action=edt&amp;pid='.$_GET["pid"],trim($data[$_GET["pid"]]["shortname"]),trim($data[$_GET["pid"]]["fullname"]));
 					
 					echo '</form>';
 					break;
@@ -191,18 +189,18 @@ else
 					echo $txt['admin_panel_addpage_savpr'].' ';
 					
 					if (fwrite($file,$contenttowrite) != false)
-						echo '<img src="zvfpcms/img/tick.png" alt="" /> '.$txt['text_success'];
+						echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="zvfpcms/img/cross.png" alt="" /> '.$txt['text_failure'];
+						echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'];
 						
 						fclose($file);
 					break;
 				case "del":
-					$delurl = "$adminurl&amp;s=man&amp;action=del2&amp;pid=".$_GET["pid"];
+					$delurl = $path['admin'].'&amp;s=man&amp;action=del2&amp;pid='.$_GET["pid"];
 					echo '<h3>Confirm deleting page "'.trim($data[$_GET["pid"]]["fullname"]).'"</h3>
 					'.$txt['admin_panel_confirm'].'<br />
 					<br />
-					<img src="zvfpcms/img/tick.png" alt="" /> <a href="'.$delurl.'">'.$txt['text_yes'].'</a> <img src="zvfpcms/img/cross.png" alt="" /> <a href="javascript:history.back(1)">'.$txt['text_no'].'</a>';
+					<img src="'.$path['images'].'/tick.png" alt="" /> <a href="'.$delurl.'">'.$txt['text_yes'].'</a> <img src="'.$path['images'].'/cross.png" alt="" /> <a href="javascript:history.back(1)">'.$txt['text_no'].'</a>';
 					break;
 				case "del2":					
 					echo '<h3>Deleting page "'.trim($data[$_GET["pid"]]["fullname"]).'"...</h3>';
@@ -218,9 +216,9 @@ else
 					$file = fopen("zvfpcms/pg/pages.txt","w");
 					
 					if (fwrite($file,json_encode($data)) != false)
-						echo '<img src="zvfpcms/img/tick.png" alt="" /> '.$txt['text_success'];
+						echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="zvfpcms/img/cross.png" alt="" /> '.$txt['text_failure'];
+						echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'];
 						
 					fclose($file);
 					
@@ -229,9 +227,9 @@ else
 					'.$txt['admin_panel_deleting'].' ';
 					
 					if (unlink("content/".$file2del.".php"))
-						echo '<img src="zvfpcms/img/tick.png" alt="" /> '.$txt['text_success'];
+						echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="zvfpcms/img/cross.png" alt="" /> '.$txt['text_failure'];
+						echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'];
 					
 					echo '<br /><br />'.$txt['admin_panel_changepage'];
 					
@@ -248,9 +246,9 @@ else
 					$file = fopen("zvfpcms/pg/pages.txt","w");
 					
 					if (fwrite($file,json_encode($data)) != false)
-						echo '<img src="zvfpcms/img/tick.png" alt="" /> '.$txt['text_success'];
+						echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="zvfpcms/img/cross.png" alt="" /> '.$txt['text_failure'];
+						echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'];
 						
 					fclose($file);
 					
@@ -267,9 +265,9 @@ else
 					$file = fopen("zvfpcms/pg/pages.txt","w");
 					
 					if (fwrite($file,json_encode($data)) != false)
-						echo '<img src="zvfpcms/img/tick.png" alt="" /> '.$txt['text_success'];
+						echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
 					else
-						echo '<img src="zvfpcms/img/cross.png" alt="" /> '.$txt['text_failure'];
+						echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'];
 						
 					fclose($file);
 					
