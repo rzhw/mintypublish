@@ -1,14 +1,15 @@
 <?php
-if (!function_exists("json_encode"))
-{
-	exit("Sorry, but JSON support is required to run ZVFPCMS. It should be included with PHP 5.20 and above.");
-}
-
+// page generation tracker
 $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
 
+// these two files are essential (yes, even the english language no matter what)
 require_once("zvfpcms/functions.php");
 require_once("zvfpcms/lang/en.php");
+
+// no json? D:
+if (!function_exists("json_encode"))
+	exit($txt['page_nojson']);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -64,7 +65,7 @@ if ($_GET["p"] == "admin")
 if (file_exists($tehfilezors))
 	include($tehfilezors);
 else
-	echo 'This page does not exist.';
+	echo $txt['page_noexist'];
 ?>
 
 <!-- Content end -->

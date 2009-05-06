@@ -38,6 +38,9 @@ $txt['zvfpcms_a2h']               = 'another creation from the strange mind of a
 $txt['zvfpcms_powered']           = 'powered by zvfpcms';
 $txt['zvfpcms_generated']         = 'page generated in [t] seconds';
 
+$txt['page_noexist']              = 'The page you requested doesn\'t exist.';
+$txt['page_nojson']               = 'Sorry, but JSON support is required to run ZVFPCMS. It should be included with PHP 5.20 and above.';
+
 $txt['admin_panel_title']         = 'Administration Panel';
 $txt['admin_panel_noperms']       = 'You do not have proper permissions to access this page.';
 $txt['admin_panel_welcome']       = 'Welcome to the administration panel.';

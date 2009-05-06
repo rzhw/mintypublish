@@ -40,6 +40,9 @@ $txt['zvfpcms_a2h']               = 'another creation from the strange mind of a
 $txt['zvfpcms_powered']           = 'powered by zvfpcms';
 $txt['zvfpcms_generated']         = 'page generated in [t] seconds';
 
+$txt['page_noexist']              = 'あなたが存在しない場合は、リクエストされたページをご覧ください。';
+$txt['page_nojson']               = 'が、申し訳ありませんがJSONをサポートZVFPCMSを実行する必要があります。これはPHP 5.20以降に付属する必要があります。';
+
 $txt['admin_panel_title']         = '管理者パネル';
 $txt['admin_panel_noperms']       = 'このページにアクセスするために適切な権限がありません。';
 $txt['admin_panel_welcome']       = '管理者パネルへようこそ。';
