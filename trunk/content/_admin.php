@@ -171,12 +171,6 @@ else
 				case "edt2":
 					$file = fopen("content/".$_POST["theid"].".php","w");
 					
-					/*$contenttowrite = str_replace('\"','"',$_POST["thecontent"]);
-					$contenttowrite = str_replace("\'","'",$contenttowrite);
-					$contenttowrite = str_replace("[DO NOT EDIT AFTER HERE]","<?php",$contenttowrite);
-					$contenttowrite = str_replace("[EDIT AFTER HERE]","?>",$contenttowrite);
-					$contenttowrite = str_replace('rel="','params="',$contenttowrite);*/
-					
 					$find = array(
 						'\"',
 						"\'",
