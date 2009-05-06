@@ -7,8 +7,8 @@ if (!function_exists("json_encode"))
 $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
 
-require_once("functions.php");
-require_once("content/_language_en.php");
+require_once("zvfpcms/functions.php");
+require_once("zvfpcms/lang/en.php");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -17,21 +17,21 @@ require_once("content/_language_en.php");
 		<title>zvfpcms dev</title>
 		
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="css/lightwindow.css" />
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<link rel="stylesheet" type="text/css" href="zvfpcms/css/lightwindow.css" />
+		<link rel="stylesheet" type="text/css" href="zvfpcms/css/default.css" />
     
 		<!-- JavaScript -->
-		<script type="text/javascript" src="js/prototype.js"></script>
-		<script type="text/javascript" src="js/effects.js"></script>
-		<script type="text/javascript" src="js/lightwindow.js"></script>
+		<script type="text/javascript" src="zvfpcms/js/prototype.js"></script>
+		<script type="text/javascript" src="zvfpcms/js/effects.js"></script>
+		<script type="text/javascript" src="zvfpcms/js/lightwindow.js"></script>
 	</head>
 	<body>
 		<div id="global_wrapper">
-			<img src="img/logo.jpg" alt="" />
+			<img src="zvfpcms/img/logo.jpg" alt="" />
 			<div id="menu_wrapper">
 				<div style="float:left;">
 					<?php
-						$data = json_decode(file_get_contents("content/_pages.txt"),true);
+						$data = json_decode(file_get_contents("zvfpcms/pg/pages.txt"),true);
 						
 						for($i=0;$i<sizeof($data);$i++)
 						{
@@ -43,18 +43,24 @@ require_once("content/_language_en.php");
 					?>
 				</div>
 				<div style="float:right;overflow:hidden;">
-					<a href="index.php?p=_admin">admin</a>
+					<a href="index.php?p=admin">admin</a>
 				</div>
 				<div style="clear:both;"></div>
 			</div>
 			<div id="content_wrapper">
 <!-- Content start -->
 <?php
-$tehfilezors = "content/".$_GET["p"].".php";
+$tehfilezors = "zvfpcms/pg/".$_GET["p"].".php";
 
-if ($tehfilezors == "content/.php")
-	$tehfilezors = "content/home.php";
+// home page has no short name
+if ($tehfilezors == "zvfpcms/pg/.php")
+	$tehfilezors = "zvfpcms/pg/home.php";
 
+// admin page is special :P
+if ($_GET["p"] == "admin")
+	$tehfilezors = "zvfpcms/admin.php";
+
+// and so we include the page...
 if (file_exists($tehfilezors))
 	include($tehfilezors);
 else
