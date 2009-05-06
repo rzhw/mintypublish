@@ -36,6 +36,8 @@
 /// Nothing
 function template_editor($currentpage,$shorttitle = null,$title = null,$child = null)
 {
+	global $txt;
+	
 	echo $txt['admin_panel_edt_src'].'<br />
 	<br />
 	
