@@ -64,4 +64,27 @@ if ($zvfpcms)
 		}
 	}
 }
+
+/*
+ * Summary:      Outputs a page manager listing entry for a specified page
+ * Parameters:   $curpage - URL of the page using this function
+ *               $pid - numerical ID of the page
+ *               $ptitle - text title of the page
+ *               $top - whether the page is the first entry in the list
+ *               $bottom - whether the page is the last entry in the list
+ * Return:       Nothing
+ */
+function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
+{
+	
+	echo '<a href="'.($top ? 'javascript:alert(\'You cannot move this page up; it already is on the top.\')' : $curpage.'&amp;action=pup&amp;pid='.$pid).'"><img src="zvfpcms/img/arrow_up'.($top ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" /></a>';
+	echo '<a href="'.($bottom ? 'javascript:alert(\'You cannot move this page down; it already is on the bottom.\')' : $curpage.'&amp;action=pdn&amp;pid='.$pid).'"><img src="zvfpcms/img/arrow_down'.($bottom ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" /></a>';
+	
+	echo '
+	<a href="'.$curpage.'&amp;action=edt&amp;pid='.$pid.'"><img src="zvfpcms/img/page_edit.png" alt="" style="width:12px;height:12px;" /></a>
+	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="zvfpcms/img/page_delete.png" alt="" style="width:12px;height:12px;" /></a>
+	<a href="javascript:alert(\'This page is not a child page. Making it a child of a page is currently not implemented.\')"><img src="zvfpcms/img/page_child_off.png" alt="" style="width:12px;height:12px;" /></a>
+	
+	<b>'.$pid.'. '.$ptitle.'</b>';
+}
 ?>
