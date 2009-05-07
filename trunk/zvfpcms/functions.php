@@ -18,15 +18,14 @@
 	http://zvfpcms.sourceforge.net/
 */
 
-/// FUNCTION:
-/// template_editor
-/// DESCRIPTION:
-/// Echoes editor
-/// ARGUMENTS:
-/// $currentpage as str - Page containing editor
-/// $title as str - Title
-/// RETURNS
-/// Nothing
+/*
+ * Summary:      Outputs the page editor
+ * Parameters:   $currentpage as string - Page containing editor
+ *               $shorttitle as string (optional) - Short title when editing
+ *               $title as string (optional) - Full title when editing
+ *               $child as string (optional) - Child page (short title) when editing
+ * Return:       Nothing
+ */
 function template_editor($currentpage,$shorttitle = null,$title = null,$child = null)
 {
 	global $txt;
@@ -69,18 +68,15 @@ function template_editor($currentpage,$shorttitle = null,$title = null,$child = 
 	</div>';
 }
 
-/// FUNCTION:
-/// template_page_man_entry
-/// DESCRIPTION:
-/// Echoes page manager entry for a specified page
-/// ARGUMENTS:
-/// $curpage - URL of the page using this function
-/// $pid - numerical ID of the page
-/// $ptitle - text title of the page
-/// $top - whether the page is the first entry in the list
-/// $bottom - whether the page is the last entry in the list
-/// RETURNS
-/// Nothing
+/*
+ * Summary:      Outputs a page manager listing entry for a specified page
+ * Parameters:   $curpage - URL of the page using this function
+ *               $pid - numerical ID of the page
+ *               $ptitle - text title of the page
+ *               $top - whether the page is the first entry in the list
+ *               $bottom - whether the page is the last entry in the list
+ * Return:       Nothing
+ */
 function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
 {
 	
@@ -96,23 +92,34 @@ function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
 
 }
 
-/// FUNCTION:
-/// get_first_sentence
-function get_first_sentence($thestring)
+/*
+ * Summary:      Modifies a variable in the configuration file
+ * Parameters:   $var - the name of the variable (WITHOUT the $)
+ *               $newval - the new value for the variable
+ * Return:       Nothing
+ */
+function config_modify($var,$newval)
 {
-    $pos[0] = strpos($thestring,'.');
-	$pos[1] = strpos($thestring,'?');
-	$pos[2] = strpos($thestring,'!');
-       
-    if($pos[0] === false && $pos[1] === false && $pos[2] === false)
+	$filec = fopen($path['root'].'/config.php','w+');
+	
+	while (!feof($filec))
 	{
-        return $thestring;
-    }
-    else
+		$confstr .= fgets($filec);
+	}
+	
+	$confln = explode('\n',$confstr);
+	
+	for ($i=0;$i<count($confln);$i++)
 	{
-		$tehpos = min($pos)+1;
-		echo $tehpos;
-		return substr($thestring, 0, $tehpos+1);
-    }
+		if (strstr($confln[$i],$var))
+		{
+			$confln[$i] = '$'.$var.'=\''.addslashes($newval).'\';';
+		}
+	}
+	$confstr = implode("\n",$confln);
+	
+	fwrite($filec,$confstr);
+	
+	fclose($filec);
 }
 ?>

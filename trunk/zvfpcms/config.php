@@ -1,6 +1,7 @@
 <?php
 // main visual config
 $cfg['lang']    = 'en';
+$cfg['time']    = 'Australia/Sydney';
 
 // paths
 $path['admin']  = 'index.php?p=admin';

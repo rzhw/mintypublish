@@ -35,6 +35,7 @@ $txt['text_failure']              = '故障!';
 $txt['text_yes']                  = 'はい';
 $txt['text_no']                   = 'いいえ';
 $txt['text_notimplemented']       = '実装されていません！';
+$txt['text_pleasewait']           = 'ちょっと待って...';
 
 $txt['zvfpcms_a2h']               = 'a2h zvfpcmsから別のプロジェクトです';
 $txt['zvfpcms_powered']           = 'zvfpcmsによって供給';

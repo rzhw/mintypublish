@@ -21,7 +21,7 @@ if ($zvfpcms)
 {
 	echo '<h3>'.$txt['admin_panel_manpages_list'].'</h3>';
 	
-	echo '<input type="button" value="Add a page" onclick="javascript:location.href=\''.$path['admin'].'&amp;s=add\'" /><br /><br />';
+	echo '<input type="button" value="'.$txt['admin_panel_addpage'].'" onclick="javascript:location.href=\''.$path['admin'].'&amp;s=add\'" /><br /><br />';
 	
 	echo $txt['admin_panel_manpages_desc'];
 	
