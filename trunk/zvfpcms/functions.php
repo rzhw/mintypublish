@@ -100,6 +100,8 @@ function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
  */
 function config_modify($var,$newval)
 {
+	// original code found at http://stackoverflow.com/questions/476892/whats-is-the-best-file-format-for-configuration-files
+	
 	$filec = fopen($path['root'].'/config.php','w+');
 	
 	while (!feof($filec))
@@ -116,6 +118,7 @@ function config_modify($var,$newval)
 			$confln[$i] = $var.'=\''.addslashes($newval).'\';';
 		}
 	}
+	
 	$confstr = implode("\n",$confln);
 	
 	fwrite($filec,$confstr);
