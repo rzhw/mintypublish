@@ -19,6 +19,36 @@
 */
 
 /*
+ * Summary:      Returns file extension from a string
+ * Parameters:   $str as string
+ * Return:       Filetype
+ */
+function get_file_extension($str)
+{
+	return substr(strrchr($str,'.'),1);
+}
+
+/*
+ * Summary:      Returns filetype from a string
+ * Parameters:   $str as string
+ * Return:       Filetype
+ */
+function get_file_type($str)
+{
+	switch (get_file_extension($str))
+	{
+		case "flv": return "video"; break;
+		case "mp4": return "video"; break;
+		case "png": return "image"; break;
+		case "gif": return "image"; break;
+		case "jpg": return "image"; break;
+		case "mp3": return "music"; break;
+		case "ogg": return "either music or video"; break;
+		default: return "cannot be viewed via most browsers"; break;
+	}
+}
+
+/*
  * Summary:      Modifies a variable in the configuration file
  * Parameters:   $var as string - the name of the variable (WITH THE PREFIX)
  *               $newval as string - the new value for the variable

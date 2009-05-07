@@ -1,7 +1,7 @@
 <?php
 // main config
 $cfg['lang']='en';
-$cfg['time']='Australia/Sydney';
+$cfg['timezone']='Australia/Sydney';
 
 // paths
 $path['admin']='index.php?p=admin';
@@ -11,4 +11,5 @@ $path['images']='zvfpcms/img';
 $path['css']='zvfpcms/css';
 $path['js']='zvfpcms/js';
 $path['pages']='zvfpcms/pg';
+$path['media']='zvfpcms/media';
 ?>

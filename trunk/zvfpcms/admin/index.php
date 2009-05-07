@@ -38,7 +38,7 @@ if ($zvfpcms)
 			<td><img src="'.$path['images'].'/admin_man_pg.png" alt="" /></td>
 			<td><a href="'.$path['admin'].'&amp;s=man" class="admin_menu_link">Manage Pages</a></td>
 			<td><img src="'.$path['images'].'/admin_man_res.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=asdf" class="admin_menu_link">Manage Resources</a></td>
+			<td><a href="'.$path['admin'].'&amp;s=med" class="admin_menu_link">Manage Media</a></td>
 			<td><img src="'.$path['images'].'/admin_man_cfg.png" alt="" /></td>
 			<td><a href="'.$path['admin'].'&amp;s=asdf" class="admin_menu_link">Configuration</a></td>
 		</tr>
@@ -94,6 +94,29 @@ if ($zvfpcms)
 						case "pdn":
 							$direction = "down";
 							include($path['admin2'].'/page_man_reorder.php');
+							break;
+						default:
+							echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
+							break;
+					}
+				}
+				break;
+			case "med":
+				echo '<h2>Manage Media</h2>
+				<br />';
+				
+				$data = json_decode(file_get_contents($path['media'].'/media.txt'),true);
+				
+				if (!isset($_GET["action"]))
+				{
+					include("zvfpcms/admin/media_man_list.php");
+				}
+				else
+				{
+					switch ($_GET["action"])
+					{
+						case "up":
+							include($path['admin2'].'/media_man_upload.php');
 							break;
 						default:
 							echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
