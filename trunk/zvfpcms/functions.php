@@ -94,8 +94,8 @@ function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
 
 /*
  * Summary:      Modifies a variable in the configuration file
- * Parameters:   $var - the name of the variable (WITHOUT the $)
- *               $newval - the new value for the variable
+ * Parameters:   $var as string - the name of the variable (WITH THE PREFIX)
+ *               $newval as string - the new value for the variable
  * Return:       Nothing
  */
 function config_modify($var,$newval)
@@ -113,7 +113,7 @@ function config_modify($var,$newval)
 	{
 		if (strstr($confln[$i],$var))
 		{
-			$confln[$i] = '$'.$var.'=\''.addslashes($newval).'\';';
+			$confln[$i] = $var.'=\''.addslashes($newval).'\';';
 		}
 	}
 	$confstr = implode("\n",$confln);

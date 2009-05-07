@@ -1,5 +1,5 @@
 <?php
-// main visual config
+// main config
 $cfg['lang']    = 'en';
 $cfg['time']    = 'Australia/Sydney';
 
