@@ -23,7 +23,7 @@ if ($zvfpcms)
 	'.$txt['admin_panel_addpage_desc'].'<br />
 	<br />
 		  <form method="post" action="'.$path['admin'].'&amp;s=add2">';
-			 template_editor($path['admin'].'&amp;s=add');
+			 include($path['admin2'].'/page_editor.php');
 	echo '</form>';
 }
 ?>

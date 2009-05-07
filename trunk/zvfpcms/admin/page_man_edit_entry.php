@@ -25,8 +25,8 @@ if ($zvfpcms)
 	echo '<br /><div class="msgbox_warning"><b>'.$txt['text_warning'].':</b> '.$txt['admin_panel_noedittitle'].'</div><br />';
 	
 	echo '<form method="post" action="'.$path['admin'].'&amp;s=man&amp;action=edt2&amp;pid='.$_GET["pid"].'">';
-		
-	template_editor($path['admin'].'&amp;s=man&amp;action=edt&amp;pid='.$_GET["pid"],trim($data[$_GET["pid"]]["shortname"]),trim($data[$_GET["pid"]]["fullname"]));
+	
+	include($path['admin2'].'/page_editor.php');
 	
 	echo '</form>';
 }

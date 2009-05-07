@@ -19,56 +19,6 @@
 */
 
 /*
- * Summary:      Outputs the page editor
- * Parameters:   $currentpage as string - Page containing editor
- *               $shorttitle as string (optional) - Short title when editing
- *               $title as string (optional) - Full title when editing
- *               $child as string (optional) - Child page (short title) when editing
- * Return:       Nothing
- */
-function template_editor($currentpage,$shorttitle = null,$title = null,$child = null)
-{
-	global $txt;
-	
-	echo $txt['admin_panel_edt_src'].'<br />
-	<br />
-	
-	'.$txt['admin_panel_edt_srtnm'].'
-		<a href="javascript:alert(\''.$txt['admin_panel_edt_srtnm_dsc'].'\')"><img src="zvfpcms/img/help.png" alt="" style="width:12px;height:12px;" /></a>
-		<input type="text" name="theid" value="'.$shorttitle.'" /><br />
-		
-	'.$txt['admin_panel_edt_fllnm'].'
-		<a href="javascript:alert(\''.$txt['admin_panel_edt_fllnm_dsc'].'\')"><img src="zvfpcms/img/help.png" alt="" style="width:12px;height:12px;" /></a>
-		<input type="text" name="thetitle" value="'.$title.'" /><br />
-		
-	'.$txt['admin_panel_edt_child'].'
-		<a href="javascript:alert(\''.$txt['admin_panel_edt_child_dsc'].'\')"><img src="zvfpcms/img/help.png" alt="" style="width:12px;height:12px;" /></a>
-		<input type="text" name="thechild" value="'.(isset($child) ? $child : '-1').'" /> <b>'.$txt['text_notimplemented'].'</b><br />
-		
-	<br />
-	<input type="submit" /><br /><br />
-	<script type="text/javascript" src="zvfpcms/js/tiny_mce/tiny_mce.js"></script>
-	<script type="text/javascript" src="zvfpcms/js/tiny_mce/tiny_mce_cfg.js"></script
-	
-	<div style="position:relative;left:-18px;">
-		<textarea id="thecontent" name="thecontent" style="width:1048px;height:512px;">';
-			if ($shorttitle != null || $_GET["pid"] == "0")
-			{
-				if ($_GET["pid"] == "0")
-					$tehcontent = file_get_contents("zvfpcms/pg/home.php");
-				else
-					$tehcontent = file_get_contents("zvfpcms/pg/".$shorttitle.".php");
-				
-				$tehcontent = str_replace("<?php", "[DO NOT EDIT AFTER HERE]", $tehcontent);
-				$tehcontent = str_replace("?>", "[EDIT AFTER HERE]", $tehcontent);
-				$tehcontent = str_replace('params="', 'rel="', $tehcontent);
-				echo $tehcontent;
-			}
-	echo '</textarea>
-	</div>';
-}
-
-/*
  * Summary:      Outputs a page manager listing entry for a specified page
  * Parameters:   $curpage - URL of the page using this function
  *               $pid - numerical ID of the page
