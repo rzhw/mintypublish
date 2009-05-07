@@ -40,7 +40,7 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www
 // the top, you know... logo and menu...
 echo '
 	<div id="global_wrapper">
-			<img src="'.$path['images'].'/logo.jpg" alt="" />
+			<img src="'.$path['images'].'/logo.png" alt="" />
 			<div id="menu_wrapper">
 				<div style="float:left;">';
 					$data = json_decode(file_get_contents($path['pages'].'/pages.txt'),true);
