@@ -33,6 +33,7 @@ $txt['text_failure']              = 'Failure!';
 $txt['text_yes']                  = 'Yes';
 $txt['text_no']                   = 'No';
 $txt['text_notimplemented']       = 'Not implemented!';
+$txt['text_pleasewait']           = 'Hang on a moment...';
 
 $txt['zvfpcms_powered']           = 'powered by zvfpcms';
 $txt['zvfpcms_a2h']               = 'zvfpcms is another project from a2h';

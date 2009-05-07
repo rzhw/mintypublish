@@ -1,4 +1,6 @@
 <?php
+$zvfpcms = true;
+
 // page generation tracker
 $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
@@ -70,7 +72,7 @@ echo '
 
 	// admin page is special :P
 	if ($_GET["p"] == "admin")
-		$tehfilezors = $path['root'].'/admin.php';
+		$tehfilezors = $path['root'].'/admin/index.php';
 
 	// and so we include the page...
 	if (file_exists($tehfilezors))
