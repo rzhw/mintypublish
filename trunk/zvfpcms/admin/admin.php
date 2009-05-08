@@ -34,13 +34,13 @@ if ($zvfpcms)
 		echo '<table cellpadding="0" cellspacing="4" border="0">
 		<tr>
 			<td><img src="'.$path['images'].'/admin_man_pg.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=man" class="admin_menu_link">Manage Pages</a></td>
+			<td><a href="'.$path['admin'].'&amp;s=man" class="admin_menu_link">'.$txt['admin_panel_manpages'].'</a></td>
 			<td><img src="'.$path['images'].'/admin_man_res.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=med" class="admin_menu_link">Manage Media</a></td>
+			<td><a href="'.$path['admin'].'&amp;s=med" class="admin_menu_link">'.$txt['admin_panel_manmedia'].'</a></td>
 			<td><img src="'.$path['images'].'/admin_man_cfg.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=asdf" class="admin_menu_link">Configuration</a></td>
+			<td><a href="'.$path['admin'].'&amp;s=asdf" class="admin_menu_link">'.$txt['admin_panel_config'].'</a></td>
 			<td><img src="'.$path['images'].'/admin_logout.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=logout" class="admin_menu_link">Logout</a></td>
+			<td><a href="'.$path['admin'].'&amp;s=logout" class="admin_menu_link">'.$txt['user_logout'].'</a></td>
 		</tr>
 		</table>';
 		

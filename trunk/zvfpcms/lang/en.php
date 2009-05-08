@@ -41,6 +41,11 @@ $txt['page_nojson']               = 'Sorry, but JSON support is required to run 
 // user stuff
 $txt['user_logout']               = 'Logout';
 
+// admin panel menu
+$txt['admin_panel_manpages']      = 'Manage Pages';
+$txt['admin_panel_manmedia']      = 'Manage Media';
+$txt['admin_panel_config']        = 'Configuration';
+
 // general admin panel
 $txt['admin_panel_title']         = 'Administration Panel';
 $txt['admin_panel_noperms']       = 'You do not have proper permissions to access this page.';
@@ -51,11 +56,6 @@ $txt['admin_panel_actn_noexist']  = 'That action doesn\'t exist or isn\'t implem
 $txt['admin_panel_what']          = 'What?';
 $txt['admin_panel_confirm']       = 'Are you sure you want to do this?';
 $txt['admin_panel_deleting']      = 'Deleting file...';
-
-// admin panel menu
-$txt['admin_panel_manpages']      = 'Manage Pages';
-$txt['admin_panel_manmedia']      = 'Manage Media';
-$txt['admin_panel_config']        = 'Configuration';
 
 // page management in admin panel
 $txt['admin_panel_addpage']       = 'Add a page';
@@ -79,4 +79,6 @@ $txt['admin_panel_edt_child']     = 'Child page of';
 $txt['admin_panel_edt_child_dsc'] = 'Type in the short title of the page you wish to set this page as the child of. If you do not wish to set this as a child of a page, leave this as -1.';
 
 // media management in admin panel
+$txt['admin_panel_manmed_recog']  = 'Recognised filetypes are:';
+$txt['admin_panel_manmed_convt']  = 'To convert media between filetypes [TODO]';
 ?>
