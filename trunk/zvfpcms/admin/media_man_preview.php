@@ -22,13 +22,13 @@ if ($zvfpcms)
 	echo '<h3>Preview</h3>';
 	echo '
 	<a  
-		 href="zvfpcms/media/test.flv"  
+		 href="'.$path['media'].'/'.$data[$_GET["pid"]].'"  
 		 style="display:block;width:640px;height:480px"  
 		 id="player"> 
 	</a> 
 
 	<script type="text/javascript">
-		flowplayer("player", "zvfpcms/flowplayer-3.1.0.swf");
+		flowplayer("player", "'.$path['root'].'/flowplayer-3.1.0.swf");
 	</script>';
 }
 ?>
