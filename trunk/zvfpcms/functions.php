@@ -48,40 +48,6 @@ function get_file_type($str)
 }
 
 /*
- * Summary:      Modifies a variable in the configuration file
- * Parameters:   $var as string - the name of the variable (WITH THE PREFIX)
- *               $newval as string - the new value for the variable
- * Return:       Nothing
- */
-function config_modify($var,$newval)
-{
-	// original code found at http://stackoverflow.com/questions/476892/whats-is-the-best-file-format-for-configuration-files
-	
-	$filec = fopen($path['root'].'/config.php','w+');
-	
-	while (!feof($filec))
-	{
-		$confstr .= fgets($filec);
-	}
-	
-	$confln = explode('\n',$confstr);
-	
-	for ($i=0;$i<count($confln);$i++)
-	{
-		if (strstr($confln[$i],$var))
-		{
-			$confln[$i] = $var.'=\''.addslashes($newval).'\';';
-		}
-	}
-	
-	$confstr = implode("\n",$confln);
-	
-	fwrite($filec,$confstr);
-	
-	fclose($filec);
-}
-
-/*
  * Summary:      Generates a hash from a given password
  *               Original found at http://www.bigroom.co.uk/blog/php-password-security
  * Parameters:   $pwd as string - The password to generate a hash from

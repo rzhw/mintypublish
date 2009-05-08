@@ -38,7 +38,7 @@ if ($zvfpcms)
 			<td><img src="'.$path['images'].'/admin_man_res.png" alt="" /></td>
 			<td><a href="'.$path['admin'].'&amp;s=med" class="admin_menu_link">'.$txt['admin_panel_manmedia'].'</a></td>
 			<td><img src="'.$path['images'].'/admin_man_cfg.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=asdf" class="admin_menu_link">'.$txt['admin_panel_config'].'</a></td>
+			<td><a href="'.$path['admin'].'&amp;s=cfg" class="admin_menu_link">'.$txt['admin_panel_config'].'</a></td>
 			<td><img src="'.$path['images'].'/admin_logout.png" alt="" /></td>
 			<td><a href="'.$path['admin'].'&amp;s=logout" class="admin_menu_link">'.$txt['user_logout'].'</a></td>
 		</tr>
@@ -121,6 +121,9 @@ if ($zvfpcms)
 							break;
 					}
 				}
+				break;
+			case "cfg":
+				include($path['admin2'].'/config_frontend.php');
 				break;
 			case "logout":
 				include($path['admin2'].'/user_logout.php');
