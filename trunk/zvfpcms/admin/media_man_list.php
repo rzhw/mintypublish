@@ -24,6 +24,9 @@ if ($zvfpcms)
 	echo 'Recognised filetypes are: <b>VIDEO</b> flv, mp4, ogg <b>IMAGES</b> png, gif, jpg <b>MUSIC</b> mp3 ogg<br />
 	<br />
 	To convert media between filetypes [filler text]<br />
+	<br />
+	Clicking on <img src="zvfpcms/img/preview.png" alt="" /> will preview a file. Clicking on
+	<img src="zvfpcms/img/trash.png" alt="" /> will delete a file.<br />
 	<br />';
 	
 	echo '<h3>Upload</h3>';
@@ -38,30 +41,8 @@ if ($zvfpcms)
 		
 	for($i = 0; $i < sizeof($data); $i++) 
 	{
-		// top item in list where there is more than one item
-		if ($i == 0 && sizeof($data) > 1)
-		{
-			entry_media($path['admin'].'&amp;s=med',$i,$data[$i],1,0);
-			echo '<br />';
-		}
-		// the only item in the list
-		else if ($i == 0)
-		{
-			entry_media($path['admin'].'&amp;s=med',$i,$data[$i],1,1);
-			echo '<br />';
-		}
-		// bottom item in list where there is more than one item
-		else if ($i == (sizeof($data)-1))
-		{
-			entry_media($path['admin'].'&amp;s=med',$i,$data[$i],0,1);
-			echo '<br />';
-		}
-		// other items
-		else
-		{
-			entry_media($path['admin'].'&amp;s=med',$i,$data[$i],0,0);
-			echo '<br />';
-		}
+		entry_media($path['admin'].'&amp;s=med',$i,$data[$i]);
+		echo '<br />';
 	}
 }
 
@@ -70,15 +51,14 @@ if ($zvfpcms)
  * Parameters:   $curpage - URL of the page using this function
  *               $pid - numerical ID of the page
  *               $ptitle - text title of the page
- *               $top - whether the page is the first entry in the list
- *               $bottom - whether the page is the last entry in the list
  * Return:       Nothing
  */
-function entry_media($curpage,$pid,$ptitle,$top=false,$bottom=false)
+function entry_media($curpage,$pid,$ptitle)
 {
 	
-	echo '<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="zvfpcms/img/trash.png" alt="" /></a>
+	echo '<a href="'.$curpage.'&amp;action=prv&amp;pid='.$pid.'"><img src="zvfpcms/img/preview.png" alt="" /></a>
+	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="zvfpcms/img/trash.png" alt="" /></a>
 	
-	<b>'.$pid.'. '.$ptitle.' ('.get_file_type($ptitle).')</b>';
+	<b>'.$ptitle.' ('.get_file_type($ptitle).')</b>';
 }
 ?>

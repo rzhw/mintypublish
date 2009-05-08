@@ -34,6 +34,7 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www
 		<script type="text/javascript" src="'.$path['js'].'/prototype.js"></script>
 		<script type="text/javascript" src="'.$path['js'].'/effects.js"></script>
 		<script type="text/javascript" src="'.$path['js'].'/lightwindow.js"></script>
+		<script type="text/javascript" src="'.$path['js'].'/flowplayer-3.1.0.min.js"></script>
 	</head>
 	<body>';
 
@@ -72,7 +73,7 @@ echo '
 
 	// admin page is special :P
 	if ($_GET["p"] == "admin")
-		$tehfilezors = $path['root'].'/admin/index.php';
+		$tehfilezors = $path['root'].'/admin/admin.php';
 
 	// and so we include the page...
 	if (file_exists($tehfilezors))
