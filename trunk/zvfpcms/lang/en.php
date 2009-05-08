@@ -38,6 +38,9 @@ $txt['zvfpcms_generated']         = 'page generated in [t] seconds';
 $txt['page_noexist']              = 'The page you requested doesn\'t exist.';
 $txt['page_nojson']               = 'Sorry, but JSON support is required to run ZVFPCMS. It should be included with PHP 5.20 and above.';
 
+// user stuff
+$txt['user_logout']               = 'Logout';
+
 // general admin panel
 $txt['admin_panel_title']         = 'Administration Panel';
 $txt['admin_panel_noperms']       = 'You do not have proper permissions to access this page.';
@@ -49,13 +52,17 @@ $txt['admin_panel_what']          = 'What?';
 $txt['admin_panel_confirm']       = 'Are you sure you want to do this?';
 $txt['admin_panel_deleting']      = 'Deleting file...';
 
+// admin panel menu
+$txt['admin_panel_manpages']      = 'Manage Pages';
+$txt['admin_panel_manmedia']      = 'Manage Media';
+$txt['admin_panel_config']        = 'Configuration';
+
 // page management in admin panel
 $txt['admin_panel_addpage']       = 'Add a page';
 $txt['admin_panel_addpage_prog']  = 'Adding page...';
 $txt['admin_panel_addpage_savpr'] = 'Saving page...';
 $txt['admin_panel_addpage_desc']  = 'The page will be added to the end of the menu. Use the "Manage pages" section to move it.';
 $txt['admin_panel_addpage_blnk']  = '(n.b. if your page has blank content this may not be true)';
-$txt['admin_panel_manpages']      = 'Manage pages';
 $txt['admin_panel_manpages_list'] = 'Pages';
 $txt['admin_panel_manpages_desc'] = 'This is the list of pages.';
 $txt['admin_panel_manpages_ordr'] = 'Use [^]/[v] to move their order in the menu.';
