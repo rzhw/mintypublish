@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $zvfpcms = true;
 
 // page generation tracker

@@ -1,9 +1,22 @@
 <?php
-// main config
+/////////////////////
+// user management //
+/////////////////////
+
+# WARNING: IT IS YOUR RESPONSIBILITY TO CREATE YOUR OWN SALT.
+$user['salt']='3f7fa01c03a66a42742f52b236322b09';
+
+/////////////////
+// main config //
+/////////////////
+
 $cfg['lang']='en';
 $cfg['timezone']='Australia/Sydney';
 
-// paths
+///////////
+// paths //
+///////////
+
 $path['admin']='index.php?p=admin';
 $path['admin2']='zvfpcms/admin';
 $path['root']='zvfpcms';

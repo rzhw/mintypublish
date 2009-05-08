@@ -13,13 +13,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-In case you're a lazy idiot who can't even at least get a basic
-understanding of the license:
-"You must retain, in the Source form of any Derivative Works that You
-distribute, all copyright, patent, trademark, and attribution notices
-from the Source form of the Work, excluding those notices that do not
-pertain to any part of the Derivative Works"
-
 http://zvfpcms.sourceforge.net/
 
 ----------------------------------------------------------------------
@@ -29,3 +22,5 @@ This is a development version.
 I have made no guarantees on its current stability.
 
 Things may be broken.
+
+Default username/password combo is admin/admin

@@ -18,12 +18,10 @@
 	http://zvfpcms.sourceforge.net/
 */
 if ($zvfpcms)
-{
-	if($lolcheese = 0)
+{	
+	if (!isloggedin())
 	{
-		// User doesn't have permissions to access
-		echo '<h1>'.$txt['admin_panel_title'].'</h1>
-		'.$txt['admin_panel_noperms'];
+		include("zvfpcms/admin/user_login.php");
 	}
 	else
 	{
@@ -41,13 +39,10 @@ if ($zvfpcms)
 			<td><a href="'.$path['admin'].'&amp;s=med" class="admin_menu_link">Manage Media</a></td>
 			<td><img src="'.$path['images'].'/admin_man_cfg.png" alt="" /></td>
 			<td><a href="'.$path['admin'].'&amp;s=asdf" class="admin_menu_link">Configuration</a></td>
+			<td><img src="'.$path['images'].'/admin_logout.png" alt="" /></td>
+			<td><a href="'.$path['admin'].'&amp;s=logout" class="admin_menu_link">Logout</a></td>
 		</tr>
-		</table>
-		<!--
-		<img src="'.$path['images'].'/page_add.png" alt="" /> <a href="'.$path['admin'].'&amp;s=add">'.$txt['admin_panel_addpage'].'</a>
-		<img src="'.$path['images'].'/page_gear.png" alt="" /> <a href="'.$path['admin'].'&amp;s=man">'.$txt['admin_panel_manpages'].'</a>
-		<img src="'.$path['images'].'/bug.png" alt="" /> <a href="'.$path['admin'].'&amp;s=reports">'.$txt['admin_panel_manbugs'].'</a>
-		-->';
+		</table>';
 		
 		// Add newlines! (Like a boss)
 		echo '<br />';
@@ -127,9 +122,79 @@ if ($zvfpcms)
 					}
 				}
 				break;
+			case "logout":
+				include($path['admin2'].'/user_logout.php');
+				break;
 			default:
-				echo $txt['admin_panel_actn_noexist'];
+				if (isset($_GET["s"]))
+					echo $txt['admin_panel_actn_noexist'];
+				break;
 		}
 	}
+}
+
+function isloggedin()
+{
+	// original code from http://www.evolt.org/node/60265
+	
+	// is the user set to remember?
+	if(isset($_COOKIE['cookuname']) && isset($_COOKIE['cookpwd']))
+	{
+		$_SESSION['uname'] = $_COOKIE['cookuname'];
+		$_SESSION['pwd'] = $_COOKIE['cookpwd'];
+	}
+
+	// user's session is still active
+	if (isset($_SESSION['uname']) && isset($_SESSION['pwd']))
+	{
+		// but is their user/pass pair correct?
+		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd']) == 2)
+		{
+			// NO? gtfo
+			unset($_SESSION['uname']);
+			unset($_SESSION['pwd']);
+			return false;
+		}
+		return true;
+	}
+	// user isn't active D:
+	else
+	{
+		return false;
+	}
+}
+
+function isexistinguser($uname,$pwd)
+{
+	global $path;
+	
+	$userfile = file_get_contents($path['root'].'/users.php');
+	$userfile = str_replace('<?php /* ','',$userfile);
+	$userfile = str_replace(' */ ?>','',$userfile);
+	
+	$userfile2 = json_decode($userfile,true);
+	
+	$hit = 0;
+	if (strchr($userfile,'"uname":"'.$uname.'"') != false)
+	{
+		for ($i=0;$i<sizeof($userfile2);$i++)
+		{
+			if ($userfile2[$i]["uname"] == $uname)
+			{
+				$hit = 1;
+				$unm = $i;
+			}
+		}
+	}
+	
+	if ($hit == 1)
+	{
+		if (user_pass_generate($pwd) == $userfile2[$unm]["pwd"])
+		{
+			$hit = 2;
+		}
+	}
+	
+	return $hit;
 }
 ?>

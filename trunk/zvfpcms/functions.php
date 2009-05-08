@@ -80,4 +80,16 @@ function config_modify($var,$newval)
 	
 	fclose($filec);
 }
+
+/*
+ * Summary:      Generates a hash from a given password
+ *               Original found at http://www.bigroom.co.uk/blog/php-password-security
+ * Parameters:   $pwd as string - The password to generate a hash from
+ * Return:       The new hash
+ */
+function user_pass_generate($pwd)
+{
+	global $user;
+    return $salt.(hash('whirlpool',$user['salt'].$pwd));
+}
 ?>
