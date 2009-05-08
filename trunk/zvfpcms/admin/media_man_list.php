@@ -21,7 +21,7 @@ if ($zvfpcms)
 {
 	echo '<h3>Information</h3>';
 	
-	echo 'Recognised filetypes are: <b>VIDEO</b> flv, mp4, ogg <b>IMAGES</b> png, gif, jpg <b>MUSIC</b> mp3 ogg<br />
+	echo 'Recognised filetypes are: <b>VIDEO</b> flv, mp4, ogg <b>IMAGES</b> png, gif, jpg <b>MUSIC</b> mp3<br />
 	<br />
 	To convert media between filetypes [filler text]<br />
 	<br />

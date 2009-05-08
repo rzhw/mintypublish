@@ -43,7 +43,6 @@ function get_file_type($str)
 		case "gif": return "image"; break;
 		case "jpg": return "image"; break;
 		case "mp3": return "music"; break;
-		case "ogg": return "either music or video"; break;
 		default: return "cannot be viewed via most browsers"; break;
 	}
 }
