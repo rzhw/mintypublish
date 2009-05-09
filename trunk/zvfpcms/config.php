@@ -3,7 +3,7 @@
 // user management //
 /////////////////////
 
-# WARNING: IT IS YOUR RESPONSIBILITY TO CREATE YOUR OWN SALT.
+# WARNING: AFTER INSTALLATION YOU _MUST NOT_ CHANGE THIS VALUE
 $user['salt']='3f7fa01c03a66a42742f52b236322b09';
 
 /////////////////
