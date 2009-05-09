@@ -39,6 +39,8 @@ $txt['text_yes']                  = 'はい';
 $txt['text_no']                   = 'いいえ';
 $txt['text_notimplemented']       = '実装されていません！';
 $txt['text_pleasewait']           = 'ちょっと待って...';
+$txt['text_whatsthis']            = '何これ？';
+$txt['text_save']                 = '保存する';
 
 // footer
 $txt['zvfpcms_a2h']               = 'a2h zvfpcmsから別のプロジェクトです';
@@ -92,4 +94,8 @@ $txt['admin_panel_edt_child_dsc'] = 'あなたの子供のように、このペ�
 // media management in admin panel
 $txt['admin_panel_manmed_recog']  = 'ファイル形式を認識している：';
 $txt['admin_panel_manmed_convt']  = 'ファイル形式との間でメディア変換するには[プレースホルダ]';
+
+// configuration frontend in admin panel
+$txt['admin_panel_lang']          = '言語';
+$txt['admin_panel_timezone']      = 'タイムゾーン';
 ?>

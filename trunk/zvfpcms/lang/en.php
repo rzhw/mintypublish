@@ -19,6 +19,7 @@
 */
 
 // strings written from a2h and aren't translated (duh)
+// this is australian english
 
 // global text
 $txt['text_warning']              = 'Warning';
@@ -28,6 +29,8 @@ $txt['text_yes']                  = 'Yes';
 $txt['text_no']                   = 'No';
 $txt['text_notimplemented']       = 'Not implemented!';
 $txt['text_pleasewait']           = 'Hang on a moment...';
+$txt['text_whatsthis']            = 'What\'s this?';
+$txt['text_save']                 = 'Save';
 
 // footer
 $txt['zvfpcms_powered']           = 'powered by zvfpcms';
@@ -81,4 +84,8 @@ $txt['admin_panel_edt_child_dsc'] = 'Type in the short title of the page you wis
 // media management in admin panel
 $txt['admin_panel_manmed_recog']  = 'Recognised filetypes are:';
 $txt['admin_panel_manmed_convt']  = 'To convert media between filetypes [TODO]';
+
+// configuration frontend in admin panel
+$txt['admin_panel_lang']          = 'Language';
+$txt['admin_panel_timezone']      = 'Timezone';
 ?>
