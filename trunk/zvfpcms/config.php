@@ -12,7 +12,7 @@ $user['salt']='3f7fa01c03a66a42742f52b236322b09';
 
 $cfg['lang']='en';
 $cfg['timezone']='Australia/Sydney';
-
+
 ///////////
 // paths //
 ///////////
