@@ -58,7 +58,7 @@ $txt['admin_panel_manmedia']      = 'メディア管理';
 $txt['admin_panel_config']        = '設定';
 
 // general admin panel
-$txt['admin_panel_title']         = '管理者パネル';
+$txt['admin_panel_title']         = '管理者のパネル';
 $txt['admin_panel_noperms']       = 'このページにアクセスするために適切な権限がありません。';
 $txt['admin_panel_welcome']       = '管理者パネルへようこそ。';
 $txt['admin_panel_noedittitle']   = 'て、任意の既存のページのタイトルを変更しないでください。あなたはそれを手動で変更を取得する必要があります。';
