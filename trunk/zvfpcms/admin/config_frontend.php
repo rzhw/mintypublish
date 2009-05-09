@@ -62,7 +62,7 @@ function updatecfg($var,$newval)
 	{
 		if (strchr($confln[$i],$var) != false)
 		{
-			$confln[$i] = $var.'=\''.addslashes($newval).'\';'."\n";
+			$confln[$i] = $var.'=\''.addslashes($newval).'\';'."\n\r";
 		}
 	}
 	
