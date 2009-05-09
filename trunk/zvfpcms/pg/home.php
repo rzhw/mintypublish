@@ -2,4 +2,4 @@ Hello and welcome to Ze Very Flat Pancaek CMS! As this is a very basic alpha rel
 <br />
 It is not recommended you use this script in a production environment currently.<br />
 <br />
-In fact, there is even nothing securing the admin panel.
+The username/password pair is currently admin/admin. Change the password if you like but atm you will need to manually write something to output a password.
