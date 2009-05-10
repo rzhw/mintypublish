@@ -58,4 +58,41 @@ function user_pass_generate($pwd)
 	global $user;
     return $salt.(hash('whirlpool',$user['salt'].$pwd));
 }
+
+//
+function media_html($fname)
+{
+	global $path;
+	
+	$toreturn = '';
+	
+	$ftype = get_file_type($fname);
+	
+	if ($ftype != "image")
+	{
+		$toreturn .= '
+		<a  
+			 href="'.$path['media'].'/'.$fname.'"  
+			 style="display:block;width:640px;height:'.($ftype == "music" ? '30' : '480').'px"  
+			 id="player"> 
+		</a> 
+
+		<script type="text/javascript">
+			flowplayer("player","'.$path['root'].'/flowplayer-3.1.0.swf"';
+		
+		if ($ftype == "music")
+		{
+			$toreturn .= ',{plugins:{controls:{fullscreen:false,height:30}}}';
+		}
+		
+		$toreturn .= ');
+		</script>';
+	}
+	else
+	{
+		$toreturn .= '<img src="'.$path['media'].'/'.$fname.'" alt="" />';
+	}
+	
+	return $toreturn;
+}
 ?>

@@ -24,7 +24,17 @@ if ($zvfpcms)
 	
 	$data[sizeof($data)] = basename($_FILES['uploadedfile']['name']);
 	
-	if(move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path) && fwrite($file,json_encode($data)))
+	$success = false;
+	
+	if (move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path))
+	{
+		if (fwrite($file,json_encode($data)))
+		{
+			$success = true;
+		}
+	}
+	
+	if ($success)
 	{
 		echo $txt['text_pleasewait'].'<meta http-equiv="refresh" content="0;url='.$path['admin'].'&amp;s=med">';
 	}

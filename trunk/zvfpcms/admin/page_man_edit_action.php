@@ -19,7 +19,7 @@
 */
 if ($zvfpcms)
 {
-	$file = fopen("content/".$_POST["theid"].".php","w");
+	$file = fopen($path['pages'].'/'.$_POST["theid"].".php","w");
 	
 	$find = array(
 		'\"',

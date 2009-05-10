@@ -65,8 +65,9 @@ echo '
 
 // and now let's have some content!
 echo '
+<!-- Content start -->
 			<div id="content_wrapper">
-<!-- Content start -->';
+';
 	$tehfilezors = $path['pages'].'/'.$_GET["p"].'.php';
 
 	// home page has no short name
@@ -78,24 +79,49 @@ echo '
 		$tehfilezors = $path['root'].'/admin/admin.php';
 
 	// and so we include the page...
+	ob_start('parsebbcode');
+	
 	if (file_exists($tehfilezors))
 		include($tehfilezors);
 	else
 		echo $txt['page_noexist'];
+		
+	ob_end_flush();
 echo '
+			</div>
 <!-- Content end -->
-			</div>';
+';
 			
 // we has a footer
 echo '
-			<!-- it would be appreciated if you do not remove the "powered by" part -->
+			<!--
+			it would be appreciated if you do not remove the "powered by" part
+			if you must remove it, at least keep this comment here
+			
+			powered by zvfpcms - a project by a2h - http://a2h.uni.cc/
+			-->
 			<div id="footer_wrapper">
 				<a href="http://zfvpcms.sourceforge.net/">'.$txt['zvfpcms_powered'].'</a>
 				| <a href="http://a2h.uni.cc/">'.$txt['zvfpcms_a2h'].'</a>';
 				$mtime = explode(' ', microtime());	$totaltime = $mtime[0] + $mtime[1] - $starttime;
 				printf(' | '.str_replace('[t]','%.3f',$txt['zvfpcms_generated']), $totaltime);
-				?>
+				echo '
 			</div>
 		</div>
 	</body>
-</html>
+</html>';
+
+function parsebbcode($buffer)
+{
+	if (strchr($buffer,'<!-- noreplace -->') == false)
+	{
+		$find = array('/(\[media\])(.+)(\[\/media\])/');
+		$replace = array(media_html('\\2'));
+		$string = preg_replace($find, $replace, $buffer);
+		return $string;
+	}
+	else
+	{
+		return $buffer;
+	}
+}

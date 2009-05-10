@@ -22,31 +22,71 @@ if ($zvfpcms)
 	echo $txt['admin_panel_edt_src'].'<br />
 	<br />
 	
-	'.$txt['admin_panel_edt_srtnm'].'
-		<a href="javascript:alert(\''.$txt['admin_panel_edt_srtnm_dsc'].'\')"><img src="zvfpcms/img/help.png" alt="" style="width:12px;height:12px;" /></a>
-		<input type="text" name="theid" value="'.$data[$_GET["pid"]]["shortname"].'" /><br />
+	<table cellpadding="0" cellspacing="4" border="0" style="border:1px solid #000;width:100%;">
+		<tr>
+			<td>
+				'.$txt['admin_panel_edt_srtnm'].'
+				(<a href="javascript:alert(\''.$txt['admin_panel_edt_srtnm_dsc'].'\')">'.$txt['text_whatsthis'].'</a>)
+			</td>
+			<td>
+				<input type="text" name="theid" value="'.$data[$_GET["pid"]]["shortname"].'" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				'.$txt['admin_panel_edt_fllnm'].'
+				(<a href="javascript:alert(\''.$txt['admin_panel_edt_fllnm_dsc'].'\')">'.$txt['text_whatsthis'].'</a>)
+			</td>
+			<td>
+				<input type="text" name="thetitle" value="'.$data[$_GET["pid"]]["fullname"].'" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				'.$txt['admin_panel_edt_child'].'
+				(<a href="javascript:alert(\''.$txt['admin_panel_edt_child_dsc'].'\')">'.$txt['text_whatsthis'].'</a>)
+			</td>
+			<td>
+				<input type="text" name="thechild" value="'.(isset($data[$_GET["pid"]]["subpage"]) ? $data[$_GET["pid"]]["subpage"] : '-1').'" /> <b>'.$txt['text_notimplemented'].'</b>
+			</td>
+		</tr>
+	</table>
+	<br />
+	
+	<div id="mediashow" style="border:1px solid #000;padding:4px;">
+		<a href="javascript:void(0)" onclick="document.getElementById(\'mediabox\').style.display=\'block\';document.getElementById(\'mediashow\').style.display=\'none\'">Insert Media</a>
+	</div>
+	
+	<div id="mediabox" style="display:none;border:1px solid #000;padding:4px;">
+		Click an item in the list to insert it.<br /><br />
 		
-	'.$txt['admin_panel_edt_fllnm'].'
-		<a href="javascript:alert(\''.$txt['admin_panel_edt_fllnm_dsc'].'\')"><img src="zvfpcms/img/help.png" alt="" style="width:12px;height:12px;" /></a>
-		<input type="text" name="thetitle" value="'.$data[$_GET["pid"]]["fullname"].'" /><br />
-		
-	'.$txt['admin_panel_edt_child'].'
-		<a href="javascript:alert(\''.$txt['admin_panel_edt_child_dsc'].'\')"><img src="zvfpcms/img/help.png" alt="" style="width:12px;height:12px;" /></a>
-		<input type="text" name="thechild" value="'.(isset($data[$_GET["pid"]]["subpage"]) ? $data[$_GET["pid"]]["subpage"] : '-1').'" /> <b>'.$txt['text_notimplemented'].'</b><br />
+		<!-- noreplace -->
+		';
+			$medlist = json_decode(file_get_contents($path['media'].'/media.txt'),true);
+			
+			for($i = 0; $i < sizeof($medlist); $i++) 
+			{
+				echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[media]'.$medlist[$i].'[/media]\');">
+				'.$medlist[$i].' ('.get_file_type($medlist[$i]).')</a><br />';
+			}
+		echo '
+	</div>
+	
+	<br />
 		
 	<br />
-	<input type="submit" /><br /><br />
+	<input type="submit" value="Save" /><br /><br />
 	<script type="text/javascript" src="zvfpcms/js/tiny_mce/tiny_mce.js"></script>
-	<script type="text/javascript" src="zvfpcms/js/tiny_mce/tiny_mce_cfg.js"></script
+	<script type="text/javascript" src="zvfpcms/js/tiny_mce/tiny_mce_cfg.js"></script>
 	
 	<div style="position:relative;left:-18px;">
 		<textarea id="thecontent" name="thecontent" style="width:1048px;height:512px;">';
-			if ($shorttitle != null || $_GET["pid"] == "0")
+			if (isset($_GET["pid"]))
 			{
-				if ($_GET["pid"] == "0")
+				if ($_GET["pid"] == 0)
 					$tehcontent = file_get_contents("zvfpcms/pg/home.php");
 				else
-					$tehcontent = file_get_contents("zvfpcms/pg/".$shorttitle.".php");
+					$tehcontent = file_get_contents("zvfpcms/pg/".$data[$_GET["pid"]]['shortname'].".php");
 				
 				$tehcontent = str_replace("<?php", "[DO NOT EDIT AFTER HERE]", $tehcontent);
 				$tehcontent = str_replace("?>", "[EDIT AFTER HERE]", $tehcontent);

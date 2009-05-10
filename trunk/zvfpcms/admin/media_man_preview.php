@@ -21,27 +21,6 @@ if ($zvfpcms)
 {
 	echo '<h3>Preview</h3>';
 	
-	$ftype = get_file_type($data[$_GET["pid"]]);
-	
-	if ($ftype != "image")
-	{
-		echo '
-		<a  
-			 href="'.$path['media'].'/'.$data[$_GET["pid"]].'"  
-			 style="display:block;width:640px;height:'.($ftype == "music" ? '30' : '480').'px"  
-			 id="player"> 
-		</a> 
-
-		<script type="text/javascript">
-			flowplayer("player","'.$path['root'].'/flowplayer-3.1.0.swf"';
-		
-		if ($ftype == "music")
-		{
-			echo ',{plugins:{controls:{fullscreen:false,height:30}}}';
-		}
-		
-		echo ');
-		</script>';
-	}
+	echo media_html($data[$_GET["pid"]]);
 }
 ?>
