@@ -78,9 +78,7 @@ if ($zvfpcms)
 	<input type="submit" value="Save" /><br /><br />
 	<script type="text/javascript" src="'.$path['js'].'/tiny_mce/tiny_mce.js"></script>
 	<script type="text/javascript" src="'.$path['js'].'/tiny_mce/tiny_mce_cfg.js"></script>
-	
-	<div style="position:relative;left:-18px;">
-		<textarea id="thecontent" name="thecontent" style="width:1048px;height:512px;">';
+	<textarea id="thecontent" name="thecontent" style="width:100%;height:480px;">';
 			if (isset($_GET["pid"]))
 			{
 				if ($_GET["pid"] == 0)
@@ -93,7 +91,6 @@ if ($zvfpcms)
 				$tehcontent = str_replace('params="', 'rel="', $tehcontent);
 				echo $tehcontent;
 			}
-	echo '</textarea>
-	</div>';
+	echo '</textarea>';
 }
 ?>

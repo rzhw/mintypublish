@@ -30,22 +30,38 @@ if ($zvfpcms)
 		'.$txt['admin_panel_welcome'].'<br />
 		<br />';
 		
-		// Link the user to all the liddle pages...
-		echo '<table cellpadding="0" cellspacing="4" border="0">
-		<tr>
-			<td><img src="'.$path['images'].'/admin_man_pg.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=man" class="admin_menu_link">'.$txt['admin_panel_manpages'].'</a></td>
-			<td><img src="'.$path['images'].'/admin_man_res.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=med" class="admin_menu_link">'.$txt['admin_panel_manmedia'].'</a></td>
-			<td><img src="'.$path['images'].'/admin_man_cfg.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=cfg" class="admin_menu_link">'.$txt['admin_panel_config'].'</a></td>
-			<td><img src="'.$path['images'].'/admin_logout.png" alt="" /></td>
-			<td><a href="'.$path['admin'].'&amp;s=logout" class="admin_menu_link">'.$txt['user_logout'].'</a></td>
-		</tr>
-		</table>';
-		
-		// Add newlines! (Like a boss)
-		echo '<br />';
+		echo '
+		<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
+			<tr>
+				<td style="width:128px;padding-right:16px;vertical-align:top;">
+					<div style="background:#c0c0c0;color:#fff;padding:4px;">
+						<img src="'.$path['images'].'/admin_man_pg.png" alt="" /> Pages
+					</div>
+					<ul>
+						<li><a href="'.$path['admin'].'&amp;s=add">Add a page</a></li>
+						<li><a href="'.$path['admin'].'&amp;s=man">List existing pages</a></li>
+					</ul>
+					<div style="background:#c0c0c0;color:#fff;padding:4px;">
+						<img src="'.$path['images'].'/admin_man_med.png" alt="" /> Media
+					</div>
+					<ul>
+						<li><a href="'.$path['admin'].'&amp;s=med">Manage/add media</a></li>
+					</ul>
+					<div style="background:#c0c0c0;color:#fff;padding:4px;">
+						<img src="'.$path['images'].'/admin_man_cfg.png" alt="" /> Configuration
+					</div>
+					<ul>
+						<li><a href="'.$path['admin'].'&amp;s=cfg">General</a></li>
+						<li>Theme <i>not implemented yet</i></li>
+					</ul>
+					<div style="background:#c0c0c0;color:#fff;padding:4px;">
+						<img src="'.$path['images'].'/help.png" alt="" /> Other
+					</div>
+					<ul>
+						<li><a href="'.$path['admin'].'&amp;s=logout">Logout</a></li>
+					</ul>
+				</td>
+				<td style="vertical-align:top;">';
 		
 		// What subaction?
 		switch ($_GET["s"])
@@ -133,6 +149,11 @@ if ($zvfpcms)
 					echo $txt['admin_panel_actn_noexist'];
 				break;
 		}
+		
+		echo '
+				</td>
+			</tr>
+		</table>';
 	}
 }
 ?>
