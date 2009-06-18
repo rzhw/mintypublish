@@ -21,17 +21,46 @@ if ($zvfpcms)
 {
 	if (!isset($_POST['docfg']))
 	{
+		$configquery = mysql_query("SELECT * FROM config");
+		$i=0;
+		while($row = mysql_fetch_array($configquery))
+		{
+			$configarray[$i]['config_name'] = $row['config_name'];
+			$configarray[$i]['config_value'] = $row['config_value'];
+			$i+=1;
+		}
+		
 		echo '<h3>Configuration</h3>';
 		
 		echo '<form action="" method="post">
 		<table cellpadding="0" cellspacing="4" border="0">
 			<tr>
-				<td>'.$txt['admin_panel_lang'].' (en/jp):</td>
-				<td><input type="text" name="lang" value="en"></td>
+				<td>
+					'.$txt['admin_panel_lang'].':
+				</td>
+				<td>
+					<select name="lang">
+						<option value="en">English</option>
+						<option value="jp">Japanese (machine translated)</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<td>'.$txt['admin_panel_timezone'].' ('.$txt['text_whatsthis'].'):</td>
-				<td><input type="text" name="timezone" value="Australia/Sydney"></td>
+				<td>
+					'.$txt['admin_panel_timezone'].' ('.$txt['text_whatsthis'].'):
+				</td>
+				<td>
+					<select name="timezone">
+					';
+						$timezones = DateTimeZone::listIdentifiers();
+						foreach ($timezones as $timezone)
+						{
+							echo '<option value="'.$timezone.'"' .
+							($timezone == $configarray[0]['config_value'] ? ' selected="selected"' : '') .
+							'>' . $timezone . '</option>';
+						}
+						echo '</select>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="submit" name="docfg" value="'.$txt['text_save'].'"></td>
@@ -40,11 +69,21 @@ if ($zvfpcms)
 		</form>';
 	}
 	else
-	{		
-		updatecfg('$cfg[\'lang\']',$_POST['lang']);
-		updatecfg('$cfg[\'timezone\']',$_POST['timezone']);
+	{
+		$timezone = mysql_real_escape_string($_POST['timezone']);
+
+		$result = mysql_query("UPDATE config SET config_value='$timezone' WHERE config_name='timezone'");
 		
-		echo $txt['text_pleasewait'].'<meta http-equiv="refresh" content="0;url='.$path['admin'].'&amp;s=man">';
+		if ($result)
+		{		
+			settopmessage(2,'Successfully saved configuration!');
+		}
+		else
+		{
+			settopmessage(0,'Configuration could not be saved!');
+		}
+			
+		pageredirect($path['admin'].'&s=cfg');
 	}
 }
 

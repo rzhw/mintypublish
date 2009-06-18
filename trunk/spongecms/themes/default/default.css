@@ -104,12 +104,21 @@ h2
 	font-size:medium;
 }
 
-input[type=text], input[type=password]
+input[type=text], input[type=password], select
 {
 	border:2px solid #c0c0c0;
 	font-family:verdana;
 	font-size:11px;
+}
+
+input[type=text], input[type=password]
+{
 	padding:2px;
+}
+
+select
+{
+	padding:1px;
 }
 
 /*

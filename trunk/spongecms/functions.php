@@ -123,6 +123,8 @@ function isexistinguser($uname,$pwd)
 {
 	global $path;
 	
+	$uname = mysql_real_escape_string($uname);
+	
 	$result = mysql_query("SELECT * FROM users WHERE user_username = '$uname'");
 	
 	/* description of $hit:
