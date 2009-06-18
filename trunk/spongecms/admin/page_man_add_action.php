@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS test version
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");

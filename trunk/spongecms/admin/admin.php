@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS test version
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ if ($zvfpcms)
 {	
 	if (!isloggedin())
 	{
-		include("zvfpcms/admin/user_login.php");
+		include($path['admin2'].'/user_login.php');
 	}
 	else
 	{
@@ -51,10 +51,10 @@ if ($zvfpcms)
 		switch ($_GET["s"])
 		{
 			case "add":
-				include("zvfpcms/admin/page_man_add_entry.php");
+				include($path['admin2'].'/page_man_add_entry.php');
 				break;
 			case "add2":
-				include("zvfpcms/admin/page_man_add_action.php");
+				include($path['admin2'].'/page_man_add_action.php');
 				break;
 			case "man":
 				echo '<h2>'.$txt['admin_panel_manpages'].'</h2>
@@ -64,7 +64,7 @@ if ($zvfpcms)
 				
 				if (!isset($_GET["action"]))
 				{
-					include("zvfpcms/admin/page_man_list.php");
+					include($path['admin2'].'/page_man_list.php');
 				}
 				else
 				{
@@ -104,7 +104,7 @@ if ($zvfpcms)
 				
 				if (!isset($_GET["action"]))
 				{
-					include("zvfpcms/admin/media_man_list.php");
+					include($path['admin2'].'/media_man_list.php');
 				}
 				else
 				{
@@ -134,70 +134,5 @@ if ($zvfpcms)
 				break;
 		}
 	}
-}
-
-function isloggedin()
-{
-	// original code from http://www.evolt.org/node/60265
-	
-	// is the user set to remember?
-	if(isset($_COOKIE['cookuname']) && isset($_COOKIE['cookpwd']))
-	{
-		$_SESSION['uname'] = $_COOKIE['cookuname'];
-		$_SESSION['pwd'] = $_COOKIE['cookpwd'];
-	}
-
-	// user's session is still active
-	if (isset($_SESSION['uname']) && isset($_SESSION['pwd']))
-	{
-		// but is their user/pass pair correct?
-		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd']) == 2)
-		{
-			// NO? gtfo
-			unset($_SESSION['uname']);
-			unset($_SESSION['pwd']);
-			return false;
-		}
-		return true;
-	}
-	// user isn't active D:
-	else
-	{
-		return false;
-	}
-}
-
-function isexistinguser($uname,$pwd)
-{
-	global $path;
-	
-	$userfile = file_get_contents($path['root'].'/users.php');
-	$userfile = str_replace('<?php /* ','',$userfile);
-	$userfile = str_replace(' */ ?>','',$userfile);
-	
-	$userfile2 = json_decode($userfile,true);
-	
-	$hit = 0;
-	if (strchr($userfile,'"uname":"'.$uname.'"') != false)
-	{
-		for ($i=0;$i<sizeof($userfile2);$i++)
-		{
-			if ($userfile2[$i]["uname"] == $uname)
-			{
-				$hit = 1;
-				$unm = $i;
-			}
-		}
-	}
-	
-	if ($hit == 1)
-	{
-		if (user_pass_generate($pwd) == $userfile2[$unm]["pwd"])
-		{
-			$hit = 2;
-		}
-	}
-	
-	return $hit;
 }
 ?>

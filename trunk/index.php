@@ -8,13 +8,17 @@ $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
 
 // these files are essential (yes, even the english language no matter what)
-require_once("zvfpcms/functions.php");
-require_once("zvfpcms/config.php");
-require_once("zvfpcms/lang/en.php");
+require_once("spongecms/functions.php");
+require_once("spongecms/config.php");
+require_once("spongecms/lang/en.php");
+
+// connect to mysql
+$sql_mysql_connection = mysql_connect('localhost','root','');
+mysql_select_db('spongecms',$sql_mysql_connection);
 
 // NOW include the chosen language, so that non translated lines aren't broken
 if ($cfg['lang'] != "en")
-	require_once("zvfpcms/lang/".$cfg['lang'].".php");
+	require_once("spongecms/lang/".$cfg['lang'].".php");
 
 // no json? D:
 if (!function_exists("json_encode"))
@@ -33,12 +37,15 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www
 		<link rel="stylesheet" type="text/css" href="'.$path['css'].'/default.css" />
     
 		<!-- JavaScript -->
+		<script type="text/javascript" src="'.$path['js'].'/cookies.js"></script>
 		<script type="text/javascript" src="'.$path['js'].'/prototype.js"></script>
 		<script type="text/javascript" src="'.$path['js'].'/effects.js"></script>
 		<script type="text/javascript" src="'.$path['js'].'/lightwindow.js"></script>
 		<script type="text/javascript" src="'.$path['js'].'/flowplayer-3.1.0.min.js"></script>
 	</head>
 	<body>';
+	
+echo '<div id="contentbg"></div>';
 
 // the top, you know... logo and menu...
 echo '
@@ -68,6 +75,8 @@ echo '
 <!-- Content start -->
 			<div id="content_wrapper">
 ';
+	echo gettopmessage();
+
 	$tehfilezors = $path['pages'].'/'.$_GET["p"].'.php';
 
 	// home page has no short name
@@ -111,17 +120,7 @@ echo '
 	</body>
 </html>';
 
-function parsebbcode($buffer)
-{
-	if (strchr($buffer,'<!-- noreplace -->') == false)
-	{
-		$find = array('/(\[media\])(.+)(\[\/media\])/');
-		$replace = array(media_html('\\2'));
-		$string = preg_replace($find, $replace, $buffer);
-		return $string;
-	}
-	else
-	{
-		return $buffer;
-	}
-}
+// end mysql
+mysql_close($sql_mysql_connection);
+
+?>

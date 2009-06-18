@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS test version
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,16 +33,22 @@ $txt['text_whatsthis']            = 'What\'s this?';
 $txt['text_save']                 = 'Save';
 
 // footer
-$txt['zvfpcms_powered']           = 'powered by zvfpcms';
-$txt['zvfpcms_a2h']               = 'zvfpcms is another project from a2h';
+$txt['zvfpcms_powered']           = 'powered by sponge cms';
+$txt['zvfpcms_a2h']               = 'sponge cms is another project from a2h';
 $txt['zvfpcms_generated']         = 'page generated in [t] seconds';
 
 // general errors
 $txt['page_noexist']              = 'The page you requested doesn\'t exist.';
-$txt['page_nojson']               = 'Sorry, but JSON support is required to run ZVFPCMS. It should be included with PHP 5.20 and above.';
+$txt['page_nojson']               = 'To use JSON as your data storage method, you need PHP 5.20 and above.';
+$txt['page_nomysql']              = 'To use MySQL as your data storage method, you need it installed.';
 
 // user stuff
+$txt['user_rememberme']           = 'Remember me when I come back';
+$txt['user_register']             = 'Register';
+$txt['user_login']                = 'Login'; // this is used as both a noun/verb
 $txt['user_logout']               = 'Logout';
+$txt['user_username']             = 'Username';
+$txt['user_password']             = 'Password';
 
 // admin panel menu
 $txt['admin_panel_manpages']      = 'Manage Pages';

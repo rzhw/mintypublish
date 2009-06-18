@@ -38,7 +38,8 @@ if ($zvfpcms)
 		$_SESSION = array();
 		session_destroy();
 		// congraulations, you have helped destroy ze vorld!
-		echo 'Logged out successfully.';
+		settopmessage(2,'Successfully logged out!');
+		pageredirect('index.php?p=admin');
 	}
 }
 ?>

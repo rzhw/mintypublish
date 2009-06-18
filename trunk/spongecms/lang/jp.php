@@ -51,7 +51,7 @@ $txt['zvfpcms_generated']         = 'ページの生成[t]秒';
 $txt['page_noexist']              = 'あなたが存在しない場合は、リクエストされたページをご覧ください。';
 $txt['page_nojson']               = 'すみません,でもJSONのサッポトZVFPCMSを実行する必要があります。これはPHP 5.20以降に付属する必要があります。';
 
-// user stuff
+// user Sponge CMS test version
 $txt['user_logout']               = 'ログアウト';
 
 // admin panel menu

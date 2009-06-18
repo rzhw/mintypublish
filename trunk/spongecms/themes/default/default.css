@@ -1,0 +1,209 @@
+/*
+ * theme specific css
+ */
+body
+{
+	font-family:verdana;
+	text-align:center;
+	background:#F9F7ED url('img/background.png') repeat-x;
+	padding:0px;
+	margin:0px;
+}
+#contentbg
+{
+	/* because margin-left:auto; margin-right:auto; doesn't work for this >_> */
+	
+	position:fixed;
+	left:auto;
+	right:auto;
+	top:50%;
+	left:50%;
+	width:1056px;
+	margin-left:-528px; /* make this the width divided by 2 */
+	margin-top:-384px;
+	top:0px;
+	bottom:0px;
+	background:url('img/background_content.png');
+	z-index:-1;
+}
+
+#global_wrapper
+{
+	width:1024px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left;
+}
+
+#menu_wrapper
+{
+	background:gray;
+	color:#fff;
+	font-size:11px;
+	padding:10px 8px 6px 8px;
+	height:16px;
+	background:url('img/background_menu.png');
+	border-top:1px solid #99713D;
+	border-bottom:1px solid #99713D;
+}
+
+#content_wrapper
+{
+	background:#fff;
+	color:#000;
+	padding:8px 8px 8px 8px;
+}
+
+#content_wrapper, td
+{
+	font-size:11px;
+	font-family:verdana;
+}
+
+#footer_wrapper
+{
+	text-align:center;
+	color:gray;
+	font-size:x-small;
+	margin-top:8px;
+}
+
+a:link, a:visited
+{
+	text-decoration:none;
+	color:gray;
+}
+
+#menu_wrapper a:link, #menu_wrapper a:visited
+{
+	text-decoration:none;
+	color:#fff;
+}
+
+a:hover, #menu_wrapper a:hover
+{
+	text-decoration:underline;
+}
+
+img
+{
+	border:none;
+}
+
+h1,h2,h3,h4,h5
+{
+ 	padding: 0;
+	margin: 0;
+}
+h1
+{
+	font-size:large;
+}
+h2
+{
+	font-size:medium;
+}
+
+input[type=text], input[type=password]
+{
+	border:2px solid #c0c0c0;
+}
+
+/*
+ * sponge cms specific css
+ */
+
+.hidden 
+{
+	display : none;
+}
+
+.menu_current
+{
+	font-weight:bold;
+}
+
+.bugstat-0
+{
+	background:#FFFF66;
+}
+.bugstat-1
+{
+	background:#FF6633;
+}
+.bugstat-2
+{
+	background:#FF0066;
+}
+.bugstat-3
+{
+	background:#9966FF;
+}
+.bugstat-4
+{
+	background:#996666;
+}
+.bugstat-5
+{
+	background:#66FF66;
+}
+
+.msgbox_warning
+{
+	background:#E77471;
+	border:1px solid #C24641;
+	color:#fff;
+	padding:2px;
+}
+
+.admin_menu_link
+{
+	font-size:medium;
+	font-weight:bold;
+}
+
+.topmsg_0, .topmsg_1, .topmsg_2
+{
+	font-weight:bold;
+	padding:4px;
+	margin-bottom:8px;
+}
+
+.topmsg_0
+{
+	border:1px solid #DF7D7D;
+	background:#FFDFDF;
+	color:#AF4C4C;
+}
+.topmsg_0 a
+{
+	color:#EF1D2A;
+}
+.topmsg_1
+{
+	/* todo */
+}
+.topmsg_2
+{
+	border:1px solid #A2EF95;
+	background:#C8FFBF;
+	color:#23ED00;
+}
+.topmsg_2 a
+{
+	color:#6AED1E;
+}
+
+#overlayall
+{
+	position:fixed;
+	left:0px;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	background:#fff;
+	color:#000;
+	font-size:32px;
+	text-align:center;
+	padding-top:20%;
+}

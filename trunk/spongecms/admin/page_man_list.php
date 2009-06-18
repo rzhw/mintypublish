@@ -76,14 +76,24 @@ if ($zvfpcms)
  */
 function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
 {
+	global $path;
 	
-	echo ' <a href="'.($top ? 'javascript:alert(\'You cannot move this page up; it already is on the top.\')' : $curpage.'&amp;action=pup&amp;pid='.$pid).'"><img src="zvfpcms/img/arrow_up'.($top ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" /></a>';
-	echo ' <a href="'.($bottom ? 'javascript:alert(\'You cannot move this page down; it already is on the bottom.\')' : $curpage.'&amp;action=pdn&amp;pid='.$pid).'"><img src="zvfpcms/img/arrow_down'.($bottom ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" /></a>';
+	// move page up
+	echo '
+	<a href="'.($top ? 'javascript:void(0)' : $curpage.'&amp;action=pup&amp;pid='.$pid).'"'.($top ? ' onclick="alert(\'You cannot move this page up; it already is on the top.\')"' : '').'>
+		<img src="'.$path['images'].'/arrow_up'.($top ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" />
+	</a>';
+	
+	// move page down
+	echo '
+	<a href="'.($bottom ? 'javascript:alert(\'You cannot move this page down; it already is on the bottom.\')' : $curpage.'&amp;action=pdn&amp;pid='.$pid).'">
+		<img src="'.$path['images'].'/arrow_down'.($bottom ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" />
+	</a>';
 	
 	echo '
-	<a href="'.$curpage.'&amp;action=edt&amp;pid='.$pid.'"><img src="zvfpcms/img/page_edit.png" alt="" /></a>
-	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="zvfpcms/img/trash.png" alt="" /></a>
-	<a href="javascript:alert(\'This page is not a child page. Making it a child of a page is currently not implemented.\')"><img src="zvfpcms/img/page_child_off.png" alt="" /></a>
+	<a href="'.$curpage.'&amp;action=edt&amp;pid='.$pid.'"><img src="'.$path['images'].'/page_edit.png" alt="" /></a>
+	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$path['images'].'/trash.png" alt="" /></a>
+	<a href="javascript:alert(\'This page is not a child page. Making it a child of a page is currently not implemented.\')"><img src="'.$path['images'].'/page_child_off.png" alt="" /></a>
 	
 	<b>'.$pid.'. '.$ptitle.'</b>';
 }

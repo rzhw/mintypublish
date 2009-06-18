@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS test version
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -76,17 +76,17 @@ if ($zvfpcms)
 		
 	<br />
 	<input type="submit" value="Save" /><br /><br />
-	<script type="text/javascript" src="zvfpcms/js/tiny_mce/tiny_mce.js"></script>
-	<script type="text/javascript" src="zvfpcms/js/tiny_mce/tiny_mce_cfg.js"></script>
+	<script type="text/javascript" src="'.$path['js'].'/tiny_mce/tiny_mce.js"></script>
+	<script type="text/javascript" src="'.$path['js'].'/tiny_mce/tiny_mce_cfg.js"></script>
 	
 	<div style="position:relative;left:-18px;">
 		<textarea id="thecontent" name="thecontent" style="width:1048px;height:512px;">';
 			if (isset($_GET["pid"]))
 			{
 				if ($_GET["pid"] == 0)
-					$tehcontent = file_get_contents("zvfpcms/pg/home.php");
+					$tehcontent = file_get_contents($path['pages'].'/home.php');
 				else
-					$tehcontent = file_get_contents("zvfpcms/pg/".$data[$_GET["pid"]]['shortname'].".php");
+					$tehcontent = file_get_contents($path['pages'].'/'.$data[$_GET["pid"]]['shortname'].".php");
 				
 				$tehcontent = str_replace("<?php", "[DO NOT EDIT AFTER HERE]", $tehcontent);
 				$tehcontent = str_replace("?>", "[EDIT AFTER HERE]", $tehcontent);
