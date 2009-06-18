@@ -1,0 +1,37 @@
+-- phpMyAdmin SQL Dump
+-- version 3.1.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jun 17, 2009 at 09:31 PM
+-- Server version: 5.1.30
+-- PHP Version: 5.2.8
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `spongecms`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_username` varchar(48) NOT NULL,
+  `user_displayname` varchar(48) NOT NULL,
+  `user_password` varchar(256) NOT NULL,
+  `user_password_salt` varchar(256) NOT NULL,
+  `user_group` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_username`, `user_displayname`, `user_password`, `user_password_salt`, `user_group`) VALUES
+(1, 'admin', 'admin', '3f7fa01c03a66a42742f52b236322b096a4e012bd9583858a5a6fa15f58bd86a25af266d3a4344f1ec2018b778f29ba83be86eb45e6dc204e11276f4a99eff4e2144fbe15e756c2c88e999649aae7d94', '3f7fa01c03a66a42742f52b236322b09', 1);

@@ -1,12 +1,21 @@
 == Welcome
 
-Alright, so hello and welcome to my GitHub ZVFPCMS repository...
+Alright, so hello and welcome to my GitHub Sponge CMS repository...
 
-== Move from SourceForge
+== Install
 
-I used to use Bzr, but Github's social stuff and beautiful interface won me over from the huge and bloated SourceForge and the nice but not very web2.0-ish Launchpad :P
+OK, so basically, trunk holds everything you need to get up and running.
 
-Anyway, the previous commit info has been lost, but nothing much has changed since the first test release on SF apart from the fact that I've changed a few lightwindow activated messages to javascript:alert()s.
+However, you also need to get MySQL running, so you'll need to do a few things.
+
+First of all, you'll need to modify these lines in <tt>/index.php</tt> -
+ // connect to mysql
+ $sql_mysql_connection = mysql_connect('localhost','root','');
+ mysql_select_db('spongecms',$sql_mysql_connection);
+
+The arguments for the first line are the server, MySQL username and password, and for the second line, change it to the name of the database.
+
+You'll then need to run the SQL query found in db_dump_mysql.txt. Note that I <b>will</b> enable dropping of existing tables, so be careful.
 
 == If you want to contribute...
 
