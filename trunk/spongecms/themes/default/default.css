@@ -107,6 +107,9 @@ h2
 input[type=text], input[type=password]
 {
 	border:2px solid #c0c0c0;
+	font-family:verdana;
+	font-size:11px;
+	padding:2px;
 }
 
 /*

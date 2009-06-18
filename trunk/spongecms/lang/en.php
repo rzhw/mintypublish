@@ -41,6 +41,7 @@ $txt['zvfpcms_generated']         = 'page generated in [t] seconds';
 $txt['page_noexist']              = 'The page you requested doesn\'t exist.';
 $txt['page_nojson']               = 'To use JSON as your data storage method, you need PHP 5.20 and above.';
 $txt['page_nomysql']              = 'To use MySQL as your data storage method, you need it installed.';
+$txt['page_oldphp']               = 'You need at least PHP 5.1.0 to run Sponge CMS.';
 
 // user stuff
 $txt['user_rememberme']           = 'Remember me when I come back';

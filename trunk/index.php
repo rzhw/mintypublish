@@ -20,9 +20,9 @@ mysql_select_db('spongecms',$sql_mysql_connection);
 if ($cfg['lang'] != "en")
 	require_once("spongecms/lang/".$cfg['lang'].".php");
 
-// no json? D:
-if (!function_exists("json_encode"))
-	exit($txt['page_nojson']);
+// you need at least php 5.1.0
+if (version_compare('5.1.0',PHP_VERSION,'>'))
+	exit($txt['page_oldphp']);
 
 // TODO: CREATE A TEMPLATING SYSTEM
 

@@ -26,8 +26,8 @@ if ($zvfpcms)
 	else
 	{
 		// Welcome the user :3
-		echo '<h1>'.$txt['admin_panel_title'].'</h1>
-		'.$txt['admin_panel_welcome'].'<br />
+		echo '
+		<h1>'.$txt['admin_panel_title'].'</h1>
 		<br />';
 		
 		echo '
@@ -52,7 +52,6 @@ if ($zvfpcms)
 					</div>
 					<ul>
 						<li><a href="'.$path['admin'].'&amp;s=cfg">General</a></li>
-						<li>Theme <i>not implemented yet</i></li>
 					</ul>
 					<div style="background:#c0c0c0;color:#fff;padding:4px;">
 						<img src="'.$path['images'].'/help.png" alt="" /> Other
@@ -146,7 +145,15 @@ if ($zvfpcms)
 				break;
 			default:
 				if (isset($_GET["s"]))
+				{
 					echo $txt['admin_panel_actn_noexist'];
+				}
+				else
+				{
+					echo '<h2>Dashboard</h2>';
+					
+					echo 'Hello! There is no dashboard right now. The menu items are along the left. Enjoy!';
+				}
 				break;
 		}
 		
