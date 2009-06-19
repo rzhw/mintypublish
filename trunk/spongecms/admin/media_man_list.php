@@ -55,6 +55,7 @@ if ($zvfpcms)
  */
 function entry_media($curpage,$pid,$ptitle)
 {
+	global $path;
 	
 	echo '<a href="'.$curpage.'&amp;action=prv&amp;pid='.$pid.'"><img src="'.$path['images'].'/preview.png" alt="" /></a>
 	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$path['images'].'/trash.png" alt="" /></a>
