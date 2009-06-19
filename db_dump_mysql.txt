@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 17, 2009 at 09:31 PM
+-- Generation Time: Jun 19, 2009 at 07:27 PM
 -- Server version: 5.1.30
 -- PHP Version: 5.2.8
 
@@ -16,9 +16,30 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `config`
+--
+
+DROP TABLE IF EXISTS `config`;
+CREATE TABLE IF NOT EXISTS `config` (
+  `config_name` varchar(32) NOT NULL,
+  `config_value` text
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `config`
+--
+
+INSERT INTO `config` (`config_name`, `config_value`) VALUES
+('timezone', 'Australia/Sydney'),
+('language', 'en');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_username` varchar(48) NOT NULL,
