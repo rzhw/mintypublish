@@ -82,7 +82,7 @@ $txt['admin_panel_manbugs']       = 'Manage bugs';
 $txt['admin_panel_modmenu_prog']  = 'Modifying menu...';
 $txt['admin_panel_edt_src']       = 'If you want to edit the source click the "HTML" button.';
 $txt['admin_panel_edt_srtnm']     = 'Short name';
-$txt['admin_panel_edt_srtnm_dsc'] = 'No spaces, no capitals. e.g. use \\\'testpg1\\\' instead of \\\'test page 1\\\'. ENGLISH LETTERS / NUMBERS ONLY.';
+$txt['admin_panel_edt_srtnm_dsc'] = 'No spaces, no capitals. e.g. use \'testpg1\' instead of \'test page 1\'. ENGLISH LETTERS / NUMBERS ONLY.';
 $txt['admin_panel_edt_fllnm']     = 'Full name';
 $txt['admin_panel_edt_fllnm_dsc'] = 'Full name to appear as both title and menu name';
 $txt['admin_panel_edt_child']     = 'Child page of';
@@ -95,4 +95,6 @@ $txt['admin_panel_manmed_convt']  = 'To convert media between filetypes [TODO]';
 // configuration frontend in admin panel
 $txt['admin_panel_lang']          = 'Language';
 $txt['admin_panel_timezone']      = 'Timezone';
+$txt['admin_panel_cfg_sucess']    = 'Successfully saved configuration!';
+$txt['admin_panel_cfg_failure']   = 'Could not save configuration!';
 ?>

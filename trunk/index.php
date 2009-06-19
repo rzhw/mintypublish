@@ -7,50 +7,47 @@ $zvfpcms = true;
 $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
 
-// these files are essential (yes, even the english language no matter what)
-require_once("spongecms/functions.php");
-require_once("spongecms/config.php");
-require_once("spongecms/lang/en.php");
+// the config
+require_once('spongecfg.php');
+
+// and now to include files from the spongecms folder!
+require_once($path['root'].'/functions.php');
+require_once($path['root'].'/lang/en.php');
 
 // connect to mysql
 $sql_mysql_connection = mysql_connect('localhost','root','');
 mysql_select_db('spongecms',$sql_mysql_connection);
 
+// get configuration from db
+$configquery = mysql_query("SELECT * FROM config");
+$i=0;
+while($row = mysql_fetch_array($configquery))
+{
+	$cfg[$i]['name'] = $row['config_name'];
+	$cfg[$i]['value'] = $row['config_value'];
+	
+	switch ($row['config_name'])
+	{
+		case 'language': $cfg_language=$i; break;
+		case 'timezone': $cfg_timezone=$i; break;
+	}
+	
+	$i+=1;
+}
+
 // NOW include the chosen language, so that non translated lines aren't broken
-if ($cfg['lang'] != "en")
-	require_once("spongecms/lang/".$cfg['lang'].".php");
+if ($cfg[$cfg_language]['value'] != "en")
+	require_once("spongecms/lang/".$cfg[$cfg_language]['value'].".php");
 
 // you need at least php 5.1.0
 if (version_compare('5.1.0',PHP_VERSION,'>'))
 	exit($txt['page_oldphp']);
 
-// TODO: CREATE A TEMPLATING SYSTEM
+// incoming header!
+include($path['theme_root'] . '/header.php');
 
-// start the page
-echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<title>zvfpcms dev</title>
-		
-		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="'.$path['css'].'/lightwindow.css" />
-		<link rel="stylesheet" type="text/css" href="'.$path['css'].'/default.css" />
-    
-		<!-- JavaScript -->
-		<script type="text/javascript" src="'.$path['js'].'/cookies.js"></script>
-		<script type="text/javascript" src="'.$path['js'].'/prototype.js"></script>
-		<script type="text/javascript" src="'.$path['js'].'/effects.js"></script>
-		<script type="text/javascript" src="'.$path['js'].'/lightwindow.js"></script>
-		<script type="text/javascript" src="'.$path['js'].'/flowplayer-3.1.0.min.js"></script>
-	</head>
-	<body>';
-	
-echo '<div id="contentbg"></div>';
-
-// the top, you know... logo and menu...
+// menu start
 echo '
-	<div id="global_wrapper">
-			<img src="'.$path['images'].'/logo.png" alt="" />
 			<div id="menu_wrapper">
 				<div style="float:left;">';
 					$data = json_decode(file_get_contents($path['pages'].'/pages.txt'),true);
@@ -69,6 +66,7 @@ echo '
 				</div>
 				<div style="clear:both;"></div>
 			</div>';
+// menu end
 
 // and now let's have some content!
 echo '
@@ -107,7 +105,7 @@ echo '
 			it would be appreciated if you do not remove the "powered by" part
 			if you must remove it, at least keep this comment here
 			
-			powered by zvfpcms - a project by a2h - http://a2h.uni.cc/
+			powered by sponge cms - a project by a2h - http://a2h.uni.cc/
 			-->
 			<div id="footer_wrapper">
 				<a href="http://zfvpcms.sourceforge.net/">'.$txt['zvfpcms_powered'].'</a>
@@ -115,10 +113,8 @@ echo '
 				$mtime = explode(' ', microtime());	$totaltime = $mtime[0] + $mtime[1] - $starttime;
 				printf(' | '.str_replace('[t]','%.3f',$txt['zvfpcms_generated']), $totaltime);
 				echo '
-			</div>
-		</div>
-	</body>
-</html>';
+			</div>';
+include($path['theme_root'] . '/footer.php');
 
 // end mysql
 mysql_close($sql_mysql_connection);

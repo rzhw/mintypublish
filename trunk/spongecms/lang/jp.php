@@ -51,8 +51,13 @@ $txt['zvfpcms_generated']         = 'ページの生成[t]秒';
 $txt['page_noexist']              = 'あなたが存在しない場合は、リクエストされたページをご覧ください。';
 $txt['page_nojson']               = 'すみません,でもJSONのサッポトZVFPCMSを実行する必要があります。これはPHP 5.20以降に付属する必要があります。';
 
-// user Sponge CMS test version
-$txt['user_logout']               = 'ログアウト';
+// user stuff
+$txt['user_rememberme']           = 'Remember me when I come back';
+$txt['user_register']             = 'Register';
+$txt['user_login']                = 'Login'; // this is used as both a noun/verb
+$txt['user_logout']               = 'Logout';
+$txt['user_username']             = 'Username';
+$txt['user_password']             = 'Password';
 
 // admin panel menu
 $txt['admin_panel_manpages']      = '管理ページ';
@@ -98,4 +103,6 @@ $txt['admin_panel_manmed_convt']  = 'ファイル形式との間でメディア�
 // configuration frontend in admin panel
 $txt['admin_panel_lang']          = '言語';
 $txt['admin_panel_timezone']      = 'タイムゾーン';
+$txt['admin_panel_cfg_sucess']    = '正常に設定を保存しました！';
+$txt['admin_panel_cfg_failure']   = '設定を保存できませんでした！';
 ?>

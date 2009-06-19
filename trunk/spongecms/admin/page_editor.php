@@ -22,60 +22,37 @@ if ($zvfpcms)
 	echo $txt['admin_panel_edt_src'].'<br />
 	<br />
 	
-	<table cellpadding="0" cellspacing="4" border="0" style="border:1px solid #000;width:100%;">
+	<table cellpadding="0" cellspacing="4" border="0" style="width:100%;">
 		<tr>
-			<td>
+			<td style="width:128px;">
 				'.$txt['admin_panel_edt_srtnm'].'
-				(<a href="javascript:alert(\''.$txt['admin_panel_edt_srtnm_dsc'].'\')">'.$txt['text_whatsthis'].'</a>)
 			</td>
 			<td>
-				<input type="text" name="theid" value="'.$data[$_GET["pid"]]["shortname"].'" />
+				<input type="text" name="theid" value="'.$data[$_GET["pid"]]["shortname"].'" /><br />
+				<small>'.$txt['admin_panel_edt_srtnm_dsc'].'</small>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				'.$txt['admin_panel_edt_fllnm'].'
-				(<a href="javascript:alert(\''.$txt['admin_panel_edt_fllnm_dsc'].'\')">'.$txt['text_whatsthis'].'</a>)
 			</td>
 			<td>
-				<input type="text" name="thetitle" value="'.$data[$_GET["pid"]]["fullname"].'" />
+				<input type="text" name="thetitle" value="'.$data[$_GET["pid"]]["fullname"].'" /><br />
+				<small>'.$txt['admin_panel_edt_fllnm_dsc'].'</small>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				'.$txt['admin_panel_edt_child'].'
-				(<a href="javascript:alert(\''.$txt['admin_panel_edt_child_dsc'].'\')">'.$txt['text_whatsthis'].'</a>)
 			</td>
 			<td>
-				<input type="text" name="thechild" value="'.(isset($data[$_GET["pid"]]["subpage"]) ? $data[$_GET["pid"]]["subpage"] : '-1').'" /> <b>'.$txt['text_notimplemented'].'</b>
+				<input type="text" name="thechild" value="'.(isset($data[$_GET["pid"]]["subpage"]) ? $data[$_GET["pid"]]["subpage"] : '-1').'" /><br />
+				<small>'.$txt['admin_panel_edt_child_dsc'].' <b>'.$txt['text_notimplemented'].'</b></small>
 			</td>
 		</tr>
 	</table>
-	<br />
 	
-	<div id="mediashow" style="border:1px solid #000;padding:4px;">
-		<a href="javascript:void(0)" onclick="document.getElementById(\'mediabox\').style.display=\'block\';document.getElementById(\'mediashow\').style.display=\'none\'">Insert Media</a>
-	</div>
-	
-	<div id="mediabox" style="display:none;border:1px solid #000;padding:4px;">
-		Click an item in the list to insert it.<br /><br />
-		
-		<!-- noreplace -->
-		';
-			$medlist = json_decode(file_get_contents($path['media'].'/media.txt'),true);
-			
-			for($i = 0; $i < sizeof($medlist); $i++) 
-			{
-				echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[media]'.$medlist[$i].'[/media]\');">
-				'.$medlist[$i].' ('.get_file_type($medlist[$i]).')</a><br />';
-			}
-		echo '
-	</div>
-	
-	<br />
-		
-	<br />
-	<input type="submit" value="Save" /><br /><br />
+	<!--<input type="submit" value="Save" />--><br /><br />
 	<script type="text/javascript" src="'.$path['js'].'/tiny_mce/tiny_mce.js"></script>
 	<script type="text/javascript" src="'.$path['js'].'/tiny_mce/tiny_mce_cfg.js"></script>
 	<textarea id="thecontent" name="thecontent" style="width:100%;height:480px;">';
