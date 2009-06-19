@@ -27,6 +27,9 @@ if ($zvfpcms)
 	<br />
 	Clicking on <img src="'.$path['images'].'/preview.png" alt="" /> will preview a file. Clicking on
 	<img src="'.$path['images'].'/trash.png" alt="" /> will delete a file.<br />
+	<br />
+	To insert media into a page, click the button that looks like the one circled below when adding or editing a page.<br />
+	<img src="'.$path['help'].'/insertmedia.png" alt="" /><br />
 	<br />';
 	
 	echo '<h3>Upload</h3>';
