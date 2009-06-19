@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS test version
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,8 +25,8 @@ if ($zvfpcms)
 	<br />
 	To convert media between filetypes [filler text]<br />
 	<br />
-	Clicking on <img src="zvfpcms/img/preview.png" alt="" /> will preview a file. Clicking on
-	<img src="zvfpcms/img/trash.png" alt="" /> will delete a file.<br />
+	Clicking on <img src="'.$path['images'].'/preview.png" alt="" /> will preview a file. Clicking on
+	<img src="'.$path['images'].'/trash.png" alt="" /> will delete a file.<br />
 	<br />';
 	
 	echo '<h3>Upload</h3>';
@@ -56,8 +56,8 @@ if ($zvfpcms)
 function entry_media($curpage,$pid,$ptitle)
 {
 	
-	echo '<a href="'.$curpage.'&amp;action=prv&amp;pid='.$pid.'"><img src="zvfpcms/img/preview.png" alt="" /></a>
-	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="zvfpcms/img/trash.png" alt="" /></a>
+	echo '<a href="'.$curpage.'&amp;action=prv&amp;pid='.$pid.'"><img src="'.$path['images'].'/preview.png" alt="" /></a>
+	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$path['images'].'/trash.png" alt="" /></a>
 	
 	<b>'.$ptitle.' ('.get_file_type($ptitle).')</b>';
 }
