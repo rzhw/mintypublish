@@ -18,11 +18,11 @@
 	http://zvfpcms.sourceforge.net/
 */
 if ($zvfpcms)
-{
-	echo '<h3>'.$txt['user_login'].'</h3>';
-	
+{	
 	if (!isset($_POST['sublogin']))
-	{		
+	{
+		echo '<h3>'.$txt['user_login'].'</h3>';
+		
 		echo '
 		<form action="" method="post">
 		<table cellpadding="4" cellspacing="0" border="0">
@@ -51,11 +51,6 @@ if ($zvfpcms)
 			<tr>
 				<td colspan="2" align="right">
 					<input type="submit" name="sublogin" value="Login" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="left">
-					<a href="register.php">'.$txt['user_register'].'</a>
 				</td>
 			</tr>
 		</table>

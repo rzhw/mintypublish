@@ -21,7 +21,10 @@ if ($zvfpcms)
 {	
 	if (!isloggedin())
 	{
-		include($path['admin2'].'/user_login.php');
+		if ($_GET['s'] == 'register')
+			include($path['admin2'].'/user_register.php');
+		else
+			include($path['admin2'].'/user_login.php');
 	}
 	else
 	{

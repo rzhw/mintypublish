@@ -62,7 +62,22 @@ echo '
 echo '
 				</div>
 				<div style="float:right;overflow:hidden;">
-					<a href="index.php?p=admin">admin</a>
+					';
+					
+					if (isloggedin())
+					{
+						echo '<b>Logged in as: '.$_SESSION['uname'].'</b>
+						(<a href="index.php?p=admin">admin</a> |
+						<a href="'.$path['admin'].'&amp;s=logout">logout</a>)';
+					}
+					else
+					{
+						echo '<b>Not logged in</b>
+						(<a href="index.php?p=admin">login</a> |
+						<a href="'.$path['admin'].'&amp;s=register">register</a>)';
+					}
+					
+					echo '
 				</div>
 				<div style="clear:both;"></div>
 			</div>';

@@ -31,6 +31,7 @@ $txt['text_notimplemented']       = 'Not implemented!';
 $txt['text_pleasewait']           = 'Hang on a moment...';
 $txt['text_whatsthis']            = 'What\'s this?';
 $txt['text_save']                 = 'Save';
+$txt['text_again']                = 'again';
 
 // footer
 $txt['zvfpcms_powered']           = 'powered by sponge cms';
@@ -50,6 +51,7 @@ $txt['user_login']                = 'Login'; // this is used as both a noun/verb
 $txt['user_logout']               = 'Logout';
 $txt['user_username']             = 'Username';
 $txt['user_password']             = 'Password';
+$txt['user_email']                = 'Email';
 
 // admin panel menu
 $txt['admin_panel_manpages']      = 'Manage Pages';

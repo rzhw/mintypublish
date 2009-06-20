@@ -206,6 +206,11 @@ select
 	color:#6AED1E;
 }
 
+.form_input_error
+{
+	border:2px solid #AF4C4C !important;
+}
+
 #overlayall
 {
 	position:fixed;
