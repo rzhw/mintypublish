@@ -28,7 +28,7 @@ if ($zvfpcms)
 				'.$txt['admin_panel_edt_srtnm'].'
 			</td>
 			<td>
-				<input type="text" name="theid" value="'.$data[$_GET["pid"]]["shortname"].'" /><br />
+				<input type="text" name="theid" value="'.$pagetitlemenu.'" /><br />
 				<small>'.$txt['admin_panel_edt_srtnm_dsc'].'</small>
 			</td>
 		</tr>
@@ -37,7 +37,7 @@ if ($zvfpcms)
 				'.$txt['admin_panel_edt_fllnm'].'
 			</td>
 			<td>
-				<input type="text" name="thetitle" value="'.$data[$_GET["pid"]]["fullname"].'" /><br />
+				<input type="text" name="thetitle" value="'.$pagetitlefull.'" /><br />
 				<small>'.$txt['admin_panel_edt_fllnm_dsc'].'</small>
 			</td>
 		</tr>
@@ -58,15 +58,11 @@ if ($zvfpcms)
 	<textarea id="thecontent" name="thecontent" style="width:100%;height:480px;">';
 			if (isset($_GET["pid"]))
 			{
-				if ($_GET["pid"] == 0)
-					$tehcontent = file_get_contents($path['pages'].'/home.php');
-				else
-					$tehcontent = file_get_contents($path['pages'].'/'.$data[$_GET["pid"]]['shortname'].".php");
-				
-				$tehcontent = str_replace("<?php", "[DO NOT EDIT AFTER HERE]", $tehcontent);
-				$tehcontent = str_replace("?>", "[EDIT AFTER HERE]", $tehcontent);
-				$tehcontent = str_replace('params="', 'rel="', $tehcontent);
-				echo $tehcontent;
+				// find a better way to do this
+				$pagecontent = str_replace("<?php", "[DO NOT EDIT AFTER HERE]", $pagecontent);
+				$pagecontent = str_replace("?>", "[EDIT AFTER HERE]", $pagecontent);
+				$pagecontent = str_replace('params="', 'rel="', $pagecontent);
+				echo $pagecontent;
 			}
 	echo '</textarea>';
 }

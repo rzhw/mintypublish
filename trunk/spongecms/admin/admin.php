@@ -78,7 +78,7 @@ if ($zvfpcms)
 				echo '<h2>'.$txt['admin_panel_manpages'].'</h2>
 				<br />';
 				
-				$data = json_decode(file_get_contents($path['pages'].'/pages.txt'),true);
+				//$data = json_decode(file_get_contents($path['pages'].'/pages.txt'),true);
 				
 				if (!isset($_GET["action"]))
 				{
@@ -89,10 +89,7 @@ if ($zvfpcms)
 					switch ($_GET["action"])
 					{
 						case "edt":
-							include($path['admin2'].'/page_man_edit_entry.php');
-							break;
-						case "edt2":
-							include($path['admin2'].'/page_man_edit_action.php');
+							include($path['admin2'].'/page_man_edit.php');
 							break;
 						case "del":
 							include($path['admin2'].'/page_man_del_confirm.php');

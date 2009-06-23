@@ -1,1 +1,0 @@
-[{"shortname":"","fullname":"home","subpage":-1},{"shortname":"testpg1","fullname":"test page 1","subpage":-1},{"shortname":"testpg2","fullname":"test page 2","subpage":-1}]

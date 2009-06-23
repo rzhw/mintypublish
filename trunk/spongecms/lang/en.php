@@ -83,10 +83,10 @@ $txt['admin_panel_manpages_delt'] = 'Click on [d] to delete a page.';
 $txt['admin_panel_manbugs']       = 'Manage bugs';
 $txt['admin_panel_modmenu_prog']  = 'Modifying menu...';
 $txt['admin_panel_edt_src']       = 'If you want to edit the source click the "HTML" button.';
-$txt['admin_panel_edt_srtnm']     = 'Short name';
-$txt['admin_panel_edt_srtnm_dsc'] = 'No spaces, no capitals. e.g. use \'testpg1\' instead of \'test page 1\'. ENGLISH LETTERS / NUMBERS ONLY.';
+$txt['admin_panel_edt_srtnm']     = 'Menu name';
+$txt['admin_panel_edt_srtnm_dsc'] = 'The name appearing in the menu';
 $txt['admin_panel_edt_fllnm']     = 'Full name';
-$txt['admin_panel_edt_fllnm_dsc'] = 'Full name to appear as both title and menu name';
+$txt['admin_panel_edt_fllnm_dsc'] = 'The name appearing in its full version';
 $txt['admin_panel_edt_child']     = 'Child page of';
 $txt['admin_panel_edt_child_dsc'] = 'Type in the short title of the page you wish to set this page as the child of. If you do not wish to set this as a child of a page, leave this as -1.';
 

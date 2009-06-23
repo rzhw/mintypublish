@@ -35,6 +35,33 @@ while($row = mysql_fetch_array($configquery))
 	$i+=1;
 }
 
+// get list of pages
+$pagequery = mysql_query("SELECT * FROM pages");
+
+$i = 0; $j = 0;
+while ($row = mysql_fetch_array($pagequery))
+{
+	// page id
+	if (isset($_GET["p"]))
+		$pid = $_GET["p"];
+	else
+		$pid = 1;
+	
+	// menu stuff
+	if ($i > 0) { $menucontent .= ' | '; }
+	$menucontent .= '<a href="index.php?p='.$row['page_id'].'"'.
+	($row['page_id']==$pid?' class="menu_current"':'').'">'.$row['page_title_menu'].'</a>';
+	$i+=1;
+	
+	// content stuff
+	if ($row['page_id'] == $pid)
+	{
+		$pagecontent = $row['page_content'];
+		if ($j > 0) { $pagecontent = 'wtf'; }
+		$j+=1;
+	}
+}
+
 // NOW include the chosen language, so that non translated lines aren't broken
 if ($cfg[$cfg_language]['value'] != "en")
 	require_once("spongecms/lang/".$cfg[$cfg_language]['value'].".php");
@@ -49,18 +76,7 @@ include($path['theme_root'] . '/header.php');
 // menu start
 echo '
 			<div id="menu_wrapper">
-				<div style="float:left;">';
-					$data = json_decode(file_get_contents($path['pages'].'/pages.txt'),true);
-					
-					for($i=0;$i<sizeof($data);$i++)
-					{
-						echo '<a href="index.php'.($data[$i]["shortname"]==null ? '' : '?p='.$data[$i]["shortname"]).'"'.($_GET["p"]==$data[$i]["shortname"] ? ' class="menu_current"' : '').'>'.$data[$i]["fullname"].'</a>';
-						
-						if ($i < (sizeof($data)-1))
-							echo ' | ';
-					}
-echo '
-				</div>
+				<div style="float:left;">'.$menucontent.'</div>
 				<div style="float:right;overflow:hidden;">
 					';
 					
@@ -90,45 +106,45 @@ echo '
 ';
 	echo gettopmessage();
 
-	$tehfilezors = $path['pages'].'/'.$_GET["p"].'.php';
-
-	// home page has no short name
-	if ($tehfilezors == $path['pages'].'/.php')
-		$tehfilezors = $path['pages'].'/home.php';
-
-	// admin page is special :P
-	if ($_GET["p"] == "admin")
-		$tehfilezors = $path['root'].'/admin/admin.php';
-
-	// and so we include the page...
 	ob_start('parsebbcode');
-	
-	if (file_exists($tehfilezors))
-		include($tehfilezors);
-	else
-		echo $txt['page_noexist'];
-		
+	switch ($_GET["p"])
+	{
+		case 'admin':
+			mysql_data_seek($pagequery, 0); // reset the query to allow usage
+			include($path['root'].'/admin/admin.php'); // include the admin panel
+			break;
+		case 'media':
+			echo '<a href="javascript:history.go(-1)">Go back</a><br /><br />'.media_html($_GET["s"]);
+			break;
+		default:			
+			if ($i == 0)
+				echo $txt['page_noexist'];
+			else
+				echo $pagecontent;
+			break;
+	}
 	ob_end_flush();
+	
 echo '
 			</div>
 <!-- Content end -->
 ';
 			
 // we has a footer
-echo '
-			<!--
-			it would be appreciated if you do not remove the "powered by" part
-			if you must remove it, at least keep this comment here
-			
-			powered by sponge cms - a project by a2h - http://a2h.uni.cc/
-			-->
-			<div id="footer_wrapper">
-				<a href="http://zfvpcms.sourceforge.net/">'.$txt['zvfpcms_powered'].'</a>
-				| <a href="http://a2h.uni.cc/">'.$txt['zvfpcms_a2h'].'</a>';
-				$mtime = explode(' ', microtime());	$totaltime = $mtime[0] + $mtime[1] - $starttime;
-				printf(' | '.str_replace('[t]','%.3f',$txt['zvfpcms_generated']), $totaltime);
-				echo '
-			</div>';
+$footer_copyright = '
+	<!--
+	it would be appreciated if you do not remove the "powered by" part
+	if you must remove it, at least keep this comment here
+	
+	powered by sponge cms - a project by a2h - http://a2h.uni.cc/
+	-->
+	<a href="http://zfvpcms.sourceforge.net/">'.$txt['zvfpcms_powered'].'</a>
+	| <a href="http://a2h.uni.cc/">'.$txt['zvfpcms_a2h'].'</a>';
+	
+$mtime = explode(' ', microtime());
+$totaltime = $mtime[0] + $mtime[1] - $starttime;
+$footer_generated = sprintf('%.3f',$totaltime);
+
 include($path['theme_root'] . '/footer.php');
 
 // end mysql

@@ -101,8 +101,14 @@ function parsebbcode($buffer)
 {
 	if (strchr($buffer,'<!-- noreplace -->') == false)
 	{
-		$find = array('/(\[media\])(.+)(\[\/media\])/');
-		$replace = array(media_html('\\2'));
+		$find = array(
+			'/(\[mediainline\])(.+)(\[\/mediainline\])/',
+			'/(\[medialink\])(.+)(\[\/medialink\])/'
+		);
+		$replace = array(
+			media_html('\\2'),
+			'<a href="index.php?p=media&s=\\2">View media (\\2)</a>'
+		);
 		$string = preg_replace($find, $replace, $buffer);
 		return $string;
 	}

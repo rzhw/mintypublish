@@ -21,41 +21,21 @@ if ($zvfpcms)
 {
 	echo '<h2>'.$txt['admin_panel_addpage_prog'].'</h2>';
 	
-	$file = fopen($path['pages'].'/'.$_POST["theid"].".php","w");
-	
 	$contenttowrite = str_replace('\"','"',$_POST["thecontent"]);
 	$contenttowrite = str_replace("\'","'",$contenttowrite);
 	
-	echo $txt['admin_panel_addpage_savpr'].' ';
+	$addquery = "INSERT INTO pages(page_orderid,page_title_menu,page_title_full,page_content,page_dateadded,page_dateedited)".
+				" VALUES($,$,$,$contenttowrite,NOW(),NOW())";
 	
-	if (fwrite($file,$contenttowrite) != false)
-		echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
+	if (mysql_query($addquery))
+	{
+		settopmessage(2,'Successfully added page!');
+	}
 	else
-		echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'].' '.$txt['admin_panel_addpage_blnk'];
-		
-	echo '<br /><br />';
-		
-	fclose($file);
+	{
+		settopmessage(0,'Could not add page!');
+	}
 	
-	$data = json_decode(file_get_contents($path['pages'].'/pages.txt'),true);
-	$file2 = fopen($path['pages'].'/pages.txt',"w");
-	
-	// TODO: Subpage support
-	$data[sizeof($data)] = array(
-		"shortname" => $_POST["theid"],
-		"fullname" => $_POST["thetitle"],
-		"subpage" => -1
-	);
-	
-	echo $txt['admin_panel_modmenu_prog'].' ';
-	
-	if (fwrite($file2,json_encode($data)) != false)
-		echo '<img src="'.$path['images'].'/tick.png" alt="" /> '.$txt['text_success'];
-	else
-		echo '<img src="'.$path['images'].'/cross.png" alt="" /> '.$txt['text_failure'];
-		
-	echo '<br /><br />'.$txt['admin_panel_changepage'];
-		
-	fclose($file2);
+	pageredirect('index.php?p=admin&s=man');
 }
 ?>

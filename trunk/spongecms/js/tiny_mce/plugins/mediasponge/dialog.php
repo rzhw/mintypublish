@@ -17,8 +17,10 @@
 			
 			for($i = 0; $i < sizeof($medlist); $i++) 
 			{
-				echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[media]'.$medlist[$i].'[/media]\');">
-				'.$medlist[$i].' ('.get_file_type($medlist[$i]).')</a><br />';
+				echo $medlist[$i].' ('.get_file_type($medlist[$i]).') - 
+				<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[mediainline]'.$medlist[$i].'[/mediainline]\');">Insert inline</a>
+				| <a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[medialink]'.$medlist[$i].'[/medialink]\');">Insert link</a>
+				<br />';
 			}
 		?>
 	</p>

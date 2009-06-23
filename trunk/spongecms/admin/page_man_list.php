@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS test version
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@
 	http://zvfpcms.sourceforge.net/
 */
 if ($zvfpcms)
-{
+{	
 	echo '<h3>'.$txt['admin_panel_manpages_list'].'</h3>';
 	
 	echo $txt['admin_panel_manpages_desc'];
@@ -33,33 +33,35 @@ if ($zvfpcms)
 	echo ' '.str_replace('[d]','<img src="'.$path['images'].'/trash.png" alt="" />',$txt['admin_panel_manpages_delt']);
 	
 	echo '<br /><br />';
-		
-	for($i = 0; $i < sizeof($data); $i++) 
+	
+	while($row = mysql_fetch_array($pagequery))
 	{
-		// top item in list where there is more than one item
+		/*// top item in list where there is more than one item
 		if ($i == 0 && sizeof($data) > 1)
 		{
-			template_page_man_entry($path['admin'].'&amp;s=man',$i,$data[$i]["fullname"],1,0);
+			template_page_man_entry($path['admin'].'&amp;s=man',$data[$i]['page_id'],$data[$i]['page_title_full'],1,0);
 			echo '<br />';
 		}
 		// the only item in the list
 		else if ($i == 0)
 		{
-			template_page_man_entry($path['admin'].'&amp;s=man',$i,$data[$i]["fullname"],1,1);
+			template_page_man_entry($path['admin'].'&amp;s=man',$data[$i]['page_id'],$data[$i]['page_title_full'],1,1);
 			echo '<br />';
 		}
 		// bottom item in list where there is more than one item
 		else if ($i == (sizeof($data)-1))
 		{
-			template_page_man_entry($path['admin'].'&amp;s=man',$i,$data[$i]["fullname"],0,1);
+			template_page_man_entry($path['admin'].'&amp;s=man',$data[$i]['page_id'],$data[$i]['page_title_full'],0,1);
 			echo '<br />';
 		}
 		// other items
 		else
 		{
-			template_page_man_entry($path['admin'].'&amp;s=man',$i,$data[$i]["fullname"],0,0);
+			template_page_man_entry($path['admin'].'&amp;s=man',$data[$i]['page_id'],$data[$i]['page_title_full'],0,0);
 			echo '<br />';
-		}
+		}*/
+		template_page_man_entry($path['admin'].'&amp;s=man',$row['page_id'],$row['page_title_full'],0,0);
+		echo '<br />';
 	}
 }
 
