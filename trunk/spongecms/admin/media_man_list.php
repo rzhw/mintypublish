@@ -1,6 +1,6 @@
 <?php
 /*
-	Sponge CMS test version
+	Sponge CMS
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,22 +15,20 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	http://zvfpcms.sourceforge.net/
+	http://a2h.github.com/Sponge-CMS/
 */
 if ($zvfpcms)
 {
 	echo '<h3>Information</h3>';
 	
-	echo 'Recognised filetypes are: <b>VIDEO</b> flv, mp4, ogg <b>IMAGES</b> png, gif, jpg <b>MUSIC</b> mp3<br />
+	echo 'Recognised filetypes are: <b>VIDEO</b> flv, mp4 <b>IMAGES</b> png, gif, jpg <b>MUSIC</b> mp3<br />
 	<br />
 	To convert media between filetypes [filler text]<br />
 	<br />
 	Clicking on <img src="'.$path['images'].'/preview.png" alt="" /> will preview a file. Clicking on
 	<img src="'.$path['images'].'/trash.png" alt="" /> will delete a file.<br />
 	<br />
-	To insert media into a page, click the button that looks like the one circled below when adding or editing a page.<br />
-	<img src="'.$path['help'].'/insertmedia.png" alt="" /><br />
-	<br />';
+	';
 	
 	echo '<h3>Upload</h3>';
 	
@@ -41,11 +39,13 @@ if ($zvfpcms)
 	echo '<h3>Media</h3>';
 	
 	echo '<br /><br />';
-		
-	for($i = 0; $i < sizeof($data); $i++) 
+	
+	$i=0;
+	while ($row = mysql_fetch_array($mediaquery))
 	{
-		entry_media($path['admin'].'&amp;s=med',$i,$data[$i]);
+		entry_media($path['admin'].'&amp;s=med',$row['media_id'],$row['media_filename']);
 		echo '<br />';
+		$i+=1;
 	}
 }
 

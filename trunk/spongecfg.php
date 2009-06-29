@@ -18,7 +18,6 @@ $path['theme_root']='spongecms/themes/'.$cfg['theme'];
 $path['images']='spongecms/themes/'.$cfg['theme'].'/img';
 $path['css']='spongecms/themes/'.$cfg['theme'];
 $path['js']='spongecms/js';
-$path['pages']='spongecms/pg';
 $path['media']='spongecms/media';
 $path['help']='spongecms/help';
 ?>

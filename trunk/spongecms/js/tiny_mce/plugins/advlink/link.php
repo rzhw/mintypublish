@@ -30,7 +30,30 @@
 						  <td class="nowrap"><label id="hreflabel" for="href">{#advlink_dlg.url}</label></td>
 						  <td><table border="0" cellspacing="0" cellpadding="0">
 								<tr>
-								  <td><input id="href" name="href" type="text" class="mceFocus" value="" onchange="selectByValue(this.form,'linklisthref',this.value);" /></td>
+								  <td>
+									<input id="href" name="href" type="text" class="mceFocus" value="" onchange="selectByValue(this.form,'linklisthref',this.value);" /><br />
+									<div style="border:1px solid black;padding:2px;margin-top:2px;">
+										<a href="javascript:void(0)" onclick="document.getElementById('linksponge').style.display='block';">Or select from a list of internal pages?</a>
+										<div id="linksponge" style="display:none;">
+											<?php
+												echo '<br />';
+												
+												include('../../../../functions.php');
+												
+												$sql_mysql_connection = mysql_connect('localhost','root','');
+												mysql_select_db('spongecms',$sql_mysql_connection);
+												$pagequery = mysql_query("SELECT * FROM pages");
+												while ($row = mysql_fetch_array($pagequery))
+												{
+													echo '&middot; <a href="javascript:void(0)" onclick="document.getElementById(\'href\').value=\'index.php?p='.$row['page_id'].'\';">'.$row['page_title_full'].'</a>';
+													echo '<br />';
+												}
+												
+												mysql_close($sql_mysql_connection);
+											?>
+										</div>
+									</div>
+								  </td>
 								  <td id="hrefbrowsercontainer">&nbsp;</td>
 								</tr>
 							  </table></td>

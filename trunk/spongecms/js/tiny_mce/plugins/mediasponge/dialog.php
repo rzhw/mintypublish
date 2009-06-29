@@ -13,15 +13,18 @@
 		<?php
 			include('../../../../functions.php');
 			
-			$medlist = json_decode(file_get_contents('../../../../media/media.txt'),true);
-			
-			for($i = 0; $i < sizeof($medlist); $i++) 
+			$sql_mysql_connection = mysql_connect('localhost','root','');
+			mysql_select_db('spongecms',$sql_mysql_connection);
+			$mediaquery = mysql_query("SELECT * FROM media");
+			while ($row = mysql_fetch_array($mediaquery))
 			{
-				echo $medlist[$i].' ('.get_file_type($medlist[$i]).') - 
-				<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[mediainline]'.$medlist[$i].'[/mediainline]\');">Insert inline</a>
-				| <a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[medialink]'.$medlist[$i].'[/medialink]\');">Insert link</a>
+				echo $row['media_filename'].' ('.get_file_type($row['media_filename']).') - 
+				<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[mediainline]'.$row['media_filename'].'[/mediainline]\');">Insert inline</a>
+				| <a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[medialink]'.$row['media_filename'].'[/medialink]\');">Insert link</a>
 				<br />';
 			}
+			
+			mysql_close($sql_mysql_connection);
 		?>
 	</p>
 

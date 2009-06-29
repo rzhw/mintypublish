@@ -1,6 +1,6 @@
 <?php
 /*
-	Sponge CMS test version
+	Sponge CMS
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	http://zvfpcms.sourceforge.net/
+	http://a2h.github.com/Sponge-CMS/
 */
 if ($zvfpcms)
 {	
@@ -57,10 +57,10 @@ if ($zvfpcms)
 						<li><a href="'.$path['admin'].'&amp;s=cfg">General</a></li>
 					</ul>
 					<div style="background:#c0c0c0;color:#fff;padding:4px;">
-						<img src="'.$path['images'].'/help.png" alt="" /> Other
+						<img src="'.$path['images'].'/help.png" alt="" /> Help
 					</div>
 					<ul>
-						<li><a href="'.$path['admin'].'&amp;s=logout">Logout</a></li>
+						<li><a href="'.$path['admin'].'&amp;s=help">Help</a></li>
 					</ul>
 				</td>
 				<td style="vertical-align:top;">';
@@ -69,16 +69,11 @@ if ($zvfpcms)
 		switch ($_GET["s"])
 		{
 			case "add":
-				include($path['admin2'].'/page_man_add_entry.php');
-				break;
-			case "add2":
-				include($path['admin2'].'/page_man_add_action.php');
+				include($path['admin2'].'/page_man_add.php');
 				break;
 			case "man":
 				echo '<h2>'.$txt['admin_panel_manpages'].'</h2>
 				<br />';
-				
-				//$data = json_decode(file_get_contents($path['pages'].'/pages.txt'),true);
 				
 				if (!isset($_GET["action"]))
 				{
@@ -92,10 +87,7 @@ if ($zvfpcms)
 							include($path['admin2'].'/page_man_edit.php');
 							break;
 						case "del":
-							include($path['admin2'].'/page_man_del_confirm.php');
-							break;
-						case "del2":					
-							include($path['admin2'].'/page_man_del_action.php');
+							include($path['admin2'].'/page_man_del.php');
 							break;
 						case "pup":
 							$direction = "up";
@@ -114,8 +106,6 @@ if ($zvfpcms)
 			case "med":
 				echo '<h2>Manage Media</h2>
 				<br />';
-				
-				$data = json_decode(file_get_contents($path['media'].'/media.txt'),true);
 				
 				if (!isset($_GET["action"]))
 				{
@@ -142,6 +132,9 @@ if ($zvfpcms)
 				break;
 			case "logout":
 				include($path['admin2'].'/user_logout.php');
+				break;
+			case "help":
+				include($path['admin2'].'/help.php');
 				break;
 			default:
 				if (isset($_GET["s"]))

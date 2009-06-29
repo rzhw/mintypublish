@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 23, 2009 at 08:50 PM
+-- Generation Time: Jun 29, 2009 at 01:27 PM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -36,6 +36,27 @@ INSERT INTO `config` (`config_name`, `config_value`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `media`
+--
+
+DROP TABLE IF EXISTS `media`;
+CREATE TABLE IF NOT EXISTS `media` (
+  `media_id` int(11) NOT NULL AUTO_INCREMENT,
+  `media_filename` varchar(64) NOT NULL,
+  PRIMARY KEY (`media_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `media`
+--
+
+INSERT INTO `media` (`media_id`, `media_filename`) VALUES
+(1, 'test.flv'),
+(2, 'cityrail.mp3');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pages`
 --
 
@@ -46,19 +67,20 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `page_title_menu` varchar(32) NOT NULL,
   `page_title_full` varchar(64) NOT NULL,
   `page_content` longtext NOT NULL,
+  `page_hideinmenu` tinyint(1) NOT NULL DEFAULT '0',
+  `page_childof` int(11) NOT NULL DEFAULT '-1',
   `page_dateadded` datetime NOT NULL,
   `page_dateedited` datetime NOT NULL,
   `page_editcount` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`page_id`),
-  UNIQUE KEY `page_orderid` (`page_orderid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  PRIMARY KEY (`page_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `pages`
 --
 
-INSERT INTO `pages` (`page_id`, `page_orderid`, `page_title_menu`, `page_title_full`, `page_content`, `page_dateadded`, `page_dateedited`, `page_editcount`) VALUES
-(1, 0, 'home', 'Home', '<p>Hello and welcome to Sponge CMS! It''s in the late alpha stages currently.</p>\r\n<p>It is not recommended you use this script in a production environment in its current state.</p>\r\n<p>The username/password pair is currently admin/admin. Change the password if you like but currently you will need to manually write something to output a password.</p>', '2009-06-23 09:20:49', '2009-06-23 09:20:49', 0);
+INSERT INTO `pages` (`page_id`, `page_orderid`, `page_title_menu`, `page_title_full`, `page_content`, `page_hideinmenu`, `page_childof`, `page_dateadded`, `page_dateedited`, `page_editcount`) VALUES
+(1, 0, 'home', 'Home', '<p>Hello and welcome to Sponge CMS! It''s in the late alpha stages currently.</p>\r\n<p>It is not recommended you use this script in a production environment in its current state.</p>\r\n<p>The username/password pair is currently admin/admin. Change the password if you like but currently you will need to manually write something to output a password.</p>', 0, -1, '2009-06-23 09:20:49', '2009-06-23 09:20:49', 0);
 
 -- --------------------------------------------------------
 

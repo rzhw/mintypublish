@@ -1,6 +1,6 @@
 <?php
 /*
-	Sponge CMS test version
+	Sponge CMS
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	http://zvfpcms.sourceforge.net/
+	http://a2h.github.com/Sponge-CMS/
 */
 if ($zvfpcms)
 {
@@ -23,9 +23,7 @@ if ($zvfpcms)
 	{
 		$i=0;
 		while($row = mysql_fetch_array($pagequery))
-		{
-			if ($i > 0) { $dontcontinue = true; }
-			
+		{			
 			if ($row['page_id'] == $_GET["pid"])
 			{
 				$pagecontent = $row['page_content'];
@@ -33,6 +31,8 @@ if ($zvfpcms)
 				$pagetitlemenu = $row['page_title_menu'];
 				$i+=1;
 			}
+			
+			if ($i == 2) { $dontcontinue = true; }
 		}
 		
 		if ($dontcontinue)
@@ -73,15 +73,27 @@ if ($zvfpcms)
 		$contenttowrite = str_replace($find,$replace,$_POST["thecontent"]);
 		$contenttowrite = mysql_real_escape_string($contenttowrite);
 		
+		// get the titles (not implemented in query yet)
+		$title_menu = mysql_real_escape_string($_POST['theid']);
+		$title_full = mysql_real_escape_string($_POST['thetitle']);
+		
+		// child
+		$childof = mysql_real_escape_string($_POST['thechild']);
+		
+		// hide in menu
+		$hideinmenu = mysql_real_escape_string($_POST['hideinmenu']);
+		
 		$pid = mysql_real_escape_string($_GET["pid"]);
 		
 		echo $txt['admin_panel_addpage_savpr'].' ';
 		
-		$updatequery = "UPDATE pages SET page_content = '$contenttowrite' WHERE page_id = $pid";
+		$updatequery = "UPDATE pages SET page_content = '$contenttowrite',".
+						" page_childof = $childof, page_hideinmenu = $hideinmenu, page_dateedited = NOW()".
+						" WHERE page_id = $pid";
 		
 		if (mysql_query($updatequery))
 		{
-			settopmessage(2,'Successfully saved edited page! ');
+			settopmessage(2,'Successfully saved edited page!');
 		}
 		else
 		{

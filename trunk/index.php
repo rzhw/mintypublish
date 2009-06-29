@@ -1,4 +1,22 @@
 <?php
+/*
+	Sponge CMS
+	Copyright 2009 a2h - http://a2h.uni.cc/
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	
+	http://a2h.github.com/Sponge-CMS/
+*/
 session_start();
 
 $zvfpcms = true;
@@ -36,7 +54,7 @@ while($row = mysql_fetch_array($configquery))
 }
 
 // get list of pages
-$pagequery = mysql_query("SELECT * FROM pages");
+$pagequery = mysql_query("SELECT * FROM pages ORDER BY page_orderid ASC");
 
 $i = 0; $j = 0;
 while ($row = mysql_fetch_array($pagequery))
@@ -48,19 +66,30 @@ while ($row = mysql_fetch_array($pagequery))
 		$pid = 1;
 	
 	// menu stuff
-	if ($i > 0) { $menucontent .= ' | '; }
-	$menucontent .= '<a href="index.php?p='.$row['page_id'].'"'.
-	($row['page_id']==$pid?' class="menu_current"':'').'">'.$row['page_title_menu'].'</a>';
-	$i+=1;
+	if ($row['page_childof'] == -1 && $row['page_hideinmenu'] == 0)
+	{
+		if ($i > 0) { $menucontent .= ' | '; }
+		$menucontent .= '<a href="index.php?p='.$row['page_id'].'"'.
+		($row['page_id']==$pid?' class="menu_current"':'').'">'.$row['page_title_menu'].'</a>';
+		$i+=1;
+	}
 	
 	// content stuff
 	if ($row['page_id'] == $pid)
 	{
-		$pagecontent = $row['page_content'];
+		$pagecontent = '';
+		
+		//if ($row['page_childof'] != -1)
+			//$pagecontent .= '<p><b>This page is a child page of <a href="index.php?p='.$row['page_childof'].'">this page</a>.</b></p>';
+		
+		$pagecontent .= $row['page_content'];
 		if ($j > 0) { $pagecontent = 'wtf'; }
 		$j+=1;
 	}
 }
+
+// get list of media
+$mediaquery = mysql_query("SELECT * FROM media");
 
 // NOW include the chosen language, so that non translated lines aren't broken
 if ($cfg[$cfg_language]['value'] != "en")

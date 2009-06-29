@@ -1,6 +1,6 @@
 <?php
 /*
-	Sponge CMS test version
+	Sponge CMS
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	http://zvfpcms.sourceforge.net/
+	http://a2h.github.com/Sponge-CMS/
 */
 if ($zvfpcms)
 {
@@ -46,8 +46,26 @@ if ($zvfpcms)
 				'.$txt['admin_panel_edt_child'].'
 			</td>
 			<td>
-				<input type="text" name="thechild" value="'.(isset($data[$_GET["pid"]]["subpage"]) ? $data[$_GET["pid"]]["subpage"] : '-1').'" /><br />
-				<small>'.$txt['admin_panel_edt_child_dsc'].' <b>'.$txt['text_notimplemented'].'</b></small>
+				<select name="thechild">
+					<option value="-1">None</option>
+					<option value="-2">----------------------</option>';
+					mysql_data_seek($pagequery, 0);
+					while ($row = mysql_fetch_array($pagequery))
+					{
+						echo '<option value="'.$row['page_id'].'">'.$row['page_title_full'].'</option>';
+					}
+				echo '
+				</select><br />
+				<small>'.$txt['admin_panel_edt_child_dsc'].'</small>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				'.$txt['admin_panel_edt_hideinmenu'].'
+			</td>
+			<td>
+				<input type="radio" name="hideinmenu" value="0"'.($hideinmenu?'':'checked="checked"').'/> No
+				<input type="radio" name="hideinmenu" value="1" /> Yes
 			</td>
 		</tr>
 	</table>

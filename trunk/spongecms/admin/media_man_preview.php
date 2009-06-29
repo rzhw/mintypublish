@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +15,18 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	http://zvfpcms.sourceforge.net/
+	http://a2h.github.com/Sponge-CMS/
 */
 if ($zvfpcms)
 {
 	echo '<h3>Preview</h3>';
 	
-	echo media_html($data[$_GET["pid"]]);
+	while ($row = mysql_fetch_array($mediaquery))
+	{
+		if ($row['media_id'] == $_GET['pid'])
+		{
+			echo media_html($row['media_filename']);
+		}
+	}
 }
 ?>

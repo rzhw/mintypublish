@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,20 +15,19 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	http://zvfpcms.sourceforge.net/
+	http://a2h.github.com/Sponge-CMS/
 */
 if ($zvfpcms)
 {
 	$target_path = $path['media'].'/'.basename($_FILES['uploadedfile']['name']); 
-	$file = fopen($path['media'].'/media.txt',"w");
-	
-	$data[sizeof($data)] = basename($_FILES['uploadedfile']['name']);
 	
 	$success = false;
 	
 	if (move_uploaded_file($_FILES['uploadedfile']['tmp_name'], $target_path))
 	{
-		if (fwrite($file,json_encode($data)))
+		$filename = mysql_real_escape_string(basename($_FILES['uploadedfile']['name']));
+		
+		if (mysql_query("INSERT INTO media (media_filename) VALUES('$filename')"))
 		{
 			$success = true;
 		}
@@ -36,11 +35,11 @@ if ($zvfpcms)
 	
 	if ($success)
 	{
-		echo $txt['text_pleasewait'].'<meta http-equiv="refresh" content="0;url='.$path['admin'].'&amp;s=med">';
+		settopmessage(2,'Successfully uploaded the file!');
 	}
 	else
 	{
-		echo $txt['text_failure'];
+		settopmessage(0,'Could not upload the file!');
 	}
 }
 ?>

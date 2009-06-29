@@ -88,7 +88,8 @@ $txt['admin_panel_edt_srtnm_dsc'] = 'The name appearing in the menu';
 $txt['admin_panel_edt_fllnm']     = 'Full name';
 $txt['admin_panel_edt_fllnm_dsc'] = 'The name appearing in its full version';
 $txt['admin_panel_edt_child']     = 'Child page of';
-$txt['admin_panel_edt_child_dsc'] = 'Type in the short title of the page you wish to set this page as the child of. If you do not wish to set this as a child of a page, leave this as -1.';
+$txt['admin_panel_edt_child_dsc'] = 'You can set this, but it does nothing special. Right now, at least.';
+$txt['admin_panel_edt_hideinmenu']= 'Hide in menu?';
 
 // media management in admin panel
 $txt['admin_panel_manmed_recog']  = 'Recognised filetypes are:';

@@ -1,6 +1,6 @@
 <?php
 /*
-	Ze Very Flat Pancaek CMS test version
+	Sponge CMS
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,40 +15,66 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	http://zvfpcms.sourceforge.net/
+	http://a2h.github.com/Sponge-CMS/
 */
 if ($zvfpcms)
 {
-	switch ($direction)
+	$i=0;
+	while($row = mysql_fetch_array($pagequery))
+	{			
+		if ($row['page_id'] == $_GET["pid"])
+		{
+			$pageorderid_orig = $row['page_orderid'];
+			$i+=1;
+		}
+		
+		if ($i == 2) { $dontcontinue = true; }
+	}
+	
+	$pid = mysql_real_escape_string($_GET["pid"]);
+	
+	if (!$dontcontinue)
 	{
-		case "up":		
-			$tempdata = $data[$_GET["pid"]];
-			$data[$_GET["pid"]] = $data[$_GET["pid"]-1];
-			$data[$_GET["pid"]-1] = $tempdata;
-			
-			$file = fopen($path['pages'].'/pages.txt',"w");
-			
-			fwrite($file,json_encode($data));
+		$success = false;
+		
+		switch ($direction)
+		{
+			case "up":
+				$pageorderid_new = $pageorderid_orig - 1;
 				
-			fclose($file);
-			
-			echo $txt['text_pleasewait'].'<meta http-equiv="refresh" content="0;url='.$path['admin'].'&amp;s=man">';
-			
-			break;
-		case "down":			
-			$tempdata = $data[$_GET["pid"]];
-			$data[$_GET["pid"]] = $data[$_GET["pid"]+1];
-			$data[$_GET["pid"]+1] = $tempdata;
-			
-			$file = fopen($path['pages'].'/pages.txt',"w");
-			
-			fwrite($file,json_encode($data));
+				$query1 = "UPDATE pages SET page_orderid = $pageorderid_orig WHERE page_orderid = $pageorderid_new";
+				$query2 = "UPDATE pages SET page_orderid = $pageorderid_new WHERE page_id = $pid";
 				
-			fclose($file);
-			
-			echo $txt['text_pleasewait'].'<meta http-equiv="refresh" content="0;url='.$path['admin'].'&amp;s=man">';
-			
-			break;
+				if (mysql_query($query1) && mysql_query($query2))
+				{
+					$success = true;
+				}
+				break;
+			case "down":
+				$pageorderid_new = $pageorderid_orig + 1;
+				
+				$query1 = "UPDATE pages SET page_orderid = $pageorderid_orig WHERE page_orderid = $pageorderid_new";
+				$query2 = "UPDATE pages SET page_orderid = $pageorderid_new WHERE page_id = $pid";
+				
+				if (mysql_query($query1) && mysql_query($query2))
+				{
+					$success = true;
+				}
+				break;
+		}
+		
+		if ($success)
+		{
+			settopmessage(2,'Reorder successful!');
+		}
+		else
+		{
+			settopmessage(0,'Reorder unsuccessful!');
+		}
+		
+		echo $query1.'<br />'.$query2;
+		
+		pageredirect('index.php?p=admin&s=man');
 	}
 }
 ?>

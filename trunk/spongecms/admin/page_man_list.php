@@ -1,6 +1,6 @@
 <?php
 /*
-	Sponge CMS test version
+	Sponge CMS
 	Copyright 2009 a2h - http://a2h.uni.cc/
 
 	Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 	
-	http://zvfpcms.sourceforge.net/
+	http://a2h.github.com/Sponge-CMS/
 */
 if ($zvfpcms)
 {	
@@ -33,35 +33,49 @@ if ($zvfpcms)
 	echo ' '.str_replace('[d]','<img src="'.$path['images'].'/trash.png" alt="" />',$txt['admin_panel_manpages_delt']);
 	
 	echo '<br /><br />';
+
+	// get the largest order id
+	$largestorder = -1;
+	while ($row = mysql_fetch_array($pagequery))
+	{
+		if ($row['page_orderid'] > $largestorder)
+		{
+			$largestorder = $row['page_orderid'];
+		}
+	}
+	
+	mysql_data_seek($pagequery, 0);
 	
 	while($row = mysql_fetch_array($pagequery))
 	{
-		/*// top item in list where there is more than one item
-		if ($i == 0 && sizeof($data) > 1)
+		$i = $row['page_orderid'];
+		
+		// top item in list where there is more than one item
+		if ($i == 0 && $i < $largestorder)
 		{
-			template_page_man_entry($path['admin'].'&amp;s=man',$data[$i]['page_id'],$data[$i]['page_title_full'],1,0);
+			template_page_man_entry($path['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],1,0);
 			echo '<br />';
 		}
 		// the only item in the list
 		else if ($i == 0)
 		{
-			template_page_man_entry($path['admin'].'&amp;s=man',$data[$i]['page_id'],$data[$i]['page_title_full'],1,1);
+			template_page_man_entry($path['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],1,1);
 			echo '<br />';
 		}
 		// bottom item in list where there is more than one item
-		else if ($i == (sizeof($data)-1))
+		else if ($i == $largestorder)
 		{
-			template_page_man_entry($path['admin'].'&amp;s=man',$data[$i]['page_id'],$data[$i]['page_title_full'],0,1);
+			template_page_man_entry($path['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],0,1);
 			echo '<br />';
 		}
 		// other items
 		else
 		{
-			template_page_man_entry($path['admin'].'&amp;s=man',$data[$i]['page_id'],$data[$i]['page_title_full'],0,0);
+			template_page_man_entry($path['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],0,0);
 			echo '<br />';
-		}*/
-		template_page_man_entry($path['admin'].'&amp;s=man',$row['page_id'],$row['page_title_full'],0,0);
-		echo '<br />';
+		}
+		
+		//template_page_man_entry($path['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],0,0);
 	}
 }
 
@@ -74,7 +88,7 @@ if ($zvfpcms)
  *               $bottom - whether the page is the last entry in the list
  * Return:       Nothing
  */
-function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
+function template_page_man_entry($curpage,$pid,$childof,$ptitle,$top=false,$bottom=false)
 {
 	global $path;
 	
@@ -93,8 +107,8 @@ function template_page_man_entry($curpage,$pid,$ptitle,$top=false,$bottom=false)
 	echo '
 	<a href="'.$curpage.'&amp;action=edt&amp;pid='.$pid.'"><img src="'.$path['images'].'/page_edit.png" alt="" /></a>
 	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$path['images'].'/trash.png" alt="" /></a>
-	<a href="javascript:alert(\'This page is not a child page. Making it a child of a page is currently not implemented.\')"><img src="'.$path['images'].'/page_child_off.png" alt="" /></a>
+	<a href="javascript:void(0)" onclick="'.($childof==-1?'javascript:alert(\'This page is not a child of anything\')':'javascript:alert(\'This page is the child of page ID '.$childof.'\')').'"><img src="'.$path['images'].'/page_child_'.($childof==-1?'off':'on').'.png" alt="" /></a>
 	
-	<b>'.$pid.'. '.$ptitle.'</b>';
+	<b>'.$ptitle.'</b>';
 }
 ?>
