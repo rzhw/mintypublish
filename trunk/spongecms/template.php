@@ -33,9 +33,9 @@ class PageBuilder
 {
 	private $title, $content, $stylesheets=array(), $javascripts=array(), $bodypre, $disabled=false, $sitename, $location;
 	
-	function PageBuilder($location)
+	function PageBuilder()
 	{
-		global $sitename;
+		global $sitename, $location;
 		
 		// outside stuff
 		$this->sitename = $sitename;

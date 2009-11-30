@@ -106,7 +106,7 @@ if (version_compare('5.1.0',PHP_VERSION,'>'))
 	exit($txt['page_oldphp']);
 
 // set up the templating system
-$page = new PageBuilder($location);
+$page = new PageBuilder();
 register_shutdown_function(array($page,'outputAll'));
 
 // and now let's have some content!
