@@ -1,5 +1,0 @@
-This file is added per section 4.4 of the Apache License Version 2.0
-
-Another project from the strange mind of a2h - http://a2h.uni.cc/
-
-ZVFPCMS' website is at http://zvfpcms.sourceforge.net/
