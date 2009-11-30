@@ -22,6 +22,7 @@
 // this is australian english
 
 // global text
+$txt['text_error']                = 'Error';
 $txt['text_warning']              = 'Warning';
 $txt['text_success']              = 'Success!';
 $txt['text_failure']              = 'Failure!';
@@ -94,6 +95,7 @@ $txt['admin_panel_edt_hideinmenu']= 'Hide in menu?';
 // media management in admin panel
 $txt['admin_panel_manmed_recog']  = 'Recognised filetypes are:';
 $txt['admin_panel_manmed_convt']  = 'To convert media between filetypes [TODO]';
+$txt['admin_panel_manmed_view']   = 'Viewing media file';
 
 // configuration frontend in admin panel
 $txt['admin_panel_lang']          = 'Language';

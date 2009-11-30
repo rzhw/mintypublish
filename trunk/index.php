@@ -74,14 +74,21 @@ while ($row = mysql_fetch_array($pagequery))
 	// menu stuff
 	if ($row['page_childof'] == -1 && $row['page_hideinmenu'] == 0)
 	{
-		/*if ($i > 0) { $menucontent .= ' | '; }
-		$menucontent .= '<a href="index.php?p='.$row['page_id'].'"'.
-		($row['page_id']==$pid?' class="menu_current"':'').'">'.$row['page_title_menu'].'</a>';
-		$i+=1;*/
+		if ($row['page_id'] == $_GET['p'])
+		{
+			$sel = true;
+			$curpgtitle = $row['page_title_full'];
+		}
+		else
+		{
+			$sel = false;
+		}
+		
 		$menu[] = array(
 			'id' => $row['page_id'],
 			'name' => $row['page_title_menu'],
-			'url' => 'index.php?p='.$row['page_id']
+			'url' => 'index.php?p='.$row['page_id'],
+			'selected' => $sel
 		);
 	}
 	
@@ -121,17 +128,25 @@ ob_start('parsebbcode');
 switch ($_GET["p"])
 {
 	case 'admin':
+		$page->setTitle($txt['admin_panel_title']);
 		mysql_data_seek($pagequery, 0); // reset the query to allow usage
 		include($location['root'].'/admin/admin.php'); // include the admin panel
 		break;
 	case 'media':
+		$page->setTitle($txt['admin_panel_manmed_view']);
 		echo '<a href="javascript:history.go(-1)">Go back</a><br /><br />'.media_html($_GET["s"]);
 		break;
 	default:			
 		if ($j == 0)
+		{
+			$page->setTitle($txt['text_error']);
 			echo $txt['page_noexist'];
+		}
 		else
+		{
+			$page->setTitle($curpgtitle);
 			echo $pagecontent;
+		}
 		break;
 }
 ob_end_flush();
