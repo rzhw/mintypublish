@@ -26,7 +26,7 @@ $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
 
 // the config
-require_once('spongecfg.php');
+require_once('spongecms/config.php');
 
 // and now to include files from the spongecms folder!
 require_once($path['root'].'/functions.php');
