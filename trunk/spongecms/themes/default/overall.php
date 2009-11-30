@@ -13,7 +13,20 @@
 			<img src="<?php echo $location['images']; ?>/logo.png" alt="" />
 			
 			<div id="menu_wrapper">
-				<div style="float:left;"><?php echo $menucontent; ?></div>
+				<div style="float:left;">
+					<ul>
+					<?php
+					foreach ($this->getMenu() as $item)
+					{
+						if (!$item['hide'])
+						echo '
+						<li>
+							<a href="'.$item['url'].'">'.$item['name'].'</a>
+						</li>';
+					}
+					?>
+					</ul>
+				</div>
 				<div style="float:right;overflow:hidden;">
 					<?php					
 					if (isloggedin())

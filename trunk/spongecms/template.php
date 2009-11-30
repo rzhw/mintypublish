@@ -90,19 +90,7 @@ class PageBuilder
 	
 	function getMenu()
 	{
-		include("menu.php");
-		
-		for ($i=0;$i<sizeof($menu);$i++)
-		{
-			if ($menu[$i]['id'] == $this->type)
-			{
-				$menu[$i]['selected'] = true;
-			}
-			else
-			{
-				$menu[$i]['selected'] = false;
-			}
-		}
+		global $menu;
 		return $menu;
 	}
 	

@@ -74,10 +74,12 @@ while ($row = mysql_fetch_array($pagequery))
 	// menu stuff
 	if ($row['page_childof'] == -1 && $row['page_hideinmenu'] == 0)
 	{
-		if ($i > 0) { $menucontent .= ' | '; }
+		/*if ($i > 0) { $menucontent .= ' | '; }
 		$menucontent .= '<a href="index.php?p='.$row['page_id'].'"'.
 		($row['page_id']==$pid?' class="menu_current"':'').'">'.$row['page_title_menu'].'</a>';
-		$i+=1;
+		$i+=1;*/
+		$menu[]['name'] = $row['page_title_menu'];
+		$menu[]['url'] = 'index.php?p='.$row['page_id'];
 	}
 	
 	// content stuff
