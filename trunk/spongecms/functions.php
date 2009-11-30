@@ -260,13 +260,13 @@ function gettopmessage()
 				{
 					setTimeout(function() {
 						timedisappear -= 1;
-						$("topmsg_timer").writeAttribute({src:"'.$location['images'].'/timer_"+timedisappear+".png"});
+						$("#topmsg_timer").attr({src:"'.$location['images'].'/timer_"+timedisappear+".png"});
 						updatetime();
 					}, 1000);
 				}
 				else
 				{
-					new Effect.Fade("topmsg",{duration:0.5});
+					$("#topmsg").fadeOut(500);
 				}
 			}
 			
