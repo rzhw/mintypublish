@@ -30,18 +30,18 @@ if ($zvfpcms)
 	Click the browse button, select your file and click upload.
 	<h3>Inserting</h3>
 	To insert media into a page, click the button that looks like the one circled below when adding or editing a page.<br />
-	<img src="'.$path['help'].'/insertmedia.png" alt="" /><br />
+	<img src="'.$location['help'].'/insertmedia.png" alt="" /><br />
 	<br />';
 	
 	echo '<h3>Inserting links</h3>
 	Simply write some text, and highlight it. The link button should activate as a result:<br />
-	<img src="'.$path['help'].'/insertlink.png" alt="" /><br />
+	<img src="'.$location['help'].'/insertlink.png" alt="" /><br />
 	<br />
 	When you click on the link button, you can insert either an external or internal link. If you wish
 	to create an external link, simply copy the full URL of the page you wish to link to and paste
 	it into the URL box. If you wish to create an internal link, there is a small box below the URL box
 	that allows you to select from a list of pages. The window looks like this:<br />
-	<img src="'.$path['help'].'/insertlink_window.png" alt="" />
+	<img src="'.$location['help'].'/insertlink_window.png" alt="" />
 	';
 }
 ?>

@@ -76,8 +76,8 @@ if ($zvfpcms)
 	</table>
 	
 	<!--<input type="submit" value="Save" />--><br /><br />
-	<script type="text/javascript" src="'.$path['js'].'/tiny_mce/tiny_mce.js"></script>
-	<script type="text/javascript" src="'.$path['js'].'/tiny_mce/tiny_mce_cfg.js"></script>
+	<script type="text/javascript" src="'.$location['js'].'/tiny_mce/tiny_mce.js"></script>
+	<script type="text/javascript" src="'.$location['js'].'/tiny_mce/tiny_mce_cfg.js"></script>
 	<textarea id="thecontent" name="thecontent" style="width:100%;height:480px;">';
 			if (isset($_GET["pid"]))
 			{

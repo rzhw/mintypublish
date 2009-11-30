@@ -31,7 +31,7 @@ if ($zvfpcms)
 		<br />
 			  <form method="post" action="">
 			  <input type="hidden" name="subadd" />';
-				 include($path['admin2'].'/page_editor.php');
+				 include($location['admin2'].'/page_editor.php');
 		echo '</form>';
 	}
 	else

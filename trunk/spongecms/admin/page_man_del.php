@@ -38,12 +38,12 @@ if ($zvfpcms)
 			}
 		}
 		
-		$delurl = $path['admin'].'&amp;s=man&amp;action=del&amp;go&amp;pid='.$_GET["pid"];
+		$delurl = $location['admin'].'&amp;s=man&amp;action=del&amp;go&amp;pid='.$_GET["pid"];
 		echo '<h3>Confirm deleting page "'.$pagetitlefull.'"</h3>
 		'.$txt['admin_panel_confirm'].'<br />
 		<br />
-		<img src="'.$path['images'].'/tick.png" alt="" /> <a href="'.$delurl.'">'.$txt['text_yes'].'</a>
-		<img src="'.$path['images'].'/cross.png" alt="" /> <a href="javascript:history.back(1)">'.$txt['text_no'].'</a>';
+		<img src="'.$location['images'].'/tick.png" alt="" /> <a href="'.$delurl.'">'.$txt['text_yes'].'</a>
+		<img src="'.$location['images'].'/cross.png" alt="" /> <a href="javascript:history.back(1)">'.$txt['text_no'].'</a>';
 	}
 	else
 	{

@@ -24,7 +24,7 @@
 
 if ($zvfpcms)
 {
-	$target_path = $path['media'].'/'.basename($_FILES['uploadedfile']['name']); 
+	$target_path = $location['media'].'/'.basename($_FILES['uploadedfile']['name']); 
 	
 	$success = false;
 	
