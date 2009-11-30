@@ -5,7 +5,7 @@ body
 {
 	font-family:verdana;
 	text-align:center;
-	background:#F9F7ED url('img/background.png') repeat-x;
+	background:#F9F7ED url('../img/background.png') repeat-x;
 	padding:0px;
 	margin:0px;
 }
@@ -23,7 +23,7 @@ body
 	margin-top:-384px;
 	top:0px;
 	bottom:0px;
-	background:url('img/background_content.png');
+	background:url('../img/background_content.png');
 	z-index:-1;
 }
 
@@ -42,7 +42,7 @@ body
 	font-size:11px;
 	padding:10px 8px 6px 8px;
 	height:16px;
-	background:url('img/background_menu.png');
+	background:url('../img/background_menu.png');
 	border-top:1px solid #99713D;
 	border-bottom:1px solid #99713D;
 }
