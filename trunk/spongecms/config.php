@@ -11,13 +11,13 @@ $cfg['theme']='default';
 // paths //
 ///////////
 
-$path['root']='spongecms';
-$path['admin2']=$path['root'].'/admin';
-$path['theme_root']=$path['root'].'/themes/'.$cfg['theme'];
-$path['images']=$path['root'].'/themes/'.$cfg['theme'].'/img';
-$path['css']=$path['root'].'/themes/'.$cfg['theme'];
-$path['js']=$path['root'].'/js';
-$path['media']=$path['root'].'/media';
-$path['help']=$path['root'].'/help';
-$path['admin']='index.php?p=admin';
+$location['root']='spongecms';
+$location['admin2']=$location['root'].'/admin';
+$location['theme_root']=$location['root'].'/themes/'.$cfg['theme'];
+$location['images']=$location['root'].'/themes/'.$cfg['theme'].'/img';
+$location['styles']=$location['root'].'/themes/'.$cfg['theme'];
+$location['js']=$location['root'].'/js';
+$location['media']=$location['root'].'/media';
+$location['help']=$location['root'].'/help';
+$location['admin']='index.php?p=admin';
 ?>
