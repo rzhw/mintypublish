@@ -34,8 +34,9 @@ $starttime = $starttime[1] + $starttime[0];
 require_once('spongecms/config.php');
 
 // and now to include files from the spongecms folder!
-require_once($path['root'].'/functions.php');
-require_once($path['root'].'/lang/en.php');
+require_once($location['root'].'/functions.php');
+require_once($location['root'].'/template.php');
+require_once($location['root'].'/lang/en.php');
 
 // connect to mysql
 $sql_mysql_connection = mysql_connect('localhost','root','');
@@ -73,10 +74,22 @@ while ($row = mysql_fetch_array($pagequery))
 	// menu stuff
 	if ($row['page_childof'] == -1 && $row['page_hideinmenu'] == 0)
 	{
-		if ($i > 0) { $menucontent .= ' | '; }
-		$menucontent .= '<a href="index.php?p='.$row['page_id'].'"'.
-		($row['page_id']==$pid?' class="menu_current"':'').'">'.$row['page_title_menu'].'</a>';
-		$i+=1;
+		if ($row['page_id'] == $_GET['p'])
+		{
+			$sel = true;
+			$curpgtitle = $row['page_title_full'];
+		}
+		else
+		{
+			$sel = false;
+		}
+		
+		$menu[] = array(
+			'id' => $row['page_id'],
+			'name' => $row['page_title_menu'],
+			'url' => 'index.php?p='.$row['page_id'],
+			'selected' => $sel
+		);
 	}
 	
 	// content stuff
@@ -104,68 +117,42 @@ if ($cfg[$cfg_language]['value'] != "en")
 if (version_compare('5.1.0',PHP_VERSION,'>'))
 	exit($txt['page_oldphp']);
 
-// incoming header!
-include($path['theme_root'] . '/header.php');
-
-// menu start
-echo '
-			<div id="menu_wrapper">
-				<div style="float:left;">'.$menucontent.'</div>
-				<div style="float:right;overflow:hidden;">
-					';
-					
-					if (isloggedin())
-					{
-						echo '<b>Logged in as: '.$_SESSION['uname'].'</b>
-						(<a href="index.php?p=admin">admin</a> |
-						<a href="'.$path['admin'].'&amp;s=logout">logout</a>)';
-					}
-					else
-					{
-						echo '<b>Not logged in</b>
-						(<a href="index.php?p=admin">login</a> |
-						<a href="'.$path['admin'].'&amp;s=register">register</a>)';
-					}
-					
-					echo '
-				</div>
-				<div style="clear:both;"></div>
-			</div>';
-// menu end
+// set up the templating system
+$page = new PageBuilder();
+register_shutdown_function(array($page,'outputAll'));
 
 // and now let's have some content!
-echo '
-<!-- Content start -->
-			<div id="content_wrapper">
-';
-	echo gettopmessage();
+echo gettopmessage();
 
-	ob_start('parsebbcode');
-	switch ($_GET["p"])
-	{
-		case 'admin':
-			mysql_data_seek($pagequery, 0); // reset the query to allow usage
-			include($path['root'].'/admin/admin.php'); // include the admin panel
-			break;
-		case 'media':
-			echo '<a href="javascript:history.go(-1)">Go back</a><br /><br />'.media_html($_GET["s"]);
-			break;
-		default:			
-			if ($i == 0)
-				echo $txt['page_noexist'];
-			else
-				echo $pagecontent;
-			break;
-	}
-	ob_end_flush();
-	
-echo '
-			</div>
-<!-- Content end -->
-';
+ob_start('parsebbcode');
+switch ($_GET["p"])
+{
+	case 'admin':
+		$page->setTitle($txt['admin_panel_title']);
+		mysql_data_seek($pagequery, 0); // reset the query to allow usage
+		include($location['root'].'/admin/admin.php'); // include the admin panel
+		break;
+	case 'media':
+		$page->setTitle($txt['admin_panel_manmed_view']);
+		echo '<a href="javascript:history.go(-1)">Go back</a><br /><br />'.media_html($_GET["s"]);
+		break;
+	default:			
+		if ($j == 0)
+		{
+			$page->setTitle($txt['text_error']);
+			echo $txt['page_noexist'];
+		}
+		else
+		{
+			$page->setTitle($curpgtitle);
+			echo $pagecontent;
+		}
+		break;
+}
+ob_end_flush();
 			
 // we has a footer
-$footer_copyright = '
+$footer['copyright'] = '
 	<!--
 	it would be appreciated if you do not remove the "powered by" part
 	if you must remove it, at least keep this comment here
@@ -177,11 +164,8 @@ $footer_copyright = '
 	
 $mtime = explode(' ', microtime());
 $totaltime = $mtime[0] + $mtime[1] - $starttime;
-$footer_generated = sprintf('%.3f',$totaltime);
-
-include($path['theme_root'] . '/footer.php');
+$footer['generated'] = sprintf('%.3f',$totaltime);
 
 // end mysql
 mysql_close($sql_mysql_connection);
-
 ?>

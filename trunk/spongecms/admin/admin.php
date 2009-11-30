@@ -27,9 +27,9 @@ if ($zvfpcms)
 	if (!isloggedin())
 	{
 		if ($_GET['s'] == 'register')
-			include($path['admin2'].'/user_register.php');
+			include($location['admin2'].'/user_register.php');
 		else
-			include($path['admin2'].'/user_login.php');
+			include($location['admin2'].'/user_login.php');
 	}
 	else
 	{
@@ -43,29 +43,29 @@ if ($zvfpcms)
 			<tr>
 				<td style="width:128px;padding-right:16px;vertical-align:top;">
 					<div style="background:#c0c0c0;color:#fff;padding:4px;">
-						<img src="'.$path['images'].'/admin_man_pg.png" alt="" /> Pages
+						<img src="'.$location['images'].'/admin_man_pg.png" alt="" /> Pages
 					</div>
 					<ul>
-						<li><a href="'.$path['admin'].'&amp;s=add">Add a page</a></li>
-						<li><a href="'.$path['admin'].'&amp;s=man">List existing pages</a></li>
+						<li><a href="'.$location['admin'].'&amp;s=add">Add a page</a></li>
+						<li><a href="'.$location['admin'].'&amp;s=man">List existing pages</a></li>
 					</ul>
 					<div style="background:#c0c0c0;color:#fff;padding:4px;">
-						<img src="'.$path['images'].'/admin_man_med.png" alt="" /> Media
+						<img src="'.$location['images'].'/admin_man_med.png" alt="" /> Media
 					</div>
 					<ul>
-						<li><a href="'.$path['admin'].'&amp;s=med">Manage/add media</a></li>
+						<li><a href="'.$location['admin'].'&amp;s=med">Manage/add media</a></li>
 					</ul>
 					<div style="background:#c0c0c0;color:#fff;padding:4px;">
-						<img src="'.$path['images'].'/admin_man_cfg.png" alt="" /> Configuration
+						<img src="'.$location['images'].'/admin_man_cfg.png" alt="" /> Configuration
 					</div>
 					<ul>
-						<li><a href="'.$path['admin'].'&amp;s=cfg">General</a></li>
+						<li><a href="'.$location['admin'].'&amp;s=cfg">General</a></li>
 					</ul>
 					<div style="background:#c0c0c0;color:#fff;padding:4px;">
-						<img src="'.$path['images'].'/help.png" alt="" /> Help
+						<img src="'.$location['images'].'/help.png" alt="" /> Help
 					</div>
 					<ul>
-						<li><a href="'.$path['admin'].'&amp;s=help">Help</a></li>
+						<li><a href="'.$location['admin'].'&amp;s=help">Help</a></li>
 					</ul>
 				</td>
 				<td style="vertical-align:top;">';
@@ -74,7 +74,7 @@ if ($zvfpcms)
 		switch ($_GET["s"])
 		{
 			case "add":
-				include($path['admin2'].'/page_man_add.php');
+				include($location['admin2'].'/page_man_add.php');
 				break;
 			case "man":
 				echo '<h2>'.$txt['admin_panel_manpages'].'</h2>
@@ -82,25 +82,25 @@ if ($zvfpcms)
 				
 				if (!isset($_GET["action"]))
 				{
-					include($path['admin2'].'/page_man_list.php');
+					include($location['admin2'].'/page_man_list.php');
 				}
 				else
 				{
 					switch ($_GET["action"])
 					{
 						case "edt":
-							include($path['admin2'].'/page_man_edit.php');
+							include($location['admin2'].'/page_man_edit.php');
 							break;
 						case "del":
-							include($path['admin2'].'/page_man_del.php');
+							include($location['admin2'].'/page_man_del.php');
 							break;
 						case "pup":
 							$direction = "up";
-							include($path['admin2'].'/page_man_reorder.php');
+							include($location['admin2'].'/page_man_reorder.php');
 							break;
 						case "pdn":
 							$direction = "down";
-							include($path['admin2'].'/page_man_reorder.php');
+							include($location['admin2'].'/page_man_reorder.php');
 							break;
 						default:
 							echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
@@ -114,17 +114,17 @@ if ($zvfpcms)
 				
 				if (!isset($_GET["action"]))
 				{
-					include($path['admin2'].'/media_man_list.php');
+					include($location['admin2'].'/media_man_list.php');
 				}
 				else
 				{
 					switch ($_GET["action"])
 					{
 						case "up":
-							include($path['admin2'].'/media_man_upload.php');
+							include($location['admin2'].'/media_man_upload.php');
 							break;
 						case "prv":
-							include($path['admin2'].'/media_man_preview.php');
+							include($location['admin2'].'/media_man_preview.php');
 							break;
 						default:
 							echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
@@ -133,13 +133,13 @@ if ($zvfpcms)
 				}
 				break;
 			case "cfg":
-				include($path['admin2'].'/config_frontend.php');
+				include($location['admin2'].'/config_frontend.php');
 				break;
 			case "logout":
-				include($path['admin2'].'/user_logout.php');
+				include($location['admin2'].'/user_logout.php');
 				break;
 			case "help":
-				include($path['admin2'].'/help.php');
+				include($location['admin2'].'/help.php');
 				break;
 			default:
 				if (isset($_GET["s"]))

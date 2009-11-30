@@ -30,14 +30,14 @@ if ($zvfpcms)
 	<br />
 	To convert media between filetypes [filler text]<br />
 	<br />
-	Clicking on <img src="'.$path['images'].'/preview.png" alt="" /> will preview a file. Clicking on
-	<img src="'.$path['images'].'/trash.png" alt="" /> will delete a file.<br />
+	Clicking on <img src="'.$location['images'].'/preview.png" alt="" /> will preview a file. Clicking on
+	<img src="'.$location['images'].'/trash.png" alt="" /> will delete a file.<br />
 	<br />
 	';
 	
 	echo '<h3>Upload</h3>';
 	
-	echo '<form method="post" action="'.$path['admin'].'&amp;s=med&amp;action=up" enctype="multipart/form-data">
+	echo '<form method="post" action="'.$location['admin'].'&amp;s=med&amp;action=up" enctype="multipart/form-data">
 	<input name="uploadedfile" type="file" /><input type="submit" value="Upload" />
 	<br /><br />';
 	
@@ -48,7 +48,7 @@ if ($zvfpcms)
 	$i=0;
 	while ($row = mysql_fetch_array($mediaquery))
 	{
-		entry_media($path['admin'].'&amp;s=med',$row['media_id'],$row['media_filename']);
+		entry_media($location['admin'].'&amp;s=med',$row['media_id'],$row['media_filename']);
 		echo '<br />';
 		$i+=1;
 	}
@@ -63,10 +63,10 @@ if ($zvfpcms)
  */
 function entry_media($curpage,$pid,$ptitle)
 {
-	global $path;
+	global $location;
 	
-	echo '<a href="'.$curpage.'&amp;action=prv&amp;pid='.$pid.'"><img src="'.$path['images'].'/preview.png" alt="" /></a>
-	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$path['images'].'/trash.png" alt="" /></a>
+	echo '<a href="'.$curpage.'&amp;action=prv&amp;pid='.$pid.'"><img src="'.$location['images'].'/preview.png" alt="" /></a>
+	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$location['images'].'/trash.png" alt="" /></a>
 	
 	<b>'.$ptitle.' ('.get_file_type($ptitle).')</b>';
 }

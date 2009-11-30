@@ -66,7 +66,7 @@ function user_pass_generate($salt,$pwd)
 //
 function media_html($fname)
 {
-	global $path;
+	global $location;
 	
 	$toreturn = '';
 	
@@ -76,13 +76,13 @@ function media_html($fname)
 	{
 		$toreturn .= '
 		<a  
-			 href="'.$path['media'].'/'.$fname.'"  
+			 href="'.$location['media'].'/'.$fname.'"  
 			 style="display:block;width:640px;height:'.($ftype == "music" ? '30' : '480').'px"  
 			 id="player"> 
 		</a> 
 
 		<script type="text/javascript">
-			flowplayer("player","'.$path['root'].'/flowplayer-3.1.0.swf"';
+			flowplayer("player","'.$location['root'].'/flowplayer-3.1.0.swf"';
 		
 		if ($ftype == "music")
 		{
@@ -94,7 +94,7 @@ function media_html($fname)
 	}
 	else
 	{
-		$toreturn .= '<img src="'.$path['media'].'/'.$fname.'" alt="" />';
+		$toreturn .= '<img src="'.$location['media'].'/'.$fname.'" alt="" />';
 	}
 	
 	return $toreturn;
@@ -131,7 +131,7 @@ function parsebbcode($buffer)
  */
 function isexistinguser($uname,$pwd)
 {
-	global $path;
+	global $location;
 	
 	$uname = mysql_real_escape_string($uname);
 	
@@ -148,6 +148,8 @@ function isexistinguser($uname,$pwd)
 	$hit = 0;
 	$rowcounted = false;
 	$salt = '';
+	
+	echo '<!--'; // cheap fix for mysql error - FIND A BETTER WAY!
 	
 	while($row = mysql_fetch_array($result))
 	{
@@ -175,6 +177,8 @@ function isexistinguser($uname,$pwd)
 		// this is for debugging the mysql user handling system
 		//echo $hit.'<br /><br />'.user_pass_generate($row['user_password_salt'],$pwd).'<br /><br />';
 	}
+	
+	echo '-->'; // cheap fix for mysql error - FIND A BETTER WAY!
 	
 	return array($hit,$salt);
 }
@@ -228,7 +232,7 @@ function settopmessage($type,$message)
 //
 function gettopmessage()
 {
-	global $path;
+	global $location;
 	
 	if (isset($_COOKIE['topmsg']))
 	{
@@ -237,7 +241,7 @@ function gettopmessage()
 		$temp = '
 		<div id="topmsg" class="topmsg_' . $msg['type'] . '">
 			<div style="float:left;">
-				<img id="topmsg_timer" src="'.$path['images'].'/timer_3.png" alt="" />
+				<img id="topmsg_timer" src="'.$location['images'].'/timer_3.png" alt="" />
 			</div>
 			<div style="float:left;margin-left:8px;">
 				' . $msg['message'] . '
@@ -256,13 +260,13 @@ function gettopmessage()
 				{
 					setTimeout(function() {
 						timedisappear -= 1;
-						$("topmsg_timer").writeAttribute({src:"'.$path['images'].'/timer_"+timedisappear+".png"});
+						$("#topmsg_timer").attr({src:"'.$location['images'].'/timer_"+timedisappear+".png"});
 						updatetime();
 					}, 1000);
 				}
 				else
 				{
-					new Effect.Fade("topmsg",{duration:0.5});
+					$("#topmsg").fadeOut(500);
 				}
 			}
 			
