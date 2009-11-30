@@ -149,6 +149,8 @@ function isexistinguser($uname,$pwd)
 	$rowcounted = false;
 	$salt = '';
 	
+	echo '<!--'; // cheap fix for mysql error - FIND A BETTER WAY!
+	
 	while($row = mysql_fetch_array($result))
 	{
 		$salt = $row['user_password_salt'];
@@ -175,6 +177,8 @@ function isexistinguser($uname,$pwd)
 		// this is for debugging the mysql user handling system
 		//echo $hit.'<br /><br />'.user_pass_generate($row['user_password_salt'],$pwd).'<br /><br />';
 	}
+	
+	echo '-->'; // cheap fix for mysql error - FIND A BETTER WAY!
 	
 	return array($hit,$salt);
 }
