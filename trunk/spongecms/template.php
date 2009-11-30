@@ -121,6 +121,7 @@ class PageBuilder
 		}
 		else
 		{
+			global $footer;
 			ob_start();
 			$location = $this->location;
 			include($this->location['theme_nr'].'/overall.php');

@@ -53,8 +53,8 @@
 			</div>
 			
 			<div id="footer_wrapper">
-				<?php echo $footer_copyright; ?>
-				| Generated in <?php echo $footer_generated; ?> secs
+				<?php echo $footer['copyright']; ?>
+				| Generated in <?php echo $footer['generated']; ?> secs
 			</div>
 		</div>
 	</body>

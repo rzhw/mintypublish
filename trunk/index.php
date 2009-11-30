@@ -152,7 +152,7 @@ switch ($_GET["p"])
 ob_end_flush();
 			
 // we has a footer
-$footer_copyright = '
+$footer['copyright'] = '
 	<!--
 	it would be appreciated if you do not remove the "powered by" part
 	if you must remove it, at least keep this comment here
@@ -164,7 +164,7 @@ $footer_copyright = '
 	
 $mtime = explode(' ', microtime());
 $totaltime = $mtime[0] + $mtime[1] - $starttime;
-$footer_generated = sprintf('%.3f',$totaltime);
+$footer['generated'] = sprintf('%.3f',$totaltime);
 
 // end mysql
 mysql_close($sql_mysql_connection);
