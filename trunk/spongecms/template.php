@@ -91,6 +91,18 @@ class PageBuilder
 	function getMenu()
 	{
 		global $menu;
+		
+		for ($i=0;$i<sizeof($menu);$i++)
+		{
+			if ($menu[$i]['id'] == $_GET['p'])
+			{
+				$menu[$i]['selected'] = true;
+			}
+			else
+			{
+				$menu[$i]['selected'] = false;
+			}
+		}
 		return $menu;
 	}
 	

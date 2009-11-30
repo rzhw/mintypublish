@@ -79,6 +79,7 @@ while ($row = mysql_fetch_array($pagequery))
 		($row['page_id']==$pid?' class="menu_current"':'').'">'.$row['page_title_menu'].'</a>';
 		$i+=1;*/
 		$menu[] = array(
+			'id' => $row['page_id'],
 			'name' => $row['page_title_menu'],
 			'url' => 'index.php?p='.$row['page_id']
 		);

@@ -20,7 +20,7 @@
 					{
 						if (!$item['hide'])
 						echo '
-						<li>
+						<li'.($item['selected']?' class="sel"':'').'>
 							<a href="'.$item['url'].'">'.$item['name'].'</a>
 						</li>';
 					}

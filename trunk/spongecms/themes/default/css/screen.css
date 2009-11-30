@@ -71,6 +71,11 @@ header,section,footer,aside,nav,article,figure
 	margin:0px 8px;
 }
 
+#menu_wrapper nav li.sel
+{
+	font-weight:bold;
+}
+
 #content_wrapper
 {
 	background:#fff;
