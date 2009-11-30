@@ -13,7 +13,7 @@
 			<img src="<?php echo $location['images']; ?>/logo.png" alt="" />
 			
 			<div id="menu_wrapper">
-				<div style="float:left;">
+				<nav>
 					<ul>
 					<?php
 					foreach ($this->getMenu() as $item)
@@ -26,7 +26,7 @@
 					}
 					?>
 					</ul>
-				</div>
+				</nav>
 				<div style="float:right;overflow:hidden;">
 					<?php					
 					if (isloggedin())
