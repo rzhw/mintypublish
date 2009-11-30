@@ -78,8 +78,10 @@ while ($row = mysql_fetch_array($pagequery))
 		$menucontent .= '<a href="index.php?p='.$row['page_id'].'"'.
 		($row['page_id']==$pid?' class="menu_current"':'').'">'.$row['page_title_menu'].'</a>';
 		$i+=1;*/
-		$menu[]['name'] = $row['page_title_menu'];
-		$menu[]['url'] = 'index.php?p='.$row['page_id'];
+		$menu[] = array(
+			'name' => $row['page_title_menu'],
+			'url' => 'index.php?p='.$row['page_id']
+		);
 	}
 	
 	// content stuff
@@ -125,7 +127,7 @@ switch ($_GET["p"])
 		echo '<a href="javascript:history.go(-1)">Go back</a><br /><br />'.media_html($_GET["s"]);
 		break;
 	default:			
-		if ($i == 0)
+		if ($j == 0)
 			echo $txt['page_noexist'];
 		else
 			echo $pagecontent;
