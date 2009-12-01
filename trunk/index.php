@@ -74,7 +74,7 @@ while ($row = mysql_fetch_array($pagequery))
 	// menu stuff
 	if ($row['page_childof'] == -1 && $row['page_hideinmenu'] == 0)
 	{
-		if ($row['page_id'] == $_GET['p'])
+		if ($row['page_id'] == $pid)
 		{
 			$sel = true;
 			$curpgtitle = $row['page_title_full'];
