@@ -22,6 +22,12 @@
  *
  */
 
+// connect to mysql
+$sql_mysql_connection = mysql_connect($mysql['server'],$mysql['username'],$mysql['password']);
+mysql_select_db($mysql['dbname'],$sql_mysql_connection);
+
+// functions begin here
+
 /*
  * Summary:      Returns file extension from a string
  * Parameters:   $str as string

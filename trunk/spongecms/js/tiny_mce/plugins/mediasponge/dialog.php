@@ -11,11 +11,9 @@
 	<p>Click an item in the list to insert it.</p>
 	<p>
 		<?php
-			include('../../../../functions.php');
 			include('../../../../config.php');
+			include('../../../../functions.php');
 			
-			$sql_mysql_connection = mysql_connect('localhost','root','');
-			mysql_select_db('spongecms',$sql_mysql_connection);
 			$mediaquery = mysql_query("SELECT * FROM media");
 			while ($row = mysql_fetch_array($mediaquery))
 			{

@@ -38,10 +38,6 @@ require_once($location['root'].'/functions.php');
 require_once($location['root'].'/template.php');
 require_once($location['root'].'/lang/en.php');
 
-// connect to mysql
-$sql_mysql_connection = mysql_connect('localhost','root','');
-mysql_select_db('spongecms',$sql_mysql_connection);
-
 // get configuration from db
 $configquery = mysql_query("SELECT * FROM config");
 $i=0;

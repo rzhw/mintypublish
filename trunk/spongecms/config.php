@@ -8,6 +8,15 @@ $cfg['timezone']='Australia/Sydney';
 $cfg['theme']='default';
 
 ///////////
+// mysql //
+///////////
+
+$mysql['server']='localhost';
+$mysql['dbname']='spongecms';
+$mysql['username']='root';
+$mysql['password']='';
+
+///////////
 // paths //
 ///////////
 
