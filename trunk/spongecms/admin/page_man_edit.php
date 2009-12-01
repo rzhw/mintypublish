@@ -47,8 +47,6 @@ if ($zvfpcms)
 		else
 		{
 			echo '<h3>Editing page "'.$pagetitlefull.'"</h3>';
-
-			echo '<br /><div class="msgbox_warning"><b>'.$txt['text_warning'].':</b> '.$txt['admin_panel_noedittitle'].'</div><br />';
 			
 			echo '<form method="post" action="">
 			<input type="hidden" name="subedit" />';
@@ -78,7 +76,7 @@ if ($zvfpcms)
 		$contenttowrite = str_replace($find,$replace,$_POST["thecontent"]);
 		$contenttowrite = mysql_real_escape_string($contenttowrite);
 		
-		// get the titles (not implemented in query yet)
+		// get the titles
 		$title_menu = mysql_real_escape_string($_POST['theid']);
 		$title_full = mysql_real_escape_string($_POST['thetitle']);
 		
@@ -93,6 +91,7 @@ if ($zvfpcms)
 		echo $txt['admin_panel_addpage_savpr'].' ';
 		
 		$updatequery = "UPDATE pages SET page_content = '$contenttowrite',".
+						" page_title_menu = '$title_menu', page_title_full = '$title_full',".
 						" page_childof = $childof, page_hideinmenu = $hideinmenu, page_dateedited = NOW()".
 						" WHERE page_id = $pid";
 		
