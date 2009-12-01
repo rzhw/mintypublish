@@ -104,4 +104,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_username`, `user_displayname`, `user_password`, `user_password_salt`, `user_group`) VALUES
-(1, 'admin', 'admin', '3f7fa01c03a66a42742f52b236322b096a4e012bd9583858a5a6fa15f58bd86a25af266d3a4344f1ec2018b778f29ba83be86eb45e6dc204e11276f4a99eff4e2144fbe15e756c2c88e999649aae7d94', '3f7fa01c03a66a42742f52b236322b09', 1);
+(1, 'admin', 'admin', 'bfcebcbf651cf279058daa3dd6c14728b52cff8a4e0839a48a52cebe1639075467e4259f80308ffb0485f74bf75ad20f6ab44a6cde5240bddebdc2c6e98726eb', '3f7fa01c03a66a42742f52b236322b09', 1);

@@ -59,8 +59,7 @@ function get_file_type($str)
  */
 function user_pass_generate($salt,$pwd)
 {
-	global $user;
-    return $salt.(hash('whirlpool',$user['salt'].$pwd));
+	return hash('whirlpool',$salt.$pwd);
 }
 
 //
@@ -152,7 +151,7 @@ function isexistinguser($uname,$pwd)
 	echo '<!--'; // cheap fix for mysql error - FIND A BETTER WAY!
 	
 	while($row = mysql_fetch_array($result))
-	{
+	{		
 		$salt = $row['user_password_salt'];
 		
 		if (!$rowcounted && $hit != -1)
