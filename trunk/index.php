@@ -50,10 +50,14 @@ while($row = mysql_fetch_array($configquery))
 	{
 		case 'language': $cfg_language=$i; break;
 		case 'timezone': $cfg_timezone=$i; break;
+		case 'sitename': $cfg_sitename=$i; break;
 	}
 	
 	$i+=1;
 }
+
+// set the site name
+$sitename = $cfg[$cfg_sitename]['value'];
 
 // get list of pages
 $pagequery = mysql_query("SELECT * FROM pages ORDER BY page_orderid ASC");

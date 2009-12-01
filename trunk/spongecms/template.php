@@ -25,9 +25,6 @@
  *
  */
 
-// temporary
-$sitename = 'Sponge CMS Demo';
-
 // http://ianburris.com/tutorials/oophp-template-engine/
 class PageBuilder
 {
