@@ -46,5 +46,7 @@ if ($zvfpcms)
 	{
 		settopmessage(0,'Could not upload the file!');
 	}
+	
+	pageredirect('index.php?p=admin&s=med');
 }
 ?>
