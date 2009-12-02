@@ -40,6 +40,7 @@ class PageBuilder
 		
 		// default stuff to output header
 		$this->title = 'Unnamed Page';
+		$this->addCSS($this->location['root'].'/global.css');
 		$this->addCSS($this->location['styles'].'/screen.css');
 		$this->addJS($location['js'].'/jquery-1.3.2.min.js');
 		$this->addJS($location['js'].'/cookies.js');
@@ -57,7 +58,7 @@ class PageBuilder
 	function setTitle($title)
 	{
 		global $sitename;
-		$this->title = $this->sitename . ' | ' . $title;
+		$this->title = $title;
 	}
 	
 	function setType($type)
@@ -93,7 +94,7 @@ class PageBuilder
 	
 	function outputHead()
 	{
-		echo '<title>'.$this->title.'</title>'."\n";
+		echo '<title>'.$this->sitename.' | '.$this->title.'</title>'."\n";
 		
 		foreach ($this->stylesheets as $stylesheet)
 		{
