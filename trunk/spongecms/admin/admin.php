@@ -38,37 +38,32 @@ if ($zvfpcms)
 		<h1>'.$txt['admin_panel_title'].'</h1>
 		<br />';
 		
+		// Show the menu
 		echo '
-		<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
-			<tr>
-				<td style="width:128px;padding-right:16px;vertical-align:top;">
-					<div style="background:#c0c0c0;color:#fff;padding:4px;">
+		<nav id="admin_menu">
+			<ul>
+				<li>
+					<a href="'.$location['admin'].'&amp;s=man">
 						<img src="'.$location['images'].'/admin_man_pg.png" alt="" /> Pages
-					</div>
-					<ul>
-						<li><a href="'.$location['admin'].'&amp;s=add">Add a page</a></li>
-						<li><a href="'.$location['admin'].'&amp;s=man">List existing pages</a></li>
-					</ul>
-					<div style="background:#c0c0c0;color:#fff;padding:4px;">
+					</a>
+				</li>
+				<li>
+					<a href="'.$location['admin'].'&amp;s=med">
 						<img src="'.$location['images'].'/admin_man_med.png" alt="" /> Media
-					</div>
-					<ul>
-						<li><a href="'.$location['admin'].'&amp;s=med">Manage/add media</a></li>
-					</ul>
-					<div style="background:#c0c0c0;color:#fff;padding:4px;">
-						<img src="'.$location['images'].'/admin_man_cfg.png" alt="" /> Configuration
-					</div>
-					<ul>
-						<li><a href="'.$location['admin'].'&amp;s=cfg">General</a></li>
-					</ul>
-					<div style="background:#c0c0c0;color:#fff;padding:4px;">
+					</a>
+				</li>
+				<li>
+					<a href="'.$location['admin'].'&amp;s=cfg">
+						<img src="'.$location['images'].'/admin_man_cfg.png" alt="" /> Config
+					</a>
+				</li>
+				<li>
+					<a href="'.$location['admin'].'&amp;s=help">
 						<img src="'.$location['images'].'/help.png" alt="" /> Help
-					</div>
-					<ul>
-						<li><a href="'.$location['admin'].'&amp;s=help">Help</a></li>
-					</ul>
-				</td>
-				<td style="vertical-align:top;">';
+					</a>
+				</li>
+			</ul>
+		</nav>';
 		
 		// What subaction?
 		switch ($_GET["s"])
@@ -154,11 +149,6 @@ if ($zvfpcms)
 				}
 				break;
 		}
-		
-		echo '
-				</td>
-			</tr>
-		</table>';
 	}
 }
 ?>

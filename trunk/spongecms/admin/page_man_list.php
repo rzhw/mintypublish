@@ -38,6 +38,9 @@ if ($zvfpcms)
 	echo ' '.str_replace('[d]','<img src="'.$location['images'].'/trash.png" alt="" />',$txt['admin_panel_manpages_delt']);
 	
 	echo '<br /><br />';
+	
+	// add new page
+	echo '<button onclick="location.href=\''.$location['admin'].'&amp;s=add\'">Add a page</button><br /><br />';
 
 	// get the largest order id
 	$largestorder = -1;
