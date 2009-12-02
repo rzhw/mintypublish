@@ -74,3 +74,31 @@
 	text-align:center;
 	padding-top:20%;
 }
+
+#admin_menu
+{
+	height:48px;
+}
+#admin_menu ul
+{
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+#admin_menu li
+{
+	background:#aaa;
+	float:left;
+	margin:0px 8px 0px 0px;
+	padding:6px 16px;
+}
+#admin_menu img
+{
+	float:left;
+	padding-right:4px;
+}
+#admin_menu a
+{
+	color:#fff;
+	text-decoration:none;
+}

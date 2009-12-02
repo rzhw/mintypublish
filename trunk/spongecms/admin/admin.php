@@ -63,7 +63,8 @@ if ($zvfpcms)
 					</a>
 				</li>
 			</ul>
-		</nav>';
+		</nav>
+		<div style="clear:both;"></div>';
 		
 		// What subaction?
 		switch ($_GET["s"])
