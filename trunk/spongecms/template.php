@@ -54,11 +54,6 @@ class PageBuilder
 			else
 				$this->addCSS($this->location['theme_def'].'/ribbon/ribbon.css');
 			
-			if (file_exists($this->location['theme'].'/ribbon/ribbon.php'))
-				$this->addBodyPreInc($this->location['theme'].'/ribbon/ribbon.php');
-			else
-				$this->addBodyPreInc($this->location['theme_def'].'/ribbon/ribbon.php');
-			
 			//if (!is_dir($this->location['ribbon']))
 			//	$this->location['ribbon'] = $this->location['theme_def'].'/ribbon';
 			
