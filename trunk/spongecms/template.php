@@ -49,7 +49,8 @@ class PageBuilder
 		// admins need extra stuff loaded
 		if (isloggedin())
 		{
-			$this->addJS($location['js'].'/jquery.ribbon.js'); // minify this
+			$this->addCSS($this->location['theme'].'/ribbon/ribbon.css');
+			$this->addJS($this->location['js'].'/jquery.ribbon.js'); // minify this
 		}
 		
 		// start capturing the content
