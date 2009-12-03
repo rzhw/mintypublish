@@ -7,11 +7,15 @@ Feel free to use this script as long as you don't remove this comment.
 */
 
 (function($) {
+
     var isLoaded;
     var isClosed;
 
-    $.fn.Ribbon = function(ribbonSettings) {
+    $.ribbonShow = function(ribbonSettings) {
         var settings = $.extend({ theme: 'windows7' }, ribbonSettings || {});
+
+// define the path to the theme
+thmpath = 'spongecms/themes/default/ribbon';
 
         $('.ribbon a').each(function() {
             if ($(this).attr('accesskey')) {
@@ -20,6 +24,8 @@ Feel free to use this script as long as you don't remove this comment.
         });
 
 	$('head').append('<style id="ribbonLoad" type="text/css">body{padding-top:120px;}</style>');
+
+	$('.mainContainer').show();
 
         if (!isLoaded) {
             SetupMenu(settings);
@@ -95,10 +101,10 @@ Feel free to use this script as long as you don't remove this comment.
             $('.ribbon-list div img[src*="/images/arrow_down.png"]').remove();
         }
 
-        $('.orb li:first ul:first').prepend('<img src="ribbon/themes/' + settings.theme + '/images/menu_top.png" style="margin-left: -10px; margin-top: -22px;" />');
-        $('.orb li:first ul:first').append('<img src="ribbon/themes/' + settings.theme + '/images/menu_bottom.png" style="margin-left: -10px; margin-bottom: -22px;" />');
+        $('.orb li:first ul:first').prepend('<img src="'+thmpath + '/images/menu_top.png" style="margin-left: -10px; margin-top: -22px;" />');
+        $('.orb li:first ul:first').append('<img src="'+thmpath + '/images/menu_bottom.png" style="margin-left: -10px; margin-bottom: -22px;" />');
 
-        $('.ribbon-list div').each(function() { if ($(this).children('ul').length > 0) { $(this).append('<img src="ribbon/themes/' + settings.theme + '/images/arrow_down.png" style="float: right; margin-top: 5px;" />') } });
+        $('.ribbon-list div').each(function() { if ($(this).children('ul').length > 0) { $(this).append('<img src="'+thmpath + '/images/arrow_down.png" style="float: right; margin-top: 5px;" />') } });
 
         //Hack for IE 7.
         if (navigator.appVersion.indexOf('MSIE 6.0') > -1 || navigator.appVersion.indexOf('MSIE 7.0') > -1) {
