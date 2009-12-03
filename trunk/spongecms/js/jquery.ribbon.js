@@ -120,13 +120,13 @@ Feel free to use this script as long as you don't remove this comment.
 		if (isLoaded) {
 			$('.orb li:first ul:first img:first').remove();
 			$('.orb li:first ul:first img:last').remove();
-			$('.ribbon-list div img[src*="/images/arrow_down.png"]').remove();
+			$('.ribbon-list div span.ardn').remove();
 		}
 
 		$('.orb li:first ul:first').prepend('<img src="'+thmpath + '/images/menu_top.png" style="margin-left: -10px; margin-top: -22px;" />');
 		$('.orb li:first ul:first').append('<img src="'+thmpath + '/images/menu_bottom.png" style="margin-left: -10px; margin-bottom: -22px;" />');
 
-		$('.ribbon-list div').each(function() { if ($(this).children('ul').length > 0) { $(this).append('<img src="'+thmpath + '/images/arrow_down.png" style="float: right; margin-top: 5px;" />') } });
+		$('.ribbon-list div').each(function() { if ($(this).children('ul').length > 0) { $(this).append('<span class="ardn"><img src="'+thmpath + '/images/arrow_down.png" style="float: right; margin-top: 5px;" /></span>') } });
 
 		//Hack for IE 7.
 		if (navigator.appVersion.indexOf('MSIE 6.0') > -1 || navigator.appVersion.indexOf('MSIE 7.0') > -1) {
