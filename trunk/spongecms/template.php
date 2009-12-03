@@ -59,7 +59,11 @@ class PageBuilder
 			else
 				$this->addBodyPreInc($this->location['theme_def'].'/ribbon/ribbon.php');
 			
+			//if (!is_dir($this->location['ribbon']))
+			//	$this->location['ribbon'] = $this->location['theme_def'].'/ribbon';
+			
 			$this->addJS($this->location['js'].'/jquery.ribbon.js'); // minify this
+			$this->addJS($this->location['js'].'/jquery.tinymcemove.js'); // minify this
 		}
 		
 		// start capturing the content
