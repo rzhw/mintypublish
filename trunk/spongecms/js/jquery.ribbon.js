@@ -9,6 +9,18 @@ Feel free to use this script as long as you don't remove this comment.
 (function($) {
 	var isLoaded;
 	var isClosed;
+	var isVisible;
+	
+	$.ribbonToggle = function() {
+		if ($('.mainContainer').css('display') == 'none')
+		{
+			$.ribbonShow();
+		}
+		else
+		{
+			$.ribbonHide();
+		}
+	};
 	
 	$.ribbonHide = function() {
 		$(document).css({'padding-top':'0px'});
