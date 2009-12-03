@@ -75,18 +75,67 @@ if ($zvfpcms)
 		</tr>
 	</table>
 	
-	<!--<input type="submit" value="Save" />--><br /><br />
-	<script type="text/javascript" src="'.$location['js'].'/tiny_mce/tiny_mce.js"></script>
-	<script type="text/javascript" src="'.$location['js'].'/tiny_mce/tiny_mce_cfg.js"></script>
-	<textarea id="thecontent" name="thecontent" style="width:100%;height:480px;">';
-			if (isset($_GET["pid"]))
-			{
-				// find a better way to do this
-				$pagecontent = str_replace("<?php", "[DO NOT EDIT AFTER HERE]", $pagecontent);
-				$pagecontent = str_replace("?>", "[EDIT AFTER HERE]", $pagecontent);
-				$pagecontent = str_replace('params="', 'rel="', $pagecontent);
-				echo $pagecontent;
-			}
-	echo '</textarea>';
+	<script type="text/javascript" src="'.$location['js'].'/tiny_mce/tiny_mce.js"></script>';
+	
+	?>
+
+<textarea id="thecontent" name="thecontent" style="width:100%;height:480px;">
+<?php
+	if (isset($_GET["pid"]))
+	{
+		// find a better way to do this
+		$pagecontent = str_replace("<?php", "[DO NOT EDIT AFTER HERE]", $pagecontent);
+		$pagecontent = str_replace("?>", "[EDIT AFTER HERE]", $pagecontent);
+		$pagecontent = str_replace('params="', 'rel="', $pagecontent);
+		echo $pagecontent;
+	}
+?>
+</textarea>
+
+<script type="text/javascript">
+tinyMCE.init({
+	mode : "exact",
+	elements : "thecontent",
+	theme : "advanced",
+	skin : "sponge",
+	plugins : "advlink,contextmenu,filemanager,iespell,imagemanager,inlinepopups,media,mediasponge,nonbreaking,noneditable,pagebreak,paste,safari,save,searchreplace,spellchecker,style,table,visualchars,xhtmlxtras",
+	theme_advanced_buttons1 : "save,pastetext,pasteword,mediasponge,code,tablecontrols,cut,copy,link,unlink,anchor",
+	theme_advanced_buttons2 : "bold,italic,underline,strikethrough,sub,sup,fontselect,fontsizeselect,bullist,numlist,outdent,indent,backcolor,forecolor",
+	theme_advanced_buttons3 : "undo,redo,|,formatselect,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull",
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_statusbar_location : "bottom",
+	content_css : "css/tinymce.css",
+	setup : function(ed) { ed.onInit.add(function(ed) {
+		// show the ribbon
+		$.ribbonToggle();
+		
+		// fonts
+		$.tinymcemove({
+			textarea : 'thecontent',
+			position : 'fixed',
+			left : ribbonoffsets.font.left,
+			top : ribbonoffsets.font.top,
+			rowheight : 26,
+			elements : 'fontselect,fontsizeselect,removeformat,|,bold,italic,underline,strikethrough,sub,sup,backcolor,forecolor'
+		});
+		
+		// paragraph
+		$.tinymcemove({
+			textarea : 'thecontent',
+			position : 'fixed',
+			left : ribbonoffsets.paragraph.left,
+			top : ribbonoffsets.paragraph.top,
+			rowheight : 26,
+			elements : 'outdent,indent,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull'
+		});
+
+		// hide redirected elements
+		$("#thecontent_toolbar1").hide();
+	})}
+});
+</script>
+
+	<?php
 }
 ?>

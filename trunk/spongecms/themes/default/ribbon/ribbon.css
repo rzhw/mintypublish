@@ -361,6 +361,8 @@ ul.menu li ul li div:hover
 	border: 1px solid #FFB700;
 }
 
+/* small image + text buttons with drop downs */
+
 ul.menu li ul div.ribbon-list
 {
 	padding: 0px 5px 0px 5px;
@@ -433,6 +435,38 @@ ul.menu li ul div.ribbon-list ul li:hover
 	padding: 0px;
 	padding-left: 29px;
 }
+
+/* large image + text buttons with drop downs */
+
+ul.menu li ul div.ribbon-list-tall, ul.menu li ul div.ribbon-list-tall div
+{
+	width:45px !important;
+	height:56px !important;
+	text-align:center;
+}
+ul.menu li ul div.ribbon-list-tall img
+{
+	margin-left:6px;
+	margin-bottom:-2px;
+}
+ul.menu li ul div.ribbon-list-tall div:hover
+{
+	background:url(images/item_background.png) !important;
+}
+ul.menu li ul div.ribbon-list-tall div .ardn
+{
+	display:block;
+	position:relative;
+	top:-8px;
+	left:-16px;
+}
+ul.menu li ul div.ribbon-list-tall ul
+{
+	margin-top:6px;
+	text-align:left;
+}
+
+/* i don't know what this is */
 
 ul.menu li ul li div img
 {
