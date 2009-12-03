@@ -8,7 +8,8 @@
 	<body>
 		<?php $this->outputBodyPre(); ?>
 		
-	<div id="contentbg"></div>
+		<div id="contentbg"></div>
+		
 		<div id="global_wrapper">
 			<img src="<?php echo $location['images']; ?>/logo.png" alt="" />
 			
