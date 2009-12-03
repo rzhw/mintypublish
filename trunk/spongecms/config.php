@@ -24,6 +24,7 @@ $location['root']='spongecms';
 $location['admin2']=$location['root'].'/admin';
 $location['theme']=$location['root'].'/themes/'.$cfg['theme'];
 $location['theme_nr']='themes/'.$cfg['theme'];
+$location['theme_def']=$location['root'].'/themes/default';
 $location['images']=$location['root'].'/themes/'.$cfg['theme'].'/img';
 $location['styles']=$location['root'].'/themes/'.$cfg['theme'].'/css';
 $location['js']=$location['root'].'/js';
