@@ -10,6 +10,7 @@ Feel free to use this script as long as you don't remove this comment.
 	var isLoaded;
 	var isClosed;
 	var isVisible;
+	var origPadding;
 	
 	$.ribbonToggle = function() {
 		if ($('.mainContainer').css('display') == 'none')
@@ -23,7 +24,7 @@ Feel free to use this script as long as you don't remove this comment.
 	};
 	
 	$.ribbonHide = function() {
-		$('body').css({'padding-top':'0px'});
+		$('body').css({'padding-top':origPadding+'px'});
 		$('.mainContainer').hide();
 	};
 
@@ -42,7 +43,8 @@ Feel free to use this script as long as you don't remove this comment.
 		});
 
 		// shift everything
-		$('body').css({'padding-top':'120px'});
+		origPadding = parseInt($('body').css('padding-top'));
+		$('body').css({'padding-top':origPadding+120+'px'});
 		
 		// and show the ribbon!
 		$('.mainContainer').show();
