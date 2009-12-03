@@ -46,6 +46,12 @@ class PageBuilder
 		$this->addJS($location['js'].'/cookies.js');
 		$this->addJS($location['js'].'/flowplayer-3.1.0.min.js');
 		
+		// admins need extra stuff loaded
+		if (isloggedin())
+		{
+			$this->addJS($location['js'].'/jquery.ribbon.js'); // minify this
+		}
+		
 		// start capturing the content
 		ob_start();
 	}
