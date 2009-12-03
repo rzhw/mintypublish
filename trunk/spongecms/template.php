@@ -99,6 +99,7 @@ class PageBuilder
 	
 	function addBodyPreInc($content)
 	{
+		global $location;
 		ob_start();
 		include($content);
 		$this->bodypre .= ob_get_clean();
