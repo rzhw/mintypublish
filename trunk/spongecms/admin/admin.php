@@ -42,25 +42,17 @@ if ($zvfpcms)
 		echo '
 		<nav id="admin_menu">
 			<ul>
-				<li>
-					<a href="'.$location['admin'].'&amp;s=man">
-						<img src="'.$location['images'].'/admin_man_pg.png" alt="" /> Pages
-					</a>
+				<li onclick="location.href=\''.$location['admin'].'&amp;s=man\'">
+					<img src="'.$location['images'].'/admin_man_pg.png" alt="" /> Pages
 				</li>
-				<li>
-					<a href="'.$location['admin'].'&amp;s=med">
-						<img src="'.$location['images'].'/admin_man_med.png" alt="" /> Media
-					</a>
+				<li onclick="location.href=\''.$location['admin'].'&amp;s=med\'">
+					<img src="'.$location['images'].'/admin_man_med.png" alt="" /> Media
 				</li>
-				<li>
-					<a href="'.$location['admin'].'&amp;s=cfg">
-						<img src="'.$location['images'].'/admin_man_cfg.png" alt="" /> Config
-					</a>
+				<li onclick="location.href=\''.$location['admin'].'&amp;s=cfg\'">
+					<img src="'.$location['images'].'/admin_man_cfg.png" alt="" /> Config
 				</li>
-				<li>
-					<a href="'.$location['admin'].'&amp;s=help">
-						<img src="'.$location['images'].'/help.png" alt="" /> Help
-					</a>
+				<li onclick="location.href=\''.$location['admin'].'&amp;s=help\'">
+					<img src="'.$location['images'].'/help.png" alt="" /> Help
 				</li>
 			</ul>
 		</nav>
