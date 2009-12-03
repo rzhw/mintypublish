@@ -43,6 +43,7 @@ class PageBuilder
 		$this->addCSS($this->location['root'].'/global.css');
 		$this->addCSS($this->location['styles'].'/screen.css');
 		$this->addJS($location['js'].'/jquery-1.3.2.min.js');
+		$this->addJS($location['js'].'/html5.js');
 		$this->addJS($location['js'].'/cookies.js');
 		$this->addJS($location['js'].'/flowplayer-3.1.0.min.js');
 		
