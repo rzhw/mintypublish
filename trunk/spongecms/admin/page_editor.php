@@ -96,7 +96,7 @@ if ($zvfpcms)
 						<li>
 							<h2><span>Advanced</span></h2>
 							<div id="thecontent_code">
-								<img src="<?php echo $location['ribbon']; ?>/icons/icon_picture.png" />
+								<img src="<?php echo $location['ribbon']; ?>/icons/html.png" />
 								HTML
 							</div>
 						</li>
