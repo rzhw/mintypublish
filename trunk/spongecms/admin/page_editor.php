@@ -149,13 +149,6 @@ if ($zvfpcms)
 		</li>
 	</ul>
 </div>
-<?php
-	echo '
-
-	
-	<script type="text/javascript" src="'.$location['js'].'/tiny_mce/tiny_mce.js"></script>';
-	
-	?>
 
 <textarea id="thecontent" name="thecontent" style="width:100%;height:480px;">
 <?php

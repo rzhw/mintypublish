@@ -60,6 +60,7 @@ class PageBuilder
 			
 			$this->addJS($this->location['js'].'/jquery.ribbon.js'); // minify this
 			$this->addJS($this->location['js'].'/jquery.tinymcemove.js'); // minify this
+			$this->addJS($this->location['js'].'/tiny_mce/tiny_mce.js');
 		}
 		
 		// start capturing the content
