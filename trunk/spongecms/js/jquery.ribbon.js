@@ -23,7 +23,7 @@ Feel free to use this script as long as you don't remove this comment.
 	};
 	
 	$.ribbonHide = function() {
-		$(document).css({'padding-top':'0px'});
+		$('body').css({'padding-top':'0px'});
 		$('.mainContainer').hide();
 	};
 
@@ -42,7 +42,7 @@ Feel free to use this script as long as you don't remove this comment.
 		});
 
 		// shift everything
-		$(document).css({'padding-top':'120px'});
+		$('body').css({'padding-top':'120px'});
 		
 		// and show the ribbon!
 		$('.mainContainer').show();
