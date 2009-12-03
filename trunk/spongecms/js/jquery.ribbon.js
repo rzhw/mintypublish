@@ -19,6 +19,8 @@ Feel free to use this script as long as you don't remove this comment.
             }
         });
 
+	$('head').append('<style id="ribbonLoad" type="text/css">body{padding-top:120px;}</style>');
+
         if (!isLoaded) {
             SetupMenu(settings);
         }
