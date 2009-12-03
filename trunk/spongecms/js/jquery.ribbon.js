@@ -7,15 +7,15 @@ Feel free to use this script as long as you don't remove this comment.
 */
 
 (function($) {
-
 	var isLoaded;
 	var isClosed;
 
 	$.ribbonShow = function(ribbonSettings) {
+		// settings
 		var settings = $.extend({ theme: 'windows7' }, ribbonSettings || {});
 
 		// define the path to the theme
-		thmpath = 'spongecms/themes/default/ribbon';
+		var thmpath = 'spongecms/themes/default/ribbon';
 
 		$('.ribbon a').each(function() {
 			if ($(this).attr('accesskey')) {
