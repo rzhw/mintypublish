@@ -9,6 +9,11 @@ Feel free to use this script as long as you don't remove this comment.
 (function($) {
 	var isLoaded;
 	var isClosed;
+	
+	$.ribbonHide = function() {
+		$(document).css({'padding-top':'0px'});
+		$('.mainContainer').hide();
+	};
 
 	$.ribbonShow = function(ribbonSettings) {
 		// settings
@@ -17,14 +22,17 @@ Feel free to use this script as long as you don't remove this comment.
 		// define the path to the theme
 		var thmpath = 'spongecms/themes/default/ribbon';
 
+		// helper indicators
 		$('.ribbon a').each(function() {
 			if ($(this).attr('accesskey')) {
 				$(this).append('<div rel="accesskeyhelper" style="display: none; position: absolute; background-image: url(images/accessbg.png); background-repeat: none; width: 16px; padding: 0px; text-align: center; height: 17px; line-height: 17px; top: ' + $(this).offset().top + 'px; left: ' + ($(this).offset().left + $(this).width() - 15) + 'px;">' + $(this).attr('accesskey') + '</div>');
 			}
 		});
 
-		$('head').append('<style id="ribbonLoad" type="text/css">body{padding-top:120px;}</style>');
-
+		// shift everything
+		$(document).css({'padding-top':'120px'});
+		
+		// and show the ribbon!
 		$('.mainContainer').show();
 
 		if (!isLoaded) {
