@@ -105,7 +105,7 @@ tinyMCE.init({
 	theme_advanced_toolbar_location : "top",
 	theme_advanced_toolbar_align : "left",
 	theme_advanced_statusbar_location : "bottom",
-	content_css : "css/tinymce.css",
+	content_css : "<?php echo $location['styles']; ?>/tinymce.css",
 	setup : function(ed) { ed.onInit.add(function(ed) {
 		// show the ribbon
 		$.ribbonToggle();
