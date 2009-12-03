@@ -224,7 +224,9 @@ tinyMCE.init({
 		
 		// hide the toolbar
 		$("#thecontent_tbl tr:first").css({'position':'fixed','top':'-99999px'});
-		$("#thecontent_ifr").css({'position':'relative'});
+		
+		// shift the content area
+		$("#thecontent_tbl").css({'position':'relative','top':'-32px','margin-bottom':'-64px'});
 	})}
 });
 </script>
