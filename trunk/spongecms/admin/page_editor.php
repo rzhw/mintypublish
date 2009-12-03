@@ -30,10 +30,10 @@ if ($zvfpcms)
 		<li>
 			<ul class="orb">
 				<li>
-					<a href="javascript:void(0);" accesskey="1" class="orbButton">&nbsp;</a><span>Menu</span>
+					<a href="javascript:void(0)" accesskey="1" class="orbButton">&nbsp;</a><span>Menu</span>
 					<ul>
 						<li>
-							<a href="#">
+							<a href="javascript:void(0)" id="thecontent_save">
 								<img src="<?php echo $location['ribbon']; ?>/icons/icon_save.png" /><span>Save</span>
 							</a>
 						</li>
@@ -78,22 +78,70 @@ if ($zvfpcms)
 							<div class="ribbon-list" style="width:88px !important;"></div>
 						</li>
 						<li>
-							<h2>
-								<span>Insert</span>
-							</h2>
+							<h2><span>Styles</span></h2>
+							<div class="ribbon-list" style="width:96px !important;"></div>
+						</li>
+						<li>
+							<h2><span>Insert</span></h2>
 							<div id="thecontent_mediasponge">
 								<img src="<?php echo $location['ribbon']; ?>/icons/icon_picture.png" />
 								Media
 							</div>
 						</li>
 						<li>
-							<h2>
-								<span>Advanced</span>
-							</h2>
+							<h2><span>Advanced</span></h2>
 							<div id="thecontent_code">
 								<img src="<?php echo $location['ribbon']; ?>/icons/icon_picture.png" />
 								HTML
 							</div>
+						</li>
+						<li>
+							<h2><span>Properties</span></h2>
+							<table cellpadding="0" cellspacing="4" border="0">
+								<tr>
+									<td style="width:96px;">
+										<?php echo $txt['admin_panel_edt_srtnm']; ?>
+									</td>
+									<td>
+										<input type="text" name="theid" value="<?php echo $pagetitlemenu; ?>" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<?php echo $txt['admin_panel_edt_fllnm']; ?>
+									</td>
+									<td>
+										<input type="text" name="thetitle" value="<?php echo $pagetitlefull; ?>" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<?php echo $txt['admin_panel_edt_child']; ?>
+									</td>
+									<td>
+										<select name="thechild">
+											<option value="-1">None</option>
+											<option value="-2">----------------------</option>
+											<?php
+											mysql_data_seek($pagequery, 0);
+											while ($row = mysql_fetch_array($pagequery))
+											{
+												echo '<option value="'.$row['page_id'].'">'.$row['page_title_full'].'</option>';
+											}
+											?>
+										</select>
+									</td>
+								</tr>
+								<!--<tr>
+									<td>
+										'.$txt['admin_panel_edt_hideinmenu'].'
+									</td>
+									<td>
+										<input type="radio" name="hideinmenu" value="0"'.($hideinmenu?'':'checked="checked"').'/> No
+										<input type="radio" name="hideinmenu" value="1" /> Yes
+									</td>
+								</tr>-->
+							</table>
 						</li>
 					</ul>
 				</li>
@@ -102,56 +150,8 @@ if ($zvfpcms)
 	</ul>
 </div>
 <?php
-	echo $txt['admin_panel_edt_src'].'<br />
-	<br />
-	
-	<table cellpadding="0" cellspacing="4" border="0" style="width:100%;">
-		<tr>
-			<td style="width:128px;">
-				'.$txt['admin_panel_edt_srtnm'].'
-			</td>
-			<td>
-				<input type="text" name="theid" value="'.$pagetitlemenu.'" /><br />
-				<small>'.$txt['admin_panel_edt_srtnm_dsc'].'</small>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				'.$txt['admin_panel_edt_fllnm'].'
-			</td>
-			<td>
-				<input type="text" name="thetitle" value="'.$pagetitlefull.'" /><br />
-				<small>'.$txt['admin_panel_edt_fllnm_dsc'].'</small>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				'.$txt['admin_panel_edt_child'].'
-			</td>
-			<td>
-				<select name="thechild">
-					<option value="-1">None</option>
-					<option value="-2">----------------------</option>';
-					mysql_data_seek($pagequery, 0);
-					while ($row = mysql_fetch_array($pagequery))
-					{
-						echo '<option value="'.$row['page_id'].'">'.$row['page_title_full'].'</option>';
-					}
-				echo '
-				</select><br />
-				<small>'.$txt['admin_panel_edt_child_dsc'].'</small>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				'.$txt['admin_panel_edt_hideinmenu'].'
-			</td>
-			<td>
-				<input type="radio" name="hideinmenu" value="0"'.($hideinmenu?'':'checked="checked"').'/> No
-				<input type="radio" name="hideinmenu" value="1" /> Yes
-			</td>
-		</tr>
-	</table>
+	echo '
+
 	
 	<script type="text/javascript" src="'.$location['js'].'/tiny_mce/tiny_mce.js"></script>';
 	
@@ -173,7 +173,8 @@ if ($zvfpcms)
 <script type="text/javascript">
 var ribbonoffsets = {
 	font: { left: 144 , top: 38 },
-	paragraph: { left: 380, top: 38 }
+	paragraph: { left: 380, top: 38 },
+	styles: { left: 496, top: 48 }
 };
 
 tinyMCE.init({
@@ -187,7 +188,7 @@ tinyMCE.init({
 	theme_advanced_buttons3 : "undo,redo,|,formatselect,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull",
 	theme_advanced_toolbar_location : "top",
 	theme_advanced_toolbar_align : "left",
-	theme_advanced_statusbar_location : "bottom",
+	theme_advanced_path : false,
 	content_css : "<?php echo $location['styles']; ?>/tinymce.css",
 	setup : function(ed) { ed.onInit.add(function(ed) {
 		// show the ribbon
@@ -212,9 +213,20 @@ tinyMCE.init({
 			rowheight : 26,
 			elements : 'outdent,indent,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull'
 		});
-
-		// hide redirected elements
-		$("#thecontent_toolbar1").hide();
+		
+		// styles
+		$.tinymcemove({
+			textarea : 'thecontent',
+			position : 'fixed',
+			left : ribbonoffsets.styles.left,
+			top : ribbonoffsets.styles.top,
+			rowheight : 26,
+			elements : 'formatselect'
+		});
+		
+		// hide the toolbar
+		$("#thecontent_tbl tr:first").css({'position':'fixed','top':'-99999px'});
+		$("#thecontent_ifr").css({'position':'relative'});
 	})}
 });
 </script>
