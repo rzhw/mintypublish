@@ -49,7 +49,16 @@ class PageBuilder
 		// admins need extra stuff loaded
 		if (isloggedin())
 		{
-			$this->addCSS($this->location['theme'].'/ribbon/ribbon.css');
+			if (file_exists($this->location['theme'].'/ribbon/ribbon.css'))
+				$this->addCSS($this->location['theme'].'/ribbon/ribbon.css');
+			else
+				$this->addCSS($this->location['theme_def'].'/ribbon/ribbon.css');
+			
+			if (file_exists($this->location['theme'].'/ribbon/ribbon.php'))
+				$this->addBodyPreInc($this->location['theme'].'/ribbon/ribbon.php');
+			else
+				$this->addBodyPreInc($this->location['theme_def'].'/ribbon/ribbon.php');
+			
 			$this->addJS($this->location['js'].'/jquery.ribbon.js'); // minify this
 		}
 		
@@ -86,6 +95,13 @@ class PageBuilder
 	function addBodyPre($content)
 	{
 		$this->bodypre .= $content;
+	}
+	
+	function addBodyPreInc($content)
+	{
+		ob_start();
+		include($content);
+		$this->bodypre .= ob_get_clean();
 	}
 	
 	function outputBodyPre()
