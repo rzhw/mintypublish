@@ -58,9 +58,10 @@ class PageBuilder
 			//if (!is_dir($this->location['ribbon']))
 			//	$this->location['ribbon'] = $this->location['theme_def'].'/ribbon';
 			
-			$this->addJS($this->location['js'].'/jquery.ribbon.js'); // minify this
-			$this->addJS($this->location['js'].'/jquery.tinymcemove.js'); // minify this
 			$this->addJS($this->location['js'].'/tiny_mce/tiny_mce.js');
+			$this->addJS($this->location['js'].'/jquery.ribbon.js'); // minify this
+			$this->addJS($this->location['js'].'/jquery.ribbon.output.js'); // minify this
+			$this->addJS($this->location['js'].'/jquery.tinymcemove.js'); // minify this
 		}
 		
 		// start capturing the content
@@ -120,6 +121,14 @@ class PageBuilder
 	function outputHead()
 	{
 		echo '<title>'.$this->sitename.' | '.$this->title.'</title>'."\n";
+		
+		echo "\t\t".'<script type="text/javascript">var loc=[];';
+		global $location;
+		foreach ($location as $key => $value)
+		{
+			echo 'loc[\''.$key.'\']=\''.$value.'\';';
+		}
+		echo '</script>'."\n";
 		
 		foreach ($this->stylesheets as $stylesheet)
 		{
