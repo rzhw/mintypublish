@@ -18,30 +18,34 @@ header,section,footer,aside,nav,article,figure
 	display:block;  
 }
 
-#contentbg
+#shadow_top
 {
-	/* because margin-left:auto; margin-right:auto; doesn't work for this >_> */
-	
-	position:fixed;
-	left:auto;
-	right:auto;
-	top:50%;
-	left:50%;
 	width:1056px;
-	margin-left:-528px; /* make this the width divided by 2 */
-	margin-top:-384px;
-	top:0px;
-	bottom:0px;
-	background:url('../img/background_content.png');
-	z-index:-1;
+	margin:16px auto 0px auto;
+	padding-top:16px;
+	background:url('../img/content_shadow_top.png') no-repeat;
 }
 
 #global_wrapper
 {
 	width:1024px;
-	margin-left:auto;
-	margin-right:auto;
+	margin:0px auto;
 	text-align:left;
+	padding:0px 16px 16px 16px;
+	background:url('../img/content_shadow_mid.png') no-repeat;
+}
+
+#header
+{
+	margin-top:-16px;
+	background:#fff;
+}
+
+#header h1
+{
+	margin:16px;
+	padding-top:10px;
+	font-size:24px;
 }
 
 #menu_wrapper
@@ -83,7 +87,8 @@ header,section,footer,aside,nav,article,figure
 {
 	background:#fff;
 	color:#000;
-	padding:8px 8px 8px 8px;
+	padding:16px;
+	min-height:400px;
 }
 
 #content_wrapper, td
