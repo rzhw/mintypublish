@@ -199,6 +199,7 @@ tinyMCE.init({
 			left : ribbonoffsets.font.left,
 			top : ribbonoffsets.font.top,
 			rowheight : 26,
+			'z-index' : 2,
 			elements : 'fontselect,fontsizeselect,removeformat,|,bold,italic,underline,strikethrough,sub,sup,backcolor,forecolor'
 		});
 		
@@ -209,6 +210,7 @@ tinyMCE.init({
 			left : ribbonoffsets.paragraph.left,
 			top : ribbonoffsets.paragraph.top,
 			rowheight : 26,
+			'z-index' : 2,
 			elements : 'outdent,indent,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull'
 		});
 		
@@ -218,7 +220,7 @@ tinyMCE.init({
 			position : 'fixed',
 			left : ribbonoffsets.styles.left,
 			top : ribbonoffsets.styles.top,
-			rowheight : 26,
+			'z-index' : 2,
 			elements : 'formatselect'
 		});
 		
