@@ -5,7 +5,7 @@ $.ribbonAll = function() {
 }
 
 $.ribbonCreate = function() {
-	$("#ribbon").html('<div class="mainContainer" style="display:none;"></div>');
+	$("body").prepend('<div class="mainContainer" style="display:none;text-align:left;"></div>');
 	$.ribbonReset();
 }
 
@@ -31,8 +31,8 @@ $.ribbonReset = function() {
 }
 
 $.ribbonExtras = function() {
-	$("#ribbon-extra li").each(function(i,elm) {
-		if ($(elm).parent("#ribbon-extra").length != 0)
+	$(".ribbon-extra li").each(function(i,elm) {
+		if ($(elm).parent(".ribbon-extra").length != 0)
 		{
 			$("#ribbon-cat-container").append($(elm));
 		}
@@ -54,19 +54,72 @@ tinyMCE.init({
 	theme_advanced_path : false,
 	theme_advanced_resizing : false,
 	content_css : loc['styles']+"/tinymce.css",
-	setup : function(ed) { ed.onInit.add($().ribbonEditor) }
+	setup : function(ed) { ed.onInit.add($.ribbonEditor) }
 });
 
-$.fn.ribbonEditor = function(launchRibbon) {
+$.ribbonEditor = function(launchRibbon) {
+	// the id of the textarea
+	var ta = 'content_edit';
+	
+	// tinymce can finally take over :P
 	if (typeof(launchRibbon) == 'undefined')
-	{		
-		tinyMCE.execCommand('mceAddControl', false, $(this).attr('id'));
-	}
-	else
 	{
-		// the id of the textarea
-		var ta = $(this).attr('id');
+		$("body").prepend('\
+<ul class="ribbon-extra">\
+	<li>\
+		<h2><span>Clipboard</span></h2>\
+		<div class="ribbon-list ribbon-list-tall">\
+			<div>\
+				<img src="'+loc['ribbon']+'/icons/icon_paste.png" />Paste\
+				<ul style="display:none;width:160px !important;">\
+					<li id="thecontent_pastetext">Without formatting</li>\
+					<li id="thecontent_pasteword">With formatting</li>\
+				</ul>\
+			</div>\
+		</div>\
+		<div class="ribbon-list">\
+			<div><img src="'+loc['ribbon']+'/icons/icon_small_cut.png" />Cut</div>\
+			<div><img src="'+loc['ribbon']+'/icons/icon_small_copy.png" />Copy</div>\
+		</div>\
+	</li>\
+	<li>\
+		<h2><span>Font</span></h2>\
+		<div class="ribbon-list" style="width:208px !important;"></div>\
+	</li>\
+	<li>\
+		<h2><span>Paragraph</span></h2>\
+		<div class="ribbon-list" style="width:88px !important;"></div>\
+	</li>\
+	<li>\
+		<h2><span>Styles</span></h2>\
+		<div class="ribbon-list" style="width:96px !important;"></div>\
+	</li>\
+	<li>\
+		<h2><span>Insert</span></h2>\
+		<div id="'+ta+'_mediasponge">\
+			<img src="'+loc['ribbon']+'/icons/icon_picture.png" /> Media\
+		</div>\
+	</li>\
+	<li>\
+		<h2><span>Advanced</span></h2>\
+		<div id="'+ta+'_code">\
+			<img src="'+loc['ribbon']+'/icons/html.png" /> HTML\
+		</div>\
+	</li>\
+</ul>');
 		
+		var contwidth = $("#content").width();
+		var contheight = $("#content").height();
+		$("#content").wrapInner('<div id="content_content" style="display:none;"></div>'); // content_content_content_content_content *headdesk*
+		$("#content").append('<textarea id="'+ta+'"></textarea>');
+		$("#"+ta).html($("#content_content").html());
+		$("#"+ta).css({'position':'relative','left':'-21px','top':'-1px','width':$("#content").width(),'height':$("#content").height()});
+		tinyMCE.execCommand('mceAddControl', false, ta);
+	}
+	
+	// create the ribbon
+	else if (typeof(launchRibbon) == 'object')
+	{
 		// set the ribbon offsets
 		var rbos = {
 			font: { left: 256 , top: 8 },
@@ -115,6 +168,4 @@ $.fn.ribbonEditor = function(launchRibbon) {
 		// shift the content area
 		$("#"+ta+"_tbl").css({'position':'relative','top':'-32px','margin-bottom':'-64px'});
 	}
-	
-	return this;
 }
