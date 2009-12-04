@@ -7,12 +7,10 @@
 	
 	<body>
 		<?php $this->outputBodyPre(); ?>
-		
-		<div id="contentbg"></div>
-		
+		<div id="shadow_top">
 		<div id="global_wrapper">
-			<img src="<?php echo $location['images']; ?>/logo.png" alt="" />
-			
+			<header id="header">
+			<h1 id="title"><?php echo $this->sitename; ?></h1>
 			<div id="menu_wrapper">
 				<nav>
 					<ul>
@@ -46,6 +44,7 @@
 				</div>
 				<div style="clear:both;"></div>
 			</div>
+			</header>
 			
 			<div id="content_wrapper">
 <!-- content start -->
@@ -57,6 +56,7 @@
 				<?php echo $footer['copyright']; ?>
 				| Generated in <?php echo $footer['generated']; ?> secs
 			</div>
+		</div>
 		</div>
 	</body>
 </html>
