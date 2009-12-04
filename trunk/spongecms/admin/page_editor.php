@@ -27,30 +27,22 @@ if ($zvfpcms)
 ?>
 <div class="mainContainer" style="display:none;">
 	<ul class="ribbon">
-		<li>
-			<ul class="orb">
-				<li>
-					<a href="javascript:void(0)" accesskey="1" class="orbButton">&nbsp;</a><span>Menu</span>
-					<ul>
-						<li>
-							<a href="javascript:void(0)" id="thecontent_save">
-								<img src="<?php echo $location['ribbon']; ?>/icons/icon_save.png" /><span>Save</span>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:void(0)">
-								<img src="<?php echo $location['ribbon']; ?>/icons/icon_exit.png" /><span>Close without saving</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li>
+		<li style="position:relative;z-index:2;">
 			<ul class="menu">
 				<li>
 					<a href="#home" accesskey="2">Home</a>
 					<ul>
+						<li>
+							<h2><span>File</span></h2>
+							<div id="thecontent_save">
+								<img src="<?php echo $location['ribbon']; ?>/icons/icon_save.png" />
+								Save
+							</div>
+							<div>
+								<img src="<?php echo $location['ribbon']; ?>/icons/icon_exit.png" />
+								Cancel
+							</div>
+						</li>
 						<li>
 							<h2><span>Clipboard</span></h2>
 							<div class="ribbon-list ribbon-list-tall">
@@ -170,9 +162,9 @@ if ($zvfpcms)
 
 <script type="text/javascript">
 var ribbonoffsets = {
-	font: { left: 144 , top: 38 },
-	paragraph: { left: 380, top: 38 },
-	styles: { left: 496, top: 48 }
+	font: { left: 256 , top: 8 },
+	paragraph: { left: 484, top: 8 },
+	styles: { left: 604, top: 20 }
 };
 
 tinyMCE.init({

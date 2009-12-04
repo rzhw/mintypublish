@@ -42,9 +42,16 @@ Feel free to use this script as long as you don't remove this comment.
 			}
 		});
 
-		// shift everything
+		// shift everything - but if there's no orb don't shift it as much!
 		origPadding = parseInt($('body').css('padding-top'));
-		$('body').css({'padding-top':origPadding+120+'px'});
+		if ($('ul.ribbon .orb').length != 0)
+		{
+			$('body').css({'padding-top':origPadding+120+'px'});
+		}
+		else
+		{
+			$('body').css({'padding-top':origPadding+120-24+'px'});
+		}
 		
 		// and show the ribbon!
 		$('.mainContainer').show();

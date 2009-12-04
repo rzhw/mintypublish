@@ -10,7 +10,6 @@
 	position: fixed;
 	top: -7px;
 	left: 0px;
-	z-index: 2;
 }
 
 .mainContainer
@@ -19,6 +18,7 @@
 	background-color: #DFE9F5;
 	border: 1px solid #3b5a82;
 	border-bottom: 0px;
+	z-index:2;
 }
 
 ul.ribbon
