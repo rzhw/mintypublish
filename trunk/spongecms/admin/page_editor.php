@@ -38,7 +38,7 @@ if ($zvfpcms)
 							</a>
 						</li>
 						<li>
-							<a href="javascript:void(0)" id="thecontent_save">
+							<a href="javascript:void(0)">
 								<img src="<?php echo $location['ribbon']; ?>/icons/icon_exit.png" /><span>Close without saving</span>
 							</a>
 						</li>
