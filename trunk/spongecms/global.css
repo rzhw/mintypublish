@@ -99,3 +99,8 @@
 	float:left;
 	padding-right:4px;
 }
+
+#ribbon-extra
+{
+	display:none;
+}
