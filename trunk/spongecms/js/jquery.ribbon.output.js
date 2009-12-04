@@ -96,7 +96,7 @@ $.ribbonEditor = function(launchRibbon) {
 	</li>\
 	<li>\
 		<h2><span>Insert</span></h2>\
-		<div id="'+ta+'_mediasponge">\
+		<div onclick="tinyMCE.execCommand(\'mceMediaSponge\')">\
 			<img src="'+loc['ribbon']+'/icons/icon_picture.png" /> Media\
 		</div>\
 	</li>\
