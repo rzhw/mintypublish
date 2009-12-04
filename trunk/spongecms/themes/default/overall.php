@@ -45,7 +45,7 @@
 				<div style="clear:both;"></div>
 			</div>
 			</header>
-			
+			<a href="javascript:$.ribbonEditor()">Edit</a><br />
 			<section id="content">
 <!-- content start -->
 <?php $this->outputContent(); ?>
