@@ -131,16 +131,21 @@ function parsebbcode($buffer)
  * Summary:      Checks whether a given username/password pair is in the database
  * Parameters:   $uname as string
  *               $pwd as string
- * Return:       An array with the values $hit and the salt respectively. See below
- *               for details on "hit"
+ * Return:       An array with the values $hit and the salt respectively.
+ *               Possible $hit values:
+ *                  -1 more than one match of the username for some reason
+ *                   0 no match for both username/password
+ *                   1 match for both username/password
+ *                   2 match for username, no match for password
+ *                   3 match for password, no match for username
  */
-function isexistinguser($uname,$pwd)
+function isexistinguser($uname,$pwd,$ishash=false)
 {
 	global $location;
 	
 	$uname = mysql_real_escape_string($uname);
 	
-	$result = mysql_query("SELECT * FROM users WHERE user_username = '$uname'");
+	$result = mysql_query("SELECT user_username,user_password,user_password_salt FROM users WHERE user_username = '$uname'") or die(mysql_error());
 	
 	/* description of $hit:
 	 *  -1 more than one match of the username for some reason
@@ -154,8 +159,6 @@ function isexistinguser($uname,$pwd)
 	$rowcounted = false;
 	$salt = '';
 	
-	echo '<!--'; // cheap fix for mysql error - FIND A BETTER WAY!
-	
 	while($row = mysql_fetch_array($result))
 	{		
 		$salt = $row['user_password_salt'];
@@ -166,7 +169,17 @@ function isexistinguser($uname,$pwd)
 			{
 				$hit = 2;
 			}
-			if (user_pass_generate($row['user_password_salt'],$pwd) == $row['user_password'])
+			
+			if (!$ishash)
+			{
+				$supposedpass = user_pass_generate($row['user_password_salt'],$pwd);
+			}
+			else
+			{
+				$supposedpass = $pwd;
+			}
+			
+			if ($supposedpass == $row['user_password'])
 			{
 				if ($hit == 2)
 					$hit = 1;
@@ -183,8 +196,6 @@ function isexistinguser($uname,$pwd)
 		//echo $hit.'<br /><br />'.user_pass_generate($row['user_password_salt'],$pwd).'<br /><br />';
 	}
 	
-	echo '-->'; // cheap fix for mysql error - FIND A BETTER WAY!
-	
 	return array($hit,$salt);
 }
 
@@ -194,7 +205,7 @@ function isloggedin()
 	// original code from http://www.evolt.org/node/60265
 	
 	// is the user set to remember?
-	if(isset($_COOKIE['cookuname']) && isset($_COOKIE['cookpwd']))
+	if (isset($_COOKIE['cookuname']) && isset($_COOKIE['cookpwd']))
 	{
 		$_SESSION['uname'] = $_COOKIE['cookuname'];
 		$_SESSION['pwd'] = $_COOKIE['cookpwd'];
@@ -204,7 +215,7 @@ function isloggedin()
 	if (isset($_SESSION['uname']) && isset($_SESSION['pwd']))
 	{
 		// but is their user/pass pair correct?
-		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd']) == 2)
+		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd'], true) != 1)
 		{
 			// NO? gtfo
 			unset($_SESSION['uname']);

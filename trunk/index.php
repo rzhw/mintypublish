@@ -165,7 +165,4 @@ $footer['copyright'] = '
 $mtime = explode(' ', microtime());
 $totaltime = $mtime[0] + $mtime[1] - $starttime;
 $footer['generated'] = sprintf('%.3f',$totaltime);
-
-// end mysql
-mysql_close($sql_mysql_connection);
 ?>
