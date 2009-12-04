@@ -26,7 +26,7 @@ if ($zvfpcms)
 {
 ?>
 <div id="ribbon"></div>
-<ul id="ribbon-extra">
+<ul class="ribbon-extra">
 	<li>
 		<h2><span>Clipboard</span></h2>
 		<div class="ribbon-list ribbon-list-tall">
@@ -130,6 +130,67 @@ if ($zvfpcms)
 ?>
 </textarea>
 <script type="text/javascript">
+$.fn.ribbonEditor = function(launchRibbon) {
+	if (typeof(launchRibbon) == 'undefined')
+	{		
+		tinyMCE.execCommand('mceAddControl', false, $(this).attr('id'));
+	}
+	else
+	{
+		// the id of the textarea
+		var ta = $(this).attr('id');
+		
+		// set the ribbon offsets
+		var rbos = {
+			font: { left: 256 , top: 8 },
+			paragraph: { left: 484, top: 8 },
+			styles: { left: 604, top: 20 }
+		};
+		
+		// show the ribbon
+		$.ribbonAll();
+		
+		// fonts
+		$.tinymcemove({
+			textarea : ta,
+			position : 'fixed',
+			left : rbos.font.left,
+			top : rbos.font.top,
+			rowheight : 26,
+			'z-index' : 2,
+			elements : 'fontselect,fontsizeselect,removeformat,|,bold,italic,underline,strikethrough,sub,sup,backcolor,forecolor'
+		});
+		
+		// paragraph
+		$.tinymcemove({
+			textarea : ta,
+			position : 'fixed',
+			left : rbos.paragraph.left,
+			top : rbos.paragraph.top,
+			rowheight : 26,
+			'z-index' : 2,
+			elements : 'outdent,indent,bullist,numlist,|,justifyleft,justifycenter,justifyright,justifyfull'
+		});
+		
+		// styles
+		$.tinymcemove({
+			textarea : ta,
+			position : 'fixed',
+			left : rbos.styles.left,
+			top : rbos.styles.top,
+			'z-index' : 2,
+			elements : 'formatselect'
+		});
+		
+		// hide the toolbar
+		$("#"+ta+"_tbl tr:first").css({'position':'fixed','top':'-99999px'});
+		
+		// shift the content area
+		$("#"+ta+"_tbl").css({'position':'relative','top':'-32px','margin-bottom':'-64px'});
+	}
+	
+	return this;
+}
 $("#thecontent").ribbonEditor();
 </script>
 	<?php
