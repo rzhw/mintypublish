@@ -112,7 +112,7 @@ $.ribbonEditor = function(launchRibbon) {
 		var contheight = $("#content").height();
 		$("#content").wrapInner('<div id="content_content" style="display:none;"></div>'); // content_content_content_content_content *headdesk*
 		$("#content").append('<textarea id="'+ta+'"></textarea>');
-		$("#"+ta).html($("#content_content").html());
+		$("#"+ta).text($("#content_content").html());
 		$("#"+ta).css({'position':'relative','left':'-21px','top':'-1px','width':$("#content").width(),'height':$("#content").height()});
 		tinyMCE.execCommand('mceAddControl', false, ta);
 	}
