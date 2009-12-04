@@ -46,11 +46,11 @@
 			</div>
 			</header>
 			
-			<div id="content_wrapper">
+			<section id="content">
 <!-- content start -->
 <?php $this->outputContent(); ?>
 <!-- content end -->
-			</div>
+			</section>
 			
 			<div id="footer_wrapper">
 				<?php echo $footer['copyright']; ?>

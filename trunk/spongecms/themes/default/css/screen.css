@@ -83,7 +83,7 @@ header,section,footer,aside,nav,article,figure
 	font-weight:bold;
 }
 
-#content_wrapper
+#content
 {
 	background:#fff;
 	color:#000;
@@ -91,7 +91,7 @@ header,section,footer,aside,nav,article,figure
 	min-height:400px;
 }
 
-#content_wrapper, td
+#content, td
 {
 	font-size:11px;
 	font-family:verdana;
