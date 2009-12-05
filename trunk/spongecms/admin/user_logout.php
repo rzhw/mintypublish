@@ -31,17 +31,16 @@ if ($zvfpcms)
 	else
 	{
 		// kill ze cookies
-		if (isset($_COOKIE['cookuname']) && isset($_COOKIE['cookpwd']))
-		{
-		   setcookie("cookuname", "", time()-60*60*24*100, "/");
-		   setcookie("cookpwd", "", time()-60*60*24*100, "/");
-		}
+		if (pisset('cookie',array('cookuname','cookpwd')))
+			punset('cookie',array('cookuname','cookpwd'));
+		
 		// kill ze session vars
-		unset($_SESSION['username']);
-		unset($_SESSION['password']);
+		punset('session',array('uname','pwd'));
+		
 		// kill ze session
 		$_SESSION = array();
 		session_destroy();
+		
 		// congraulations, you have helped destroy ze vorld!
 		settopmessage(2,'Successfully logged out!');
 		pageredirect('index.php?p=admin');
