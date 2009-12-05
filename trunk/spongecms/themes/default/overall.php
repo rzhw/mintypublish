@@ -28,7 +28,7 @@
 					</ul>
 				</nav>
 				<div style="float:right;overflow:hidden;">
-					<?php					
+					<?php
 					if (isloggedin())
 					{
 						echo '<b>Logged in as: '.$_SESSION['uname'].'</b>

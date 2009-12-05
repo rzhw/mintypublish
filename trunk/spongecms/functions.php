@@ -199,7 +199,7 @@ function isexistinguser($uname,$pwd,$ishash=false)
  */
 
 function isloggedin()
-{	
+{
 	// is the user set to remember?
 	if (pisset('cookie',array('cookuname','cookpwd')))
 	{
