@@ -243,7 +243,7 @@ function pset($type,$variable,$value)
 		switch ($type)
 		{
 			case 'session': $_SESSION[$variable] = $value; break;
-			case 'cookie' : $_COOKIE [$variable] = $value; break;
+			case 'cookie' : setcookie($variable, $value, time()+60*60*24*100, "/"); break;
 		}
 	}
 	elseif (is_array($variable))
@@ -259,7 +259,7 @@ function pset($type,$variable,$value)
 			case 'cookie':
 				foreach($variable as $var => $val)
 				{
-					$_COOKIE[$var] = $val;
+					setcookie($var, $val, time()+60*60*24*100, "/");
 				}
 				break;
 		}
