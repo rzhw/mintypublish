@@ -213,8 +213,7 @@ function isloggedin()
 		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd'], true) != 1)
 		{
 			// NO? gtfo
-			unset($_SESSION['uname']);
-			unset($_SESSION['pwd']);
+			punset('session',array('uname','pwd'));
 			return false;
 		}
 		return true;
@@ -344,6 +343,47 @@ function pisset($type,$variable)
 				{
 					if (!isset($_COOKIE[$var]))
 						$ret = false;
+				}
+				break;
+		}
+		return $ret;
+	}
+}
+
+/*
+ * Summary:      Unsets some persistent values (no pun intended)
+ * Parameters:   $type as string - can be either 'session' or 'cookie'
+ *               $variable as string OR array
+ *                   If string - the name of the variable to unset
+ *                   If array - an array of the variables to unset
+ * Return:       Nothing
+ */
+
+function punset($type,$variable)
+{
+	if (is_string($variable))
+	{
+		switch ($type)
+		{
+			case 'session': unset($_SESSION[$variable]); break;
+			case 'cookie' : setcookie($variable, "", time()-60*60*24*100, "/"); break;
+		}
+	}
+	elseif (is_array($variable))
+	{
+		$ret = true;
+		switch ($type)
+		{
+			case 'session':
+				foreach($variable as $var)
+				{
+					unset($_SESSION[$var]);
+				}
+				break;
+			case 'cookie':
+				foreach($variable as $var)
+				{
+					setcookie($var, "", time()-60*60*24*100, "/");
 				}
 				break;
 		}
