@@ -191,11 +191,15 @@ function isexistinguser($uname,$pwd,$ishash=false)
 	return array($hit,$salt);
 }
 
-//
+/*
+ * Summary:      Checks whether the current session has a logged in user
+ *               Original from http://www.evolt.org/node/60265
+ * Parameters:   None
+ * Return:       Either true or false
+ */
+
 function isloggedin()
-{
-	// original code from http://www.evolt.org/node/60265
-	
+{	
 	// is the user set to remember?
 	if (pisset('cookie',array('cookuname','cookpwd')))
 	{
