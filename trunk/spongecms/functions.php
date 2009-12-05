@@ -147,14 +147,6 @@ function isexistinguser($uname,$pwd,$ishash=false)
 	
 	$result = mysql_query("SELECT user_username,user_password,user_password_salt FROM users WHERE user_username = '$uname'") or die(mysql_error());
 	
-	/* description of $hit:
-	 *  -1 more than one match of the username for some reason
-	 *   0 no match for both username/password
-	 *   1 match for both username/password
-	 *   2 match for username, no match for password
-	 *   3 match for password, no match for username
-	*/
-	
 	$hit = 0;
 	$rowcounted = false;
 	$salt = '';
@@ -205,14 +197,13 @@ function isloggedin()
 	// original code from http://www.evolt.org/node/60265
 	
 	// is the user set to remember?
-	if (isset($_COOKIE['cookuname']) && isset($_COOKIE['cookpwd']))
+	if (pisset('cookie',array('cookuname','cookpwd')))
 	{
-		$_SESSION['uname'] = $_COOKIE['cookuname'];
-		$_SESSION['pwd'] = $_COOKIE['cookpwd'];
+		pset('session',array('uname'=>$_COOKIE['cookuname'],'pwd'=>$_COOKIE['cookpwd']));
 	}
 
 	// user's session is still active
-	if (isset($_SESSION['uname']) && isset($_SESSION['pwd']))
+	if (pisset('session',array('uname','pwd')))
 	{
 		// but is their user/pass pair correct?
 		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd'], true) != 1)
@@ -228,6 +219,131 @@ function isloggedin()
 	else
 	{
 		return false;
+	}
+}
+
+/*
+ * Summary:      Sets a persistent variable
+ * Parameters:   $type as string - can be either 'session' or 'cookie'
+ *               $variable as string OR array
+ *                   If string - the name of the variable to set
+ *                   If array - an array formed as $variable => $value
+ *               $value as anything - the value
+ *                   If $variable is an array do not give this a value!
+ * Return:       Nothing
+ */
+
+function pset($type,$variable,$value)
+{
+	if (is_string($variable))
+	{
+		switch ($type)
+		{
+			case 'session': $_SESSION[$variable] = $value; break;
+			case 'cookie' : $_COOKIE [$variable] = $value; break;
+		}
+	}
+	elseif (is_array($variable))
+	{
+		switch ($type)
+		{
+			case 'session':
+				foreach($variable as $var => $val)
+				{
+					$_SESSION[$var] = $val;
+				}
+				break;
+			case 'cookie':
+				foreach($variable as $var => $val)
+				{
+					$_COOKIE[$var] = $val;
+				}
+				break;
+		}
+	}
+}
+
+/*
+ * Summary:      Gets a persistent variable
+ * Parameters:   $type as string - can be either 'session' or 'cookie'
+ *               $variable as string OR array
+ *                   If string - the name of the variable to get
+ *                   If array - an array of the variables to get
+ * Return:       The value of the variable
+ */
+
+function pget($type,$variable)
+{
+	if (is_string($variable))
+	{
+		switch ($type)
+		{
+			case 'session': return $_SESSION[$variable]; break;
+			case 'cookie' : return $_COOKIE [$variable]; break;
+		}
+	}
+	elseif (is_array($variable))
+	{
+		$ret = array();
+		switch ($type)
+		{
+			case 'session':
+				foreach($variable as $var)
+				{
+					$ret[] = $_SESSION[$var];
+				}
+				break;
+			case 'cookie':
+				foreach($variable as $var)
+				{
+					$ret[] = $_COOKIE[$var];
+				}
+				break;
+		}
+		return $ret;
+	}
+}
+
+/*
+ * Summary:      Checks if the provided persistent variables are set
+ * Parameters:   $type as string - can be either 'session' or 'cookie'
+ *               $variable as string OR array
+ *                   If string - the name of the variable to check
+ *                   If array - an array of the variables to get
+ * Return:       `true` if all variables provided are set, otherwise `false`
+ */
+
+function pisset($type,$variable)
+{
+	if (is_string($variable))
+	{
+		switch ($type)
+		{
+			case 'session': return isset($_SESSION[$variable]); break;
+			case 'cookie' : return isset($_COOKIE [$variable]); break;
+		}
+	}
+	elseif (is_array($variable))
+	{
+		$ret = true;
+		switch ($type)
+		{
+			case 'session':
+				foreach($variable as $var)
+				{
+					if (!isset($_SESSION[$var]))
+						$ret = false;
+				}
+				break;
+			case 'cookie':
+				foreach($variable as $var)
+				{
+					if (!isset($_COOKIE[$var]))
+						$ret = false;
+				}
+				break;
+		}
+		return $ret;
 	}
 }
 
