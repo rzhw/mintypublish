@@ -236,7 +236,7 @@ function isloggedin()
  * Return:       Nothing
  */
 
-function pset($type,$variable,$value)
+function pset($type,$variable,$value='')
 {
 	if (is_string($variable))
 	{
