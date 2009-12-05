@@ -409,6 +409,8 @@ function gettopmessage()
 			removeCookie("topmsg");
 		</script>';
 		
+		$temp = str_replace(array("\n","\r","\t"),'',$temp)."\n\n";
+		
 		return $temp;
 	}
 	else
