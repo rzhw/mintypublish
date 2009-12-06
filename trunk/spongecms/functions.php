@@ -152,7 +152,7 @@ function isexistinguser($uname,$pwd,$ishash=false)
 	$salt = '';
 	
 	while($row = mysql_fetch_array($result))
-	{		
+	{
 		$salt = $row['user_password_salt'];
 		
 		if (!$rowcounted && $hit != -1)
