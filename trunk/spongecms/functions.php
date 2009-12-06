@@ -210,7 +210,7 @@ function isloggedin()
 	if (pisset('session',array('uname','pwd')))
 	{
 		// but is their user/pass pair correct?
-		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd'], true) != 1)
+		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd'], true) == 1)
 		{
 			// NO? gtfo
 			punset('session',array('uname','pwd'));
