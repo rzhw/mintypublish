@@ -131,33 +131,28 @@ function parsebbcode($buffer)
  * Summary:      Checks whether a given username/password pair is in the database
  * Parameters:   $uname as string
  *               $pwd as string
- * Return:       An array with the values $hit and the salt respectively. See below
- *               for details on "hit"
+ * Return:       An array with the values $hit and the salt respectively.
+ *               Possible $hit values:
+ *                  -1 more than one match of the username for some reason
+ *                   0 no match for both username/password
+ *                   1 match for both username/password
+ *                   2 match for username, no match for password
+ *                   3 match for password, no match for username
  */
-function isexistinguser($uname,$pwd)
+function isexistinguser($uname,$pwd,$ishash=false)
 {
 	global $location;
 	
 	$uname = mysql_real_escape_string($uname);
 	
-	$result = mysql_query("SELECT * FROM users WHERE user_username = '$uname'");
-	
-	/* description of $hit:
-	 *  -1 more than one match of the username for some reason
-	 *   0 no match for both username/password
-	 *   1 match for both username/password
-	 *   2 match for username, no match for password
-	 *   3 match for password, no match for username
-	*/
+	$result = mysql_query("SELECT user_username,user_password,user_password_salt FROM users WHERE user_username = '$uname'") or die(mysql_error());
 	
 	$hit = 0;
 	$rowcounted = false;
 	$salt = '';
 	
-	echo '<!--'; // cheap fix for mysql error - FIND A BETTER WAY!
-	
 	while($row = mysql_fetch_array($result))
-	{		
+	{
 		$salt = $row['user_password_salt'];
 		
 		if (!$rowcounted && $hit != -1)
@@ -166,7 +161,17 @@ function isexistinguser($uname,$pwd)
 			{
 				$hit = 2;
 			}
-			if (user_pass_generate($row['user_password_salt'],$pwd) == $row['user_password'])
+			
+			if (!$ishash)
+			{
+				$supposedpass = user_pass_generate($row['user_password_salt'],$pwd);
+			}
+			else
+			{
+				$supposedpass = $pwd;
+			}
+			
+			if ($supposedpass == $row['user_password'])
 			{
 				if ($hit == 2)
 					$hit = 1;
@@ -183,32 +188,32 @@ function isexistinguser($uname,$pwd)
 		//echo $hit.'<br /><br />'.user_pass_generate($row['user_password_salt'],$pwd).'<br /><br />';
 	}
 	
-	echo '-->'; // cheap fix for mysql error - FIND A BETTER WAY!
-	
 	return array($hit,$salt);
 }
 
-//
+/*
+ * Summary:      Checks whether the current session has a logged in user
+ *               Original from http://www.evolt.org/node/60265
+ * Parameters:   None
+ * Return:       Either true or false
+ */
+
 function isloggedin()
 {
-	// original code from http://www.evolt.org/node/60265
-	
 	// is the user set to remember?
-	if(isset($_COOKIE['cookuname']) && isset($_COOKIE['cookpwd']))
+	if (pisset('cookie',array('cookuname','cookpwd')))
 	{
-		$_SESSION['uname'] = $_COOKIE['cookuname'];
-		$_SESSION['pwd'] = $_COOKIE['cookpwd'];
+		pset('session',array('uname'=>$_COOKIE['cookuname'],'pwd'=>$_COOKIE['cookpwd']));
 	}
 
 	// user's session is still active
-	if (isset($_SESSION['uname']) && isset($_SESSION['pwd']))
+	if (pisset('session',array('uname','pwd')))
 	{
 		// but is their user/pass pair correct?
-		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd']) == 2)
+		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd'], true) == 1)
 		{
 			// NO? gtfo
-			unset($_SESSION['uname']);
-			unset($_SESSION['pwd']);
+			punset('session',array('uname','pwd'));
 			return false;
 		}
 		return true;
@@ -220,6 +225,192 @@ function isloggedin()
 	}
 }
 
+/*
+ * Summary:      Sets a persistent variable
+ * Parameters:   $type as string - can be either 'session' or 'cookie'
+ *               $variable as string OR array
+ *                   If string - the name of the variable to set
+ *                   If array - an array formed as $variable => $value
+ *               $value as anything - the value
+ *                   If $variable is an array and $type is 'session', don't set this!
+ *                   If $variable is an array and $type is 'cookie', this is how long
+ *                       the cookie is set for in seconds. If this isn't set then it
+ *                       will be set to 3 months. DON'T INCLUDE time()!
+ *               $expire as integer
+ *                   If $type is 'session', don't set this!
+ *                   If $variable is a string and $type is 'cookie', this is how long
+ *                       the cookie is set for in seconds. If this isn't set then it
+ *                       will be set to 3 months. DON'T INCLUDE time()!
+ * Return:       Nothing
+ */
+
+function pset($type,$variable,$value='',$expire=7776000)
+{
+	if (is_string($variable))
+	{
+		switch ($type)
+		{
+			case 'session':
+				$_SESSION[$variable] = $value;
+				break;
+			case 'cookie':
+				setcookie($variable, $value, time() + $expire, "/");
+				break;
+		}
+	}
+	elseif (is_array($variable))
+	{
+		switch ($type)
+		{
+			case 'session':
+				foreach($variable as $var => $val)
+				{
+					$_SESSION[$var] = $val;
+				}
+				break;
+			case 'cookie':
+				if ($value == '')
+				{
+					$expire = 7776000;
+				}
+				else
+				{
+					$expire = $value;
+				}
+				foreach($variable as $var => $val)
+				{
+					setcookie($var, $val, time() + $expire, "/");
+				}
+				break;
+		}
+	}
+}
+
+/*
+ * Summary:      Gets a persistent variable
+ * Parameters:   $type as string - can be either 'session' or 'cookie'
+ *               $variable as string OR array
+ *                   If string - the name of the variable to get
+ *                   If array - an array of the variables to get
+ * Return:       The value of the variable
+ */
+
+function pget($type,$variable)
+{
+	if (is_string($variable))
+	{
+		switch ($type)
+		{
+			case 'session': return $_SESSION[$variable]; break;
+			case 'cookie' : return $_COOKIE [$variable]; break;
+		}
+	}
+	elseif (is_array($variable))
+	{
+		$ret = array();
+		switch ($type)
+		{
+			case 'session':
+				foreach($variable as $var)
+				{
+					$ret[] = $_SESSION[$var];
+				}
+				break;
+			case 'cookie':
+				foreach($variable as $var)
+				{
+					$ret[] = $_COOKIE[$var];
+				}
+				break;
+		}
+		return $ret;
+	}
+}
+
+/*
+ * Summary:      Checks if the provided persistent variables are set
+ * Parameters:   $type as string - can be either 'session' or 'cookie'
+ *               $variable as string OR array
+ *                   If string - the name of the variable to check
+ *                   If array - an array of the variables to get
+ * Return:       `true` if all variables provided are set, otherwise `false`
+ */
+
+function pisset($type,$variable)
+{
+	if (is_string($variable))
+	{
+		switch ($type)
+		{
+			case 'session': return isset($_SESSION[$variable]); break;
+			case 'cookie' : return isset($_COOKIE [$variable]); break;
+		}
+	}
+	elseif (is_array($variable))
+	{
+		$ret = true;
+		switch ($type)
+		{
+			case 'session':
+				foreach($variable as $var)
+				{
+					if (!isset($_SESSION[$var]))
+						$ret = false;
+				}
+				break;
+			case 'cookie':
+				foreach($variable as $var)
+				{
+					if (!isset($_COOKIE[$var]))
+						$ret = false;
+				}
+				break;
+		}
+		return $ret;
+	}
+}
+
+/*
+ * Summary:      Unsets some persistent values (no pun intended)
+ * Parameters:   $type as string - can be either 'session' or 'cookie'
+ *               $variable as string OR array
+ *                   If string - the name of the variable to unset
+ *                   If array - an array of the variables to unset
+ * Return:       Nothing
+ */
+
+function punset($type,$variable)
+{
+	if (is_string($variable))
+	{
+		switch ($type)
+		{
+			case 'session': unset($_SESSION[$variable]); break;
+			case 'cookie' : setcookie($variable, "", time()-60*60*24*100, "/"); break;
+		}
+	}
+	elseif (is_array($variable))
+	{
+		$ret = true;
+		switch ($type)
+		{
+			case 'session':
+				foreach($variable as $var)
+				{
+					unset($_SESSION[$var]);
+				}
+				break;
+			case 'cookie':
+				foreach($variable as $var)
+				{
+					setcookie($var, "", time()-60*60*24*100, "/");
+				}
+				break;
+		}
+		return $ret;
+	}
+}
+
 //
 function settopmessage($type,$message)
 {
@@ -228,10 +419,7 @@ function settopmessage($type,$message)
 		'message' => $message
 	));
 	
-	echo '
-	<script type="text/javascript">
-		setCookie("topmsg",\''.$temp.'\',60);
-	</script>';
+	pset('cookie', 'topmsg', $temp, 60);
 }
 
 //
@@ -239,7 +427,7 @@ function gettopmessage()
 {
 	global $location;
 	
-	if (isset($_COOKIE['topmsg']))
+	if (pisset('cookie','topmsg'))
 	{
 		$msg = json_decode(stripslashes($_COOKIE['topmsg']), true);
 		
@@ -274,9 +462,11 @@ function gettopmessage()
 					$("#topmsg").fadeOut(500);
 				}
 			}
-			
-			removeCookie("topmsg");
 		</script>';
+		
+		punset('cookie','topmsg');
+		
+		$temp = str_replace(array("\n","\r","\t"),'',$temp)."\n\n";
 		
 		return $temp;
 	}

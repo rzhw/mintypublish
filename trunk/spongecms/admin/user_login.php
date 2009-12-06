@@ -67,13 +67,14 @@ if ($zvfpcms)
 		
 		if ($isuser[0] == 1)
 		{
-			$_SESSION['uname'] = stripslashes($_POST['uname']);
-			$_SESSION['pwd'] = user_pass_generate($isuser[1],$_POST['pwd']);
+			$username = stripslashes($_POST['uname']);
+			$password = user_pass_generate($isuser[1],$_POST['pwd']);
+			
+			pset('session',array('uname' => $username,'pwd' => $password));
 			
 			if (isset($_POST['remember']))
 			{
-				setcookie("cookuname", $_SESSION['uname'], time()+60*60*24*100, "/");
-				setcookie("cookpwd", $_SESSION['pwd'], time()+60*60*24*100, "/");
+				pset('cookie',array('uname' => $username,'pwd' => $password));
 			}
 			
 			settopmessage(2,'Successfully logged in!');
