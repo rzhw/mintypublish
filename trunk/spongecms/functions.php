@@ -232,18 +232,30 @@ function isloggedin()
  *                   If string - the name of the variable to set
  *                   If array - an array formed as $variable => $value
  *               $value as anything - the value
- *                   If $variable is an array do not give this a value!
+ *                   If $variable is an array and $type is 'session', don't set this!
+ *                   If $variable is an array and $type is 'cookie', this is how long
+ *                       the cookie is set for in seconds. If this isn't set then it
+ *                       will be set to 3 months. DON'T INCLUDE time()!
+ *               $expire as integer
+ *                   If $type is 'session', don't set this!
+ *                   If $variable is a string and $type is 'cookie', this is how long
+ *                       the cookie is set for in seconds. If this isn't set then it
+ *                       will be set to 3 months. DON'T INCLUDE time()!
  * Return:       Nothing
  */
 
-function pset($type,$variable,$value='')
+function pset($type,$variable,$value='',$expire=7776000)
 {
 	if (is_string($variable))
 	{
 		switch ($type)
 		{
-			case 'session': $_SESSION[$variable] = $value; break;
-			case 'cookie' : setcookie($variable, $value, time()+60*60*24*100, "/"); break;
+			case 'session':
+				$_SESSION[$variable] = $value;
+				break;
+			case 'cookie':
+				setcookie($variable, $value, time() + $expire, "/");
+				break;
 		}
 	}
 	elseif (is_array($variable))
@@ -257,9 +269,17 @@ function pset($type,$variable,$value='')
 				}
 				break;
 			case 'cookie':
+				if ($value == '')
+				{
+					$expire = 7776000;
+				}
+				else
+				{
+					$expire = $value;
+				}
 				foreach($variable as $var => $val)
 				{
-					setcookie($var, $val, time()+60*60*24*100, "/");
+					setcookie($var, $val, time() + $expire, "/");
 				}
 				break;
 		}
@@ -399,7 +419,7 @@ function settopmessage($type,$message)
 		'message' => $message
 	));
 	
-	setcookie('topmsg', $temp, time()+60, "/");
+	pset('cookie', 'topmsg', $temp, 60);
 }
 
 //
