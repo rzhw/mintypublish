@@ -72,8 +72,8 @@ $.ribbonEditor = function(launchRibbon) {
 			<div>\
 				<img src="'+loc['ribbon']+'/icons/icon_paste.png" />Paste\
 				<ul style="display:none;width:160px !important;">\
-					<li id="thecontent_pastetext">Without formatting</li>\
-					<li id="thecontent_pasteword">With formatting</li>\
+					<li id="'+ta+'_pastetext">Without formatting</li>\
+					<li id="'+ta+'_pasteword">With formatting</li>\
 				</ul>\
 			</div>\
 		</div>\
