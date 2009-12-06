@@ -399,10 +399,7 @@ function settopmessage($type,$message)
 		'message' => $message
 	));
 	
-	echo '
-	<script type="text/javascript">
-		setCookie("topmsg",\''.$temp.'\',60);
-	</script>';
+	setcookie('topmsg', $temp, time()+60, "/");
 }
 
 //
@@ -410,7 +407,7 @@ function gettopmessage()
 {
 	global $location;
 	
-	if (isset($_COOKIE['topmsg']))
+	if (pisset('cookie','topmsg'))
 	{
 		$msg = json_decode(stripslashes($_COOKIE['topmsg']), true);
 		
@@ -445,9 +442,9 @@ function gettopmessage()
 					$("#topmsg").fadeOut(500);
 				}
 			}
-			
-			removeCookie("topmsg");
 		</script>';
+		
+		punset('cookie','topmsg');
 		
 		$temp = str_replace(array("\n","\r","\t"),'',$temp)."\n\n";
 		
