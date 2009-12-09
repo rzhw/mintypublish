@@ -143,9 +143,9 @@ function isexistinguser($uname,$pwd,$ishash=false)
 {
 	global $location;
 	
-	$uname = mysql_real_escape_string($uname);
+	$uname2 = mysql_real_escape_string($uname);
 	
-	$result = mysql_query("SELECT user_username,user_password,user_password_salt FROM users WHERE user_username = '$uname'") or die(mysql_error());
+	$result = mysql_query("SELECT user_username,user_password,user_password_salt FROM users WHERE user_username = '$uname2'") or die(mysql_error());
 	
 	$hit = 0;
 	$rowcounted = false;
