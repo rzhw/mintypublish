@@ -1,54 +1,11 @@
-$.ribbonAll = function() {
-	$.ribbonCreate();
-	$.ribbonExtras();
-	$.ribbonShow();
-}
-
-$.ribbonCreate = function() {
-	$("body").prepend('<div class="mainContainer" style="display:none;text-align:left;"></div>');
-	$.ribbonReset();
-}
-
-$.ribbonReset = function() {
-	$(".mainContainer").html('\
-		<ul class="ribbon">\
-			<li style="position:relative;z-index:2;">\
-				<ul class="menu">\
-					<li>\
-						<a href="#home" accesskey="2">Home</a>\
-						<ul id="ribbon-cat-container">\
-							<li>\
-								<h2><span>File</span></h2>\
-								<div><img src="'+loc['ribbon']+'/icons/icon_save.png" />Save</div>\
-								<div><img src="'+loc['ribbon']+'/icons/icon_exit.png" />Cancel</div>\
-							</li>\
-						</ul>\
-					</li>\
-				</ul>\
-			</li>\
-		</ul>\
-	');
-}
-
-$.ribbonExtras = function() {
-	$(".ribbon-extra li").each(function(i,elm) {
-		if ($(elm).parent(".ribbon-extra").length != 0)
-		{
-			$("#ribbon-cat-container").append($(elm));
-		}
-	});
-}
-
-//
-
 tinyMCE.init({
 	mode : "none",
 	theme : "advanced",
 	skin : "sponge",
 	plugins : "advlink,contextmenu,filemanager,iespell,imagemanager,inlinepopups,media,mediasponge,nonbreaking,noneditable,pagebreak,paste,safari,save,searchreplace,spellchecker,style,table,visualchars,xhtmlxtras",
-	theme_advanced_buttons1 : "save,pastetext,pasteword,mediasponge,code,tablecontrols,cut,copy,link,unlink,anchor",
-	theme_advanced_buttons2 : "bold,italic,underline,strikethrough,sub,sup,fontselect,fontsizeselect,bullist,numlist,outdent,indent,backcolor,forecolor",
-	theme_advanced_buttons3 : "undo,redo,|,formatselect,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull",
+	plugins : "advlink,contextmenu,filemanager,iespell,imagemanager,inlinepopups,media,mediasponge,nonbreaking,noneditable,pagebreak,paste,safari,save,searchreplace,spellchecker,style,table,visualchars,xhtmlxtras",
+	theme_advanced_buttons1 : "save,|,undo,redo,|,cut,copy,|,pastetext,pasteword,|,bold,italic,underline,strikethrough,sub,sup,|,link,unlink,anchor,|,tablecontrols,|,mediasponge,|,code",
+	theme_advanced_buttons2 : "formatselect,fontselect,fontsizeselect,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull,|,backcolor,forecolor,|,bullist,numlist,outdent,indent,blockquote",
 	theme_advanced_toolbar_location : "top",
 	theme_advanced_toolbar_align : "left",
 	theme_advanced_path : false,

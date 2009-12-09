@@ -49,19 +49,9 @@ class PageBuilder
 		
 		// admins need extra stuff loaded
 		if (isloggedin())
-		{
-			if (file_exists($this->location['theme'].'/ribbon/ribbon.css'))
-				$this->addCSS($this->location['theme'].'/ribbon/ribbon.css');
-			else
-				$this->addCSS($this->location['theme_def'].'/ribbon/ribbon.css');
-			
-			//if (!is_dir($this->location['ribbon']))
-			//	$this->location['ribbon'] = $this->location['theme_def'].'/ribbon';
-			
+		{			
 			$this->addJS($this->location['js'].'/tiny_mce/tiny_mce.js');
-			$this->addJS($this->location['js'].'/jquery.ribbon.js'); // minify this
-			$this->addJS($this->location['js'].'/jquery.ribbon.output.js'); // minify this
-			$this->addJS($this->location['js'].'/jquery.tinymcemove.js'); // minify this
+			$this->addJS($this->location['js'].'/jquery.pageeditor.js');
 		}
 		
 		// start capturing the content
