@@ -14,6 +14,10 @@ tinyMCE.init({
 });
 
 $.pageEditor = function() {
+	// the id of the textarea
+	var ta = 'content_edit';
+	
+	// stuff
 	var contwidth = $("#content").width();
 	var contheight = $("#content").height();
 	$("#content").wrapInner('<div id="content_content" style="display:none;"></div>'); // content_content_content_content_content *headdesk*
