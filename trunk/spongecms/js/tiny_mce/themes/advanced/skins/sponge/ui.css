@@ -4,6 +4,7 @@
 .spongeSkin table td {vertical-align:middle}
 
 /* Containers */
+.spongeSkin table {background:#F0F0EE}
 .spongeSkin iframe {display:block; background:#FFF; border:1px dashed #aaa;}
 .spongeSkin .mceToolbar {height:26px}
 
@@ -30,7 +31,7 @@
 .spongeSkin td.mceRight table {margin:0 0 0 auto;}
 
 /* Button */
-.spongeSkin .mceButton {display:block; background:url(img/button_bg.png); width:22px; height:22px}
+.spongeSkin .mceButton {display:block; background:#F0F0EE; width:22px; height:22px}
 .spongeSkin a.mceButton span, .spongeSkin a.mceButton img {margin-left:1px}
 .spongeSkin .mceOldBoxModel a.mceButton span, .spongeSkin .mceOldBoxModel a.mceButton img {margin:0 0 0 1px}
 .spongeSkin a.mceButtonEnabled:hover {background-color:#B2BBD0; background-position:0 -22px}
@@ -42,7 +43,7 @@
 .spongeSkin .mceButtonDisabled .mceButtonLabel {color:#888}
 
 /* Separator */
-.spongeSkin .mceSeparator {display:block; background:url(img/button_bg.png) -22px 0; width:5px; height:22px}
+.spongeSkin .mceSeparator {display:block; background:#F0F0EE; width:5px; height:22px}
 
 /* ListBox */
 .spongeSkin .mceListBox {margin-left:3px}
