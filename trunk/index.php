@@ -151,18 +151,15 @@ switch ($_GET["p"])
 }
 ob_end_flush();
 			
-// we has a footer
-$footer['copyright'] = '
-	<!--
-	it would be appreciated if you do not remove the "powered by" part
-	if you must remove it, at least keep this comment here
-	
-	powered by sponge cms - a project by a2h - http://a2h.uni.cc/
-	-->
-	<a href="http://zfvpcms.sourceforge.net/">'.$txt['zvfpcms_powered'].'</a>
-	| <a href="http://a2h.uni.cc/">'.$txt['zvfpcms_a2h'].'</a>';
-	
+// we has a footer	
 $mtime = explode(' ', microtime());
 $totaltime = $mtime[0] + $mtime[1] - $starttime;
-$footer['generated'] = sprintf('%.3f',$totaltime);
+
+$footer['copyright'] = '
+	<!--
+	powered by sponge cms - a project by a2h - http://a2h.uni.cc/
+	page generated in '.sprintf('%.3f',$totaltime).' seconds
+	please AT LEAST leave this comment in and without modifications -
+	your users don\'t see it, so it\'s not much to ask!
+	-->'."\n\n";
 ?>

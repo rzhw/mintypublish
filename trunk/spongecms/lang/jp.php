@@ -39,11 +39,6 @@ $txt['text_pleasewait']           = 'ちょっと待って...';
 $txt['text_whatsthis']            = '何これ？';
 $txt['text_save']                 = '保存する';
 
-// footer
-$txt['zvfpcms_a2h']               = 'a2h zvfpcmsから別のプロジェクトです';
-$txt['zvfpcms_powered']           = 'zvfpcmsによって供給';
-$txt['zvfpcms_generated']         = 'ページの生成[t]秒';
-
 // general errors
 $txt['page_noexist']              = 'あなたが存在しない場合は、リクエストされたページをご覧ください。';
 $txt['page_nojson']               = 'すみません,でもJSONのサッポトZVFPCMSを実行する必要があります。これはPHP 5.20以降に付属する必要があります。';
