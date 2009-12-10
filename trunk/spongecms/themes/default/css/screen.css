@@ -1,5 +1,5 @@
 /*
- * Sponge CMS theme - Spongey - Version 1.0
+ * Sponge CMS theme - Unnamed - Version 1.0
  * Copyright (c) a2h 2009
  * Tango icons from the Tango Desktop Project - http://tango.freedesktop.org/
  */
@@ -8,9 +8,16 @@ body
 {
 	font-family:verdana;
 	text-align:center;
-	background:#F9F7ED url('../img/background.png') repeat-x;
 	padding:0px;
 	margin:0px;
+	background:#f5f5f5 url('../img/bg.png') repeat-x;
+	color:#151515;
+}
+
+body, td
+{
+	font-size:12px;
+	font-family:verdana;
 }
 
 header,section,footer,aside,nav,article,figure
@@ -18,46 +25,30 @@ header,section,footer,aside,nav,article,figure
 	display:block;  
 }
 
-#shadow_top
-{
-	width:1056px;
-	margin:16px auto 0px auto;
-	padding-top:16px;
-	background:url('../img/content_shadow_top.png') no-repeat;
-}
-
 #global_wrapper
 {
-	width:1024px;
 	margin:0px auto;
 	text-align:left;
-	padding:0px 16px 16px 16px;
-	background:url('../img/content_shadow_mid.png') no-repeat;
+	width:1024px;
 }
 
 #header
 {
-	margin-top:-16px;
-	background:#fff;
+	color:#fff;
 }
 
 #header h1
 {
-	margin:16px;
-	padding-top:10px;
-	font-size:24px;
+	font-size:28px;
+	height:34px;
+	padding:15px 0px;
 }
 
 #menu_wrapper
 {
-	background:gray;
 	color:#fff;
-	font-size:11px;
-	padding:10px 8px 6px 8px;
-	height:16px;
-	background:url('../img/background_menu.png');
-	border-top:1px solid #99713D;
-	border-bottom:1px solid #99713D;
+	padding-top:10px;
+	height:26px;
 }
 
 #menu_wrapper nav
@@ -75,7 +66,7 @@ header,section,footer,aside,nav,article,figure
 #menu_wrapper nav li
 {
 	float:left;
-	margin:0px 8px;
+	margin-right:16px;
 }
 
 #menu_wrapper nav li.sel
@@ -83,43 +74,27 @@ header,section,footer,aside,nav,article,figure
 	font-weight:bold;
 }
 
+#menu_wrapper a:link, #menu_wrapper a:visited
+{
+	text-decoration:none;
+	color:#F1F4E8;
+}
+
+#menu_wrapper a:hover
+{
+	text-decoration:underline;
+	color:#E7F2C1;
+}
+
 #content_wrapper
 {
-	background:#fff;
-	color:#000;
-	padding:16px;
-	min-height:400px;
-}
-
-#content_wrapper, td
-{
-	font-size:11px;
-	font-family:verdana;
-}
-
-#footer_wrapper
-{
-	text-align:center;
-	color:gray;
-	font-size:x-small;
-	margin:8px 0px;
+	margin-top:16px;
 }
 
 a:link, a:visited
 {
 	text-decoration:none;
 	color:gray;
-}
-
-#menu_wrapper a:link, #menu_wrapper a:visited
-{
-	text-decoration:none;
-	color:#fff;
-}
-
-a:hover, #menu_wrapper a:hover
-{
-	text-decoration:underline;
 }
 
 img
@@ -156,4 +131,75 @@ input[type=text], input[type=password]
 select
 {
 	padding:1px;
+}
+
+.adminblock
+{
+	display:inline;
+	color:#fff;
+}
+
+.adminblock *
+{
+	float:left;
+}
+
+.adminblock a
+{
+	color:#fff !important;
+	text-decoration:none !important;
+}
+
+.adminblock .left
+{
+	background:url('../img/admin_block.png') no-repeat 0px 0px;
+	width:8px;
+	height:16px;
+}
+
+.adminblock .right
+{
+	background:url('../img/admin_block.png') no-repeat -16px 0px;
+	width:8px;
+	height:16px;
+}
+
+.adminblock .middle
+{
+	background:url('../img/admin_block.png') -32px 0px;
+	height:14px;
+	padding-top:2px;
+	font-size:9px;
+}
+
+.adminblock .middle img
+{
+	margin-top:1px;
+}
+
+.adminblock .middle .imgafter
+{
+	margin-left:4px;
+}
+
+.adminblock input[type=text], .adminblock input[type=password]
+{
+	border:0px;
+	font-size:9px;
+	background:#333;
+	color:#aaa;
+	margin:0px 1px;
+	padding:0px;
+	height:12px;
+}
+
+.adminblock input[type=submit]
+{
+	border:0px;
+	font-size:9px;
+	background:#555;
+	color:#aaa;
+	margin:0px 1px;
+	padding:0px;
+	height:12px;
 }

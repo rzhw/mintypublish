@@ -8,14 +8,19 @@
 	<body>
 		<?php $this->outputBodyPre(); ?>
 		
-		<div id="shadow_top">
+		<script type="text/javascript">
+			// temporary
+			$(document).ready(function() {
+				$(".adminblock").wrapInner('<div class="middle"></div>').prepend('<div class="left"></div>').append('<div class="right"></div>');
+			});
+		</script>
+		
 		<div id="global_wrapper">
 			<header id="header">
 			<h1 id="title"><?php echo $this->sitename; ?></h1>
 			<div id="menu_wrapper">
 				<nav>
-					<ul>
-					<?php
+					<ul><?php
 					foreach ($this->getMenu() as $item)
 					{
 						if (!$item['hide'])
@@ -24,24 +29,19 @@
 							<a href="'.$item['url'].'">'.$item['name'].'</a>
 						</li>';
 					}
+					echo "\n";
 					?>
 					</ul>
 				</nav>
-				<div style="float:right;overflow:hidden;">
-					<?php
-					if (isloggedin())
-					{
-						echo '<b>Logged in as: '.$_SESSION['uname'].'</b>
-						(<a href="index.php?p=admin">admin</a> |
-						<a href="'.$location['admin'].'&amp;s=logout">logout</a>)';
-					}
-					else
-					{
-						echo '<b>Not logged in</b>
-						(<a href="index.php?p=admin">login</a> |
-						<a href="'.$location['admin'].'&amp;s=register">register</a>)';
-					}
-					?>
+				<div style="float:right;">
+					<?php if (isloggedin()): echo "\n"; ?>
+					<div class="adminblock">
+						<a href="index.php?p=admin">
+							<img src="<?php echo $location['images']; ?>/admin_icon.png" alt="admin" />
+							<div class="imgafter"><?php echo $_SESSION['uname']; ?></div>
+						</a>
+					</div>
+					<?php echo "\n"; endif; ?>
 				</div>
 				<div style="clear:both;"></div>
 			</div>
@@ -53,11 +53,7 @@
 <!-- content end -->
 			</div>
 			
-			<div id="footer_wrapper">
-				<?php echo $footer['copyright']; ?>
-				| Generated in <?php echo $footer['generated']; ?> secs
-			</div>
-		</div>
+			<?php echo $footer['copyright']; ?>
 		</div>
 	</body>
 </html>

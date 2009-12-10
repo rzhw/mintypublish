@@ -54,6 +54,9 @@ if ($zvfpcms)
 				<li onclick="location.href=\''.$location['admin'].'&amp;s=help\'">
 					<img src="'.$location['images'].'/help.png" alt="" /> Help
 				</li>
+				<li onclick="location.href=\''.$location['admin'].'&amp;s=logout\'">
+					<img src="'.$location['images'].'/admin_man_logout.png" alt="" /> Logout
+				</li>
 			</ul>
 		</nav>
 		<div style="clear:both;"></div>';

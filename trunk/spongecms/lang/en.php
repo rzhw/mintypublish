@@ -38,11 +38,6 @@ $txt['text_whatsthis']            = 'What\'s this?';
 $txt['text_save']                 = 'Save';
 $txt['text_again']                = 'again';
 
-// footer
-$txt['zvfpcms_powered']           = 'powered by sponge cms';
-$txt['zvfpcms_a2h']               = 'sponge cms is another project from a2h';
-$txt['zvfpcms_generated']         = 'page generated in [t] seconds';
-
 // general errors
 $txt['page_noexist']              = 'The page you requested doesn\'t exist.';
 $txt['page_nojson']               = 'To use JSON as your data storage method, you need PHP 5.20 and above.';
