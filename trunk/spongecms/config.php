@@ -3,8 +3,6 @@
 // main config //
 /////////////////
 
-$cfg['lang']='en';
-$cfg['timezone']='Australia/Sydney';
 $cfg['theme']='default';
 
 ///////////
