@@ -152,6 +152,7 @@ select
 
 .adminblock .left
 {
+	margin-left:4px;
 	background:url('../img/admin_block.png') no-repeat 0px 0px;
 	width:8px;
 	height:16px;

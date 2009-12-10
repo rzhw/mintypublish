@@ -36,6 +36,11 @@
 				<div style="float:right;">
 					<?php if (isloggedin()): echo "\n"; ?>
 					<div class="adminblock">
+						<a href="javascript:$.pageEditor()">
+							<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="edit" />
+						</a>
+					</div>
+					<div class="adminblock">
 						<a href="index.php?p=admin">
 							<img src="<?php echo $location['images']; ?>/admin_icon.png" alt="admin" />
 							<div class="imgafter"><?php echo $_SESSION['uname']; ?></div>
@@ -46,7 +51,7 @@
 				<div style="clear:both;"></div>
 			</div>
 			</header>
-			<a href="javascript:$.pageEditor()">Edit</a><br />
+			
 			<section id="content">
 <!-- content start -->
 <?php $this->outputContent(); ?>
