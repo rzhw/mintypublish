@@ -135,7 +135,7 @@ select
 
 .adminblock
 {
-	display:inline;
+	float:left;
 	color:#fff;
 }
 

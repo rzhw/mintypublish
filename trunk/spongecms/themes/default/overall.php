@@ -12,6 +12,11 @@
 			// temporary
 			$(document).ready(function() {
 				$(".adminblock").wrapInner('<div class="middle"></div>').prepend('<div class="left"></div>').append('<div class="right"></div>');
+				$("#propertiesbubble").wrapInner('<div style="margin:48px 8px 8px 8px;"></div>');
+				$("#propertiesbubble").css({
+					'left': $("#propertiesbtn").position().left + $("#propertiesbtn").width() / 2 - $("#propertiesbubble").width() / 2,
+					'top' : $("#propertiesbtn").position().top
+				});
 			});
 		</script>
 		
@@ -35,6 +40,15 @@
 				</nav>
 				<div style="float:right;">
 					<?php if (isloggedin() && $_GET['p'] != 'admin'): echo "\n"; ?>
+					<div class="adminblock" id="propertiesbtn">
+						<a href="javascript:void(0)">
+							<img src="<?php echo $location['images']; ?>/admin_properties.png" alt="properties" />
+						</a>
+					</div>
+					<div id="propertiesbubble" style="position:absolute;background:url('<?php echo $location['images']; ?>/admin_properties_bubble.png');font-size:11px;width:256px;height:128px;">
+						hi
+					</div>
+					
 					<div class="adminblock">
 						<a href="javascript:$.pageEditor()">
 							<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="edit" />
