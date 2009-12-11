@@ -34,12 +34,14 @@
 					</ul>
 				</nav>
 				<div style="float:right;">
-					<?php if (isloggedin()): echo "\n"; ?>
+					<?php if (isloggedin() && $_GET['p'] != 'admin'): echo "\n"; ?>
 					<div class="adminblock">
 						<a href="javascript:$.pageEditor()">
 							<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="edit" />
 						</a>
 					</div>
+					<?php echo "\n"; endif; ?>
+					<?php if (isloggedin()): echo "\n"; ?>
 					<div class="adminblock">
 						<a href="index.php?p=admin">
 							<img src="<?php echo $location['images']; ?>/admin_icon.png" alt="admin" />
