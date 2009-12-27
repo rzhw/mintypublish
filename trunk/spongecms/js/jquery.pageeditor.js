@@ -1,3 +1,30 @@
+/*
+ * Sponge Content Management System
+ * Copyright (c) 2009 a2h - http://a2h.uni.cc/
+ * http://zvfpcms.sourceforge.net/
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * Under section 7b of the GNU General Public License you are
+ * required to preserve this notice.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+// this code was written for the default theme
+// it needs changes to allow flexibility for other themes
+// i.e. not having to use the same base html
+
 tinyMCE.init({
 	mode : "none",
 	theme : "advanced",
@@ -14,16 +41,36 @@ tinyMCE.init({
 	content_css : loc['styles']+"/tinymce.css"
 });
 
-$.pageEditor = function() {
+$.pageEditor = function(ison) {
+	/* TODO: IMPLEMENT SAVING */
+
 	// the id of the textarea
 	var ta = 'content_edit';
 	
-	// stuff
-	var contwidth = $("#content").width();
-	var contheight = $("#content").height();
-	$("#content").wrapInner('<div id="content_content" style="display:none;"></div>'); // content_content_content_content_content *headdesk*
-	$("#content").append('<textarea id="'+ta+'"></textarea>');
-	$("#"+ta).text($("#content_content").html());
-	$("#"+ta).css({'position':'relative','left':'-21px','top':'-1px','width':contwidth,'height':contheight+32});
-	tinyMCE.execCommand('mceAddControl', false, ta);
+	if (!ison)
+	{
+		if ($("#"+ta).length == 0)
+		{
+			$("#content").wrapInner('<div id="content_content" style="display:none;"></div>'); // content_content_content_content_content *headdesk*
+			$("#content").append('<textarea id="'+ta+'"></textarea>');
+			$("#"+ta).text($("#content_content").html());
+			$("#"+ta).css({'position':'relative','left':'-21px','top':'-1px'});
+		}
+		else
+		{
+			$("#content_content").hide();
+			$("#"+ta).show();
+		}
+		var contwidth = $("#content").width();
+		var contheight = $("#content").height();
+		$("#"+ta).css({'width':contwidth,'height':contheight+32});
+		tinyMCE.execCommand('mceAddControl', false, ta);
+	}
+	else
+	{
+		cont = tinyMCE.get(ta).getContent();
+		tinyMCE.execCommand('mceRemoveControl', false, ta);
+		$("#"+ta).hide();
+		$("#content_content").html(cont).show();
+	}
 }
