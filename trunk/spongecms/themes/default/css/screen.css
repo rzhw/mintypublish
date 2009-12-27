@@ -25,6 +25,16 @@ header,section,footer,aside,nav,article,figure
 	display:block;  
 }
 
+table
+{
+	border-spacing:0px;
+}
+td
+{
+	border:0px;
+	padding:0px;
+}
+
 #global_wrapper
 {
 	margin:0px auto;
@@ -203,4 +213,37 @@ select
 	margin:0px 1px;
 	padding:0px;
 	height:12px;
+}
+
+#propertiesbubble
+{
+	position:absolute;
+	background:url('../img/admin_properties_bubble.png');
+	width:256px;
+	height:128px;
+}
+#propertiesbubble table
+{
+	width:100%;
+}
+#propertiesbubble td
+{
+	padding:2px 0px;
+	*padding:0px;
+}
+#propertiesbubble, #propertiesbubble td, #propertiesbubble input
+{
+	font-size:10px;
+}
+#propertiesbubble input[type=text], #propertiesbubble input[type=password]
+{
+	width:100%;
+	border:0px;
+	font-size:9px;
+	background:#222;
+	color:#aaa;
+	padding:0px;
+	height:12px;
+	opacity:0.75;
+	filter:opacity(75);
 }

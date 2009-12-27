@@ -135,6 +135,23 @@ class PageBuilder
 		echo $this->content;
 	}
 	
+	function outputAdminMenu()
+	{
+		if (isloggedin())
+		{
+			global $menu, $pid;
+			foreach ($menu as $menuitem)
+			{
+				if ($menuitem['id'] == $pid)
+				{
+					$curpg = $menuitem;
+				}
+			}
+			$location = $this->location;
+			include($this->location['theme_nr'].'/admin_menu.php');
+		}
+	}
+	
 	function build()
 	{
 		if ($this->disabled)
