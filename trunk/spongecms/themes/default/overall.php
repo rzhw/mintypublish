@@ -8,6 +8,8 @@
 	<body>
 		<?php $this->outputBodyPre(); ?>
 		
+		<?php $this->outputAdminMenu(); ?>
+		
 		<div id="global_wrapper">
 			<header id="header">
 				<h1 id="title"><?php echo $this->sitename; ?></h1>
@@ -27,7 +29,6 @@
 						?>
 						</ul>
 					</nav>
-					<?php $this->outputAdminMenu(); ?>
 					<div style="clear:both;"></div>
 				</div>
 			</header>

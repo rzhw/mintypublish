@@ -10,7 +10,7 @@ body
 	text-align:center;
 	padding:0px;
 	margin:0px;
-	background:#f5f5f5 url('../img/bg.png') repeat-x;
+	background:#f5f5f5;
 	color:#151515;
 }
 
@@ -37,9 +37,15 @@ td
 
 #global_wrapper
 {
+	background:url('../img/bg.png') repeat-x;
 	margin:0px auto;
 	text-align:left;
+}
+
+#header, #content
+{
 	width:1024px;
+	margin:0px auto;
 }
 
 #header
@@ -143,10 +149,24 @@ select
 	padding:1px;
 }
 
+#admin
+{
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:16px;
+	padding:4px 0px;
+	background:#000;
+}
+
 .adminblock
 {
 	float:left;
 	color:#fff;
+	margin:0px 8px;
+	height:14px;
+	font-size:9px;
 }
 
 .adminblock *
@@ -160,35 +180,12 @@ select
 	text-decoration:none !important;
 }
 
-.adminblock .left
-{
-	margin-left:4px;
-	background:url('../img/admin_block.png') no-repeat 0px 0px;
-	width:8px;
-	height:16px;
-}
-
-.adminblock .right
-{
-	background:url('../img/admin_block.png') no-repeat -16px 0px;
-	width:8px;
-	height:16px;
-}
-
-.adminblock .middle
-{
-	background:url('../img/admin_block.png') -32px 0px;
-	height:14px;
-	padding-top:2px;
-	font-size:9px;
-}
-
-.adminblock .middle img
+.adminblock img
 {
 	margin-top:1px;
 }
 
-.adminblock .middle .imgafter
+.adminblock .imgafter
 {
 	margin-left:4px;
 }

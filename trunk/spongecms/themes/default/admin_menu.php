@@ -1,4 +1,4 @@
-<div style="float:right;">
+<aside id="admin">
 	<?php if ($_GET['p'] != 'admin'): echo "\n"; ?>
 	<div class="adminblock" id="propertiesbtn">
 		<a href="javascript:void(0)">
@@ -61,7 +61,7 @@
 			}
 			$.pageEditor(ison);
 		});
-		$(".adminblock").wrapInner('<div class="middle"></div>').prepend('<div class="left"></div>').append('<div class="right"></div>');
+		$("head").append('<style type="text/css">body{margin-top:24px !important;}</style>');
 		$("#propertiesbubble").wrapInner('<div style="margin:45px 5px 5px 5px;"></div>');
 		$("#propertiesbubble").css({
 			'left': $("#propertiesbtn").position().left + $("#propertiesbtn").width() / 2 - $("#propertiesbubble").width() / 2,
@@ -75,4 +75,4 @@
 			setTimeout(function(){$("#propertiesbubble").stop().css('top',-999)},400);
 		});
 	</script>
-</div>
+</aside>
