@@ -2,13 +2,12 @@
 	<div class="block">
 		<img src="<?php echo $location['images']; ?>/admin_preview.png" alt="Preview Mode" title="Preview Mode" />
 	</div>
-	<?php if ($_GET['p'] != 'admin'): echo "\n"; ?>
-	<div class="block">
+	<div class="block<?php echo $_GET['p']=='admin' ? ' off' : ''; ?>">
 		<a href="javascript:void(0)" id="admin_edit">
 			<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="edit" />
 		</a>
 	</div>
-	<div class="block" id="propertiesbtn">
+	<div class="block<?php echo $_GET['p']=='admin' ? ' off' : ''; ?>" id="propertiesbtn">
 		<a href="javascript:void(0)">
 			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="pages" />
 		</a>
@@ -40,7 +39,6 @@
 			</tr>
 		</table>
 	</div>
-	<?php echo "\n";endif; ?>
 	<div class="block" style="float:right !important;">
 		<a href="index.php?p=admin">
 			<img src="<?php echo $location['images']; ?>/admin_config.png" alt="admin" />
