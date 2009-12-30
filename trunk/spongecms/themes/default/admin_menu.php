@@ -1,15 +1,13 @@
 <aside id="admin">
-	<div class="block">
-		<img src="<?php echo $location['images']; ?>/admin_preview.png" alt="Preview Mode" title="Preview Mode" />
+	<div class="block mode" data-mode="preview">
+		<img src="<?php echo $location['images']; ?>/admin_preview.png" alt="P" title="Preview Mode" />
 	</div>
-	<div class="block off">
-		<a href="javascript:void(0)" id="admin_edit">
-			<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="edit" />
-		</a>
+	<div class="block mode off" data-mode="edit">
+		<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="E" title="Edit Mode" />
 	</div>
-	<div class="block off" id="propertiesbtn">
+	<div class="block mode off" data-mode="structure">
 		<a href="javascript:void(0)">
-			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="pages" />
+			<img src="<?php echo $location['images']; ?>/admin_structure.png" alt="S" title="Structure Mode" />
 		</a>
 	</div>
 	<div id="propertiesbubble" style="top:-999px;left:-999px;">
@@ -48,21 +46,8 @@
 
 	<script type="text/javascript">
 		// temporary
-		$("#admin_edit").click(function() {
-			var ison = false;
-			if ($(this).find("img").attr('src').indexOf('_on') != -1)
-			{
-				$(this).find("img").attr('src', $(this).find("img").attr('src').replace('_on',''));
-				ison = true;
-			}
-			else
-			{
-				$(this).find("img").attr('src', $(this).find("img").attr('src').replace('.png','') + '_on.png');
-			}
-			$.pageEditor(ison);
-		});
 		$("head").append('<style type="text/css">body{margin-top:24px !important;}</style>');
-		$("#propertiesbubble").wrapInner('<div style="margin:45px 5px 5px 5px;"></div>');
+		/*$("#propertiesbubble").wrapInner('<div style="margin:45px 5px 5px 5px;"></div>');
 		$("#propertiesbubble").css({
 			'left': $("#propertiesbtn").position().left + $("#propertiesbtn").width() / 2 - $("#propertiesbubble").width() / 2,
 			'opacity': 0
@@ -73,6 +58,6 @@
 		$("#propertiesbubble td:last a:first").click(function(){
 			$("#propertiesbubble").stop().animate({'top':$("#propertiesbtn").position().top-32,'opacity':0},400);
 			setTimeout(function(){$("#propertiesbubble").stop().css('top',-999)},400);
-		});
+		});*/
 	</script>
 </aside>

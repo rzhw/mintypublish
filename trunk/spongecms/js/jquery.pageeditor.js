@@ -41,36 +41,58 @@ tinyMCE.init({
 	content_css : loc['styles']+"/tinymce.css"
 });
 
-$.pageEditor = function(ison) {
-	/* TODO: IMPLEMENT SAVING */
-
-	// the id of the textarea
-	var ta = 'content_edit';
-	
-	if (!ison)
-	{
-		if ($("#"+ta).length == 0)
+$(document).ready(function() {
+	var curmode = 'preview';
+	$("#admin .block.mode").click(function() {
+		// variables
+		var mode = $(this).attr('data-mode');
+		var ta = 'content_edit';
+		
+		// don't rexecute everything
+		if (mode == curmode) { return false; }
+		
+		// switch the on/off states
+		$("#admin .block.mode[data-mode="+curmode+"]").addClass('off');
+		$(this).removeClass('off');
+		
+		// switching from edit
+		if (curmode == 'edit')
 		{
-			$("#content").wrapInner('<div id="content_content" style="display:none;"></div>'); // content_content_content_content_content *headdesk*
-			$("#content").append('<textarea id="'+ta+'"></textarea>');
-			$("#"+ta).text($("#content_content").html());
-			$("#"+ta).css({'position':'relative','left':'-21px','top':'-1px'});
+			cont = tinyMCE.get(ta).getContent();
+			tinyMCE.execCommand('mceRemoveControl', false, ta);
+			$("#"+ta).hide();
+			$("#content_content").html(cont).show();
 		}
-		else
+		
+		switch (mode)
 		{
-			$("#content_content").hide();
-			$("#"+ta).show();
+			case 'preview':
+				curmode = mode;
+				break;
+			
+			case 'edit':
+				if ($("#"+ta).length == 0)
+				{
+					$("#content").wrapInner('<div id="content_content" style="display:none;"></div>');
+					$("#content").append('<textarea id="'+ta+'"></textarea>');
+					$("#"+ta).text($("#content_content").html());
+					$("#"+ta).css({'position':'relative','left':'-21px','top':'-1px'});
+				}
+				else
+				{
+					$("#content_content").hide();
+					$("#"+ta).show();
+				}
+				var contwidth = $("#content").width();
+				var contheight = $("#content").height();
+				$("#"+ta).css({'width':contwidth,'height':contheight+32});
+				tinyMCE.execCommand('mceAddControl', false, ta);
+				curmode = mode;
+				break;
+			
+			case 'structure':
+				alert('Structure mode has not been implemented yet.');
+				break;
 		}
-		var contwidth = $("#content").width();
-		var contheight = $("#content").height();
-		$("#"+ta).css({'width':contwidth,'height':contheight+32});
-		tinyMCE.execCommand('mceAddControl', false, ta);
-	}
-	else
-	{
-		cont = tinyMCE.get(ta).getContent();
-		tinyMCE.execCommand('mceRemoveControl', false, ta);
-		$("#"+ta).hide();
-		$("#content_content").html(cont).show();
-	}
-}
+	});
+});
