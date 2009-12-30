@@ -5,7 +5,7 @@
 
 /* Containers */
 .spongeSkin table {background:#F0F0EE}
-.spongeSkin iframe {display:block; background:#FFF; border:1px dashed #aaa;}
+.spongeSkin iframe {display:block; background:transparent; border:1px dashed #cfcfcf; padding:1px; position:relative; left:-2px; top:-2px;}
 .spongeSkin .mceToolbar {height:26px}
 
 /* External */
