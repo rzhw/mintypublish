@@ -167,7 +167,6 @@ select
 	color:#fff;
 	margin:0px 8px;
 	padding:0px 4px;
-	height:16px;
 	font-size:9px;
 	background:transparent;
 }
@@ -178,7 +177,7 @@ select
 #admin .block.off
 {
 	opacity:0.25;
-	filter:opacity(0.25);
+	filter:alpha(opacity=25);
 }
 
 #admin .block img
