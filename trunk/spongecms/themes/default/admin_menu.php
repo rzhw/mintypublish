@@ -1,8 +1,16 @@
 <aside id="admin">
+	<div class="block">
+		<img src="<?php echo $location['images']; ?>/admin_preview.png" alt="Preview Mode" title="Preview Mode" />
+	</div>
 	<?php if ($_GET['p'] != 'admin'): echo "\n"; ?>
-	<div class="adminblock" id="propertiesbtn">
+	<div class="block">
+		<a href="javascript:void(0)" id="admin_edit">
+			<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="edit" />
+		</a>
+	</div>
+	<div class="block" id="propertiesbtn">
 		<a href="javascript:void(0)">
-			<img src="<?php echo $location['images']; ?>/admin_properties.png" alt="properties" />
+			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="pages" />
 		</a>
 	</div>
 	<div id="propertiesbubble" style="top:-999px;left:-999px;">
@@ -32,17 +40,11 @@
 			</tr>
 		</table>
 	</div>
-
-	<div class="adminblock">
-		<a href="javascript:void(0)" id="admin_edit">
-			<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="edit" />
-		</a>
-	</div>
 	<?php echo "\n";endif; ?>
-	<div class="adminblock">
+	<div class="block" style="float:right !important;">
 		<a href="index.php?p=admin">
-			<img src="<?php echo $location['images']; ?>/admin_icon.png" alt="admin" />
-			<div class="imgafter"><?php echo $_SESSION['uname']; ?></div>
+			<img src="<?php echo $location['images']; ?>/admin_config.png" alt="admin" />
+			<!--<div class="imgafter"><?php echo $_SESSION['uname']; ?></div>-->
 		</a>
 	</div>
 
