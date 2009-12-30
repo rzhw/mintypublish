@@ -30,7 +30,6 @@ tinyMCE.init({
 	theme : "advanced",
 	skin : "sponge",
 	plugins : "advlink,contextmenu,filemanager,iespell,imagemanager,inlinepopups,media,mediasponge,nonbreaking,noneditable,pagebreak,paste,safari,save,searchreplace,spellchecker,style,table,visualchars,xhtmlxtras",
-	plugins : "advlink,contextmenu,filemanager,iespell,imagemanager,inlinepopups,media,mediasponge,nonbreaking,noneditable,pagebreak,paste,safari,save,searchreplace,spellchecker,style,table,visualchars,xhtmlxtras",
 	theme_advanced_buttons1 : "save,|,undo,redo,|,cut,copy,|,pastetext,pasteword,|,bold,italic,underline,strikethrough,sub,sup,|,link,unlink,anchor,|,tablecontrols,|,mediasponge,image,|,code",
 	theme_advanced_buttons2 : "formatselect,fontselect,fontsizeselect,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull,|,backcolor,forecolor,|,bullist,numlist,outdent,indent,blockquote",
 	theme_advanced_buttons3 : "",
@@ -76,7 +75,6 @@ $(document).ready(function() {
 					$("#content").wrapInner('<div id="content_content" style="display:none;"></div>');
 					$("#content").append('<textarea id="'+ta+'"></textarea>');
 					$("#"+ta).text($("#content_content").html());
-					$("#"+ta).css({'position':'relative','left':'-21px','top':'-1px'});
 				}
 				else
 				{
