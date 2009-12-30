@@ -2,12 +2,12 @@
 	<div class="block">
 		<img src="<?php echo $location['images']; ?>/admin_preview.png" alt="Preview Mode" title="Preview Mode" />
 	</div>
-	<div class="block<?php echo $_GET['p']=='admin' ? ' off' : ''; ?>">
+	<div class="block off">
 		<a href="javascript:void(0)" id="admin_edit">
 			<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="edit" />
 		</a>
 	</div>
-	<div class="block<?php echo $_GET['p']=='admin' ? ' off' : ''; ?>" id="propertiesbtn">
+	<div class="block off" id="propertiesbtn">
 		<a href="javascript:void(0)">
 			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="pages" />
 		</a>
