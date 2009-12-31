@@ -30,6 +30,12 @@ $zvfpcms = true;
 $starttime = explode(' ', microtime());
 $starttime = $starttime[1] + $starttime[0];
 
+// page id
+if (isset($_GET["p"]))
+	$pid = $_GET["p"];
+else
+	$pid = 1;
+
 // the config
 require_once('spongecms/config.php');
 
@@ -65,11 +71,6 @@ $pagequery = mysql_query("SELECT * FROM pages ORDER BY page_orderid ASC");
 $i = 0; $j = 0;
 while ($row = mysql_fetch_array($pagequery))
 {
-	// page id
-	if (isset($_GET["p"]))
-		$pid = $_GET["p"];
-	else
-		$pid = 1;
 	
 	// menu stuff
 	if ($row['page_childof'] == -1 && $row['page_hideinmenu'] == 0)
@@ -87,6 +88,8 @@ while ($row = mysql_fetch_array($pagequery))
 		$menu[] = array(
 			'id' => $row['page_id'],
 			'name' => $row['page_title_menu'],
+			'name_short' => $row['page_title_menu'],
+			'name_full' => $row['page_title_full'],
 			'url' => 'index.php?p='.$row['page_id'],
 			'selected' => $sel
 		);

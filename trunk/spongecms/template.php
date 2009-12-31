@@ -47,6 +47,13 @@ class PageBuilder
 		$this->addJS($location['js'].'/cookies.js');
 		$this->addJS($location['js'].'/flowplayer-3.1.0.min.js');
 		
+		// admins need extra stuff loaded
+		if (isloggedin())
+		{			
+			$this->addJS($this->location['js'].'/tiny_mce/tiny_mce.js');
+			$this->addJS($this->location['js'].'/jquery.pageeditor.js');
+		}
+		
 		// start capturing the content
 		ob_start();
 	}
@@ -82,6 +89,14 @@ class PageBuilder
 		$this->bodypre .= $content;
 	}
 	
+	function addBodyPreInc($content)
+	{
+		global $location;
+		ob_start();
+		include($content);
+		$this->bodypre .= ob_get_clean();
+	}
+	
 	function outputBodyPre()
 	{
 		echo $this->bodypre;
@@ -97,6 +112,14 @@ class PageBuilder
 	{
 		echo '<title>'.$this->sitename.' | '.$this->title.'</title>'."\n";
 		
+		echo "\t\t".'<script type="text/javascript">var loc=[];';
+		global $location;
+		foreach ($location as $key => $value)
+		{
+			echo 'loc[\''.$key.'\']=\''.$value.'\';';
+		}
+		echo '</script>'."\n";
+		
 		foreach ($this->stylesheets as $stylesheet)
 		{
 			echo "\t\t".'<link rel="stylesheet" type="text/css" href="'.$stylesheet.'" />'."\n";
@@ -110,6 +133,23 @@ class PageBuilder
 	function outputContent()
 	{
 		echo $this->content;
+	}
+	
+	function outputAdminMenu()
+	{
+		if (isloggedin())
+		{
+			global $menu, $pid;
+			foreach ($menu as $menuitem)
+			{
+				if ($menuitem['id'] == $pid)
+				{
+					$curpg = $menuitem;
+				}
+			}
+			$location = $this->location;
+			include($this->location['theme_nr'].'/admin_menu.php');
+		}
 	}
 	
 	function build()

@@ -10,7 +10,7 @@ body
 	text-align:center;
 	padding:0px;
 	margin:0px;
-	background:#f5f5f5 url('../img/bg.png') repeat-x;
+	background:#f5f5f5;
 	color:#151515;
 }
 
@@ -25,11 +25,27 @@ header,section,footer,aside,nav,article,figure
 	display:block;  
 }
 
+table
+{
+	border-spacing:0px;
+}
+td
+{
+	border:0px;
+	padding:0px;
+}
+
 #global_wrapper
 {
+	background:url('../img/bg.png') repeat-x;
 	margin:0px auto;
 	text-align:left;
+}
+
+#header, #content
+{
 	width:1024px;
+	margin:0px auto;
 }
 
 #header
@@ -86,7 +102,7 @@ header,section,footer,aside,nav,article,figure
 	color:#E7F2C1;
 }
 
-#content_wrapper
+#content
 {
 	margin-top:16px;
 }
@@ -133,10 +149,50 @@ select
 	padding:1px;
 }
 
+#admin
+{
+	position:fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:24px;
+	/*background:#000;*/
+	background:#181818 url('../img/admin_logo.png') right -4px no-repeat;
+	-moz-box-shadow:0px 0px 6px #000;
+}
+
+#admin .block
+{
+	float:left;
+	color:#fff;
+	margin:0px 8px;
+	padding:0px 4px;
+	height:24px;
+	font-size:9px;
+	background:transparent;
+}
+#admin .block.on
+{
+	background:#fff;
+}
+#admin .block.off
+{
+	opacity:0.25;
+	filter:alpha(opacity=25);
+}
+
+#admin .block img
+{
+	margin:5px 0px 3px 0px;
+}
+
 .adminblock
 {
-	display:inline;
+	float:left;
 	color:#fff;
+	margin:0px 8px;
+	height:14px;
+	font-size:9px;
 }
 
 .adminblock *
@@ -150,34 +206,12 @@ select
 	text-decoration:none !important;
 }
 
-.adminblock .left
-{
-	background:url('../img/admin_block.png') no-repeat 0px 0px;
-	width:8px;
-	height:16px;
-}
-
-.adminblock .right
-{
-	background:url('../img/admin_block.png') no-repeat -16px 0px;
-	width:8px;
-	height:16px;
-}
-
-.adminblock .middle
-{
-	background:url('../img/admin_block.png') -32px 0px;
-	height:14px;
-	padding-top:2px;
-	font-size:9px;
-}
-
-.adminblock .middle img
+.adminblock img
 {
 	margin-top:1px;
 }
 
-.adminblock .middle .imgafter
+.adminblock .imgafter
 {
 	margin-left:4px;
 }
@@ -202,4 +236,37 @@ select
 	margin:0px 1px;
 	padding:0px;
 	height:12px;
+}
+
+#propertiesbubble
+{
+	position:absolute;
+	background:url('../img/admin_properties_bubble.png');
+	width:256px;
+	height:128px;
+}
+#propertiesbubble table
+{
+	width:100%;
+}
+#propertiesbubble td
+{
+	padding:2px 0px;
+	*padding:0px;
+}
+#propertiesbubble, #propertiesbubble td, #propertiesbubble input
+{
+	font-size:10px;
+}
+#propertiesbubble input[type=text], #propertiesbubble input[type=password]
+{
+	width:100%;
+	border:0px;
+	font-size:9px;
+	background:#222;
+	color:#aaa;
+	padding:0px;
+	height:12px;
+	opacity:0.75;
+	filter:opacity(75);
 }

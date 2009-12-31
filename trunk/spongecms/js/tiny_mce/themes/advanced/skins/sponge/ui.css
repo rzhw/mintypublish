@@ -4,8 +4,8 @@
 .spongeSkin table td {vertical-align:middle}
 
 /* Containers */
-.spongeSkin table {background:#E5EFFD}
-.spongeSkin iframe {display:block; background:#FFF}
+.spongeSkin table {background:#F0F0EE}
+.spongeSkin iframe {display:block; background:transparent; border:1px dashed #cfcfcf; padding:1px; position:relative; left:-2px; top:-2px;}
 .spongeSkin .mceToolbar {height:26px}
 
 /* External */
@@ -14,11 +14,7 @@
 .spongeSkin .mceExternalClose {position:absolute; top:3px; right:3px; width:7px; height:7px; background:url(../../img/icons.gif) -820px 0}
 
 /* Layout */
-.spongeSkin table.mceLayout {border:0; border-left:1px solid #ABC6DD; border-right:1px solid #ABC6DD}
-.spongeSkin table.mceLayout tr.mceFirst td {border-top:1px solid #ABC6DD}
-.spongeSkin table.mceLayout tr.mceLast td {border-bottom:1px solid #ABC6DD}
 .spongeSkin table.mceToolbar, .spongeSkin tr.mceFirst .mceToolbar tr td, .spongeSkin tr.mceLast .mceToolbar tr td {border:0; margin:0; padding:0}
-.spongeSkin .mceIframeContainer {border-top:1px solid #ABC6DD; border-bottom:1px solid #ABC6DD}
 .spongeSkin .mceStatusbar {display:block; font-family:'MS Sans Serif',sans-serif,Verdana,Arial; font-size:9pt; line-height:16px; overflow:visible; color:#000; height:20px}
 .spongeSkin .mceStatusbar div {float:left; padding:2px}
 .spongeSkin .mceStatusbar a.mceResize {display:block; float:right; background:url(../../img/icons.gif) -800px 0; width:20px; height:20px; cursor:se-resize}
@@ -35,7 +31,7 @@
 .spongeSkin td.mceRight table {margin:0 0 0 auto;}
 
 /* Button */
-.spongeSkin .mceButton {display:block; background:url(img/button_bg.png); width:22px; height:22px}
+.spongeSkin .mceButton {display:block; background:#F0F0EE; width:22px; height:22px}
 .spongeSkin a.mceButton span, .spongeSkin a.mceButton img {margin-left:1px}
 .spongeSkin .mceOldBoxModel a.mceButton span, .spongeSkin .mceOldBoxModel a.mceButton img {margin:0 0 0 1px}
 .spongeSkin a.mceButtonEnabled:hover {background-color:#B2BBD0; background-position:0 -22px}
@@ -47,7 +43,7 @@
 .spongeSkin .mceButtonDisabled .mceButtonLabel {color:#888}
 
 /* Separator */
-.spongeSkin .mceSeparator {display:block; background:url(img/button_bg.png) -22px 0; width:5px; height:22px}
+.spongeSkin .mceSeparator {display:block; background:#F0F0EE; width:5px; height:22px}
 
 /* ListBox */
 .spongeSkin .mceListBox {margin-left:3px}
