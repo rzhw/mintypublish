@@ -8,11 +8,16 @@
 	<div class="block mode off" data-mode="structure">
 		<img src="<?php echo $location['images']; ?>/admin_structure.png" alt="S" title="Structure Mode" />
 	</div>
-	<div class="block" style="float:right !important;">
-		<a href="index.php?p=admin">
-			<img src="<?php echo $location['images']; ?>/admin_config.png" alt="admin" />
-			<!--<div class="imgafter"><?php echo $_SESSION['uname']; ?></div>-->
-		</a>
+	<div style="float:right;">
+		<div class="block">
+			<a href="index.php?p=admin">
+				<img src="<?php echo $location['images']; ?>/admin_config.png" alt="admin" />
+			</a>
+		</div>
+		<div class="sep"></div>
+		<div class="block">
+			<?php echo $_SESSION['uname']; ?>
+		</div>
 	</div>
 
 	<script type="text/javascript">

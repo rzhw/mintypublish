@@ -161,14 +161,23 @@ select
 	-moz-box-shadow:0px 0px 6px #000;
 }
 
+#admin .sep
+{
+	float:left;
+	border-left:1px solid #fff;
+	margin:2px 0px;
+	width:0px;
+	height:20px;
+}
+
 #admin .block
 {
 	float:left;
 	color:#fff;
 	margin:0px 8px;
-	padding:0px 4px;
+	padding:5px 4px;
 	height:24px;
-	font-size:9px;
+	font-size:10px;
 	background:transparent;
 }
 #admin .block.on
@@ -179,11 +188,6 @@ select
 {
 	opacity:0.25;
 	filter:alpha(opacity=25);
-}
-
-#admin .block img
-{
-	margin:5px 0px 3px 0px;
 }
 
 .adminblock
