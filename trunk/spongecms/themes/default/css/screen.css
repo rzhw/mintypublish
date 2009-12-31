@@ -180,6 +180,14 @@ select
 	font-size:10px;
 	background:transparent;
 }
+#admin .block *
+{
+	float:left;
+}
+#admin .block span
+{
+	margin-left:6px;
+}
 #admin .block.on
 {
 	background:#fff;

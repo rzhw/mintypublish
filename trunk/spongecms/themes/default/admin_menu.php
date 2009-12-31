@@ -16,7 +16,8 @@
 		</div>
 		<div class="sep"></div>
 		<div class="block">
-			<?php echo $_SESSION['uname']; ?>
+			<img src="<?php echo $location['images']; ?>/admin_user.png" alt="Logged in as " />
+			<span><?php echo $_SESSION['uname']; ?></span>
 		</div>
 	</div>
 
