@@ -5,10 +5,10 @@
 	<div class="block mode off" data-mode="edit">
 		<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="E" title="Edit Mode" />
 	</div>
-	<div class="block mode off" data-mode="structure">
-		<img src="<?php echo $location['images']; ?>/admin_structure.png" alt="S" title="Structure Mode" />
-	</div>
 	<div style="float:right;">
+		<div class="block">
+			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="Pages" />
+		</div>
 		<div class="block">
 			<a href="index.php?p=admin">
 				<img src="<?php echo $location['images']; ?>/admin_config.png" alt="admin" />
