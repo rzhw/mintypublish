@@ -90,6 +90,7 @@ $(document).ready(function() {
 			
 			case 'structure':
 				alert('Structure mode has not been implemented yet.');
+				curmode = mode;
 				break;
 		}
 	});
