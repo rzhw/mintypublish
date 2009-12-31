@@ -6,9 +6,7 @@
 		<img src="<?php echo $location['images']; ?>/admin_edit.png" alt="E" title="Edit Mode" />
 	</div>
 	<div class="block mode off" data-mode="structure">
-		<a href="javascript:void(0)">
-			<img src="<?php echo $location['images']; ?>/admin_structure.png" alt="S" title="Structure Mode" />
-		</a>
+		<img src="<?php echo $location['images']; ?>/admin_structure.png" alt="S" title="Structure Mode" />
 	</div>
 	<div class="block" style="float:right !important;">
 		<a href="index.php?p=admin">
