@@ -216,3 +216,26 @@ select
 	color:#151515;
 	overflow:auto;
 }
+#admin .drop button
+{
+	border:0px;
+	background:#eee;
+	color:#000;
+	width:56px;
+	height:16px;
+	padding-bottom:4px;
+	*padding-bottom:0px;
+	margin-top:8px;
+	font-size:10px;
+	text-align:center;
+}
+#admin .drop .close
+{
+	font-size:9px;
+	margin-top:8px;
+	text-align:right;
+}
+#admin .drop .close a
+{
+	border-bottom:1px #808080 dotted;
+}

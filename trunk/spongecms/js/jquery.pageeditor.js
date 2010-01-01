@@ -117,7 +117,12 @@ $(document).ready(function() {
 		{
 			case 'files':
 				// ooh, html
-				$(drop).html('<div class="list" style="height:160px;"></div>');
+				$(drop).html('<div class="list" style="height:160px;"></div>\
+				<button style="float:left;margin-right:4px;">upload</button>\
+				<button style="float:left;margin-right:4px;">rename</button>\
+				<button style="float:left;">delete</button>\
+				<div style="clear:both;"></div>\
+				<div class="close"><a href="javascript:void(0)" onclick="$(this).parent().parent().hide()">close</a></div>');
 				
 				// tree view time
 				$(drop).find(".list").tree({
