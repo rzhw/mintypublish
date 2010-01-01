@@ -1,39 +1,43 @@
 <?php
-switch ($_GET['type'])
+session_start();
+require_once('../config.php');
+require_once('../functions.php');
+
+if (isloggedin())
 {
-	case 'get':
-		header('Content-type: application/json');
-		
-		// sample children
-		$children = array(
-			array('data' => 'Test 1'),
-			array('data' => 'Test 2'),
-			array('data' => 'Test 3'),
-			array('data' => 'Test 4'),
-			array('data' => 'Test 5')
-		);
-		
-		// add the attributes to the children
-		$c = count($children);
-		for ($i=0;$i<$c;$i++)
-		{
-			$children[$i]['attributes'] = array( 'rel' => 'file' );
-		}
-		
-		// the parents
-		$parents = array('Images','Video','Audio','Documents','Other');
-		
-		// add the required stuff to the parents
-		$output = array();
-		$c = count($parents);
-		for ($i=0;$i<$c;$i++)
-		{
-			$output[$i]['data'] = $parents[$i];
-			$output[$i]['attributes'] = array( 'rel' => 'root' );
-			$output[$i]['children'] = $children;
-		}
-		
-		echo json_encode($output);
-		break;
+	switch ($_GET['type'])
+	{
+		case 'get':
+			header('Content-type: application/json');
+			
+			// the parents
+			$parents = filetypes('list','names',true);
+			
+			// add the common stuff to the parents
+			$output = array();
+			$c = count($parents);
+			for ($i=0;$i<$c;$i++)
+			{
+				$output[$i]['data'] = $parents[$i];
+				$output[$i]['attributes'] = array('rel' => 'root');
+			}
+			
+			// add the files to the parents
+			$files = mysql_query("SELECT media_filename FROM media ORDER BY media_filename ASC");
+			while ($file = mysql_fetch_array($files))
+			{
+				$key = array_search(filetypes('identify',$file['media_filename'],true),$parents);
+				$output[$key]['children'][] = array('data' => $file['media_filename'], 'attributes' => array('rel' => 'file'));
+			}
+			
+			// finally!
+			echo json_encode($output);
+			
+			break;
+	}
+}
+else
+{
+	echo 'You either do not have permissions or your session has expired.';
 }
 ?>

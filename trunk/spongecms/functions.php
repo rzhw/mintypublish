@@ -56,6 +56,92 @@ function get_file_type($str)
 		default: return "unrecognised"; break;
 	}
 }
+function filetypes($whattodo,$value='',$bool=false)
+{
+	global $filetypes;
+	
+	if (!$filetypes)
+	{
+		$filetypes = array(
+			'img' => array(
+				'name' => 'image',
+				'name_plural' => 'images',
+				'recognised' => array('gif','jpg','jpeg','png','apng','svg')
+			),
+			'vid' => array(
+				'name' => 'video',
+				'name_plural' => 'videos',
+				'recognised' => array('flv','mp4')
+			),
+			'aud' => array(
+				'name' => 'audio',
+				'name_plural' => 'audio',
+				'recognised' => array('mp3')
+			),
+			'doc' => array(
+				'name' => 'document',
+				'name_plural' => 'documents',
+				'recognised' => array('pdf','htm','html','txt','doc','docx','xls','xlsx','csv','ppt','pptx','pub','pubx','adb','adbx','odt','odp','ods')
+			),
+			'oth' => array(
+				'name' => 'other',
+				'name_plural' => 'others',
+				'recognised' => array()
+			)
+		);
+	}
+	
+	switch ($whattodo)
+	{
+		case 'list':
+			switch ($value)
+			{
+				case 'all':
+					return $filetypes;
+					break;
+				case 'names':
+					$arr = array();
+					foreach ($filetypes as $filetype)
+					{
+						if ($bool)
+						{
+							$arr[] = $filetype['name_plural'];
+						}
+						else
+						{
+							$arr[] = $filetype['name'];
+						}
+					}
+					return $arr;
+					break;
+			}
+			break;
+		case 'identify':
+			foreach ($filetypes as $filetype)
+			{
+				if (in_array(get_file_extension($value),$filetype['recognised']))
+				{
+					if ($bool)
+					{
+						return $filetype['name_plural'];
+					}
+					else
+					{
+						return $filetype['name'];
+					}
+				}
+			}
+			if ($bool)
+			{
+				return $filetypes['oth']['name_plural'];
+			}
+			else
+			{
+				return $filetypes['oth']['name'];
+			}
+			break;
+	}
+}
 
 /*
  * Summary:      Generates a hash from a given password
