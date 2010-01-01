@@ -14,7 +14,7 @@
 		</div>
 		<div class="block">
 			<a href="index.php?p=admin">
-				<img src="<?php echo $location['images']; ?>/admin_config.png" alt="admin" />
+				<img src="<?php echo $location['images']; ?>/admin_config.png" alt="Config" />
 			</a>
 		</div>
 		<div class="sep"></div>
