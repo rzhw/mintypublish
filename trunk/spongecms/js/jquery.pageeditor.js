@@ -98,6 +98,20 @@ $(document).ready(function() {
 	
 	/// button blocks
 	$("#admin .block.button").click(function() {
-		alert('Hello world');
+		// variables
+		var type = $(this).attr('data-type');
+		
+		switch (type)
+		{
+			case 'files':
+				alert('sup');
+				break;
+			case 'pages':
+				alert('sup');
+				break;
+			case 'config':
+				location.href=loc['admin'];
+				break;
+		}
 	});
 });

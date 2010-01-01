@@ -13,9 +13,7 @@
 			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="Pages" />
 		</div>
 		<div class="block button" data-type="config">
-			<a href="index.php?p=admin">
-				<img src="<?php echo $location['images']; ?>/admin_config.png" alt="Config" />
-			</a>
+			<img src="<?php echo $location['images']; ?>/admin_config.png" alt="Config" />
 		</div>
 		<div class="sep"></div>
 		<div class="block">
