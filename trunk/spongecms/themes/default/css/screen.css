@@ -151,14 +151,15 @@ select
 
 #admin
 {
+	background:#181818 url('../img/admin_logo.png') right -4px no-repeat;
+	-moz-box-shadow:0px 0px 6px #000;
 	position:fixed;
 	top:0px;
 	left:0px;
 	width:100%;
 	height:24px;
-	/*background:#000;*/
-	background:#181818 url('../img/admin_logo.png') right -4px no-repeat;
-	-moz-box-shadow:0px 0px 6px #000;
+	text-align:left;
+	font-size:10px;
 }
 
 #admin .sep
@@ -177,7 +178,6 @@ select
 	margin:0px 8px;
 	padding:5px 4px;
 	height:24px;
-	font-size:10px;
 	background:transparent;
 }
 #admin .block *
@@ -198,87 +198,14 @@ select
 	filter:alpha(opacity=25);
 }
 
-.adminblock
+#admin .drop
 {
-	float:left;
-	color:#fff;
-	margin:0px 8px;
-	height:14px;
-	font-size:9px;
-}
-
-.adminblock *
-{
-	float:left;
-}
-
-.adminblock a
-{
-	color:#fff !important;
-	text-decoration:none !important;
-}
-
-.adminblock img
-{
-	margin-top:1px;
-}
-
-.adminblock .imgafter
-{
-	margin-left:4px;
-}
-
-.adminblock input[type=text], .adminblock input[type=password]
-{
-	border:0px;
-	font-size:9px;
-	background:#333;
-	color:#aaa;
-	margin:0px 1px;
-	padding:0px;
-	height:12px;
-}
-
-.adminblock input[type=submit]
-{
-	border:0px;
-	font-size:9px;
-	background:#555;
-	color:#aaa;
-	margin:0px 1px;
-	padding:0px;
-	height:12px;
-}
-
-#propertiesbubble
-{
-	position:absolute;
-	background:url('../img/admin_properties_bubble.png');
-	width:256px;
-	height:128px;
-}
-#propertiesbubble table
-{
-	width:100%;
-}
-#propertiesbubble td
-{
-	padding:2px 0px;
-	*padding:0px;
-}
-#propertiesbubble, #propertiesbubble td, #propertiesbubble input
-{
-	font-size:10px;
-}
-#propertiesbubble input[type=text], #propertiesbubble input[type=password]
-{
-	width:100%;
-	border:0px;
-	font-size:9px;
 	background:#222;
-	color:#aaa;
-	padding:0px;
-	height:12px;
-	opacity:0.75;
-	filter:opacity(75);
+	color:#fff;
+	-moz-box-shadow:0px 0px 6px rgba(0,0,0,0.5);
+	margin-top:4px;
+	width:176px;
+	height:240px;
+	padding:8px;
+	font-size:11px;
 }

@@ -97,17 +97,28 @@ $(document).ready(function() {
 	});
 	
 	/// button blocks
+	var drop = $('<div class="drop"></div>').appendTo("#admin").hide();
 	$("#admin .block.button").click(function() {
 		// variables
 		var type = $(this).attr('data-type');
 		
+		// using drop
+		if (type == 'files' || type == 'pages')
+		{
+			$(drop).show().css({
+				'position': 'fixed',
+				'left': $(this).position().left + $(this).width() + 8 - $(drop).width(),
+				'top': $("#admin").height()
+			});
+		}
+		
+		// now what?
 		switch (type)
 		{
 			case 'files':
-				alert('sup');
-				break;
+				$(drop).text('sup');
 			case 'pages':
-				alert('sup');
+				$(drop).text('sup');
 				break;
 			case 'config':
 				location.href=loc['admin'];
