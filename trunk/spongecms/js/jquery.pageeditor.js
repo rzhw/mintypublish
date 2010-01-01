@@ -180,7 +180,7 @@ $(document).ready(function() {
 				$(drop).text('sup');
 				break;
 			case 'config':
-				location.href=loc['admin'];
+				location.href = loc['admin'];
 				break;
 		}
 	});
