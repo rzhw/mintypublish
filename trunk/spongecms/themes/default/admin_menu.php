@@ -7,6 +7,9 @@
 	</div>
 	<div style="float:right;">
 		<div class="block">
+			<img src="<?php echo $location['images']; ?>/admin_files.png" alt="Files" />
+		</div>
+		<div class="block">
 			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="Pages" />
 		</div>
 		<div class="block">
