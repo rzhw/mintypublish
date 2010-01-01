@@ -116,11 +116,31 @@ $(document).ready(function() {
 		switch (type)
 		{
 			case 'files':
+				// ooh, html
 				$(drop).html(<><![CDATA[
-					<div class="list">
-						test
+					<div class="list" style="height:128px;">
+						<ul>
+							<li>Images</li>
+							<li>
+								Videos
+								<ul>
+									<li>Test 1</li>
+									<li>Test 2</li>
+									<li>Test 3</li>
+									<li>Test 4</li>
+									<li>Test 5</li>
+								</ul>
+							</li>
+							<li>Audio</li>
+							<li>Documents</li>
+							<li>Other</li>
+						</ul>
 					</div>
 				]]></>.toString());
+				
+				// tree view time
+				$(drop).find(".list").tree({ui:{animation:250}});
+				
 				break;
 			case 'pages':
 				$(drop).text('sup');
