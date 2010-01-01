@@ -116,7 +116,12 @@ $(document).ready(function() {
 		switch (type)
 		{
 			case 'files':
-				$(drop).text('sup');
+				$(drop).html(<><![CDATA[
+					<div class="list">
+						test
+					</div>
+				]]></>.toString());
+				break;
 			case 'pages':
 				$(drop).text('sup');
 				break;
