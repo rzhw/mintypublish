@@ -116,55 +116,20 @@ $(document).ready(function() {
 		switch (type)
 		{
 			case 'files':
-				// sample json
-				var samplechildren = [
-					{ data : 'Test 1', attributes : { 'rel' : 'file' } },
-					{ data : 'Test 2', attributes : { 'rel' : 'file' } },
-					{ data : 'Test 3', attributes : { 'rel' : 'file' } },
-					{ data : 'Test 4', attributes : { 'rel' : 'file' } },
-					{ data : 'Test 5', attributes : { 'rel' : 'file' } }
-				];
-				
-				var sampledata = [
-					{
-						data : 'Images',
-						attributes : { 'rel' : 'root' },
-						children : samplechildren
-					},
-					{
-						data : 'Videos',
-						attributes : { 'rel' : 'root' },
-						children : samplechildren
-					},
-					{
-						data : 'Audio',
-						attributes : { 'rel' : 'root' },
-						children : samplechildren
-					},
-					{
-						data : 'Documents',
-						attributes : { 'rel' : 'root' },
-						children : samplechildren
-					},
-					{
-						data : 'Other',
-						attributes : { 'rel' : 'root' },
-						children : samplechildren
-					},
-				];
-				
 				// ooh, html
 				$(drop).html('<div class="list" style="height:160px;"></div>');
 				
 				// tree view time
 				$(drop).find(".list").tree({
-					data : { type : 'json' , opts : { static : sampledata } },
+					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?type=get' } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
 					types : {
+						'default' : {
+							draggable : false
+						},
 						'root' : {
 							deletable : false,
 							renameable : false,
-							draggable : false,
 							max_children : -1,
 							max_depth : 1
 						},
