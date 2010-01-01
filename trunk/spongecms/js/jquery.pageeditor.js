@@ -41,10 +41,11 @@ tinyMCE.init({
 });
 
 $(document).ready(function() {
+	/// mode blocks
 	var curmode = 'preview';
 	$("#admin .block.mode").click(function() {
 		// variables
-		var mode = $(this).attr('data-mode');
+		var mode = $(this).attr('data-type');
 		var ta = 'content_edit';
 		
 		// don't rexecute everything
@@ -93,5 +94,10 @@ $(document).ready(function() {
 				curmode = mode;
 				break;
 		}
+	});
+	
+	/// button blocks
+	$("#admin .block.button").click(function() {
+		alert('Hello world');
 	});
 });
