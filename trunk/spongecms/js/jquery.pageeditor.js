@@ -118,11 +118,11 @@ $(document).ready(function() {
 			case 'files':
 				// sample json
 				var samplechildren = [
-					{ data : 'Test 1' },
-					{ data : 'Test 2' },
-					{ data : 'Test 3' },
-					{ data : 'Test 4' },
-					{ data : 'Test 5' }
+					{ data : 'Test 1', attributes : { 'rel' : 'file' } },
+					{ data : 'Test 2', attributes : { 'rel' : 'file' } },
+					{ data : 'Test 3', attributes : { 'rel' : 'file' } },
+					{ data : 'Test 4', attributes : { 'rel' : 'file' } },
+					{ data : 'Test 5', attributes : { 'rel' : 'file' } }
 				];
 				
 				var sampledata = [
@@ -162,17 +162,18 @@ $(document).ready(function() {
 				// tree view time
 				$(drop).find(".list").tree({
 					data : { type : 'json' , opts : { static : sampledata } },
-					ui : { animation : 250, theme_path : loc['theme'] + '/tree/style.css' },
+					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
 					types : {
-						'default' : {
-							max_children: 0
-						},
 						'root' : {
 							deletable : false,
 							renameable : false,
 							draggable : false,
-							max_children: -1,
-							max_depth: 1
+							max_children : -1,
+							max_depth : 1
+						},
+						'file' : {
+							max_children: 0,
+							icon : { image : loc['tree'] + '/file.png' }
 						}
 					}
 				});
