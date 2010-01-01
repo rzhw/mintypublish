@@ -162,7 +162,7 @@ $(document).ready(function() {
 				// tree view time
 				$(drop).find(".list").tree({
 					data : { type : 'json' , opts : { static : sampledata } },
-					ui : { animation : 250 },
+					ui : { animation : 250, theme_path : loc['theme'] + '/tree/style.css' },
 					types : {
 						'default' : {
 							max_children: 0
