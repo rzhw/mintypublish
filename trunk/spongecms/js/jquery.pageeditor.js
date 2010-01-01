@@ -154,10 +154,7 @@ $(document).ready(function() {
 				];
 				
 				// ooh, html
-				$(drop).html(<><![CDATA[
-					<div class="list" style="height:160px;">
-					</div>
-				]]></>.toString());
+				$(drop).html('<div class="list" style="height:160px;"></div>');
 				
 				// tree view time
 				$(drop).find(".list").tree({
