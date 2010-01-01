@@ -118,20 +118,38 @@ $(document).ready(function() {
 			case 'files':
 				// ooh, html
 				$(drop).html(<><![CDATA[
-					<div class="list" style="height:128px;">
+					<div class="list" style="height:160px;">
 						<ul>
-							<li>Images</li>
+							<li>
+								Images
+								<ul>
+									<li><a href="#"><ins>&nbsp;</ins>Test 1</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 2</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 3</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 4</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 5</a></li>
+								</ul>
+							</li>
 							<li>
 								Videos
 								<ul>
-									<li>Test 1</li>
-									<li>Test 2</li>
-									<li>Test 3</li>
-									<li>Test 4</li>
-									<li>Test 5</li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 1</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 2</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 3</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 4</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 5</a></li>
 								</ul>
 							</li>
-							<li>Audio</li>
+							<li>
+								Audio
+								<ul>
+									<li><a href="#"><ins>&nbsp;</ins>Test 1</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 2</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 3</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 4</a></li>
+									<li><a href="#"><ins>&nbsp;</ins>Test 5</a></li>
+								</ul>
+							</li>
 							<li>Documents</li>
 							<li>Other</li>
 						</ul>
@@ -139,7 +157,10 @@ $(document).ready(function() {
 				]]></>.toString());
 				
 				// tree view time
-				$(drop).find(".list").tree({ui:{animation:250}});
+				$(drop).find(".list").tree({
+					ui: {animation:250},
+					rules: {max_depth:2}
+				});
 				
 				break;
 			case 'pages':
