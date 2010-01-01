@@ -116,50 +116,65 @@ $(document).ready(function() {
 		switch (type)
 		{
 			case 'files':
+				// sample json
+				var samplechildren = [
+					{ data : 'Test 1' },
+					{ data : 'Test 2' },
+					{ data : 'Test 3' },
+					{ data : 'Test 4' },
+					{ data : 'Test 5' }
+				];
+				
+				var sampledata = [
+					{
+						data : 'Images',
+						attributes : { 'rel' : 'root' },
+						children : samplechildren
+					},
+					{
+						data : 'Videos',
+						attributes : { 'rel' : 'root' },
+						children : samplechildren
+					},
+					{
+						data : 'Audio',
+						attributes : { 'rel' : 'root' },
+						children : samplechildren
+					},
+					{
+						data : 'Documents',
+						attributes : { 'rel' : 'root' },
+						children : samplechildren
+					},
+					{
+						data : 'Other',
+						attributes : { 'rel' : 'root' },
+						children : samplechildren
+					},
+				];
+				
 				// ooh, html
 				$(drop).html(<><![CDATA[
 					<div class="list" style="height:160px;">
-						<ul>
-							<li>
-								Images
-								<ul>
-									<li><a href="#"><ins>&nbsp;</ins>Test 1</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 2</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 3</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 4</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 5</a></li>
-								</ul>
-							</li>
-							<li>
-								Videos
-								<ul>
-									<li><a href="#"><ins>&nbsp;</ins>Test 1</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 2</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 3</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 4</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 5</a></li>
-								</ul>
-							</li>
-							<li>
-								Audio
-								<ul>
-									<li><a href="#"><ins>&nbsp;</ins>Test 1</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 2</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 3</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 4</a></li>
-									<li><a href="#"><ins>&nbsp;</ins>Test 5</a></li>
-								</ul>
-							</li>
-							<li>Documents</li>
-							<li>Other</li>
-						</ul>
 					</div>
 				]]></>.toString());
 				
 				// tree view time
 				$(drop).find(".list").tree({
-					ui: {animation:250},
-					rules: {max_depth:2}
+					data : { type : 'json' , opts : { static : sampledata } },
+					ui : { animation : 250 },
+					types : {
+						'default' : {
+							max_children: 0
+						},
+						'root' : {
+							deletable : false,
+							renameable : false,
+							draggable : false,
+							max_children: -1,
+							max_depth: 1
+						}
+					}
 				});
 				
 				break;
