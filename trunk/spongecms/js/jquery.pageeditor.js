@@ -117,7 +117,7 @@ $(document).ready(function() {
 		{
 			case 'files':
 				// ooh, html
-				$(drop).html('<div class="list" style="height:160px;"></div>\
+				$(drop).html('<div class="list"></div>\
 				<button style="float:left;margin-right:5px;">upload</button>\
 				<button style="float:left;margin-right:5px;">view</button>\
 				<button style="float:left;margin-right:5px;">rename</button>\

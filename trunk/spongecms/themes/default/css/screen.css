@@ -219,6 +219,7 @@ select
 	background:#bbb;
 	color:#151515;
 	overflow:auto;
+	height:160px;
 }
 #admin .drop button
 {
