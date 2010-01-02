@@ -52,7 +52,7 @@ $(document).ready(function() {
 		if (mode == curmode) { return false; }
 		
 		// switch the on/off states
-		$("#admin .block.mode[data-mode="+curmode+"]").addClass('off');
+		$("#admin .block.mode[data-type="+curmode+"]").addClass('off');
 		$(this).removeClass('off');
 		
 		// switching from edit
