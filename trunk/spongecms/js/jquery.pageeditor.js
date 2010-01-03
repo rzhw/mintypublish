@@ -102,6 +102,9 @@ $(document).ready(function() {
 	              <div class="close"><a href="javascript:void(0)" onclick="$(this).parent().parent().hide()">close</a></div>\
 	              </div>').appendTo("#admin").hide();
 	
+	var listing = '<div class="list"></div>\
+	               <div class="button4"><button>add</button><button>view</button><button>edit</button><button>delete</button></div>';
+	
 	$("#admin .block.button").click(function() {
 		// variables
 		var type = $(this).attr('data-type');
@@ -120,15 +123,7 @@ $(document).ready(function() {
 		switch (type)
 		{
 			case 'files':
-				// ooh, html
-				$(drop).find(".content").html('<div class="list"></div>\
-				<button style="float:left;margin-right:5px;">upload</button>\
-				<button style="float:left;margin-right:5px;">view</button>\
-				<button style="float:left;margin-right:5px;">rename</button>\
-				<button style="float:left;">delete</button>');
-				
-				// tree view time
-				$(drop).find(".list").tree({
+				$(drop).find(".content").html(listing).find(".list").tree({
 					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?type=get' } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
 					types : {
@@ -147,11 +142,20 @@ $(document).ready(function() {
 						}
 					}
 				});
-				
 				break;
+			
 			case 'pages':
-				$(drop).text('sup');
+				$(drop).find(".content").html(listing).find(".list").tree({
+					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?type=get' } },
+					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
+					types : {
+						'default' : {
+							icon : { image : loc['tree'] + '/file.png' }
+						}
+					}
+				});
 				break;
+			
 			case 'config':
 				location.href = loc['admin'];
 				break;
