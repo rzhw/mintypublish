@@ -97,7 +97,11 @@ $(document).ready(function() {
 	});
 	
 	/// button blocks
-	var drop = $('<div class="drop"></div>').appendTo("#admin").hide();
+	var drop = $('<div class="drop">\
+	              <div class="content"></div>\
+	              <div class="close"><a href="javascript:void(0)" onclick="$(this).parent().parent().hide()">close</a></div>\
+	              </div>').appendTo("#admin").hide();
+	
 	$("#admin .block.button").click(function() {
 		// variables
 		var type = $(this).attr('data-type');
@@ -117,13 +121,11 @@ $(document).ready(function() {
 		{
 			case 'files':
 				// ooh, html
-				$(drop).html('<div class="list"></div>\
+				$(drop).find(".content").html('<div class="list"></div>\
 				<button style="float:left;margin-right:5px;">upload</button>\
 				<button style="float:left;margin-right:5px;">view</button>\
 				<button style="float:left;margin-right:5px;">rename</button>\
-				<button style="float:left;">delete</button>\
-				<div style="clear:both;"></div>\
-				<div class="close"><a href="javascript:void(0)" onclick="$(this).parent().parent().hide()">close</a></div>');
+				<button style="float:left;">delete</button>');
 				
 				// tree view time
 				$(drop).find(".list").tree({

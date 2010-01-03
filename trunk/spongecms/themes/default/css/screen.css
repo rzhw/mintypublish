@@ -236,8 +236,9 @@ select
 }
 #admin .drop .close
 {
+	clear:both;
+	padding-top:8px;
 	font-size:9px;
-	margin-top:8px;
 	text-align:right;
 }
 #admin .drop .close a
