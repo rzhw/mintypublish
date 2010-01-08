@@ -50,7 +50,10 @@ if (isloggedin())
 			while ($file = mysql_fetch_array($files))
 			{
 				$key = array_search(filetypes('identify',$file['media_filename'],true),$parents);
-				$output[$key]['children'][] = array('data' => $file['media_filename'], 'attributes' => array('rel' => 'file'));
+				$output[$key]['children'][] = array(
+					'data' => $file['media_filename'],
+					'attributes' => array('rel' => 'file', 'data-id' => $file['media_id'])
+				);
 			}
 			
 			// finally!
