@@ -40,7 +40,7 @@ if (isloggedin())
 			{
 				$output[] = array(
 					'data' => $page['page_title_full'] . ' <small class="subtitle">' . $page['page_title_menu'] . '</small>',
-					'attributes' => array('data-pid' => $page['page_id'])
+					'attributes' => array('data-id' => $page['page_id'])
 				);
 			}
 			
