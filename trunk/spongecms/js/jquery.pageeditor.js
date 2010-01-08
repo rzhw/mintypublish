@@ -1,7 +1,7 @@
 /*
- * Sponge Content Management System
- * Copyright (c) 2009 a2h - http://a2h.uni.cc/
- * http://zvfpcms.sourceforge.net/
+ * mintypublish Content Management System
+ * Copyright (c) 2009-2010 a2h
+ * http://github.com/a2h/mintypublish
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -146,7 +146,7 @@ $(document).ready(function() {
 			
 			case 'pages':
 				$(drop).find(".content").html(listing).find(".list").tree({
-					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?type=get' } },
+					data : { type : 'json' , opts : { url : loc['admin2'] + '/pages.php?type=get' } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
 					types : {
 						'default' : {

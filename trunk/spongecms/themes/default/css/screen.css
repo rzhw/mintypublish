@@ -220,6 +220,10 @@ select
 	overflow:auto;
 	height:160px;
 }
+#admin .drop .list .subtitle
+{
+	font-size:8px;
+}
 #admin .drop button
 {
 	border:0px;
