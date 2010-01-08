@@ -236,6 +236,10 @@ select
 	font-size:9px;
 	text-align:center;
 }
+#admin .drop .button4
+{
+	font-size:0px;
+}
 #admin .drop .button4 button
 {
 	width:40px;

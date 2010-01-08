@@ -46,7 +46,7 @@ if (isloggedin())
 			}
 			
 			// add the files to the parents
-			$files = mysql_query("SELECT media_filename FROM media ORDER BY media_filename ASC");
+			$files = mysql_query("SELECT * FROM media ORDER BY media_filename ASC");
 			while ($file = mysql_fetch_array($files))
 			{
 				$key = array_search(filetypes('identify',$file['media_filename'],true),$parents);

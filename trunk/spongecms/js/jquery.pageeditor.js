@@ -103,7 +103,13 @@ $(document).ready(function() {
 	              </div>').appendTo("#admin").hide();
 	
 	var listing = '<div class="list"></div>\
-	               <div class="button4"><button>add</button><button>view</button><button>info</button><button>delete</button></div>';
+	               <div class="button4">\
+	               <button id="admin_list_add">add</button>\
+	               <button id="admin_list_view">view</button>\
+	               <button id="admin_list_info">info</button>\
+	               <button id="admin_list_delete">delete</button>\
+	               </div>\
+	               <div class="more"></div>';
 	
 	$("#admin .block.button").click(function() {
 		// variables
@@ -123,6 +129,7 @@ $(document).ready(function() {
 		switch (type)
 		{
 			case 'files':
+				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
 					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?type=get' } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
@@ -142,9 +149,29 @@ $(document).ready(function() {
 						}
 					}
 				});
+				
+				// give the buttons appropriate actions
+				$("#admin_list_add").click(function() {
+					// make this use the .more div instead of the inbuilt func for consistency
+					$.tree.focused().create(false,-1);
+				});
+				
+				$("#admin_list_view").click(function() {
+					id = $.tree.focused().selected;
+					if (id)
+					{
+						// remember that this depends on the old admin panel functionality!
+						location.href = loc['admin'] + '&s=med&action=prv&pid=' + $(id).attr('data-id');
+					}
+					else
+					{
+						alert('You haven\'t selected anything!');
+					}
+				});
 				break;
 			
 			case 'pages':
+				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
 					data : { type : 'json' , opts : { url : loc['admin2'] + '/pages.php?type=get' } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
@@ -152,6 +179,24 @@ $(document).ready(function() {
 						'default' : {
 							icon : { image : loc['tree'] + '/file.png' }
 						}
+					}
+				});
+				
+				// give the buttons appropriate actions
+				$("#admin_list_add").click(function() {
+					// make this use the .more div instead of the inbuilt func for consistency
+					$.tree.focused().create(false,-1);
+				});
+				
+				$("#admin_list_view").click(function() {
+					id = $.tree.focused().selected;
+					if (id)
+					{
+						location.href = 'index.php?p=' + $(id).attr('data-id');
+					}
+					else
+					{
+						alert('You haven\'t selected anything!');
 					}
 				});
 				break;
