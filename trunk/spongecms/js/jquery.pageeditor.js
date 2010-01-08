@@ -103,7 +103,7 @@ $(document).ready(function() {
 	              </div>').appendTo("#admin").hide();
 	
 	var listing = '<div class="list"></div>\
-	               <div class="button4"><button>add</button><button>view</button><button>edit</button><button>delete</button></div>';
+	               <div class="button4"><button>add</button><button>view</button><button>info</button><button>delete</button></div>';
 	
 	$("#admin .block.button").click(function() {
 		// variables
