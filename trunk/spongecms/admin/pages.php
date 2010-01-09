@@ -39,7 +39,7 @@ if (isloggedin())
 			while ($page = mysql_fetch_array($pages))
 			{
 				$output[] = array(
-					'data' => $page['page_title_full'] . ' <small class="subtitle">' . $page['page_title_menu'] . '</small>',
+					'data' => $page['page_title_full'] . '<small class="subtitle">' . $page['page_title_menu'] . '</small>',
 					'attributes' => array('data-id' => $page['page_id'])
 				);
 			}
