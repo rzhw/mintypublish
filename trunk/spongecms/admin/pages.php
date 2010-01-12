@@ -33,7 +33,7 @@ if (isloggedin())
 		case 'get':
 			header('Content-type: application/json');
 			
-			// build the list
+			// build the list NEED TO IMPLEMENT RECOGNITION OF CHILD PAGES
 			$output = array();
 			$pages = mysql_query("SELECT * FROM pages ORDER BY page_orderid ASC");
 			while ($page = mysql_fetch_array($pages))

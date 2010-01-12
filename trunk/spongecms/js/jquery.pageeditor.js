@@ -191,30 +191,41 @@ $(document).ready(function() {
 							
 							// we only want to send the ids of each page, that's it. nothing more.
 							var tempnodes = [];
-							$.each($.tree.focused().get(toget), function() {
-								tempnodes[tempnodes.length] = this.attributes.id.replace(pidprefix,'');
-							});
-							
-							// prepare the payload
-							var tosend = {
-								nodes : tempnodes
-							};
-							
-							// if the moved node has its parent changed then we need to send it too
-							if (movetype == 'inside')
+							var tempparent = -1;
+							if (movetype != 'inside')
 							{
-								tosend.parent = $(node_ref).attr('id').replace(pidprefix,'');
+								$.each($.tree.focused().get(toget), function() {
+									tempnodes[tempnodes.length] = this.attributes.id.replace(pidprefix,'');
+								});
 							}
 							else
 							{
-								tosend.parent = -1;
+								// 'inside' has the .get() function detailing the parent in the first 2 values
+								// with (as an example), {"id":"id_7"}, then {"state":"open","title":"Home"},
+								// then an array with the children
+								
+								$.each($.tree.focused().get(toget), function(i) {
+									if (i == 'attributes')
+									{
+										tempparent = this.id.replace(pidprefix,'');
+									}
+									else if (i == 'children')
+									{
+										$.each(this, function() {
+											tempnodes[tempnodes.length] = this.attributes.id.replace(pidprefix,'');
+										});
+									}
+								});
 							}
 							
 							// now send the data
 							$.ajax({
 								type: 'post',
 								url: loc['admin2'] + '/pages.php?type=reorder',
-								data: $.toJSON(tosend),
+								data: $.toJSON({
+									nodes: tempnodes,
+									parent: tempparent
+								}),
 								dataType: 'json',
 								beforeSend: function() {
 									$(drop).find(".status").show().text('saving...');
