@@ -96,7 +96,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	/// button blocks
+	/// button blocks	
 	var drop = $('<div class="drop">\
 	              <div class="content"></div>\
 	              <div class="status"></div>\
@@ -172,9 +172,12 @@ $(document).ready(function() {
 				break;
 			
 			case 'pages':
+				// prefix for ids
+				var pidprefix = 'id_';
+				
 				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
-					data : { type : 'json' , opts : { url : loc['admin2'] + '/pages.php?type=get' } },
+					data : { type : 'json' , opts : { url : loc['admin2'] + '/pages.php?type=get&pidprefix=' + pidprefix } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
 					types : {
 						'default' : {
@@ -187,21 +190,20 @@ $(document).ready(function() {
 							var toget = $.tree.focused().parent(node).length > 0 ? $.tree.focused().parent(node) : false;
 							
 							// we only want to send the ids of each page, that's it. nothing more.
+							var tempnodes = [];
+							$.each($.tree.focused().get(toget), function() {
+								tempnodes[tempnodes.length] = this.attributes.id.replace(pidprefix,'');
+							});
+							
+							// prepare the payload
 							var tosend = {
-								nodes : $.each($.tree.focused().get(toget), function() {
-									// only things on the same depth are needed
-									delete this.children;
-									// unneeded attribute
-									delete this.attributes['class'];
-									// titles aren't needed
-									delete this.data;
-								})
-							}
+								nodes : tempnodes
+							};
 							
 							// if the moved node has its parent changed then we need to send it too
 							if (movetype == 'inside')
 							{
-								tosend.parent = $(node_ref).attr('data-id');
+								tosend.parent = $(node_ref).attr('id').replace(pidprefix,'');
 							}
 							
 							// now send the data
@@ -231,7 +233,7 @@ $(document).ready(function() {
 					id = $.tree.focused().selected;
 					if (id)
 					{
-						location.href = 'index.php?p=' + $(id).attr('data-id');
+						location.href = 'index.php?p=' + $(id).attr('id').replace(pidprefix,'');
 					}
 					else
 					{
