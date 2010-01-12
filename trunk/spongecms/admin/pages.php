@@ -61,7 +61,7 @@ if (isloggedin())
 			//
 			foreach ($nodes as $node)
 			{
-				$temp .= $node['data']['title'] . '   ';
+				$temp .= $node . '   ';
 			}
 			
 			echo json_encode(array('success'=>$temp));
