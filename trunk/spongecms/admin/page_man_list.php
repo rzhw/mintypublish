@@ -28,9 +28,6 @@ if ($zvfpcms)
 	
 	echo $txt['admin_panel_manpages_desc'];
 	
-	// Move up/down instructions
-	echo ' '.str_replace('[v]','<img src="'.$location['images'].'/arrow_down.png" alt="" />',str_replace('[^]','<img src="'.$location['images'].'/arrow_up.png" alt="" />',$txt['admin_panel_manpages_ordr']));
-	
 	// Edit instructions
 	echo ' '.str_replace('[e]','<img src="'.$location['images'].'/page_edit.png" alt="" />',$txt['admin_panel_manpages_edit']);
 	
@@ -58,32 +55,8 @@ if ($zvfpcms)
 	{
 		$i = $row['page_orderid'];
 		
-		// top item in list where there is more than one item
-		if ($i == 0 && $i < $largestorder)
-		{
-			template_page_man_entry($location['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],1,0);
-			echo '<br />';
-		}
-		// the only item in the list
-		else if ($i == 0)
-		{
-			template_page_man_entry($location['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],1,1);
-			echo '<br />';
-		}
-		// bottom item in list where there is more than one item
-		else if ($i == $largestorder)
-		{
-			template_page_man_entry($location['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],0,1);
-			echo '<br />';
-		}
-		// other items
-		else
-		{
-			template_page_man_entry($location['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],0,0);
-			echo '<br />';
-		}
-		
-		//template_page_man_entry($location['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],0,0);
+		template_page_man_entry($location['admin'].'&amp;s=man',$row['page_id'],$row['page_childof'],$row['page_title_full'],0,0);
+		echo '<br />';
 	}
 }
 
@@ -99,18 +72,6 @@ if ($zvfpcms)
 function template_page_man_entry($curpage,$pid,$childof,$ptitle,$top=false,$bottom=false)
 {
 	global $location;
-	
-	// move page up
-	echo '
-	<a href="'.($top ? 'javascript:void(0)' : $curpage.'&amp;action=pup&amp;pid='.$pid).'"'.($top ? ' onclick="alert(\'You cannot move this page up; it already is on the top.\')"' : '').'>
-		<img src="'.$location['images'].'/arrow_up'.($top ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" />
-	</a>';
-	
-	// move page down
-	echo '
-	<a href="'.($bottom ? 'javascript:alert(\'You cannot move this page down; it already is on the bottom.\')' : $curpage.'&amp;action=pdn&amp;pid='.$pid).'">
-		<img src="'.$location['images'].'/arrow_down'.($bottom ? '_off' : '').'.png" alt="" style="width:12px;height:12px;" />
-	</a>';
 	
 	echo '
 	<a href="'.$curpage.'&amp;action=edt&amp;pid='.$pid.'"><img src="'.$location['images'].'/page_edit.png" alt="" /></a>

@@ -28,10 +28,7 @@ if ($zvfpcms)
 	
 	echo 'Recognised filetypes are: <b>VIDEO</b> flv, mp4 <b>IMAGES</b> png, gif, jpg <b>MUSIC</b> mp3<br />
 	<br />
-	To convert media between filetypes [filler text]<br />
-	<br />
-	Clicking on <img src="'.$location['images'].'/preview.png" alt="" /> will preview a file. Clicking on
-	<img src="'.$location['images'].'/trash.png" alt="" /> will delete a file.<br />
+	Clicking on <img src="'.$location['images'].'/trash.png" alt="" /> will delete a file.<br />
 	<br />
 	';
 	
@@ -65,8 +62,7 @@ function entry_media($curpage,$pid,$ptitle)
 {
 	global $location;
 	
-	echo '<a href="'.$curpage.'&amp;action=prv&amp;pid='.$pid.'"><img src="'.$location['images'].'/preview.png" alt="" /></a>
-	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$location['images'].'/trash.png" alt="" /></a>
+	echo '<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$location['images'].'/trash.png" alt="" /></a>
 	
 	<b>'.$ptitle.' ('.get_file_type($ptitle).')</b>';
 }

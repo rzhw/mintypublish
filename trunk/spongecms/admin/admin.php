@@ -36,6 +36,9 @@ if ($zvfpcms)
 		// Welcome the user :3
 		echo '
 		<h1>'.$txt['admin_panel_title'].'</h1>
+		<b>Please note: This admin panel\'s functionality is being phased out in favour of the "admin bar" you can see above.
+		As functions here are made redundant they will be removed</b>
+		<br />
 		<br />';
 		
 		// Show the menu
