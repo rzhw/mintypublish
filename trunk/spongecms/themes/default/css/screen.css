@@ -250,12 +250,19 @@ select
 {
 	margin-left:0px;
 }
+
+#admin .drop .status, #admin .drop .close
+{
+	font-size:9px;
+	padding:8px 0px 4px 0px;
+}
+#admin .drop .status
+{
+	float:left;
+}
 #admin .drop .close
 {
-	clear:both;
-	padding:8px 0px 4px 0px;
-	font-size:9px;
-	text-align:right;
+	float:right;
 }
 #admin .drop .close a
 {

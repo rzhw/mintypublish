@@ -99,6 +99,7 @@ $(document).ready(function() {
 	/// button blocks
 	var drop = $('<div class="drop">\
 	              <div class="content"></div>\
+	              <div class="status"></div>\
 	              <div class="close"><a href="javascript:void(0)" onclick="$(this).parent().parent().hide()">close</a></div>\
 	              </div>').appendTo("#admin").hide();
 	
@@ -178,6 +179,44 @@ $(document).ready(function() {
 					types : {
 						'default' : {
 							icon : { image : loc['tree'] + '/file.png' }
+						}
+					},
+					callback : {
+						'onmove' : function(node, node_ref, movetype, tree_cur, tree_old) {
+							// if the node has a parent get that instead of the whole tree
+							var toget = $.tree.focused().parent(node).length > 0 ? $.tree.focused().parent(node) : false;
+							
+							// we only want to send the ids of each page, that's it. nothing more.
+							var tosend = {
+								nodes : $.each($.tree.focused().get(toget), function() {
+									// only things on the same depth are needed
+									delete this.children;
+									// unneeded attribute
+									delete this.attributes['class'];
+									// titles aren't needed
+									delete this.data;
+								})
+							}
+							
+							// if the moved node has its parent changed then we need to send it too
+							if (movetype == 'inside')
+							{
+								tosend.parent = $(node_ref).attr('data-id');
+							}
+							
+							// now send the data
+							$.ajax({
+								type: 'post',
+								url: loc['admin2'] + '/pages.php?type=reorder',
+								data: $.toJSON(tosend),
+								dataType: 'json',
+								beforeSend: function() {
+									$(drop).find(".status").text('saving...');
+								},
+								success: function(data) {
+									alert(data.success);
+								}
+							});
 						}
 					}
 				});

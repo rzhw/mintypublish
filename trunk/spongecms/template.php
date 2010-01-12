@@ -52,6 +52,7 @@ class PageBuilder
 		if (isloggedin())
 		{			
 			$this->addJS($this->location['js'].'/tiny_mce/tiny_mce.js');
+			$this->addJS($this->location['js'].'/jquery.json-2.2.min.js');
 			$this->addJS($this->location['js'].'/jquery.pageeditor.js');
 		}
 		

@@ -48,6 +48,24 @@ if (isloggedin())
 			echo json_encode($output);
 			
 			break;
+		
+		case 'reorder':
+			header('Content-type: application/json');
+			
+			// initial taking apart of the info we got
+			$params = json_decode(file_get_contents("php://input"), true);
+			$nodes = $params['nodes'];
+			
+			$temp = '';
+			
+			//
+			foreach ($nodes as $node)
+			{
+				$temp .= $node['data']['title'] . '   ';
+			}
+			
+			echo json_encode(array('success'=>$temp));
+			break;
 	}
 }
 else
