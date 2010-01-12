@@ -54,17 +54,20 @@ if (isloggedin())
 			
 			// initial taking apart of the info we got
 			$params = json_decode(file_get_contents("php://input"), true);
-			$nodes = $params['nodes'];
+			$n = $params['nodes'];
+			$c = $params['parent'];
+			$s = count($n);
 			
-			$temp = '';
-			
-			//
-			foreach ($nodes as $node)
+			// reorder!
+			$success = true;
+			for ($i=0; $i<$s; $i++)
 			{
-				$temp .= $node . '   ';
+				$p = $n[$i];
+				// this is probably extremely uneffecient for larger sets of data :/
+				mysql_query("UPDATE pages SET page_orderid = $i, page_childof = $c WHERE page_id = $p") or $success = false;
 			}
 			
-			echo json_encode(array('success'=>$temp));
+			echo json_encode(array('success'=>$success));
 			break;
 	}
 }

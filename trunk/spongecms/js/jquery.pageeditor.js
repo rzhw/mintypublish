@@ -205,6 +205,10 @@ $(document).ready(function() {
 							{
 								tosend.parent = $(node_ref).attr('id').replace(pidprefix,'');
 							}
+							else
+							{
+								tosend.parent = -1;
+							}
 							
 							// now send the data
 							$.ajax({
@@ -213,10 +217,20 @@ $(document).ready(function() {
 								data: $.toJSON(tosend),
 								dataType: 'json',
 								beforeSend: function() {
-									$(drop).find(".status").text('saving...');
+									$(drop).find(".status").show().text('saving...');
 								},
 								success: function(data) {
-									alert(data.success);
+									if (data.success)
+									{
+										$(drop).find(".status").text('saved!');
+									}
+									else
+									{
+										$(drop).find(".status").text('save error!');
+									}
+									setTimeout(function() {
+										$(drop).find(".status").fadeOut(2000);
+									}, 1000);
 								}
 							});
 						}
