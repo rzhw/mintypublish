@@ -116,8 +116,8 @@ $mediaquery = mysql_query("SELECT * FROM media");
 if ($cfg[$cfg_language]['value'] != "en")
 	require_once("spongecms/lang/".$cfg[$cfg_language]['value'].".php");
 
-// you need at least php 5.1.0
-if (version_compare('5.1.0',PHP_VERSION,'>'))
+// you need at least php 5.2.0
+if (version_compare('5.2.0',PHP_VERSION,'>'))
 	exit($txt['page_oldphp']);
 
 // set up the templating system
