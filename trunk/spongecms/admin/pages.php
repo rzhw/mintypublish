@@ -67,7 +67,20 @@ if (isloggedin())
 			$success = true;
 			mysql_query("INSERT INTO pages (page_orderid, page_title_full, page_title_menu, page_content) VALUES ($orderid, '$titlefull', '$titleshort', '<p>Here is some example content. Let\'s get editing!</p>')") or $success = false;
 			
-			echo json_encode(array('success'=>$success));
+			// message
+			if ($success)
+			{
+				$message = 'page added!';
+			}
+			else
+			{
+				$message = 'page add failed!';
+			}
+			
+			echo json_encode(array(
+				'success' => $success,
+				'message' => $message
+			));
 			
 			break;
 		
@@ -89,7 +102,20 @@ if (isloggedin())
 				mysql_query("UPDATE pages SET page_orderid = $i, page_childof = $c WHERE page_id = $p") or $success = false;
 			}
 			
-			echo json_encode(array('success'=>$success));
+			// message
+			if ($success)
+			{
+				$message = 'saved!';
+			}
+			else
+			{
+				$message = 'save failed!';
+			}
+			
+			echo json_encode(array(
+				'success' => $success,
+				'message' => $message
+			));
 			
 			break;
 	}

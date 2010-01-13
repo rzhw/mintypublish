@@ -231,14 +231,7 @@ $(document).ready(function() {
 									$(drop).find(".status").show().text('saving...');
 								},
 								success: function(data) {
-									if (data.success)
-									{
-										$(drop).find(".status").text('saved!');
-									}
-									else
-									{
-										$(drop).find(".status").text('save error!');
-									}
+									$(drop).find(".status").text(data.message);
 									setTimeout(function() {
 										$(drop).find(".status").fadeOut(2000);
 									}, 1000);
@@ -274,15 +267,13 @@ $(document).ready(function() {
 								$(drop).find(".status").show().text('saving...');
 							},
 							success: function(data) {
+								$(drop).find(".status").text(data.message);
+								
 								if (data.success)
 								{
-									$(drop).find(".status").text('saved!');
 									$.tree.focused().refresh();
 								}
-								else
-								{
-									$(drop).find(".status").text('save error!');
-								}
+								
 								setTimeout(function() {
 									$(drop).find(".status").fadeOut(2000);
 								}, 1000);
