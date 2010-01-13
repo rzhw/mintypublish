@@ -49,6 +49,11 @@ if (isloggedin())
 			
 			break;
 		
+		case 'add':
+			header('Content-type: application/json');
+			
+			break;
+		
 		case 'reorder':
 			header('Content-type: application/json');
 			
@@ -68,6 +73,7 @@ if (isloggedin())
 			}
 			
 			echo json_encode(array('success'=>$success));
+			
 			break;
 	}
 }

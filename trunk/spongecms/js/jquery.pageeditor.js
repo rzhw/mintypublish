@@ -250,8 +250,20 @@ $(document).ready(function() {
 				
 				// give the buttons appropriate actions
 				$("#admin_list_add").click(function() {
-					// make this use the .more div instead of the inbuilt func for consistency
-					$.tree.focused().create(false,-1);
+					$(drop).find(".more").hide().html('\
+						<p><b>Add a page</b></p>\
+						<p>\
+							<label for="page_title_full">Title (full):</label> <input type="text" id="page_title_full" /><br />\
+							<label for="page_title_short">Title (short):</label> <input type="text" id="page_title_short" />\
+						</p>\
+						<p>\
+							<input type="button" value="Go!" />\
+						</p>\
+					').slideDown();
+					
+					$(drop).find(".more input[type=button]").click(function() {
+						
+					});
 				});
 				
 				$("#admin_list_view").click(function() {

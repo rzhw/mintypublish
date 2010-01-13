@@ -225,6 +225,7 @@ select
 	font-size:8px;
 	padding-left:4px;
 }
+
 #admin .drop button
 {
 	border:0px;
@@ -237,6 +238,32 @@ select
 	font-size:9px;
 	text-align:center;
 }
+
+#admin .drop .more
+{
+	font-size:9px;
+}
+#admin .drop .more input[type=text], #admin .drop .more input[type=button]
+{
+	font-size:9px;
+	background:#444;
+	color:#aaa;
+	padding:1px;
+}
+#admin .drop .more input[type=text]
+{
+	border:1px solid #aaa;
+	width:96px;
+}
+#admin .drop .more input[type=button]
+{
+	border:1px solid #555;
+	width:32px;
+	border-radius:2px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+}
+
 #admin .drop .button4
 {
 	font-size:0px;
