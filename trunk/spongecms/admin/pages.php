@@ -52,6 +52,23 @@ if (isloggedin())
 		case 'add':
 			header('Content-type: application/json');
 			
+			// info goes in [CONSIDER: string escaping]
+			$titlefull = $_POST['title_full'];
+			$titleshort = $_POST['title_short'];
+			
+			// find the largest order id
+			$pageordertop = mysql_query("SELECT page_orderid FROM pages WHERE page_childof = -1 ORDER BY page_orderid DESC LIMIT 1");
+			while ($page = mysql_fetch_array($pageordertop))
+			{
+				$orderid = $page['page_orderid'] + 1;
+			}
+			
+			// add the page
+			$success = true;
+			mysql_query("INSERT INTO pages (page_orderid, page_title_full, page_title_menu, page_content) VALUES ($orderid, '$titlefull', '$titleshort', '<p>Here is some example content. Let\'s get editing!</p>')") or $success = false;
+			
+			echo json_encode(array('success'=>$success));
+			
 			break;
 		
 		case 'reorder':

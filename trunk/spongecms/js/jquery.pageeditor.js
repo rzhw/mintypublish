@@ -262,7 +262,32 @@ $(document).ready(function() {
 					').slideDown();
 					
 					$(drop).find(".more input[type=button]").click(function() {
-						
+						$.ajax({
+							type: 'post',
+							url: loc['admin2'] + '/pages.php?type=add',
+							data: {
+								title_full: $("#page_title_full").attr('value'),
+								title_short: $("#page_title_short").attr('value')
+							},
+							dataType: 'json',
+							beforeSend: function() {
+								$(drop).find(".status").show().text('saving...');
+							},
+							success: function(data) {
+								if (data.success)
+								{
+									$(drop).find(".status").text('saved!');
+									$.tree.focused().refresh();
+								}
+								else
+								{
+									$(drop).find(".status").text('save error!');
+								}
+								setTimeout(function() {
+									$(drop).find(".status").fadeOut(2000);
+								}, 1000);
+							}
+						});
 					});
 				});
 				
