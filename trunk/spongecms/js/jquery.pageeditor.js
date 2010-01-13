@@ -184,6 +184,9 @@ $(document).ready(function() {
 							icon : { image : loc['tree'] + '/file.png' }
 						}
 					},
+				
+				/// PAGE REORDERING
+				
 					callback : {
 						'onmove' : function(node, node_ref, movetype, tree_cur, tree_old) {
 							// if the node has a parent get that instead of the whole tree
@@ -241,7 +244,8 @@ $(document).ready(function() {
 					}
 				});
 				
-				// give the buttons appropriate actions
+				/// PAGE ADDING
+				
 				$("#admin_list_add").click(function() {
 					$(drop).find(".more").hide().html('\
 						<p><b>Add a page</b></p>\
@@ -283,6 +287,8 @@ $(document).ready(function() {
 					});
 				});
 				
+				/// PAGE VIEWING
+				
 				$("#admin_list_view").click(function() {
 					id = $.tree.focused().selected;
 					if (id)
@@ -294,6 +300,8 @@ $(document).ready(function() {
 						alert('You haven\'t selected anything!');
 					}
 				});
+				
+				/// PAGE DELETING
 				
 				$("#admin_list_delete").click(function() {
 					id = $.tree.focused().selected;
