@@ -293,6 +293,61 @@ $(document).ready(function() {
 						alert('You haven\'t selected anything!');
 					}
 				});
+				
+				$("#admin_list_delete").click(function() {
+					id = $.tree.focused().selected;
+					if (id)
+					{
+						$.tree.focused().lock(true);
+						
+						$(drop).find(".more").hide().html('\
+							<p><b>Delete page</b></p>\
+							<p>\
+								Are you sure you want to do this?\
+							</p>\
+							<p>\
+								<input type="button" value="No" />\
+								<input type="button" value="Yes" />\
+							</p>\
+						').slideDown();
+						
+						$(drop).find(".more input[type=button]:first").click(function() {
+							$.tree.focused().lock(false);
+							$(drop).find(".more").slideUp();
+						});
+						
+						$(drop).find(".more input[type=button]:last").click(function() {
+							$.ajax({
+								type: 'post',
+								url: loc['admin2'] + '/pages.php?type=delete',
+								data: {
+									page_id: $(id).attr('id').replace(pidprefix,'')
+								},
+								dataType: 'json',
+								beforeSend: function() {
+									$(drop).find(".status").show().text('working...');
+								},
+								success: function(data) {
+									$(drop).find(".status").text(data.message);
+									
+									if (data.success)
+									{
+										$.tree.focused().lock(false);
+										$.tree.focused().refresh();
+									}
+									
+									setTimeout(function() {
+										$(drop).find(".status").fadeOut(2000);
+									}, 1000);
+								}
+							});
+						});
+					}
+					else
+					{
+						alert('You haven\'t selected anything!');
+					}
+				});
 				break;
 			
 			case 'config':

@@ -84,6 +84,33 @@ if (isloggedin())
 			
 			break;
 		
+		case 'delete':
+			header('Content-type: application/json');
+			
+			// info goes in
+			$pid = $_POST['page_id'];
+			
+			// delete the page
+			$success = true;
+			mysql_query("DELETE FROM pages WHERE page_id = $pid") or $success = false;
+			
+			// message
+			if ($success)
+			{
+				$message = 'deleted!';
+			}
+			else
+			{
+				$message = 'delete failed!';
+			}
+			
+			echo json_encode(array(
+				'success' => $success,
+				'message' => $message
+			));
+			
+			break;
+		
 		case 'reorder':
 			header('Content-type: application/json');
 			
