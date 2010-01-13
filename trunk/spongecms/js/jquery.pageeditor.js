@@ -228,7 +228,7 @@ $(document).ready(function() {
 								}),
 								dataType: 'json',
 								beforeSend: function() {
-									$(drop).find(".status").show().text('saving...');
+									$(drop).find(".status").show().text('working...');
 								},
 								success: function(data) {
 									$(drop).find(".status").text(data.message);
@@ -264,7 +264,8 @@ $(document).ready(function() {
 							},
 							dataType: 'json',
 							beforeSend: function() {
-								$(drop).find(".status").show().text('saving...');
+								$(drop).find(".more").slideUp();
+								$(drop).find(".status").show().text('working...');
 							},
 							success: function(data) {
 								$(drop).find(".status").text(data.message);
@@ -325,6 +326,7 @@ $(document).ready(function() {
 								},
 								dataType: 'json',
 								beforeSend: function() {
+									$(drop).find(".more").slideUp();
 									$(drop).find(".status").show().text('working...');
 								},
 								success: function(data) {
