@@ -31,9 +31,6 @@ if ($zvfpcms)
 	// Edit instructions
 	echo ' '.str_replace('[e]','<img src="'.$location['images'].'/page_edit.png" alt="" />',$txt['admin_panel_manpages_edit']);
 	
-	// Delete instructions
-	echo ' '.str_replace('[d]','<img src="'.$location['images'].'/trash.png" alt="" />',$txt['admin_panel_manpages_delt']);
-	
 	echo '<br /><br />';
 
 	// get the largest order id
@@ -72,8 +69,6 @@ function template_page_man_entry($curpage,$pid,$childof,$ptitle,$top=false,$bott
 	
 	echo '
 	<a href="'.$curpage.'&amp;action=edt&amp;pid='.$pid.'"><img src="'.$location['images'].'/page_edit.png" alt="" /></a>
-	<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$location['images'].'/trash.png" alt="" /></a>
-	<a href="javascript:void(0)" onclick="'.($childof==-1?'javascript:alert(\'This page is not a child of anything\')':'javascript:alert(\'This page is the child of page ID '.$childof.'\')').'"><img src="'.$location['images'].'/page_child_'.($childof==-1?'off':'on').'.png" alt="" /></a>
 	
 	<b>'.$ptitle.'</b>';
 }
