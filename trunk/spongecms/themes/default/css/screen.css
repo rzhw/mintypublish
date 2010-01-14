@@ -252,13 +252,13 @@ select
 }
 #admin .drop .more input[type=text]
 {
-	border:1px solid #aaa;
+	border:1px solid #777;
 	width:96px;
+	margin-bottom:2px;
 }
 #admin .drop .more input[type=button]
 {
 	border:1px solid #555;
-	width:32px;
 	border-radius:2px;
 	-moz-border-radius:2px;
 	-webkit-border-radius:2px;

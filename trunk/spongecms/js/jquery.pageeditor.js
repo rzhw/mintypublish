@@ -1,4 +1,4 @@
-/*
+/**
  * mintypublish Content Management System
  * Copyright (c) 2009-2010 a2h
  * http://github.com/a2h/mintypublish
@@ -18,7 +18,6 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 // this code was written for the default theme
@@ -151,11 +150,14 @@ $(document).ready(function() {
 					}
 				});
 				
-				// give the buttons appropriate actions
+				/// MEDIA ADDING
+				
 				$("#admin_list_add").click(function() {
 					// make this use the .more div instead of the inbuilt func for consistency
 					$.tree.focused().create(false,-1);
 				});
+				
+				/// MEDIA VIEWING
 				
 				$("#admin_list_view").click(function() {
 					id = $.tree.focused().selected;
@@ -254,11 +256,16 @@ $(document).ready(function() {
 							<label for="page_title_short">Title (short):</label> <input type="text" id="page_title_short" />\
 						</p>\
 						<p>\
-							<input type="button" value="Go!" />\
+							<input type="button" value="add" />\
+							<input type="button" value="cancel" />\
 						</p>\
 					').slideDown();
 					
-					$(drop).find(".more input[type=button]").click(function() {
+					$(drop).find(".more input[type=button]:last").click(function() {
+						$(drop).find(".more").slideUp();
+					});
+					
+					$(drop).find(".more input[type=button]:first").click(function() {
 						$.ajax({
 							type: 'post',
 							url: loc['admin2'] + '/pages.php?type=add',
@@ -312,20 +319,20 @@ $(document).ready(function() {
 						$(drop).find(".more").hide().html('\
 							<p><b>Delete page</b></p>\
 							<p>\
-								Are you sure you want to do this?\
+								Please confirm that you want to delete this page. It cannot be recovered after deletion.\
 							</p>\
 							<p>\
-								<input type="button" value="No" />\
-								<input type="button" value="Yes" />\
+								<input type="button" value="delete" />\
+								<input type="button" value="cancel" />\
 							</p>\
 						').slideDown();
 						
-						$(drop).find(".more input[type=button]:first").click(function() {
+						$(drop).find(".more input[type=button]:last").click(function() {
 							$.tree.focused().lock(false);
 							$(drop).find(".more").slideUp();
 						});
 						
-						$(drop).find(".more input[type=button]:last").click(function() {
+						$(drop).find(".more input[type=button]:first").click(function() {
 							$.ajax({
 								type: 'post',
 								url: loc['admin2'] + '/pages.php?type=delete',
