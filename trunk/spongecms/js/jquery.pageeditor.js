@@ -192,6 +192,8 @@ $(document).ready(function() {
 					dataType: 'json',
 					beforeSend: function(file) {
 						alert('The file you selected is called '+file);
+						//$.tree.focused().lock(true);
+						//$(drop).find(".status").show().text('working...');
 						return false;
 					}
 				});
