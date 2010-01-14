@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * mintypublish Content Management System
  * Copyright (c) 2009-2010 a2h
  * http://github.com/a2h/mintypublish
@@ -19,7 +19,6 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 session_start();
@@ -65,7 +64,8 @@ if (isloggedin())
 			
 			// add the page
 			$success = true;
-			mysql_query("INSERT INTO pages (page_orderid, page_title_full, page_title_menu, page_content) VALUES ($orderid, '$titlefull', '$titleshort', '<p>Here is some example content. Let\'s get editing!</p>')") or $success = false;
+			$examplecontent = 'Here is some example content. Let\'s get editing!';
+			mysql_query("INSERT INTO pages (page_orderid, page_title_full, page_title_menu, page_content) VALUES ($orderid, '$titlefull', '$titleshort', '<p>$examplecontent</p>')") or $success = false;
 			
 			// message
 			if ($success)
