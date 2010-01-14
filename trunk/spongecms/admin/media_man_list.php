@@ -26,44 +26,12 @@ if ($zvfpcms)
 {
 	echo '<h3>Information</h3>';
 	
-	echo 'Recognised filetypes are: <b>VIDEO</b> flv, mp4 <b>IMAGES</b> png, gif, jpg <b>MUSIC</b> mp3<br />
-	<br />
-	Clicking on <img src="'.$location['images'].'/trash.png" alt="" /> will delete a file.<br />
-	<br />
-	';
+	echo 'Recognised filetypes are: <b>VIDEO</b> flv, mp4 <b>IMAGES</b> png, gif, jpg <b>MUSIC</b> mp3<br /><br />';
 	
 	echo '<h3>Upload</h3>';
 	
 	echo '<form method="post" action="'.$location['admin'].'&amp;s=med&amp;action=up" enctype="multipart/form-data">
 	<input name="uploadedfile" type="file" /><input type="submit" value="Upload" />
 	<br /><br />';
-	
-	echo '<h3>Media</h3>';
-	
-	echo '<br /><br />';
-	
-	$i=0;
-	while ($row = mysql_fetch_array($mediaquery))
-	{
-		entry_media($location['admin'].'&amp;s=med',$row['media_id'],$row['media_filename']);
-		echo '<br />';
-		$i+=1;
-	}
-}
-
-/*
- * Summary:      Outputs a page manager listing entry for a specified page
- * Parameters:   $curpage - URL of the page using this function
- *               $pid - numerical ID of the page
- *               $ptitle - text title of the page
- * Return:       Nothing
- */
-function entry_media($curpage,$pid,$ptitle)
-{
-	global $location;
-	
-	echo '<a href="'.$curpage.'&amp;action=del&amp;pid='.$pid.'"><img src="'.$location['images'].'/trash.png" alt="" /></a>
-	
-	<b>'.$ptitle.' ('.get_file_type($ptitle).')</b>';
 }
 ?>
