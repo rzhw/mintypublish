@@ -64,7 +64,7 @@ if (isloggedin())
 			
 			// add the page
 			$success = true;
-			$examplecontent = 'Here is some example content. Let\'s get editing!';
+			$examplecontent = str_replace("'","\'",'Here is some example content. Let\'s get editing!');
 			mysql_query("INSERT INTO pages (page_orderid, page_title_full, page_title_menu, page_content) VALUES ($orderid, '$titlefull', '$titleshort', '<p>$examplecontent</p>')") or $success = false;
 			
 			// message
