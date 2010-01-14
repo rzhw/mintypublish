@@ -186,9 +186,14 @@ $(document).ready(function() {
 				
 				/// FILE ADDING
 				
-				$("#admin_list_add").click(function() {
-					// make this use the .more div instead of the inbuilt func for consistency
-					$.tree.focused().create(false,-1);
+				$("#admin_list_add").ajaxUpload({
+					type: 'post',
+					url: loc['admin2'] + '/files.php?type=upload',
+					dataType: 'json',
+					beforeSend: function(file) {
+						alert('The file you selected is called '+file);
+						return false;
+					}
 				});
 				
 				/// FILE VIEWING
