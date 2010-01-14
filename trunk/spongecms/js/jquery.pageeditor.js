@@ -197,6 +197,20 @@ $(document).ready(function() {
 						//$.tree.focused().lock(true);
 						//$(drop).find(".status").show().text('working...');
 						return false;
+					},
+					success: function(data) {
+						$.tree.focused().lock(false);
+						
+						$(drop).find(".status").text(data.message);
+						
+						if (data.success)
+						{
+							$.tree.focused().refresh();
+						}
+						
+						setTimeout(function() {
+							$(drop).find(".status").fadeOut(2000);
+						}, 1000);
 					}
 				});
 				
