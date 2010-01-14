@@ -165,7 +165,7 @@ $(document).ready(function() {
 				
 				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
-					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?type=get&fidprefix=' + fidprefix } },
+					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?' + $.param({'type':'get','fidprefix':fidprefix}) } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
 					types : {
 						'default' : {
@@ -277,7 +277,7 @@ $(document).ready(function() {
 				
 				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
-					data : { type : 'json' , opts : { url : loc['admin2'] + '/pages.php?type=get&pidprefix=' + pidprefix } },
+					data : { type : 'json' , opts : { url : loc['admin2'] + '/pages.php?' + $.param({'type':'get','pidprefix':pidprefix}) } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
 					types : {
 						'default' : {
