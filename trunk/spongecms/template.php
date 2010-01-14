@@ -42,16 +42,16 @@ class PageBuilder
 		$this->title = 'Unnamed Page';
 		$this->addCSS($this->location['root'].'/global.css');
 		$this->addCSS($this->location['styles'].'/screen.css');
-		$this->addJS($location['js'].'/jquery-1.3.2.min.js');
-		$this->addJS($location['js'].'/jquery.tree.min.js');
-		$this->addJS($location['js'].'/html5.js');
-		$this->addJS($location['js'].'/cookies.js');
-		$this->addJS($location['js'].'/flowplayer-3.1.0.min.js');
+		$this->addJS($this->location['js'].'/jquery-1.3.2.min.js');
+		$this->addJS($this->location['js'].'/html5.js');
+		$this->addJS($this->location['js'].'/flowplayer-3.1.0.min.js');
 		
 		// admins need extra stuff loaded
 		if (isloggedin())
-		{			
+		{
 			$this->addJS($this->location['js'].'/tiny_mce/tiny_mce.js');
+			$this->addJS($this->location['js'].'/ajaxupload.min.js');
+			$this->addJS($this->location['js'].'/jquery.tree.min.js');
 			$this->addJS($this->location['js'].'/jquery.json-2.2.min.js');
 			$this->addJS($this->location['js'].'/jquery.pageeditor.js');
 		}

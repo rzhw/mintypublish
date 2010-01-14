@@ -24,6 +24,35 @@
 // it needs changes to allow flexibility for other themes
 // i.e. not having to use the same base html
 
+/// ATTACH AJAX UPLOAD TO JQUERY
+
+if (typeof(AjaxUpload) == 'function')
+{
+	jQuery.fn.ajaxUpload = function(options) {
+		if (options.type.toLowerCase() == 'get')
+		{
+			alert('ajaxUpload: GET is not a valid parameter for this method');
+		}
+		else
+		{
+			var settings = $.extend({}, {
+				action: options.url,
+				name: options.name,
+				data: options.data,
+				autoSubmit: options.autoSubmit,
+				responseType: options.dataType,
+				onChange: options.select,
+				onSubmit: options.beforeSend,
+				onComplete: options.success,
+			});
+			
+			new AjaxUpload(this, settings);
+		}
+	}
+}
+
+/// INITIALISE TINYMCE
+
 tinyMCE.init({
 	mode : "none",
 	theme : "advanced",
@@ -40,7 +69,8 @@ tinyMCE.init({
 });
 
 $(document).ready(function() {
-	/// mode blocks
+	/// MODE BLOCKS
+	
 	var curmode = 'preview';
 	$("#admin .block.mode").click(function() {
 		// variables
@@ -95,7 +125,8 @@ $(document).ready(function() {
 		}
 	});
 	
-	/// button blocks	
+	/// BUTTON BLOCKS
+	
 	var drop = $('<div class="drop">\
 	              <div class="content"></div>\
 	              <div class="status"></div>\
