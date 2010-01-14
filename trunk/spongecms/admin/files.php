@@ -51,7 +51,7 @@ if (isloggedin())
 				$key = array_search(filetypes('identify',$file['media_filename'],true),$parents);
 				$output[$key]['children'][] = array(
 					'data' => $file['media_filename'],
-					'attributes' => array('rel' => 'file', 'data-id' => $file['media_id'])
+					'attributes' => array('rel' => 'file', 'id' => $_GET['fidprefix'] . $file['media_id'])
 				);
 			}
 			

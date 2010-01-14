@@ -129,9 +129,12 @@ $(document).ready(function() {
 		switch (type)
 		{
 			case 'files':
+				// prefix for ids
+				var fidprefix = 'fid_';
+				
 				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
-					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?type=get' } },
+					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?type=get&fidprefix=' + fidprefix } },
 					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
 					types : {
 						'default' : {
@@ -164,7 +167,7 @@ $(document).ready(function() {
 					if (id)
 					{
 						// remember that this depends on the old admin panel functionality!
-						location.href = loc['admin'] + '&s=med&action=prv&pid=' + $(id).attr('data-id');
+						location.href = loc['admin'] + '&s=med&action=prv&pid=' + $(id).attr('id').replace(fidprefix,'');
 					}
 					else
 					{
@@ -201,7 +204,7 @@ $(document).ready(function() {
 								type: 'post',
 								url: loc['admin2'] + '/files.php?type=delete',
 								data: {
-									file_id: $(id).attr('id').replace(pidprefix,'')
+									file_id: $(id).attr('id').replace(fidprefix,'')
 								},
 								dataType: 'json',
 								beforeSend: function() {
@@ -234,7 +237,7 @@ $(document).ready(function() {
 			
 			case 'pages':
 				// prefix for ids
-				var pidprefix = 'id_';
+				var pidprefix = 'pid_';
 				
 				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
