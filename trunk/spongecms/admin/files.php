@@ -25,6 +25,8 @@ session_start();
 require_once('../config.php');
 require_once('../functions.php');
 
+$filedir = '../' . str_replace($location['root'],'',$location['media']);
+
 if (isloggedin())
 {
 	switch ($_GET['type'])
@@ -60,6 +62,43 @@ if (isloggedin())
 			
 			break;
 		
+		case 'upload':
+			// the ajaxupload script uses an iframe to get the response so this can't be used
+			//header('Content-type: application/json');
+			
+			// work out the destination for the file (1, 1, 1, uh... 1!)
+			$filename = basename($_FILES['mintyupload']['name']);
+			$filedest = $filedir . '/' . $filename;
+			
+			// success tracking
+			$success = true;
+			
+			// incoming!
+			if (!move_uploaded_file($_FILES['mintyupload']['tmp_name'], $filedest))
+			{
+				$success = false;
+			}
+			
+			// add it to the db
+			mysql_query("INSERT INTO media (media_filename) VALUES('$filename')") or $success = false;
+			
+			// message
+			if ($success)
+			{
+				$message = 'file upload succeeded! (' . $filename . ')';
+			}
+			else
+			{
+				$message = 'file upload failed!';
+			}
+			
+			echo json_encode(array(
+				'success' => $success,
+				'message' => $message
+			));
+			
+			break;
+		
 		case 'delete':
 			header('Content-type: application/json');
 			
@@ -75,7 +114,7 @@ if (isloggedin())
 			{
 				try
 				{
-					unlink('../' . str_replace($location['root'],'',$location['media']) . '/' . $file['media_filename']);
+					unlink($filedir . '/' . $file['media_filename']);
 				}
 				catch (Exception $e)
 				{

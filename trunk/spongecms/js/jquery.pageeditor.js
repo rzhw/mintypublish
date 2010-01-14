@@ -191,12 +191,11 @@ $(document).ready(function() {
 				$("#admin_list_add").ajaxUpload({
 					type: 'post',
 					url: loc['admin2'] + '/files.php?type=upload',
+					name: 'mintyupload',
 					dataType: 'json',
 					beforeSend: function(file) {
-						alert('The file you selected is called '+file);
-						//$.tree.focused().lock(true);
-						//$(drop).find(".status").show().text('working...');
-						return false;
+						$.tree.focused().lock(true);
+						$(drop).find(".status").show().text('working...');
 					},
 					success: function(data) {
 						$.tree.focused().lock(false);
