@@ -26,32 +26,35 @@
 
 /// ATTACH AJAX UPLOAD TO JQUERY
 
-if (typeof(AjaxUpload) == 'function')
-{
-	jQuery.fn.ajaxUpload = function(options) {
-		if (options.type.toLowerCase() == 'get')
-		{
-			alert('ajaxUpload: GET is not a valid parameter for this method');
-		}
-		else
-		{
-			var settings = $.extend({}, {
-				action: options.url,
-				name: options.name,
-				data: options.data,
-				autoSubmit: options.autoSubmit,
-				responseType: options.dataType,
-				onChange: options.select,
-				onSubmit: options.beforeSend,
-				onComplete: function(file, response) {
-					options.success(response, file);
-				}
-			});
-			
-			new AjaxUpload(this, settings);
+(function($){
+	if (typeof(AjaxUpload) == 'function')
+	{
+		$.fn.ajaxUpload = function(options) {
+			// GET is not supported by the ajax upload script, maybe should add it and send it upstream
+			if (options.type.toLowerCase() == 'get')
+			{
+				alert('ajaxUpload: GET is not a valid parameter for this method');
+			}
+			else
+			{
+				var settings = $.extend({}, {
+					action: options.url,
+					name: options.name,
+					data: options.data,
+					autoSubmit: options.autoSubmit,
+					responseType: options.dataType,
+					onChange: options.select,
+					onSubmit: options.beforeSend,
+					onComplete: function(file, response) {
+						options.success(response, file);
+					}
+				});
+				
+				new AjaxUpload(this, settings);
+			}
 		}
 	}
-}
+})(jQuery);
 
 /// INITIALISE TINYMCE
 
