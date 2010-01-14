@@ -43,7 +43,9 @@ if (typeof(AjaxUpload) == 'function')
 				responseType: options.dataType,
 				onChange: options.select,
 				onSubmit: options.beforeSend,
-				onComplete: options.success,
+				onComplete: function(file, response) {
+					options.success(response, file);
+				}
 			});
 			
 			new AjaxUpload(this, settings);
