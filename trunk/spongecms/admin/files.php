@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * mintypublish Content Management System
  * Copyright (c) 2009-2010 a2h
  * http://github.com/a2h/mintypublish
@@ -19,7 +19,6 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 session_start();
@@ -58,6 +57,42 @@ if (isloggedin())
 			
 			// finally!
 			echo json_encode($output);
+			
+			break;
+		
+		case 'delete':
+			header('Content-type: application/json');
+			
+			// info goes in
+			$fid = $_POST['file_id'];
+			
+			// success tracking
+			$success = true;
+			
+			// get the filename to delete
+			$filea = mysql_query("SELECT media_filename FROM media WHERE media_id = $fid LIMIT 1");
+			while ($file = mysql_fetch_array($filea))
+			{
+				unlink($file['media_filename']) or $success = false;
+			}
+			
+			// delete the file
+			mysql_query("DELETE FROM media WHERE media_id = $fid") or $success = false;
+			
+			// message
+			if ($success)
+			{
+				$message = 'deleted!';
+			}
+			else
+			{
+				$message = 'delete failed!';
+			}
+			
+			echo json_encode(array(
+				'success' => $success,
+				'message' => $message
+			));
 			
 			break;
 	}

@@ -150,14 +150,14 @@ $(document).ready(function() {
 					}
 				});
 				
-				/// MEDIA ADDING
+				/// FILE ADDING
 				
 				$("#admin_list_add").click(function() {
 					// make this use the .more div instead of the inbuilt func for consistency
 					$.tree.focused().create(false,-1);
 				});
 				
-				/// MEDIA VIEWING
+				/// FILE VIEWING
 				
 				$("#admin_list_view").click(function() {
 					id = $.tree.focused().selected;
@@ -171,6 +171,65 @@ $(document).ready(function() {
 						alert('You haven\'t selected anything!');
 					}
 				});
+				
+				/// FILE DELETING
+				
+				$("#admin_list_delete").click(function() {
+					id = $.tree.focused().selected;
+					if (id)
+					{
+						$.tree.focused().lock(true);
+						
+						$(drop).find(".more").hide().html('\
+							<p><b>Delete file</b></p>\
+							<p>\
+								Please confirm that you want to delete this file. It cannot be recovered after deletion.\
+							</p>\
+							<p>\
+								<input type="button" value="delete" />\
+								<input type="button" value="cancel" />\
+							</p>\
+						').slideDown();
+						
+						$(drop).find(".more input[type=button]:last").click(function() {
+							$.tree.focused().lock(false);
+							$(drop).find(".more").slideUp();
+						});
+						
+						$(drop).find(".more input[type=button]:first").click(function() {
+							$.ajax({
+								type: 'post',
+								url: loc['admin2'] + '/files.php?type=delete',
+								data: {
+									file_id: $(id).attr('id').replace(pidprefix,'')
+								},
+								dataType: 'json',
+								beforeSend: function() {
+									$(drop).find(".more").slideUp();
+									$(drop).find(".status").show().text('working...');
+								},
+								success: function(data) {
+									$(drop).find(".status").text(data.message);
+									
+									if (data.success)
+									{
+										$.tree.focused().lock(false);
+										$.tree.focused().refresh();
+									}
+									
+									setTimeout(function() {
+										$(drop).find(".status").fadeOut(2000);
+									}, 1000);
+								}
+							});
+						});
+					}
+					else
+					{
+						alert('You haven\'t selected anything!');
+					}
+				});
+				
 				break;
 			
 			case 'pages':
@@ -365,6 +424,7 @@ $(document).ready(function() {
 						alert('You haven\'t selected anything!');
 					}
 				});
+				
 				break;
 			
 			case 'config':
