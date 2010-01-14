@@ -73,7 +73,14 @@ if (isloggedin())
 			$filea = mysql_query("SELECT media_filename FROM media WHERE media_id = $fid LIMIT 1");
 			while ($file = mysql_fetch_array($filea))
 			{
-				unlink($file['media_filename']) or $success = false;
+				try
+				{
+					unlink('../' . str_replace($location['root'],'',$location['media']) . '/' . $file['media_filename']);
+				}
+				catch (Exception $e)
+				{
+					$success = false;
+				}
 			}
 			
 			// delete the file
