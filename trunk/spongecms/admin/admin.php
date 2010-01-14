@@ -48,9 +48,6 @@ if ($zvfpcms)
 				<li onclick="location.href=\''.$location['admin'].'&amp;s=man\'">
 					<img src="'.$location['images'].'/admin_man_pg.png" alt="" /> Pages
 				</li>
-				<li onclick="location.href=\''.$location['admin'].'&amp;s=med\'">
-					<img src="'.$location['images'].'/admin_man_med.png" alt="" /> Media
-				</li>
 				<li onclick="location.href=\''.$location['admin'].'&amp;s=cfg\'">
 					<img src="'.$location['images'].'/admin_man_cfg.png" alt="" /> Config
 				</li>
