@@ -100,7 +100,7 @@ $(document).ready(function() {
 		{
 			cont = tinyMCE.get(ta).getContent();
 			tinyMCE.execCommand('mceRemoveControl', false, ta);
-			$("#"+ta).hide();
+			$("#content_editing").hide();
 			$("#content_content").html(cont).show();
 		}
 		
@@ -114,14 +114,20 @@ $(document).ready(function() {
 				if ($("#"+ta).length == 0)
 				{
 					$("#content").wrapInner('<div id="content_content" style="display:none;"></div>');
-					$("#content").append('<textarea id="'+ta+'"></textarea>');
+					$("#content").append('<form id="content_editing" onsubmit="$(this).submit();return false;"><textarea id="'+ta+'"></textarea></form>');
+					/*! tinymce doesn't detect jquery .submit binds, find a better way to do this (or maybe even edit the tinymce save plugin) */
+					$("#content_editing").submit(function() {
+						alert('Saving doesn\'t work yet, you need to use the old admin panel for now');
+						return false;
+					});
 					$("#"+ta).text($("#content_content").html());
 				}
 				else
 				{
 					$("#content_content").hide();
-					$("#"+ta).show();
+					$("#content_editing").show();
 				}
+				
 				var contwidth = $("#content").width();
 				var contheight = $("#content").height();
 				$("#"+ta).css({'width':contwidth});
