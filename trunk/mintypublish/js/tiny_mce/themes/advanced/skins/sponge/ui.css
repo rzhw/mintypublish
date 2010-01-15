@@ -4,9 +4,9 @@
 .spongeSkin table td {vertical-align:middle}
 
 /* Containers */
-.spongeSkin table {background:#F0F0EE}
-.spongeSkin iframe {display:block; background:transparent; border:1px dashed #cfcfcf; padding:1px; position:relative; left:-2px; top:-2px;}
-.spongeSkin .mceToolbar {height:26px}
+.spongeSkin table {background:transparent}
+.spongeSkin iframe {display:block; background:transparent; border:1px dashed #dedede; padding:1px; position:relative; left:-2px; top:-2px;}
+.spongeSkin .mceToolbar {background:#F0F0EE;height:26px}
 
 /* External */
 .spongeSkin .mceExternalToolbar {position:absolute; border:1px solid #ABC6DD; border-bottom:0; display:none}
