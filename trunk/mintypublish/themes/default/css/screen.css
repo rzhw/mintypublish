@@ -42,15 +42,21 @@ td
 	text-align:left;
 }
 
-#header, #content
+#content
 {
-	width:1024px;
 	margin:0px auto;
+	width:1024px;
 }
 
 #header
 {
 	color:#fff;
+}
+
+#header #title
+{
+	margin:0px auto;
+	width:1024px;
 }
 
 #header h1
@@ -62,14 +68,17 @@ td
 
 #menu_wrapper
 {
+	background:#464646;
 	color:#fff;
+	border-top:1px solid #545454;
 	padding-top:10px;
 	height:26px;
 }
 
 #menu_wrapper nav
 {
-	float:left;
+	margin:0px auto;
+	width:1024px;
 }
 
 #menu_wrapper nav ul
