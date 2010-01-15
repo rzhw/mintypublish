@@ -24,6 +24,6 @@
 
 	<script type="text/javascript">
 		// temporary
-		$("head").append('<style type="text/css">body{margin-top:24px !important;}</style>');
+		$("head").append('<style type="text/css">#global_wrapper{margin-top:24px !important;}</style>');
 	</script>
 </aside>
