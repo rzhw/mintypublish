@@ -53,7 +53,7 @@ class PageBuilder
 			$this->addJS($this->location['js'].'/ajaxupload.min.js');
 			$this->addJS($this->location['js'].'/jquery.tree.min.js');
 			$this->addJS($this->location['js'].'/jquery.json-2.2.min.js');
-			$this->addJS($this->location['js'].'/jquery.pageeditor.js');
+			$this->addJS($this->location['js'].'/mintypublish.admin.js');
 		}
 		
 		// start capturing the content
