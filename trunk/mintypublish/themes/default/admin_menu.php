@@ -16,7 +16,7 @@
 			<img src="<?php echo $location['images']; ?>/admin_config.png" alt="Config" />
 		</div>
 		<div class="sep"></div>
-		<div class="block">
+		<div class="block button" data-type="profile">
 			<img src="<?php echo $location['images']; ?>/admin_user.png" alt="Logged in as " />
 			<span><?php echo $_SESSION['uname']; ?></span>
 		</div>

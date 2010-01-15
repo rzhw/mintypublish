@@ -151,14 +151,14 @@ $(document).ready(function() {
 		// variables
 		var type = $(this).attr('data-type');
 		
-		// using drop
-		if (type == 'files' || type == 'pages')
+		// prepare the drop
+		if (type != 'config')
 		{
-			$(drop).show().css({
-				'position': 'fixed',
-				'left': $(this).position().left + $(this).width() + 8 - $(drop).width(),
-				'top': $("#admin").height()
-			});
+		$(drop).show().css({
+			'position': 'fixed',
+			'left': $(this).position().left + $(this).width() + 8 - $(drop).width(),
+			'top': $("#admin").height()
+		});
 		}
 		
 		// now what?
@@ -491,6 +491,14 @@ $(document).ready(function() {
 			
 			case 'config':
 				location.href = loc['admin'];
+				break;
+			
+			case 'profile':
+				$(drop).find(".content").html('\
+					Hello there ' + $(this).find("span").text() + '!<br /><br />\
+					Sooner or later there will be profile related options here, not yet though.<br /><br />\
+					Though you could always <a href="' + loc['admin'] + '&s=logout">logout</a> if you want to.\
+				');
 				break;
 		}
 	});
