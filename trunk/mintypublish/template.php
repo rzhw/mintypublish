@@ -124,6 +124,8 @@ class PageBuilder
 		}
 		echo '</script>'."\n";
 		
+		echo "\t\t".'<meta name="generator" content="mintypublish pre-alpha" />'."\n";
+		
 		foreach ($this->stylesheets as $stylesheet)
 		{
 			echo "\t\t".'<link rel="stylesheet" type="text/css" href="'.$stylesheet.'" />'."\n";
