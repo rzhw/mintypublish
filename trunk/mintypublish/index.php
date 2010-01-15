@@ -107,6 +107,7 @@ if ($showscreen)
 			#instruction
 			{
 				padding-top:96px;
+				text-shadow:0px 1px 1px rgba(0,0,0,0.75);
 			}
 			form
 			{
@@ -125,14 +126,15 @@ if ($showscreen)
 				border-radius:2px;
 				-moz-border-radius:2px;
 				-webkit-border-radius:2px;
-				background:#111;
-				border:1px solid #444;
-				color:#888;
+				background:#aaa;
+				border-top:1px solid #777;
+				border-right:1px solid #bbb;
+				border-bottom:1px solid #bbb;
+				border-left:1px solid #777;
+				color:#333;
 				font-family:verdana;
 				font-size:16px;
 				padding:8px;
-				opacity:0.5;
-				filter:alpha(opacity=50);
 			}
 			input[type=submit]
 			{
