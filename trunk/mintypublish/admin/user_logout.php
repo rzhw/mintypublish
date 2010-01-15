@@ -43,7 +43,7 @@ if ($zvfpcms)
 		
 		// congraulations, you have helped destroy ze vorld!
 		settopmessage(2,'Successfully logged out!');
-		pageredirect('index.php?p=admin');
+		header('Location: ./');
 	}
 }
 ?>
