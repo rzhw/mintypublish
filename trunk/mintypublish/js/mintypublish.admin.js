@@ -82,6 +82,12 @@ $(document).ready(function() {
 		var mode = $(this).attr('data-type');
 		var ta = 'content_edit';
 		
+		// status holder
+		if ($("#admin .editstatus").length == 0)
+		{
+			$("#admin .block.mode[data-type=edit]").after('<div class="block editstatus"></div>');
+		}
+		
 		// don't rexecute everything
 		if (mode == curmode) { return false; }
 		
