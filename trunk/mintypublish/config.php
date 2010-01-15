@@ -18,7 +18,6 @@ $mysql['password']='';
 // paths //
 ///////////
 
-$location['root']='mintypublish';
 $location['admin2']=$location['root'].'/admin';
 $location['theme']=$location['root'].'/themes/'.$cfg['theme'];
 $location['theme_nr']='themes/'.$cfg['theme'];
