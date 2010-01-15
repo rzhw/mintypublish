@@ -12,4 +12,4 @@ Getting started
 * Go into `trunk/mintypublish/config.php` and edit the MySQL settings as appropriate
 * Use a script such as phpMyAdmin to run the `db_dump_mysql.txt` file
 * Go to where you've installed mintypublish, and bask in the glory!
-* To get the administration tools, go to `index.php?p=admin`
+* To get the administration tools, say you have mintypublish in `http://yoursite.com/mp/`, you'd go to `http://yoursite.com/mp/mintypublish/`
