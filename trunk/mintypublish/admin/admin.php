@@ -56,6 +56,26 @@ if ($zvfpcms)
 		{
 			case "add":
 				include($location['admin2'].'/page_man_add.php');
+			case "man":
+				echo '<h2>'.$txt['admin_panel_manpages'].'</h2>
+				<br />';
+				
+				if (!isset($_GET["action"]))
+				{
+					include($location['admin2'].'/page_man_list.php');
+				}
+				else
+				{
+					switch ($_GET["action"])
+					{
+						case "edt":
+							include($location['admin2'].'/page_man_edit.php');
+							break;
+						default:
+							echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
+							break;
+					}
+				}
 				break;
 			case "med":
 				echo '<h2>Manage Media</h2>
