@@ -28,6 +28,8 @@ require_once('functions.php');
 if (!isloggedin())
 {
 
+$showscreen = true;
+
 if (isset($_POST['sublogin']))
 {
 	$isuser = isexistinguser($_POST['uname'],$_POST['pwd']);
@@ -47,15 +49,16 @@ if (isset($_POST['sublogin']))
 		settopmessage(2,'Successfully logged in!');
 		
 		header('Location: ../');
+		
+		$showscreen = false;
 	}
 	else
 	{
-		settopmessage(0,'Login failed!');
-		
-		header('Location: ../');
+		$error = true;
 	}
 }
-else
+
+if ($showscreen)
 {
 ?>
 
