@@ -160,7 +160,7 @@ select
 
 #admin
 {
-	background:#181818 url('../img/admin_logo.png') right -4px no-repeat;
+	background:#181818;
 	box-shadow:0px 0px 6px #000;
 	-moz-box-shadow:0px 0px 6px #000;
 	-webkit-box-shadow:0px 0px 6px #000;
