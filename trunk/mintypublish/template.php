@@ -101,6 +101,8 @@ class PageBuilder
 	
 	function outputBodyPre()
 	{
+		global $pid;
+		echo '<div id="pid" style="display:none;">' . $pid . '</div>'."\n";
 		echo $this->bodypre;
 	}
 	

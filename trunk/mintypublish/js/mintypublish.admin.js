@@ -117,7 +117,10 @@ $(document).ready(function() {
 					$("#content").append('<form id="content_editing" onsubmit="$(this).submit();return false;"><textarea id="'+ta+'"></textarea></form>');
 					/*! tinymce doesn't detect jquery .submit binds, find a better way to do this (or maybe even edit the tinymce save plugin) */
 					$("#content_editing").submit(function() {
+						/// PAGE SAVING
+						
 						alert('Saving doesn\'t work yet, you need to use the old admin panel for now');
+						
 						return false;
 					});
 					$("#"+ta).text($("#content_content").html());
