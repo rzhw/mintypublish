@@ -167,14 +167,11 @@ $(document).ready(function() {
 		var type = $(this).attr('data-type');
 		
 		// prepare the drop
-		if (type != 'config')
-		{
 		$(drop).show().css({
 			'position': 'fixed',
 			'left': $(this).position().left + $(this).width() + 8 - $(drop).width(),
 			'top': $("#admin").height()
 		});
-		}
 		
 		// now what?
 		switch (type)
@@ -505,7 +502,11 @@ $(document).ready(function() {
 				break;
 			
 			case 'config':
-				location.href = loc['admin'];
+				$(drop).find(".content").html('\
+					Hello there!<br /><br />\
+					Sooner or later there will be options to configure your site here, not yet though.<br /><br />\
+					Looking for the <a href="' + loc['admin'] + '">old admin panel</a>?\
+				');
 				break;
 			
 			case 'profile':
