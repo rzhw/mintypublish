@@ -1,8 +1,8 @@
 <?php
-/*
- * Sponge Content Management System
- * Copyright (c) 2009 a2h - http://a2h.uni.cc/
- * http://zvfpcms.sourceforge.net/
+/**
+ * mintypublish Content Management System
+ * Copyright (c) 2009-2010 a2h
+ * http://github.com/a2h/mintypublish
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -19,7 +19,6 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 session_start();
@@ -37,9 +36,9 @@ else
 	$pid = 1;
 
 // the config
-require_once('spongecms/config.php');
+require_once('mintypublish/config.php');
 
-// and now to include files from the spongecms folder!
+// and now to include files from the root folder!
 require_once($location['root'].'/functions.php');
 require_once($location['root'].'/template.php');
 require_once($location['root'].'/lang/en.php');
@@ -114,7 +113,7 @@ $mediaquery = mysql_query("SELECT * FROM media");
 
 // NOW include the chosen language, so that non translated lines aren't broken
 if ($cfg[$cfg_language]['value'] != "en")
-	require_once("spongecms/lang/".$cfg[$cfg_language]['value'].".php");
+	require_once($location['root']."/lang/".$cfg[$cfg_language]['value'].".php");
 
 // you need at least php 5.2.0
 if (version_compare('5.2.0',PHP_VERSION,'>'))
