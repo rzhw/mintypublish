@@ -1,8 +1,8 @@
 <?php
-/*
- * Sponge Content Management System
- * Copyright (c) 2009 a2h - http://a2h.uni.cc/
- * http://zvfpcms.sourceforge.net/
+/**
+ * mintypublish Content Management System
+ * Copyright (c) 2009-2010 a2h
+ * http://github.com/a2h/mintypublish
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -19,17 +19,13 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 if ($zvfpcms)
 {	
 	if (!isloggedin())
 	{
-		if ($_GET['s'] == 'register')
-			include($location['admin2'].'/user_register.php');
-		else
-			include($location['admin2'].'/user_login.php');
+		header('Location: mintypublish');
 	}
 	else
 	{
@@ -61,60 +57,18 @@ if ($zvfpcms)
 			case "add":
 				include($location['admin2'].'/page_man_add.php');
 				break;
-			case "man":
-				echo '<h2>'.$txt['admin_panel_manpages'].'</h2>
-				<br />';
-				
-				if (!isset($_GET["action"]))
-				{
-					include($location['admin2'].'/page_man_list.php');
-				}
-				else
-				{
-					switch ($_GET["action"])
-					{
-						case "edt":
-							include($location['admin2'].'/page_man_edit.php');
-							break;
-						case "del":
-							include($location['admin2'].'/page_man_del.php');
-							break;
-						case "pup":
-							$direction = "up";
-							include($location['admin2'].'/page_man_reorder.php');
-							break;
-						case "pdn":
-							$direction = "down";
-							include($location['admin2'].'/page_man_reorder.php');
-							break;
-						default:
-							echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
-							break;
-					}
-				}
-				break;
 			case "med":
 				echo '<h2>Manage Media</h2>
 				<br />';
 				
-				if (!isset($_GET["action"]))
+				switch ($_GET["action"])
 				{
-					include($location['admin2'].'/media_man_list.php');
-				}
-				else
-				{
-					switch ($_GET["action"])
-					{
-						case "up":
-							include($location['admin2'].'/media_man_upload.php');
-							break;
-						case "prv":
-							include($location['admin2'].'/media_man_preview.php');
-							break;
-						default:
-							echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
-							break;
-					}
+					case "prv":
+						include($location['admin2'].'/media_man_preview.php');
+						break;
+					default:
+						echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
+						break;
 				}
 				break;
 			case "cfg":
@@ -122,9 +76,6 @@ if ($zvfpcms)
 				break;
 			case "logout":
 				include($location['admin2'].'/user_logout.php');
-				break;
-			case "help":
-				include($location['admin2'].'/help.php');
 				break;
 			default:
 				if (isset($_GET["s"]))
