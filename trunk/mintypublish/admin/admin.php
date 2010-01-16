@@ -32,56 +32,20 @@ if ($zvfpcms)
 		// Welcome the user :3
 		echo '
 		<h1>'.$txt['admin_panel_title'].'</h1>
-		<b>Please note: This admin panel\'s functionality is being phased out in favour of the "admin bar" you can see above.
-		As functions here are made redundant they will be removed</b>
+		<br />
+		<b>Please note: Most of this admin panel\'s functionality has been reimplemented in the "admin bar" at the top of the screen and removed from here</b>
+		<br />
 		<br />
 		<br />';
-		
-		// Show the menu
-		echo '
-		<nav id="admin_menu">
-			<ul>
-				<li onclick="location.href=\''.$location['admin'].'&amp;s=cfg\'">
-					<img src="'.$location['images'].'/admin_man_cfg.png" alt="" /> Config
-				</li>
-			</ul>
-		</nav>
-		<div style="clear:both;"></div>';
 		
 		// What subaction?
 		switch ($_GET["s"])
 		{
-			case "med":
-				echo '<h2>Manage Media</h2>
-				<br />';
-				
-				switch ($_GET["action"])
-				{
-					case "prv":
-						include($location['admin2'].'/media_man_preview.php');
-						break;
-					default:
-						echo '<h3>'.$txt['admin_panel_what'].'</h3>'.$txt['admin_panel_actn_noexist'];
-						break;
-				}
-				break;
-			case "cfg":
-				include($location['admin2'].'/config_frontend.php');
-				break;
 			case "logout":
 				include($location['admin2'].'/user_logout.php');
 				break;
 			default:
-				if (isset($_GET["s"]))
-				{
-					echo $txt['admin_panel_actn_noexist'];
-				}
-				else
-				{
-					echo '<h2>Dashboard</h2>';
-					
-					echo 'Hello! There is no dashboard right now. The menu items are along the left. Enjoy!';
-				}
+				include($location['admin2'].'/config_frontend.php');
 				break;
 		}
 	}
