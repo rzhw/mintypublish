@@ -214,6 +214,11 @@ body.admin #global_wrapper
 	filter:alpha(opacity=25);
 }
 
+body.media #admin .mode.off
+{
+	display:none;
+}
+
 #admin .drop
 {
 	background:#333;
