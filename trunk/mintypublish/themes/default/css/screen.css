@@ -220,6 +220,7 @@ select
 	width:176px;
 	padding:8px;
 	font-size:11px;
+	z-index:2;
 }
 
 #admin .drop .list
