@@ -161,30 +161,27 @@ function media_html($fname)
 	$toreturn = '';
 	
 	$ftype = get_file_type($fname);
+	$fpath = $location['files'].'/'.$fname;
 	
 	if ($ftype != "image")
 	{
 		$toreturn .= '
-		<a  
-			 href="'.$location['files'].'/'.$fname.'"  
-			 style="display:block;width:640px;height:'.($ftype == "music" ? '30' : '480').'px"  
-			 id="player"> 
-		</a> 
-
+		<div id="video"></div>
 		<script type="text/javascript">
-			flowplayer("player","'.$location['root'].'/flowplayer-3.1.0.swf"';
-		
-		if ($ftype == "music")
-		{
-			$toreturn .= ',{plugins:{controls:{fullscreen:false,height:30}}}';
-		}
-		
-		$toreturn .= ');
+			var videovars = {
+				' . ($ftype == "music" ? 'mp3' : 'flv') . ': "../' . $fpath . '",
+				autoplay: true
+			};
+			var videoparams = {
+				bgcolor: "#000000",
+				allowFullScreen: true
+			};
+			swfobject.embedSWF(loc["root"] + "/mpw_player.swf", "video", 800, ' . ($ftype == "music" ? 27 : 450+27) . ', "9.0.0", null, videovars, videoparams);
 		</script>';
 	}
 	else
 	{
-		$toreturn .= '<img src="'.$location['files'].'/'.$fname.'" alt="" />';
+		$toreturn .= '<img src="' . $fpath . '" alt="" />';
 	}
 	
 	return $toreturn;
