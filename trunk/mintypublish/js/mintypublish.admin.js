@@ -58,19 +58,22 @@
 
 /// INITIALISE TINYMCE
 
+var pageChanged = false;
+var pageSaved = false;
 tinyMCE.init({
-	mode : "none",
-	theme : "advanced",
-	skin : "sponge",
-	plugins : "autoresize,advlink,contextmenu,filemanager,iespell,imagemanager,inlinepopups,media,mediasponge,nonbreaking,noneditable,pagebreak,paste,safari,save,searchreplace,spellchecker,style,table,visualchars,xhtmlxtras",
-	theme_advanced_buttons1 : "save,|,undo,redo,|,cut,copy,|,pastetext,pasteword,|,bold,italic,underline,strikethrough,sub,sup,|,link,unlink,anchor,|,tablecontrols,|,mediasponge,image,|,code",
-	theme_advanced_buttons2 : "formatselect,fontselect,fontsizeselect,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull,|,backcolor,forecolor,|,bullist,numlist,outdent,indent,blockquote",
-	theme_advanced_buttons3 : "",
-	theme_advanced_toolbar_location : "external",
-	theme_advanced_toolbar_align : "left",
-	theme_advanced_path : false,
-	theme_advanced_resizing : false,
-	content_css : loc['styles']+"/tinymce.css"
+	mode: "none",
+	theme: "advanced",
+	skin: "sponge",
+	plugins: "autoresize,advlink,contextmenu,filemanager,iespell,imagemanager,inlinepopups,media,mediasponge,nonbreaking,noneditable,pagebreak,paste,safari,save,searchreplace,spellchecker,style,table,visualchars,xhtmlxtras",
+	theme_advanced_buttons1: "save,|,undo,redo,|,cut,copy,|,pastetext,pasteword,|,bold,italic,underline,strikethrough,sub,sup,|,link,unlink,anchor,|,tablecontrols,|,mediasponge,image,|,code",
+	theme_advanced_buttons2: "formatselect,fontselect,fontsizeselect,removeformat,|,justifyleft,justifycenter,justifyright,justifyfull,|,backcolor,forecolor,|,bullist,numlist,outdent,indent,blockquote",
+	theme_advanced_buttons3: "",
+	theme_advanced_toolbar_location: "external",
+	theme_advanced_toolbar_align: "left",
+	theme_advanced_path: false,
+	theme_advanced_resizing: false,
+	content_css: loc['styles']+"/tinymce.css",
+	onchange_callback: function() { pageChanged = true; }
 });
 
 $(document).ready(function() {
@@ -81,6 +84,7 @@ $(document).ready(function() {
 		// variables
 		var mode = $(this).attr('data-type');
 		var ta = 'content_edit';
+		var doChange = true;
 		
 		// status holder
 		if ($("#admin .editstatus").length == 0)
@@ -91,57 +95,88 @@ $(document).ready(function() {
 		// don't rexecute everything
 		if (mode == curmode) { return false; }
 		
-		// switch the on/off states
-		$("#admin .block.mode[data-type="+curmode+"]").addClass('off');
-		$(this).removeClass('off');
-		
 		// switching from edit
 		if (curmode == 'edit')
 		{
-			cont = tinyMCE.get(ta).getContent();
-			tinyMCE.execCommand('mceRemoveControl', false, ta);
-			$("#content_editing").hide();
-			$("#content_content").html(cont).show();
-		}
-		
-		switch (mode)
-		{
-			case 'preview':
-				curmode = mode;
-				break;
-			
-			case 'edit':
-				if ($("#"+ta).length == 0)
+			if (pageChanged)
+			{
+				if (!confirm('You have unsaved changes. Would you like to continue switching modes? This will discard all changes.'))
 				{
-					$("#content").wrapInner('<div id="content_content" style="display:none;"></div>');
-					$("#content").append('<form id="content_editing" onsubmit="$(this).submit();return false;"><textarea id="'+ta+'"></textarea></form>');
-					/*! tinymce doesn't detect jquery .submit binds, find a better way to do this (or maybe even edit the tinymce save plugin) */
-					$("#content_editing").submit(function() {
-						/// PAGE SAVING
-						
-						alert('Saving doesn\'t work yet, you need to use the old admin panel for now');
-						
-						return false;
-					});
-					$("#"+ta).text($("#content_content").html());
+					doChange = false;
+				}
+			}
+			if (doChange)
+			{
+				cont = tinyMCE.get(ta).getContent();
+				$("#content_editing").hide();
+				
+				if (pageSaved)
+				{
+					$("#content_content").html(cont);
 				}
 				else
 				{
-					$("#content_content").hide();
-					$("#content_editing").show();
+					tinyMCE.get(ta).setContent($("#content_content").html());
 				}
 				
-				var contwidth = $("#content").width();
-				var contheight = $("#content").height();
-				$("#"+ta).css({'width':contwidth});
-				tinyMCE.execCommand('mceAddControl', false, ta);
-				curmode = mode;
-				break;
-			
-			case 'structure':
-				alert('Structure mode has not been implemented yet.');
-				curmode = mode;
-				break;
+				tinyMCE.execCommand('mceRemoveControl', false, ta);
+				$("#content_content").show();
+			}
+		}
+		
+		// switch the on/off states
+		if (doChange)
+		{
+			$("#admin .block.mode[data-type="+curmode+"]").addClass('off');
+			$(this).removeClass('off');
+		}
+		
+		if (doChange)
+		{
+			switch (mode)
+			{
+				case 'preview':
+					curmode = mode;
+					break;
+				
+				case 'edit':
+					pageSaved = false;
+					
+					if ($("#"+ta).length == 0)
+					{
+						$("#content").wrapInner('<div id="content_content" style="display:none;"></div>');
+						$("#content").append('<form id="content_editing" onsubmit="$(this).submit();return false;"><textarea id="'+ta+'"></textarea></form>');
+						/*! tinymce doesn't detect jquery .submit binds, find a better way to do this (or maybe even edit the tinymce save plugin) */
+						$("#content_editing").submit(function() {
+							/// PAGE SAVING
+							
+							alert('Saving doesn\'t work yet, you need to use the old admin panel for now');
+							
+							//pageSaved = true;
+							//pageChanged = false;
+							
+							return false;
+						});
+						$("#"+ta).text($("#content_content").html());
+					}
+					else
+					{
+						$("#content_content").hide();
+						$("#content_editing").show();
+					}
+					
+					var contwidth = $("#content").width();
+					var contheight = $("#content").height();
+					$("#"+ta).css({'width':contwidth});
+					tinyMCE.execCommand('mceAddControl', false, ta);
+					curmode = mode;
+					break;
+				
+				case 'structure':
+					alert('Structure mode has not been implemented yet.');
+					curmode = mode;
+					break;
+			}
 		}
 	});
 	
