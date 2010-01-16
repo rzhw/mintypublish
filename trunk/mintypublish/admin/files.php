@@ -25,7 +25,7 @@ session_start();
 require_once('../config.php');
 require_once('../functions.php');
 
-$filedir = '../' . str_replace($location['root'],'',$location['media']);
+$filedir = '../' . str_replace($location['root'],'',$location['files']);
 
 if (isloggedin())
 {
@@ -47,13 +47,13 @@ if (isloggedin())
 			}
 			
 			// add the files to the parents
-			$files = mysql_query("SELECT * FROM media ORDER BY media_filename ASC");
+			$files = mysql_query("SELECT * FROM files ORDER BY file_filename ASC");
 			while ($file = mysql_fetch_array($files))
 			{
-				$key = array_search(filetypes('identify',$file['media_filename'],true),$parents);
+				$key = array_search(filetypes('identify',$file['file_filename'],true),$parents);
 				$output[$key]['children'][] = array(
-					'data' => $file['media_filename'],
-					'attributes' => array('rel' => 'file', 'id' => $_GET['fidprefix'] . $file['media_id'])
+					'data' => $file['file_filename'],
+					'attributes' => array('rel' => 'file', 'id' => $_GET['fidprefix'] . $file['file_id'])
 				);
 			}
 			
@@ -80,7 +80,7 @@ if (isloggedin())
 			}
 			
 			// add it to the db
-			mysql_query("INSERT INTO media (media_filename) VALUES('" . escape_smart($filename) . "')") or $success = false;
+			mysql_query("INSERT INTO file (file_filename) VALUES('" . escape_smart($filename) . "')") or $success = false;
 			
 			// message
 			if ($success)
@@ -109,12 +109,12 @@ if (isloggedin())
 			$success = true;
 			
 			// get the filename to delete
-			$filea = mysql_query("SELECT media_filename FROM media WHERE media_id = $fid LIMIT 1");
+			$filea = mysql_query("SELECT file_filename FROM file WHERE file_id = $fid LIMIT 1");
 			while ($file = mysql_fetch_array($filea))
 			{
 				try
 				{
-					unlink($filedir . '/' . $file['media_filename']);
+					unlink($filedir . '/' . $file['file_filename']);
 				}
 				catch (Exception $e)
 				{
@@ -123,7 +123,7 @@ if (isloggedin())
 			}
 			
 			// delete the file
-			mysql_query("DELETE FROM media WHERE media_id = $fid") or $success = false;
+			mysql_query("DELETE FROM file WHERE file_id = $fid") or $success = false;
 			
 			// message
 			if ($success)

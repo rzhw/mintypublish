@@ -109,7 +109,7 @@ while ($row = mysql_fetch_array($pagequery))
 }
 
 // get list of media
-$mediaquery = mysql_query("SELECT * FROM media");
+$mediaquery = mysql_query("SELECT * FROM files");
 
 // NOW include the chosen language, so that non translated lines aren't broken
 if ($cfg[$cfg_language]['value'] != "en")

@@ -14,23 +14,23 @@
 			include('../../../../config.php');
 			include('../../../../functions.php');
 			
-			$mediaquery = mysql_query("SELECT * FROM media");
+			$mediaquery = mysql_query("SELECT * FROM files");
 			while ($row = mysql_fetch_array($mediaquery))
 			{
 				// title
-				echo $row['media_filename'].' ('.get_file_type($row['media_filename']).') - ';
+				echo $row['file_filename'].' ('.get_file_type($row['file_filename']).') - ';
 				
 				// is it an image?
-				if (get_file_type($row['media_filename']) == 'image')
+				if (get_file_type($row['file_filename']) == 'image')
 				{
-					echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'<img src=\\\''.$location['media'].'/'.$row['media_filename'].'\\\' />\')">Insert inline</a>';
+					echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'<img src=\\\''.$location['files'].'/'.$row['file_filename'].'\\\' />\')">Insert inline</a>';
 				}
 				
 				// is it an audio/video file?
 				else
 				{
-					echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[mediainline]'.$row['media_filename'].'[/mediainline]\');">Insert inline</a>
-					| <a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[medialink]'.$row['media_filename'].'[/medialink]\');">Insert link</a>';
+					echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[mediainline]'.$row['file_filename'].'[/mediainline]\');">Insert inline</a>
+					| <a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[medialink]'.$row['file_filename'].'[/medialink]\');">Insert link</a>';
 				}
 				
 				// newline

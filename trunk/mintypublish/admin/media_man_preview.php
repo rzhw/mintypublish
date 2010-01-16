@@ -28,9 +28,9 @@ if ($zvfpcms)
 	
 	while ($row = mysql_fetch_array($mediaquery))
 	{
-		if ($row['media_id'] == $_GET['pid'])
+		if ($row['file_id'] == $_GET['pid'])
 		{
-			echo media_html($row['media_filename']);
+			echo media_html($row['file_filename']);
 		}
 	}
 }

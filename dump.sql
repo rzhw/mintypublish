@@ -36,20 +36,20 @@ INSERT INTO `config` (`config_name`, `config_value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `media`
+-- Table structure for table `files`
 --
 
-CREATE TABLE IF NOT EXISTS `media` (
-  `media_id` int(11) NOT NULL AUTO_INCREMENT,
-  `media_filename` varchar(64) NOT NULL,
-  PRIMARY KEY (`media_id`)
+CREATE TABLE IF NOT EXISTS `files` (
+  `file_id` int(11) NOT NULL AUTO_INCREMENT,
+  `file_filename` varchar(64) NOT NULL,
+  PRIMARY KEY (`file_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `media`
+-- Dumping data for table `files`
 --
 
-INSERT INTO `media` (`media_id`, `media_filename`) VALUES
+INSERT INTO `files` (`file_id`, `file_filename`) VALUES
 (1, 'test.flv'),
 (2, 'cityrail.mp3');
 

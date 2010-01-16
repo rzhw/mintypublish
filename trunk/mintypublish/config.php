@@ -26,7 +26,7 @@ $location['images']=$location['root'].'/themes/'.$cfg['theme'].'/img';
 $location['styles']=$location['root'].'/themes/'.$cfg['theme'].'/css';
 $location['tree']=$location['root'].'/themes/'.$cfg['theme'].'/tree';
 $location['js']=$location['root'].'/js';
-$location['media']=$location['root'].'/media';
+$location['files']=$location['root'].'/media';
 $location['help']=$location['root'].'/help';
 $location['admin']='index.php?p=admin';
 ?>

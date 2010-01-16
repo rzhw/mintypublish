@@ -1,8 +1,8 @@
 <?php
-/*
- * Sponge Content Management System
- * Copyright (c) 2009 a2h - http://a2h.uni.cc/
- * http://zvfpcms.sourceforge.net/
+/**
+ * mintypublish Content Management System
+ * Copyright (c) 2009-2010 a2h
+ * http://github.com/a2h/mintypublish
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -19,7 +19,6 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 // connect to mysql
@@ -167,7 +166,7 @@ function media_html($fname)
 	{
 		$toreturn .= '
 		<a  
-			 href="'.$location['media'].'/'.$fname.'"  
+			 href="'.$location['files'].'/'.$fname.'"  
 			 style="display:block;width:640px;height:'.($ftype == "music" ? '30' : '480').'px"  
 			 id="player"> 
 		</a> 
@@ -185,7 +184,7 @@ function media_html($fname)
 	}
 	else
 	{
-		$toreturn .= '<img src="'.$location['media'].'/'.$fname.'" alt="" />';
+		$toreturn .= '<img src="'.$location['files'].'/'.$fname.'" alt="" />';
 	}
 	
 	return $toreturn;
