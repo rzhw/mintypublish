@@ -169,14 +169,14 @@ function media_html($fname)
 		<div id="video"></div>
 		<script type="text/javascript">
 			var videovars = {
-				' . ($ftype == "music" ? 'mp3' : 'flv') . ': "../' . $fpath . '",
-				autoplay: true
+				path: "../' . $fpath . '",
+				autoplay: true,
+				fullscreen: true
 			};
 			var videoparams = {
-				bgcolor: "#000000",
-				allowFullScreen: true
+				bgcolor: "#000000"
 			};
-			swfobject.embedSWF(loc["root"] + "/mpw_player.swf", "video", 800, ' . ($ftype == "music" ? 27 : 450+27) . ', "9.0.0", null, videovars, videoparams);
+			swfobject.embedSWF(loc["root"] + "/player.swf", "video", 800, ' . ($ftype == "music" ? 27 : 450) . ', "9.0.0", null, videovars, videoparams);
 		</script>';
 	}
 	else
