@@ -80,7 +80,7 @@ if (isloggedin())
 			}
 			
 			// add it to the db
-			mysql_query("INSERT INTO media (media_filename) VALUES('$filename')") or $success = false;
+			mysql_query("INSERT INTO media (media_filename) VALUES('" . escape_smart($filename) . "')") or $success = false;
 			
 			// message
 			if ($success)
@@ -103,7 +103,7 @@ if (isloggedin())
 			header('Content-type: application/json');
 			
 			// info goes in
-			$fid = $_POST['file_id'];
+			$fid = escape_smart($_POST['file_id']);
 			
 			// success tracking
 			$success = true;

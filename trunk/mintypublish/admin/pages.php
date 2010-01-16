@@ -51,9 +51,9 @@ if (isloggedin())
 		case 'add':
 			header('Content-type: application/json');
 			
-			// info goes in [CONSIDER: string escaping]
-			$titlefull = $_POST['title_full'];
-			$titleshort = $_POST['title_short'];
+			// info goes in
+			$titlefull = escape_smart($_POST['title_full']);
+			$titleshort = escape_smart($_POST['title_short']);
 			
 			// find the largest order id
 			$pageordertop = mysql_query("SELECT page_orderid FROM pages WHERE page_childof = -1 ORDER BY page_orderid DESC LIMIT 1");
@@ -87,9 +87,9 @@ if (isloggedin())
 		case 'edit':
 			header('Content-type: application/json');
 			
-			// info goes in [CONSIDER: string escaping]
-			$i = $_POST['page_id'];
-			$c = mysql_real_escape_string($_POST['content']); // maybe not because of magic quotes
+			// info goes in
+			$i = escape_smart($_POST['page_id']);
+			$c = escape_smart($_POST['content']);
 			
 			// edit time!
 			$success = true;
@@ -115,10 +115,10 @@ if (isloggedin())
 		case 'rename':
 			header('Content-type: application/json');
 			
-			// info goes in [CONSIDER: string escaping]
-			$id = $_POST['page_id'];
-			$tf = $_POST['title_full'];
-			$ts = $_POST['title_short'];
+			// info goes in
+			$id = escape_smart($_POST['page_id']);
+			$tf = escape_smart($_POST['title_full']);
+			$ts = escape_smart($_POST['title_short']);
 			
 			// rename time!
 			$success = true;
@@ -145,7 +145,7 @@ if (isloggedin())
 			header('Content-type: application/json');
 			
 			// info goes in
-			$pid = $_POST['page_id'];
+			$pid = escape_smart($_POST['page_id']);
 			
 			// delete the page
 			$success = true;
