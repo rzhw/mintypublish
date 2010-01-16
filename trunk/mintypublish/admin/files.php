@@ -109,7 +109,7 @@ if (isloggedin())
 			$success = true;
 			
 			// get the filename to delete
-			$filea = mysql_query("SELECT file_filename FROM file WHERE file_id = $fid LIMIT 1");
+			$filea = mysql_query("SELECT file_filename FROM files WHERE file_id = $fid LIMIT 1");
 			while ($file = mysql_fetch_array($filea))
 			{
 				try
@@ -123,7 +123,7 @@ if (isloggedin())
 			}
 			
 			// delete the file
-			mysql_query("DELETE FROM file WHERE file_id = $fid") or $success = false;
+			mysql_query("DELETE FROM files WHERE file_id = $fid") or $success = false;
 			
 			// message
 			if ($success)
