@@ -292,7 +292,9 @@ $(document).ready(function() {
 				
 				$("#admin_list_view").click(function() {
 					id = $.tree.focused().selected;
-					if (id)
+					isaparent = $.tree.focused().selected.attr('rel') == 'root' ? true : false;
+					
+					if (id && !isaparent)
 					{
 						var parent = $.tree.focused().get_text( $.tree.focused().selected.parent().parent() ).toLowerCase(); // amazing api
 						
