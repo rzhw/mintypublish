@@ -80,7 +80,7 @@ if (isloggedin())
 			}
 			
 			// add it to the db
-			mysql_query("INSERT INTO file (file_filename) VALUES('" . escape_smart($filename) . "')") or $success = false;
+			mysql_query("INSERT INTO files (file_filename) VALUES('" . escape_smart($filename) . "')") or $success = false;
 			
 			// message
 			if ($success)
