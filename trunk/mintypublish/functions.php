@@ -563,14 +563,17 @@ function gettopmessage()
 }
 
 //
-function pageredirect($url)
+function escape_smart($value)
 {
-	echo '
-	<script type="text/javascript">
-		document.write(\'<div id="overlayall">Hang on a moment, you\\\'re being redirected...<br /><br />\');
-		document.write(\'<small><small>Or click <a href="'.$url.'">here</a> if it doesn\\\'t do so</div>\');
-		
-		location.href=\''.$url.'\';
-	</script>';
+	// code from http://simon.net.nz/articles/protecting-mysql-sql-injection-attacks-using-php/
+	if (get_magic_quotes_gpc())
+	{
+		$value = stripslashes($value);
+	}
+	if (!is_numeric($value))
+	{
+		$value = mysql_real_escape_string($value);
+	}
+	return $value;
 }
 ?>
