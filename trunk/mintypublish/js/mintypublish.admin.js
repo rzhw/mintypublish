@@ -294,8 +294,19 @@ $(document).ready(function() {
 					id = $.tree.focused().selected;
 					if (id)
 					{
-						// remember that this depends on the old admin panel functionality!
-						location.href = 'index.php?p=media&id=' + $(id).attr('id').replace(fidprefix,'');
+						var parent = $.tree.focused().get_text( $.tree.focused().selected.parent().parent() ).toLowerCase(); // amazing api
+						
+						switch (parent)
+						{
+							case 'images':
+							case 'videos':
+							case 'audio':
+								location.href = 'index.php?p=media&id=' + $(id).attr('id').replace(fidprefix,'');
+								break;
+							default:
+								alert('Viewing this filetype is not supported currently');
+								break;
+						}
 					}
 					else
 					{
@@ -510,6 +521,7 @@ $(document).ready(function() {
 					{
 						$.tree.focused().lock(true);
 						
+						// don't use .get_text() because of how we formed the page nodes
 						var tf = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
 						var ts = $(id).find('.subtitle').text();
 						

@@ -42,19 +42,6 @@ function get_file_extension($str)
  * Parameters:   $str as string
  * Return:       Filetype
  */
-function get_file_type($str)
-{
-	switch (get_file_extension($str))
-	{
-		case "flv": return "video"; break;
-		case "mp4": return "video"; break;
-		case "png": return "image"; break;
-		case "gif": return "image"; break;
-		case "jpg": return "image"; break;
-		case "mp3": return "music"; break;
-		default: return "unrecognised"; break;
-	}
-}
 function filetypes($whattodo,$value='',$bool=false)
 {
 	global $filetypes;
@@ -160,28 +147,35 @@ function media_html($fname)
 	
 	$toreturn = '';
 	
-	$ftype = get_file_type($fname);
+	$ftype = filetypes('identify', $fname);
 	$fpath = $location['files'].'/'.$fname;
 	
-	if ($ftype != "image")
+	switch ($ftype)
 	{
-		$toreturn .= '
-		<div id="video"></div>
-		<script type="text/javascript">
-			var videovars = {
-				path: "../' . $fpath . '",
-				autoplay: true,
-				fullscreen: true
-			};
-			var videoparams = {
-				bgcolor: "#000000"
-			};
-			swfobject.embedSWF(loc["root"] + "/player.swf", "video", 800, ' . ($ftype == "music" ? 27 : 450) . ', "9.0.0", null, videovars, videoparams);
-		</script>';
-	}
-	else
-	{
-		$toreturn .= '<img src="' . $fpath . '" alt="" />';
+		case 'audio':
+		case 'video':
+			$toreturn .= '
+			<div id="video"></div>
+			<script type="text/javascript">
+				var videovars = {
+					path: "' . ($ftype == 'video' ? '../' : '') /* bug in gsplayer forces these weird paths */ . $fpath . '",
+					autoplay: true,' . ($ftype == 'video' ? '
+					fullscreen: true' : '') . '
+				};
+				var videoparams = {
+					bgcolor: "#000000"
+				};
+				swfobject.embedSWF("' . $location['root'] . '/player.swf", "video", 800, ' . ($ftype == 'video' ? 450 : 27) . ', "9.0.0", null, videovars, videoparams);
+			</script>';
+			break;
+		
+		case 'image':
+			$toreturn .= '<img src="' . $fpath . '" alt="" />';
+			break;
+		
+		default:
+			$toreturn .= 'Unrecognised filetype';
+			break;
 	}
 	
 	return $toreturn;
