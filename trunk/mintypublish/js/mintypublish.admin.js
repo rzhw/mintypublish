@@ -644,8 +644,7 @@ $(document).ready(function() {
 			
 			case 'config':
 				$(drop).find(".content").html('\
-					Hello there!<br /><br />\
-					Sooner or later there will be options to configure your site here, not yet though.<br /><br />\
+					<div class="list">Sooner or later there will be options to configure your site here, not yet though.</div>\
 					Looking for the <a href="' + loc['admin'] + '">old admin panel</a>?\
 				');
 				break;
