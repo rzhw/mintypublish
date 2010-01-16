@@ -159,7 +159,7 @@ function media_html($fname)
 			<script type="text/javascript">
 				var videovars = {
 					path: "' . ($ftype == 'video' ? '../' : '') /* bug in gsplayer forces these weird paths */ . $fpath . '",
-					autoplay: true,' . ($ftype == 'video' ? '
+					autoplay: true' . ($ftype == 'video' ? ',
 					fullscreen: true' : '') . '
 				};
 				var videoparams = {

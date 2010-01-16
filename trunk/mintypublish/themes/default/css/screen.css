@@ -160,7 +160,7 @@ select
 
 body.admin #global_wrapper
 {
-	margin-top:24px;
+	padding-top:24px;
 }
 
 #admin
