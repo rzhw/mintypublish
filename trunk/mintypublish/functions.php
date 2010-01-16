@@ -163,7 +163,8 @@ function media_html($fname)
 					fullscreen: true' : '') . '
 				};
 				var videoparams = {
-					bgcolor: "#000000"
+					bgcolor: "#000000",
+					allowfullscreen: true
 				};
 				swfobject.embedSWF("' . $location['root'] . '/player.swf", "video", 800, ' . ($ftype == 'video' ? 450 : 27) . ', "9.0.0", null, videovars, videoparams);
 			</script>';
