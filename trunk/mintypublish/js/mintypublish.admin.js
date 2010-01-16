@@ -441,6 +441,40 @@ $(document).ready(function() {
 					}
 				});
 				
+				/// PAGE EDITING
+				
+				$("#admin_list_info").click(function() {
+					id = $.tree.focused().selected;
+					if (id)
+					{
+						$.tree.focused().lock(true);
+						
+						var tf = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
+						var ts = $(id).find('.subtitle').text();
+						
+						$(drop).find(".more").hide().html('\
+							<p><b>Page information</b></p>\
+							<p>\
+								<label for="page_title_full">Title (full):</label> <input type="text" id="page_title_full" value="' + tf + '" /><br />\
+								<label for="page_title_short">Title (short):</label> <input type="text" id="page_title_short" value="' + ts + '" />\
+							</p>\
+							<p>\
+								<input type="button" value="save" />\
+								<input type="button" value="cancel" />\
+							</p>\
+						').slideDown();
+						
+						$(drop).find(".more input[type=button]:last").click(function() {
+							$.tree.focused().lock(false);
+							$(drop).find(".more").slideUp();
+						});
+					}
+					else
+					{
+						alert('You haven\'t selected anything!');
+					}
+				});
+				
 				/// PAGE DELETING
 				
 				$("#admin_list_delete").click(function() {
