@@ -227,7 +227,7 @@ $(document).ready(function() {
 		var type = $(this).attr('data-type');
 		
 		// prepare the drop
-		$(drop).show().css({
+		$(drop).show().css('width',192-16).css({
 			'position': 'fixed',
 			'left': $(this).position().left + $(this).width() + 8 - $(drop).width(),
 			'top': $("#admin").height()
