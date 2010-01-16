@@ -1,8 +1,8 @@
 <?php
-/*
- * Sponge Content Management System
- * Copyright (c) 2009 a2h - http://a2h.uni.cc/
- * http://zvfpcms.sourceforge.net/
+/**
+ * mintypublish Content Management System
+ * Copyright (c) 2009-2010 a2h
+ * http://github.com/a2h/mintypublish
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -19,7 +19,6 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 if ($zvfpcms)
@@ -53,7 +52,7 @@ if ($zvfpcms)
 			</tr>
 			<tr>
 				<td>
-					'.$txt['admin_panel_timezone'].' ('.$txt['text_whatsthis'].'):
+					'.$txt['admin_panel_timezone'].':
 				</td>
 				<td>
 					<select name="timezone">
