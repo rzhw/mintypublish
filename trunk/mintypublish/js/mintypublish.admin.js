@@ -280,11 +280,12 @@ $(document).ready(function() {
 									$(drop).find(".status").show().text('working...');
 								},
 								success: function(data) {
+									$.tree.focused().lock(false);
+									
 									$(drop).find(".status").text(data.message);
 									
 									if (data.success)
 									{
-										$.tree.focused().lock(false);
 										$.tree.focused().refresh();
 									}
 									
@@ -468,6 +469,37 @@ $(document).ready(function() {
 							$.tree.focused().lock(false);
 							$(drop).find(".more").slideUp();
 						});
+						
+						$(drop).find(".more input[type=button]:first").click(function() {
+							$.ajax({
+								type: 'post',
+								url: loc['admin2'] + '/pages.php?type=rename',
+								data: {
+									page_id: $(id).attr('id').replace(pidprefix,''),
+									title_full: $("#page_title_full").attr('value'),
+									title_short: $("#page_title_short").attr('value')
+								},
+								dataType: 'json',
+								beforeSend: function() {
+									$(drop).find(".more").slideUp();
+									$(drop).find(".status").show().text('working...');
+								},
+								success: function(data) {
+									$.tree.focused().lock(false);
+									
+									$(drop).find(".status").text(data.message);
+									
+									if (data.success)
+									{
+										$.tree.focused().refresh();
+									}
+									
+									setTimeout(function() {
+										$(drop).find(".status").fadeOut(2000);
+									}, 1000);
+								}
+							});
+						});
 					}
 					else
 					{
@@ -512,11 +544,12 @@ $(document).ready(function() {
 									$(drop).find(".status").show().text('working...');
 								},
 								success: function(data) {
+									$.tree.focused().lock(false);
+									
 									$(drop).find(".status").text(data.message);
 									
 									if (data.success)
 									{
-										$.tree.focused().lock(false);
 										$.tree.focused().refresh();
 									}
 									

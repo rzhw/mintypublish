@@ -84,6 +84,35 @@ if (isloggedin())
 			
 			break;
 		
+		case 'rename':
+			header('Content-type: application/json');
+			
+			// info goes in [CONSIDER: string escaping]
+			$id = $_POST['page_id'];
+			$tf = $_POST['title_full'];
+			$ts = $_POST['title_short'];
+			
+			// rename time!
+			$success = true;
+			mysql_query("UPDATE pages SET page_title_full = '$tf', page_title_menu = '$ts' WHERE page_id = $id") or $success = false;
+			
+			// message
+			if ($success)
+			{
+				$message = 'page info saved!';
+			}
+			else
+			{
+				$message = 'page info save failed!';
+			}
+			
+			echo json_encode(array(
+				'success' => $success,
+				'message' => $message
+			));
+			
+			break;
+		
 		case 'delete':
 			header('Content-type: application/json');
 			

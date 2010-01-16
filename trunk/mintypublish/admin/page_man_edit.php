@@ -76,24 +76,11 @@ if ($zvfpcms)
 		$contenttowrite = str_replace($find,$replace,$_POST["thecontent"]);
 		$contenttowrite = mysql_real_escape_string($contenttowrite);
 		
-		// get the titles
-		$title_menu = mysql_real_escape_string($_POST['theid']);
-		$title_full = mysql_real_escape_string($_POST['thetitle']);
-		
-		// child
-		$childof = mysql_real_escape_string($_POST['thechild']);
-		
-		// hide in menu
-		$hideinmenu = mysql_real_escape_string($_POST['hideinmenu']);
-		
 		$pid = mysql_real_escape_string($_GET["pid"]);
 		
 		echo $txt['admin_panel_addpage_savpr'].' ';
 		
-		$updatequery = "UPDATE pages SET page_content = '$contenttowrite',".
-						" page_title_menu = '$title_menu', page_title_full = '$title_full',".
-						" page_childof = $childof, page_hideinmenu = $hideinmenu, page_dateedited = NOW()".
-						" WHERE page_id = $pid";
+		$updatequery = "UPDATE pages SET page_content = '$contenttowrite', page_dateedited = NOW() WHERE page_id = $pid";
 		
 		if (mysql_query($updatequery))
 		{

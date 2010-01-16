@@ -26,52 +26,6 @@ if ($zvfpcms)
 {
 ?>
 <br />
-<table cellpadding="0" cellspacing="4" border="0">
-	<tr>
-		<td style="width:96px;">
-			<?php echo $txt['admin_panel_edt_srtnm']; ?>
-		</td>
-		<td>
-			<input type="text" name="theid" value="<?php echo $pagetitlemenu; ?>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<?php echo $txt['admin_panel_edt_fllnm']; ?>
-		</td>
-		<td>
-			<input type="text" name="thetitle" value="<?php echo $pagetitlefull; ?>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<?php echo $txt['admin_panel_edt_child']; ?>
-		</td>
-		<td>
-			<select name="thechild">
-				<option value="-1">None</option>
-				<option value="-2">----------------------</option>
-				<?php
-				mysql_data_seek($pagequery, 0);
-				while ($row = mysql_fetch_array($pagequery))
-				{
-					echo '<option value="'.$row['page_id'].'">'.$row['page_title_full'].'</option>';
-				}
-				?>
-			</select>
-		</td>
-	</tr>
-	<!--<tr>
-		<td>
-			'.$txt['admin_panel_edt_hideinmenu'].'
-		</td>
-		<td>
-			<input type="radio" name="hideinmenu" value="0"'.($hideinmenu?'':'checked="checked"').'/> No
-			<input type="radio" name="hideinmenu" value="1" /> Yes
-		</td>
-	</tr>-->
-</table>
-<br /><br /><br /><br />
 
 <textarea id="thecontent" name="thecontent" style="width:100%;height:480px;">
 <?php
