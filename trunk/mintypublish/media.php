@@ -1,8 +1,8 @@
 <?php
-/*
- * Sponge Content Management System
- * Copyright (c) 2009 a2h - http://a2h.uni.cc/
- * http://zvfpcms.sourceforge.net/
+/**
+ * mintypublish Content Management System
+ * Copyright (c) 2009-2010 a2h
+ * http://github.com/a2h/mintypublish
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -19,17 +19,18 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 if ($zvfpcms)
 {
-	echo '<h3>Preview</h3>';
+	$page->setTitle($txt['admin_panel_manmed_view']);
+	$page->addBodyClass('media');
 	
 	while ($row = mysql_fetch_array($mediaquery))
 	{
-		if ($row['file_id'] == $_GET['pid'])
+		if ($row['file_id'] == $_GET['id'])
 		{
+			echo '<h2>' . $row['file_filename'] . '</h2>';
 			echo media_html($row['file_filename']);
 		}
 	}

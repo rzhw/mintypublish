@@ -135,8 +135,7 @@ switch ($_GET["p"])
 		include($location['root'].'/admin/admin.php'); // include the admin panel
 		break;
 	case 'media':
-		$page->setTitle($txt['admin_panel_manmed_view']);
-		echo '<a href="javascript:history.go(-1)">Go back</a><br /><br />'.media_html($_GET["s"]);
+		include($location['root'] . '/media.php');
 		break;
 	default:			
 		if ($j == 0)

@@ -5,7 +5,7 @@
 		<?php $this->outputHead(); ?>
 	</head>
 	
-	<body>
+	<body class="<?php $this->outputBodyClasses(); ?>">
 		<?php $this->outputBodyPre(); ?>
 		
 		<?php $this->outputAdminMenu(); ?>

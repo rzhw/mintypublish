@@ -295,7 +295,7 @@ $(document).ready(function() {
 					if (id)
 					{
 						// remember that this depends on the old admin panel functionality!
-						location.href = loc['admin'] + '&s=med&action=prv&pid=' + $(id).attr('id').replace(fidprefix,'');
+						location.href = 'index.php?p=media&id=' + $(id).attr('id').replace(fidprefix,'');
 					}
 					else
 					{

@@ -201,7 +201,7 @@ function parsebbcode($buffer)
 		);
 		$replace = array(
 			media_html('\\2'),
-			'<a href="index.php?p=media&s=\\2">View media (\\2)</a>'
+			'<a href="index.php?p=media&id=\\2">View media (\\2)</a>'
 		);
 		$string = preg_replace($find, $replace, $buffer);
 		return $string;

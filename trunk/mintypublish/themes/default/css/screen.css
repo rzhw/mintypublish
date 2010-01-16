@@ -158,6 +158,11 @@ select
 	padding:1px;
 }
 
+body.admin #global_wrapper
+{
+	margin-top:24px;
+}
+
 #admin
 {
 	background:#181818;

@@ -21,9 +21,4 @@
 			<span><?php echo $_SESSION['uname']; ?></span>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		// temporary
-		$("head").append('<style type="text/css">#global_wrapper{margin-top:24px !important;}</style>');
-	</script>
 </aside>

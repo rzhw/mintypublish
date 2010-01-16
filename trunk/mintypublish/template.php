@@ -24,7 +24,7 @@
 // http://ianburris.com/tutorials/oophp-template-engine/
 class PageBuilder
 {
-	private $title, $content, $stylesheets=array(), $javascripts=array(), $bodypre, $disabled=false, $sitename, $location;
+	private $title, $content, $stylesheets=array(), $javascripts=array(), $bodypre, $disabled=false, $sitename, $location, $bodyClasses;
 	
 	function PageBuilder()
 	{
@@ -100,6 +100,29 @@ class PageBuilder
 		global $pid;
 		echo '<div id="pid" style="display:none;">' . $pid . '</div>'."\n";
 		echo $this->bodypre;
+	}
+	
+	function addBodyClass($class)
+	{
+		$this->bodyClasses[] = $class;
+	}
+	
+	function outputBodyClasses()
+	{
+		if (isloggedin())
+		{
+			$this->bodyClasses[] = 'admin';
+		}
+		
+		$c = count($this->bodyClasses);
+		for ($i=0; $i<$c; $i++)
+		{
+			if ($i > 0)
+			{
+				echo ' ';
+			}
+			echo $this->bodyClasses[$i];
+		}
 	}
 	
 	function getMenu()
