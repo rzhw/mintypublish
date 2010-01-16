@@ -86,12 +86,6 @@ $(document).ready(function() {
 		var ta = 'content_edit';
 		var doChange = true;
 		
-		// status holder
-		if ($("#admin .editstatus").length == 0)
-		{
-			$("#admin .block.mode[data-type=edit]").after('<div class="block editstatus"></div>');
-		}
-		
 		// don't rexecute everything
 		if (mode == curmode) { return false; }
 		
@@ -150,10 +144,41 @@ $(document).ready(function() {
 						$("#content_editing").submit(function() {
 							/// PAGE SAVING
 							
-							alert('Saving doesn\'t work yet, you need to use the old admin panel for now');
+							pageSaved = true;
+							pageChanged = false;
 							
-							//pageSaved = true;
-							//pageChanged = false;
+							// temporary form disabling method until a better solution is available
+							$('<div id="'+ta+'_disabler">').appendTo("#content_editing").end().css({
+								'position': 'absolute',
+								'left': $("#"+ta+"_parent").offset().left,
+								'top': $("#"+ta+"_parent").offset().top,
+								'width': $("#"+ta+"_parent").width(),
+								'height': $("#"+ta+"_parent").height(),
+								'background': '#999',
+								'opacity': 0.5
+							});
+							
+							// off goes the data
+							$.ajax({
+								type: 'post',
+								url: loc['admin2'] + '/pages.php?type=edit',
+								data: {
+									page_id: $("#pid").text(),
+									content: tinyMCE.get(ta).getContent()
+								},
+								dataType: 'json',
+								success: function(data) {
+									if (!data.success)
+									{
+										tinyMCE.get(ta).windowManager.alert(data.message);
+									}
+									
+									$("#"+ta+"_disabler").fadeOut(1000);
+									setTimeout(function() {
+										$("#"+ta+"_disabler").remove();
+									}, 1000);
+								}
+							});
 							
 							return false;
 						});

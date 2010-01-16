@@ -84,6 +84,34 @@ if (isloggedin())
 			
 			break;
 		
+		case 'edit':
+			header('Content-type: application/json');
+			
+			// info goes in [CONSIDER: string escaping]
+			$i = $_POST['page_id'];
+			$c = mysql_real_escape_string($_POST['content']); // maybe not because of magic quotes
+			
+			// edit time!
+			$success = true;
+			mysql_query("UPDATE pages SET page_content = '$c' WHERE page_id = $i") or $success = false;
+			
+			// message (and we have more room!)
+			if ($success)
+			{
+				$message = '';
+			}
+			else
+			{
+				$message = 'Page could not save:' . "\n" . mysql_error();
+			}
+			
+			echo json_encode(array(
+				'success' => $success,
+				'message' => $message
+			));
+			
+			break;
+		
 		case 'rename':
 			header('Content-type: application/json');
 			
