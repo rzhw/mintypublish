@@ -84,12 +84,21 @@ while ($row = mysql_fetch_array($pagequery))
 			$sel = false;
 		}
 		
+		if ($row['page_id'] == 1)
+		{
+			$purl = './';
+		}
+		else
+		{
+			$purl = 'index.php?p=' . $row['page_id'];
+		}
+		
 		$menu[] = array(
 			'id' => $row['page_id'],
 			'name' => $row['page_title_menu'],
 			'name_short' => $row['page_title_menu'],
 			'name_full' => $row['page_title_full'],
-			'url' => 'index.php?p='.$row['page_id'],
+			'url' => $purl,
 			'selected' => $sel
 		);
 	}
