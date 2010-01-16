@@ -10,7 +10,7 @@ $cfg['theme']='default';
 ///////////
 
 $mysql['server']='localhost';
-$mysql['dbname']='spongecms';
+$mysql['dbname']='mintypublish';
 $mysql['username']='root';
 $mysql['password']='';
 
