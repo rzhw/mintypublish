@@ -31,7 +31,9 @@ CREATE TABLE IF NOT EXISTS `config` (
 INSERT INTO `config` (`config_name`, `config_value`) VALUES
 ('timezone', 'Australia/Sydney'),
 ('language', 'en'),
-('sitename', 'My Unnamed Website');
+('sitename', 'My Unnamed Website'),
+('disabled', 'false'),
+('theme', 'default');
 
 -- --------------------------------------------------------
 
