@@ -41,28 +41,9 @@ else
 require_once($location['root'].'/config.php');
 require_once($location['root'].'/functions.php');
 require_once($location['root'].'/template.php');
-require_once($location['root'].'/lang/en.php');
-
-// get configuration from db
-$configquery = mysql_query("SELECT * FROM config");
-$i=0;
-while($row = mysql_fetch_array($configquery))
-{
-	$cfg[$i]['name'] = $row['config_name'];
-	$cfg[$i]['value'] = $row['config_value'];
-	
-	switch ($row['config_name'])
-	{
-		case 'language': $cfg_language=$i; break;
-		case 'timezone': $cfg_timezone=$i; break;
-		case 'sitename': $cfg_sitename=$i; break;
-	}
-	
-	$i+=1;
-}
 
 // set the site name
-$sitename = $cfg[$cfg_sitename]['value'];
+$sitename = MP_SITENAME;
 
 // get list of pages
 $pagequery = mysql_query("SELECT * FROM pages ORDER BY page_orderid ASC");
@@ -119,10 +100,6 @@ while ($row = mysql_fetch_array($pagequery))
 
 // get list of media
 $mediaquery = mysql_query("SELECT * FROM files");
-
-// NOW include the chosen language, so that non translated lines aren't broken
-if ($cfg[$cfg_language]['value'] != "en")
-	require_once($location['root']."/lang/".$cfg[$cfg_language]['value'].".php");
 
 // you need at least php 5.2.0
 if (version_compare('5.2.0',PHP_VERSION,'>'))

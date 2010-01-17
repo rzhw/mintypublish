@@ -44,9 +44,6 @@ if ($zvfpcms)
 			case "logout":
 				include($location['admin2'].'/user_logout.php');
 				break;
-			default:
-				include($location['admin2'].'/config_frontend.php');
-				break;
 		}
 	}
 }

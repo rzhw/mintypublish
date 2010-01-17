@@ -25,6 +25,24 @@
 $sql_mysql_connection = mysql_connect($mysql['server'],$mysql['username'],$mysql['password']);
 mysql_select_db($mysql['dbname'],$sql_mysql_connection);
 
+// define the core stuff
+define('MP_VERSION', '0.5.0-dev');
+$configquery = mysql_query("SELECT * FROM config");
+while($row = mysql_fetch_array($configquery))
+{	
+	define(
+		'MP_' . strtoupper($row['config_name']),
+		$row['config_value']
+	);
+}
+
+// include the language files
+require_once($location['root'] . '/lang/en.php');
+if (MP_LANGUAGE != "en")
+{
+	require_once($location['root'] . '/lang/' . MP_LANGUAGE . '.php');
+}
+
 // functions begin here
 
 /*

@@ -643,6 +643,8 @@ $(document).ready(function() {
 				break;
 			
 			case 'config':
+				// because we only have a few config options right now this will do
+				
 				$(drop).find(".content").html('\
 					<div class="list">Sooner or later there will be options to configure your site here, not yet though.</div>\
 					Looking for the <a href="' + loc['admin'] + '">old admin panel</a>?\
