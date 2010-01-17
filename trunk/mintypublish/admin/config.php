@@ -40,14 +40,12 @@ if (isloggedin())
 						<select name="language">
 						';
 						$languages = array(
-							array('en','English'),
-							array('jp','Japanese (machine translated)')
+							'en' => 'English',
+							'jp' => 'Japanese (machine translated)'
 						);
-						for ($i=0;$i<sizeof($languages);$i++)
+						foreach ($languages as $id => $name)
 						{
-							$ret .= '<option value="' . $languages[$i][0] . '"' .
-							($languages[$i][0] == MP_LANGUAGE ? ' selected="selected"' : '') .
-							'>'.$languages[$i][1].'</option>';
+							$ret .= '<option value="' . $id . '"' . ($id == MP_LANGUAGE ? ' selected="selected"' : '') . '>' . $name . '</option>';
 						}
 						$ret .= '</select>
 					</td>
@@ -60,11 +58,9 @@ if (isloggedin())
 						<select name="timezone">
 						';
 							$timezones = DateTimeZone::listIdentifiers();
-							foreach ($timezones as $timezone)
+							foreach ($timezones as $tz)
 							{
-								$ret .= '<option value="' . $timezone . '"' .
-								($timezone == MP_TIMEZONE ? ' selected="selected"' : '') .
-								'>' . $timezone . '</option>';
+								$ret .= '<option value="' . $tz . '"' . ($tz == MP_TIMEZONE ? ' selected="selected"' : '') . '>' . $tz . '</option>';
 							}
 							$ret .= '</select>
 					</td>
