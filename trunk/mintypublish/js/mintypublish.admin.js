@@ -676,7 +676,7 @@ $(document).ready(function() {
 				$(drop).find(".content").html('\
 					Hello there ' + $(this).find("span").text() + '!<br /><br />\
 					Sooner or later there will be profile related options here, not yet though.<br /><br />\
-					Though you could always <a href="' + loc['admin'] + '&s=logout">logout</a> if you want to.\
+					Though you could always <a href="index.php?p=logout">logout</a> if you want to.\
 				');
 				break;
 		}

@@ -115,10 +115,8 @@ echo gettopmessage();
 ob_start('parsebbcode');
 switch ($_GET["p"])
 {
-	case 'admin':
-		$page->setTitle($txt['admin_panel_title']);
-		mysql_data_seek($pagequery, 0); // reset the query to allow usage
-		include($location['root'].'/admin/admin.php'); // include the admin panel
+	case 'logout':
+		include($location['admin2'].'/logout.php');
 		break;
 	case 'media':
 		include($location['root'] . '/media.php');
