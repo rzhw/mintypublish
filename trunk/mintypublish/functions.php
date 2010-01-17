@@ -43,6 +43,7 @@ $location = array(
 	'admin2'    => $root . '/admin',
 	'files'     => $root . '/media',
 	'js'        => $root . '/js',
+	'themes'    => $root . '/themes',
 	'theme'     => $root . '/themes/' . MP_THEME,
 	'theme_nr'  => 'themes/' . MP_THEME,
 	'theme_def' => $root . '/themes/default',
