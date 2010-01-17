@@ -22,6 +22,7 @@
  */
 
 session_start();
+$root = '..';
 require_once('../config.php');
 require_once('../functions.php');
 
@@ -32,6 +33,21 @@ if (isloggedin())
 		case 'get':
 			$ret = '
 			<table cellpadding="0" cellspacing="4" border="0">
+				<tr>
+					<td>
+						Theme:
+					</td>
+					<td>
+						<select name="theme">
+						';
+						foreach (glob($location['themes'] . '/*', GLOB_ONLYDIR) as $themedir)
+						{
+							$thm = basename($themedir);
+							$ret .= '<option value="' . $thm . '"' . ($thm == MP_THEME ? ' selected="selected"' : '') . '>' . $thm . '</option>';
+						}
+						$ret .= '</select>
+					</td>
+				</tr>
 				<tr>
 					<td>
 						'.$txt['admin_panel_lang'].':
@@ -64,9 +80,6 @@ if (isloggedin())
 							}
 							$ret .= '</select>
 					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="right"><input type="submit" name="docfg" value="'.$txt['text_save'].'"></td>
 				</tr>
 			</table>';
 			
