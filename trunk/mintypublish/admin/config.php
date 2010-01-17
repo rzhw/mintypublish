@@ -32,56 +32,39 @@ if (isloggedin())
 	{
 		case 'get':
 			$ret = '
-			<table cellpadding="0" cellspacing="4" border="0">
-				<tr>
-					<td>
-						Theme:
-					</td>
-					<td>
-						<select name="theme">
-						';
-						foreach (glob($location['themes'] . '/*', GLOB_ONLYDIR) as $themedir)
-						{
-							$thm = basename($themedir);
-							$ret .= '<option value="' . $thm . '"' . ($thm == MP_THEME ? ' selected="selected"' : '') . '>' . $thm . '</option>';
-						}
-						$ret .= '</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						'.$txt['admin_panel_lang'].':
-					</td>
-					<td>
-						<select name="language">
-						';
-						$languages = array(
-							'en' => 'English',
-							'jp' => 'Japanese (machine translated)'
-						);
-						foreach ($languages as $id => $name)
-						{
-							$ret .= '<option value="' . $id . '"' . ($id == MP_LANGUAGE ? ' selected="selected"' : '') . '>' . $name . '</option>';
-						}
-						$ret .= '</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						'.$txt['admin_panel_timezone'].':
-					</td>
-					<td>
-						<select name="timezone">
-						';
-							$timezones = DateTimeZone::listIdentifiers();
-							foreach ($timezones as $tz)
-							{
-								$ret .= '<option value="' . $tz . '"' . ($tz == MP_TIMEZONE ? ' selected="selected"' : '') . '>' . $tz . '</option>';
-							}
-							$ret .= '</select>
-					</td>
-				</tr>
-			</table>';
+				Theme (requires refresh after saving):<br />
+				<select name="theme">
+				';
+				foreach (glob($location['themes'] . '/*', GLOB_ONLYDIR) as $themedir)
+				{
+					$thm = basename($themedir);
+					$ret .= '<option value="' . $thm . '"' . ($thm == MP_THEME ? ' selected="selected"' : '') . '>' . $thm . '</option>';
+				}
+				$ret .= '</select><br /><br />
+				
+				'.$txt['admin_panel_lang'].':<br />
+				<select name="language">
+				';
+				$languages = array(
+					'en' => 'English',
+					'jp' => 'Japanese (machine translated)'
+				);
+				foreach ($languages as $id => $name)
+				{
+					$ret .= '<option value="' . $id . '"' . ($id == MP_LANGUAGE ? ' selected="selected"' : '') . '>' . $name . '</option>';
+				}
+				$ret .= '</select><br /><br />
+				
+				'.$txt['admin_panel_timezone'].':<br />
+				<select name="timezone">
+				';
+					$timezones = DateTimeZone::listIdentifiers();
+					foreach ($timezones as $tz)
+					{
+						$ret .= '<option value="' . $tz . '"' . ($tz == MP_TIMEZONE ? ' selected="selected"' : '') . '>' . $tz . '</option>';
+					}
+					$ret .= '</select><br /><br />
+			';
 			
 			echo str_replace(array("\r\n","\n","\t"),'',$ret);
 			
@@ -91,23 +74,25 @@ if (isloggedin())
 			header('Content-type: application/json');
 			
 			// info goes in
+			$theme = escape_smart($_POST['theme']);
 			$language = escape_smart($_POST['language']);
 			$timezone = escape_smart($_POST['timezone']);
 
 			// query time!
 			$success = true;
 			
-			$result_language = mysql_query("UPDATE config SET config_value='$language' WHERE config_name='language'") or $success = false;
-			$result_timezone = mysql_query("UPDATE config SET config_value='$timezone' WHERE config_name='timezone'") or $success = false;
+			mysql_query("UPDATE config SET config_value='$theme' WHERE config_name='theme'") or $success = false;
+			mysql_query("UPDATE config SET config_value='$language' WHERE config_name='language'") or $success = false;
+			mysql_query("UPDATE config SET config_value='$timezone' WHERE config_name='timezone'") or $success = false;
 			
 			// message
 			if ($success)
 			{
-				$message = 'page info saved!';
+				$message = 'config saved!';
 			}
 			else
 			{
-				$message = 'page info save failed!';
+				$message = 'config save failed!';
 			}
 			
 			echo json_encode(array(

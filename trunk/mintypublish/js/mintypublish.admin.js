@@ -643,12 +643,33 @@ $(document).ready(function() {
 				break;
 			
 			case 'config':
-				// because we only have a few config options right now this will do
-				
 				$(drop).find(".content").html('\
-					<div class="list">Sooner or later there will be options to configure your site here, not yet though.</div>\
-					Looking for the <a href="' + loc['admin'] + '">old admin panel</a>?\
+					<div class="list" style="font-size:10px;padding:8px;">Sooner or later there will be options to configure your site here, not yet though.</div>\
+					<span style="font-size:9px;">This method of configuration is temporary and will be changed once more configuration options are added</span>\
 				');
+				$(drop).find(".list").load(loc['admin2'] + '/config.php?type=get', function() {
+					$(drop).find(".list").append('<button id="config_save">Save</button>').wrapInner('<form id="config_form"></form>');
+					
+					$("#config_save").click(function() {
+						$.ajax({
+							type: 'post',
+							url: loc['admin2'] + '/config.php?type=set',
+							data: $("#config_form").serialize(),
+							dataType: 'json',
+							beforeSend: function() {
+								$(drop).find(".status").show().text('working...');
+							},
+							success: function(data) {								
+								$(drop).find(".status").text(data.message);
+								
+								setTimeout(function() {
+									$(drop).find(".status").fadeOut(2000);
+								}, 1000);
+							}
+						});
+						return false;
+					});
+				});
 				break;
 			
 			case 'profile':
