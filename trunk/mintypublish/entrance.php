@@ -38,9 +38,9 @@ else
 	$pid = 1;
 
 // begin including things
-require_once($location['root'].'/config.php');
-require_once($location['root'].'/functions.php');
-require_once($location['root'].'/template.php');
+require_once($root.'/config.php');
+require_once($root.'/functions.php');
+require_once($root.'/template.php');
 
 // set the site name
 $sitename = MP_SITENAME;

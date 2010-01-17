@@ -53,10 +53,10 @@ $location = array(
 );
 
 // include the language files
-require_once($location['root'] . '/lang/en.php');
+require_once($root . '/lang/en.php');
 if (MP_LANGUAGE != "en")
 {
-	require_once($location['root'] . '/lang/' . MP_LANGUAGE . '.php');
+	require_once($root . '/lang/' . MP_LANGUAGE . '.php');
 }
 
 // functions begin here
