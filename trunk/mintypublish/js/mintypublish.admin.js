@@ -52,7 +52,7 @@
 				
 				new AjaxUpload(this, settings);
 			}
-		}
+		};
 	}
 })(jQuery);
 
@@ -136,7 +136,7 @@ $(document).ready(function() {
 				case 'edit':
 					pageSaved = false;
 					
-					if ($("#"+ta).length == 0)
+					if (!$("#"+ta).length)
 					{
 						$("#content").wrapInner('<div id="content_content" style="display:none;"></div>');
 						$("#content").append('<form id="content_editing" onsubmit="$(this).submit();return false;"><textarea id="'+ta+'"></textarea></form>');
@@ -399,7 +399,7 @@ $(document).ready(function() {
 					callback : {
 						'onmove' : function(node, node_ref, movetype, tree_cur, tree_old) {
 							// if the node has a parent get that instead of the whole tree
-							var toget = $.tree.focused().parent(node).length > 0 ? $.tree.focused().parent(node) : false;
+							var toget = $.tree.focused().parent(node).length ? $.tree.focused().parent(node) : false;
 							
 							// we only want to send the ids of each page, that's it. nothing more.
 							var tempnodes = [];
