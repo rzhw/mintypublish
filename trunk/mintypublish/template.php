@@ -135,13 +135,13 @@ class PageBuilder
 	{
 		echo '<title>'.$this->sitename.' | '.$this->title.'</title>'."\n";
 		
-		echo "\t\t".'<script type="text/javascript">var loc=[];';
+		echo "\t\t".'<script type="text/javascript">var loc = {';
 		global $location;
 		foreach ($location as $key => $value)
 		{
-			echo 'loc[\''.$key.'\']=\''.$value.'\';';
+			echo '\''.$key.'\':\''.$value.'\',';
 		}
-		echo '</script>'."\n";
+		echo '};</script>'."\n";
 		
 		echo "\t\t".'<meta name="generator" content="mintypublish pre-alpha" />'."\n";
 		

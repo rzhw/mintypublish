@@ -21,6 +21,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$location['root'] = 'mintypublish';
-include($location['root'] . '/entrance.php');
+$root = 'mintypublish';
+include($root . '/entrance.php');
 ?>

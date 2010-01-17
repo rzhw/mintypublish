@@ -1,10 +1,4 @@
 <?php
-/////////////////
-// main config //
-/////////////////
-
-$cfg['theme']='default';
-
 ///////////
 // mysql //
 ///////////
@@ -13,20 +7,4 @@ $mysql['server']='localhost';
 $mysql['dbname']='mintypublish';
 $mysql['username']='root';
 $mysql['password']='';
-
-///////////
-// paths //
-///////////
-
-$location['admin2']=$location['root'].'/admin';
-$location['theme']=$location['root'].'/themes/'.$cfg['theme'];
-$location['theme_nr']='themes/'.$cfg['theme'];
-$location['theme_def']=$location['root'].'/themes/default';
-$location['images']=$location['root'].'/themes/'.$cfg['theme'].'/img';
-$location['styles']=$location['root'].'/themes/'.$cfg['theme'].'/css';
-$location['tree']=$location['root'].'/themes/'.$cfg['theme'].'/tree';
-$location['js']=$location['root'].'/js';
-$location['files']=$location['root'].'/media';
-$location['help']=$location['root'].'/help';
-$location['admin']='index.php?p=admin';
 ?>
