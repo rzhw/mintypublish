@@ -86,11 +86,11 @@ if (isloggedin())
 			// message
 			if ($success)
 			{
-				$message = 'file upload succeeded! (' . $filename . ')';
+				$message = $txt['files_add_success'] . ' (' . $filename . ')';
 			}
 			else
 			{
-				$message = 'file upload failed!';
+				$message = $txt['files_add_failure'];
 			}
 			
 			echo json_encode(array(
@@ -129,11 +129,11 @@ if (isloggedin())
 			// message
 			if ($success)
 			{
-				$message = 'deleted!';
+				$message = $txt['files_del_success'];
 			}
 			else
 			{
-				$message = 'delete failed!';
+				$message = $txt['files_del_failure'];
 			}
 			
 			echo json_encode(array(
@@ -146,6 +146,6 @@ if (isloggedin())
 }
 else
 {
-	echo 'You either do not have permissions or your session has expired.';
+	echo $txt['notadmin'];
 }
 ?>

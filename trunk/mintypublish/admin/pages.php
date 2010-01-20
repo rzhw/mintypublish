@@ -71,11 +71,11 @@ if (isloggedin())
 			// message
 			if ($success)
 			{
-				$message = 'page added!';
+				$message = $txt['pages_add_success'];
 			}
 			else
 			{
-				$message = 'page add failed!';
+				$message = $txt['pages_add_failure'];
 			}
 			
 			echo json_encode(array(
@@ -103,7 +103,7 @@ if (isloggedin())
 			}
 			else
 			{
-				$message = 'Page could not save:' . "\n" . mysql_error();
+				$message = $txt['pages_edit_failure'] . "\n" . mysql_error();
 			}
 			
 			echo json_encode(array(
@@ -128,11 +128,11 @@ if (isloggedin())
 			// message
 			if ($success)
 			{
-				$message = 'page info saved!';
+				$message = $txt['pages_info_success'];
 			}
 			else
 			{
-				$message = 'page info save failed!';
+				$message = $txt['pages_info_failure'];
 			}
 			
 			echo json_encode(array(
@@ -155,11 +155,11 @@ if (isloggedin())
 			// message
 			if ($success)
 			{
-				$message = 'deleted!';
+				$message = $txt['pages_del_success'];
 			}
 			else
 			{
-				$message = 'delete failed!';
+				$message = $txt['pages_del_failure'];
 			}
 			
 			echo json_encode(array(
@@ -190,11 +190,11 @@ if (isloggedin())
 			// message
 			if ($success)
 			{
-				$message = 'saved!';
+				$message = $txt['pages_order_success'];
 			}
 			else
 			{
-				$message = 'save failed!';
+				$message = $txt['pages_order_failure'];
 			}
 			
 			echo json_encode(array(
@@ -207,6 +207,6 @@ if (isloggedin())
 }
 else
 {
-	echo 'You either do not have permissions or your session has expired.';
+	echo $txt['notadmin'];
 }
 ?>
