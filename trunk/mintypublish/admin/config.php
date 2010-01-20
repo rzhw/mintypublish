@@ -45,7 +45,7 @@ if (isloggedin())
 				}
 				$ret .= '</select><br /><br />
 				
-				'.$txt['admin_panel_lang'].':<br />
+				Language:<br />
 				<select name="language">
 				';
 				$languages = array(
@@ -58,7 +58,7 @@ if (isloggedin())
 				}
 				$ret .= '</select><br /><br />
 				
-				'.$txt['admin_panel_timezone'].':<br />
+				Timezone:<br />
 				<select name="timezone">
 				';
 					$timezones = DateTimeZone::listIdentifiers();
