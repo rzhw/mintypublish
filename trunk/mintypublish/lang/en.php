@@ -25,7 +25,7 @@
 // strings written from a2h and aren't translated (duh)
 // this is australian english
 
-// global text
+// global text (old admin panel)
 $txt['text_error']                = 'Error';
 $txt['text_warning']              = 'Warning';
 $txt['text_success']              = 'Success!';
@@ -40,65 +40,31 @@ $txt['text_again']                = 'again';
 
 // general errors
 $txt['page_noexist']              = 'The page you requested doesn\'t exist.';
-$txt['page_nojson']               = 'To use JSON as your data storage method, you need PHP 5.20 and above.';
-$txt['page_nomysql']              = 'To use MySQL as your data storage method, you need it installed.';
-$txt['page_oldphp']               = 'You need at least PHP 5.1.0 to run Sponge CMS.';
+$txt['page_oldphp']               = 'mintypublish requires at least PHP 5.2.0 to function.';
+$txt['working']                   = 'working...';
 
 // user stuff
-$txt['user_rememberme']           = 'Remember me when I come back';
-$txt['user_register']             = 'Register';
+$txt['user_rememberme']           = 'Remember me';
 $txt['user_login']                = 'Login'; // this is used as both a noun/verb
 $txt['user_logout']               = 'Logout';
 $txt['user_username']             = 'Username';
 $txt['user_password']             = 'Password';
 $txt['user_email']                = 'Email';
 
-// admin panel menu
-$txt['admin_panel_manpages']      = 'Manage Pages';
-$txt['admin_panel_manmedia']      = 'Manage Media';
-$txt['admin_panel_config']        = 'Configuration';
+// pages
+$txt['pages_add_success']         = 'page add succeeded!';
+$txt['pages_add_failure']         = 'page add failed!';
+$txt['pages_edit_failure']        = 'Page could not be saved, reason:';
+$txt['pages_info_success']        = 'page info saved!';
+$txt['pages_info_failure']        = 'page info save failed!';
+$txt['pages_del_success']         = 'page deleted!';
+$txt['pages_del_failure']         = 'page delete failed!';
+$txt['pages_order_success']       = 'saved!';
+$txt['pages_order_failure']       = 'save failed!';
 
-// general admin panel
-$txt['admin_panel_title']         = 'Administration Panel';
-$txt['admin_panel_noperms']       = 'You do not have proper permissions to access this page.';
-$txt['admin_panel_welcome']       = 'Welcome to the administration panel.';
-$txt['admin_panel_noedittitle']   = 'Do not change the any of the titles of an existing page. You must get it changed manually.';
-$txt['admin_panel_changepage']    = 'Go to another page to view the changes.';
-$txt['admin_panel_actn_noexist']  = 'That action doesn\'t exist or isn\'t implemented.';
-$txt['admin_panel_what']          = 'What?';
-$txt['admin_panel_confirm']       = 'Are you sure you want to do this?';
-$txt['admin_panel_deleting']      = 'Deleting file...';
-
-// page management in admin panel
-$txt['admin_panel_addpage']       = 'Add a page';
-$txt['admin_panel_addpage_prog']  = 'Adding page...';
-$txt['admin_panel_addpage_savpr'] = 'Saving page...';
-$txt['admin_panel_addpage_desc']  = 'The page will be added to the end of the menu. Use the "Manage pages" section to move it.';
-$txt['admin_panel_addpage_blnk']  = '(n.b. if your page has blank content this may not be true)';
-$txt['admin_panel_manpages_list'] = 'Pages';
-$txt['admin_panel_manpages_desc'] = 'This is the list of pages.';
-$txt['admin_panel_manpages_ordr'] = 'Use [^]/[v] to move their order in the menu.';
-$txt['admin_panel_manpages_edit'] = 'Click on [e] to edit a page.';
-$txt['admin_panel_manpages_delt'] = 'Click on [d] to delete a page.';
-$txt['admin_panel_manbugs']       = 'Manage bugs';
-$txt['admin_panel_modmenu_prog']  = 'Modifying menu...';
-$txt['admin_panel_edt_src']       = 'If you want to edit the source click the "HTML" button.';
-$txt['admin_panel_edt_srtnm']     = 'Menu name';
-$txt['admin_panel_edt_srtnm_dsc'] = 'The name appearing in the menu';
-$txt['admin_panel_edt_fllnm']     = 'Full name';
-$txt['admin_panel_edt_fllnm_dsc'] = 'The name appearing in its full version';
-$txt['admin_panel_edt_child']     = 'Child page of';
-$txt['admin_panel_edt_child_dsc'] = 'You can set this, but it does nothing special. Right now, at least.';
-$txt['admin_panel_edt_hideinmenu']= 'Hide in menu?';
-
-// media management in admin panel
-$txt['admin_panel_manmed_recog']  = 'Recognised filetypes are:';
-$txt['admin_panel_manmed_convt']  = 'To convert media between filetypes [TODO]';
-$txt['admin_panel_manmed_view']   = 'Viewing media file';
-
-// configuration frontend in admin panel
-$txt['admin_panel_lang']          = 'Language';
-$txt['admin_panel_timezone']      = 'Timezone';
-$txt['admin_panel_cfg_sucess']    = 'Successfully saved configuration!';
-$txt['admin_panel_cfg_failure']   = 'Could not save configuration!';
+// files
+$txt['files_add_success']         = 'file upload succeeded!';
+$txt['files_add_failure']         = 'file upload failed!';
+$txt['files_del_success']         = 'file deleted!';
+$txt['files_del_failure']         = 'file delete failed!';
 ?>
