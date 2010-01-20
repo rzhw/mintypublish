@@ -110,8 +110,6 @@ $page = new PageBuilder();
 register_shutdown_function(array($page,'outputAll'));
 
 // and now let's have some content!
-echo gettopmessage();
-
 ob_start('parsebbcode');
 switch ($_GET["p"])
 {

@@ -39,7 +39,6 @@ else
 	session_destroy();
 	
 	// congraulations, you have helped destroy ze vorld!
-	settopmessage(2,'Successfully logged out!');
 	header('Location: ./');
 }
 ?>

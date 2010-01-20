@@ -47,8 +47,6 @@ if (isset($_POST['sublogin']))
 			pset('cookie',array('uname' => $username,'pwd' => $password));
 		}
 		
-		settopmessage(2,'Successfully logged in!');
-		
 		header('Location: ../');
 		
 		$showscreen = false;
