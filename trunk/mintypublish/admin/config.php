@@ -32,6 +32,9 @@ if (isloggedin())
 	{
 		case 'get':
 			$ret = '
+				Site name:<br />
+				<input type="text" name="sitename" value="' . MP_SITENAME . '" /><br /><br />
+				
 				Theme (requires refresh after saving):<br />
 				<select name="theme">
 				';
@@ -74,6 +77,7 @@ if (isloggedin())
 			header('Content-type: application/json');
 			
 			// info goes in
+			$sitename = escape_smart($_POST['sitename']);
 			$theme = escape_smart($_POST['theme']);
 			$language = escape_smart($_POST['language']);
 			$timezone = escape_smart($_POST['timezone']);
@@ -81,6 +85,7 @@ if (isloggedin())
 			// query time!
 			$success = true;
 			
+			mysql_query("UPDATE config SET config_value='$sitename' WHERE config_name='sitename'") or $success = false;
 			mysql_query("UPDATE config SET config_value='$theme' WHERE config_name='theme'") or $success = false;
 			mysql_query("UPDATE config SET config_value='$language' WHERE config_name='language'") or $success = false;
 			mysql_query("UPDATE config SET config_value='$timezone' WHERE config_name='timezone'") or $success = false;
