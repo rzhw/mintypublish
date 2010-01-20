@@ -158,22 +158,22 @@ if ($showscreen)
 	<body>
 		<div id="darken"></div>
 		<div id="area">
-			<p id="instruction">Login to access the administration tools</p>
+			<p id="instruction"><?php echo $txt['user_loginmsg']; ?></p>
 			<form action="" method="post">
 				<p>
-					<label for="username">Username</label>
+					<label for="username"><?php echo $txt['user_username']; ?></label>
 					<input type="text" name="uname" id="username" value="" />
 				</p>
 				<p>
-					<label for="password">Password</label>
+					<label for="password"><?php echo $txt['user_password']; ?></label>
 					<input type="password" name="pwd" id="password" value="" />
 				</p>
 				<p>
 					<input type="checkbox" name="remember" id="remember" />
-					<label for="remember">Remember me</label>
+					<label for="remember"><?php echo $txt['user_rememberme']; ?></label>
 				</p>
 				<p id="submit_wrap">
-					<input type="submit" name="sublogin" value="Login &raquo;" />
+					<input type="submit" name="sublogin" value="<?php echo $txt['user_login']; ?> &raquo;" />
 				</p>
 			</form>
 		</div>

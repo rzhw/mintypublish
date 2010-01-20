@@ -45,12 +45,12 @@ $txt['working']                   = 'working...';
 $txt['notadmin']                  = 'You either do not have permissions to access this page or your session has expired.';
 
 // user stuff
+$txt['user_loginmsg']             = 'Login to access the administration tools';
 $txt['user_rememberme']           = 'Remember me';
 $txt['user_login']                = 'Login'; // this is used as both a noun/verb
 $txt['user_logout']               = 'Logout';
 $txt['user_username']             = 'Username';
 $txt['user_password']             = 'Password';
-$txt['user_email']                = 'Email';
 
 // pages
 $txt['pages_add_success']         = 'page add succeeded!';
