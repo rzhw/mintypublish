@@ -125,7 +125,7 @@ switch ($_GET["p"])
 		if ($j == 0)
 		{
 			$page->setTitle($txt['text_error']);
-			echo $txt['page_noexist'];
+			echo $txt['noexist'];
 		}
 		else
 		{
