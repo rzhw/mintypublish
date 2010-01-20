@@ -39,8 +39,8 @@ $txt['text_save']                 = 'Save';
 $txt['text_again']                = 'again';
 
 // general errors
-$txt['page_noexist']              = 'The page you requested doesn\'t exist.';
-$txt['page_oldphp']               = 'mintypublish requires at least PHP 5.2.0 to function.';
+$txt['noexist']                   = 'The page you requested doesn\'t exist.';
+$txt['oldphp']                    = 'mintypublish requires at least PHP 5.2.0 to function.';
 $txt['working']                   = 'working...';
 $txt['notadmin']                  = 'You either do not have permissions to access this page or your session has expired.';
 
