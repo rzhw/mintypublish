@@ -49,8 +49,9 @@ if (isloggedin())
 				<select name="language">
 				';
 				$languages = array(
-					'en' => 'English',
-					'jp' => 'Japanese (machine translated)'
+					'english' => 'English',
+					'japanese' => 'Japanese (machine translated)',
+					'engrish' => 'Engrish'
 				);
 				foreach ($languages as $id => $name)
 				{

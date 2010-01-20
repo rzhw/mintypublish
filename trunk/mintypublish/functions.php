@@ -53,8 +53,8 @@ $location = array(
 );
 
 // include the language files
-require_once($root . '/lang/en.php');
-if (MP_LANGUAGE != "en")
+require_once($root . '/lang/english.php');
+if (MP_LANGUAGE != 'english')
 {
 	require_once($root . '/lang/' . MP_LANGUAGE . '.php');
 }
