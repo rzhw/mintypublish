@@ -143,7 +143,7 @@ class PageBuilder
 		}
 		echo '};</script>'."\n";
 		
-		echo "\t\t".'<meta name="generator" content="mintypublish pre-alpha" />'."\n";
+		echo "\t\t".'<meta name="generator" content="mintypublish ' . MP_VERSION . '" />'."\n";
 		
 		foreach ($this->stylesheets as $stylesheet)
 		{

@@ -26,7 +26,7 @@ $sql_mysql_connection = mysql_connect($mysql['server'],$mysql['username'],$mysql
 mysql_select_db($mysql['dbname'],$sql_mysql_connection);
 
 // define the core stuff
-define('MP_VERSION', '0.5.0-dev');
+define('MP_VERSION', '0.5.1-dev');
 $configquery = mysql_query("SELECT * FROM config");
 while($row = mysql_fetch_array($configquery))
 {	
