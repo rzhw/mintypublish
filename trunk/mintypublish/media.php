@@ -23,13 +23,14 @@
 
 if ($zvfpcms)
 {
-	$page->setTitle($txt['admin_panel_manmed_view']);
 	$page->addBodyClass('media');
 	
 	while ($row = mysql_fetch_array($mediaquery))
 	{
 		if ($row['file_id'] == $_GET['id'])
 		{
+			$page->setTitle($row['file_filename']);
+			
 			echo '<h2>' . $row['file_filename'] . '</h2>';
 			echo media_html($row['file_filename']);
 		}
