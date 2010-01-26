@@ -111,7 +111,8 @@ register_shutdown_function(array($page,'outputAll'));
 
 // and now let's have some content!
 ob_start('parsebbcode');
-switch ($_GET["p"])
+$page->addBodyClass('page-' . preg_replace('/[^a-zA-Z0-9\s]/', '', $_GET['p']));
+switch ($_GET['p'])
 {
 	case 'logout':
 		include($location['admin2'].'/logout.php');

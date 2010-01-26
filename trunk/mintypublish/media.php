@@ -22,9 +22,7 @@
  */
 
 if ($zvfpcms)
-{
-	$page->addBodyClass('media');
-	
+{	
 	while ($row = mysql_fetch_array($mediaquery))
 	{
 		if ($row['file_id'] == $_GET['id'])
