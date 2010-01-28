@@ -137,9 +137,15 @@ class PageBuilder
 		
 		echo "\t\t".'<script type="text/javascript">var loc = {';
 		global $location;
+		$i = 0;
 		foreach ($location as $key => $value)
 		{
-			echo '\''.$key.'\':\''.$value.'\',';
+			if ($i > 0)
+			{
+				echo ',';
+			}
+			echo "'$key':'$value'";
+			$i++;
 		}
 		echo '};</script>'."\n";
 		
