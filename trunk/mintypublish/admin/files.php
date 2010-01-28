@@ -26,7 +26,7 @@ $root = '..';
 require_once('../config.php');
 require_once('../functions.php');
 
-$filedir = '../' . str_replace($location['root'],'',$location['files']);
+$filedir = $root . str_replace($location['root'],'',$location['files']);
 
 if (isloggedin())
 {
@@ -79,9 +79,10 @@ if (isloggedin())
 			{
 				$success = false;
 			}
-			
-			// add it to the db
-			mysql_query("INSERT INTO files (file_filename) VALUES('" . escape_smart($filename) . "')") or $success = false;
+			else
+			{
+				mysql_query("INSERT INTO files (file_filename) VALUES('" . escape_smart($filename) . "')") or $success = false;
+			}
 			
 			// message
 			if ($success)
