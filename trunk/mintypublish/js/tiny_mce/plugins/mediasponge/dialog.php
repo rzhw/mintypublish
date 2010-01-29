@@ -18,10 +18,10 @@
 			while ($row = mysql_fetch_array($mediaquery))
 			{
 				// title
-				echo $row['file_filename'].' ('.get_file_type($row['file_filename']).') - ';
+				echo $row['file_filename'].' ('.filetypes('identify',$row['file_filename']).') - ';
 				
 				// is it an image?
-				if (get_file_type($row['file_filename']) == 'image')
+				if (filetypes('identify',$row['file_filename']) == 'image')
 				{
 					echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'<img src=\\\''.$location['files'].'/'.$row['file_filename'].'\\\' />\')">Insert inline</a>';
 				}
