@@ -38,18 +38,15 @@
 											<?php
 												echo '<br />';
 												
+												include('../../../../config.php');
 												include('../../../../functions.php');
 												
-												$sql_mysql_connection = mysql_connect('localhost','root','');
-												mysql_select_db('spongecms',$sql_mysql_connection);
 												$pagequery = mysql_query("SELECT * FROM pages");
 												while ($row = mysql_fetch_array($pagequery))
 												{
 													echo '&middot; <a href="javascript:void(0)" onclick="document.getElementById(\'href\').value=\'index.php?p='.$row['page_id'].'\';">'.$row['page_title_full'].'</a>';
 													echo '<br />';
 												}
-												
-												mysql_close($sql_mysql_connection);
 											?>
 										</div>
 									</div>
