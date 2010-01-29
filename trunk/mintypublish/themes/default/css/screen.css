@@ -19,10 +19,14 @@ body, td
 	font-family:verdana;
 }
 
+/* html5 */
+
 header,section,footer,aside,nav,article,figure
 {
 	display:block;  
 }
+
+/* kill ye olde table styling */
 
 table
 {
@@ -34,7 +38,9 @@ td
 	padding:0px;
 }
 
-#global_wrapper
+/* wrappers */
+
+#container
 {
 	background:url('../img/bg.png') repeat-x;
 	margin:0px auto;
@@ -43,7 +49,7 @@ td
 
 #content
 {
-	margin:0px auto;
+	margin:16px auto 0px auto;
 	width:1024px;
 }
 
@@ -65,7 +71,9 @@ td
 	padding:15px 0px;
 }
 
-#menu_wrapper
+/* the menu */
+
+#menu
 {
 	background:#464646;
 	color:#fff;
@@ -74,46 +82,43 @@ td
 	height:26px;
 }
 
-#menu_wrapper nav
+#menu nav
 {
 	margin:0px auto;
 	width:1024px;
 }
 
-#menu_wrapper nav ul
+#menu nav ul
 {
 	list-style:none;
 	padding:0px;
 	margin:0px;
 }
 
-#menu_wrapper nav li
+#menu nav li
 {
 	float:left;
 	margin-right:16px;
 }
 
-#menu_wrapper nav li.sel
+#menu nav li.sel
 {
 	font-weight:bold;
 }
 
-#menu_wrapper a:link, #menu_wrapper a:visited
+#menu a:link, #menu a:visited
 {
 	text-decoration:none;
 	color:#F1F4E8;
 }
 
-#menu_wrapper a:hover
+#menu a:hover
 {
 	text-decoration:underline;
 	color:#E7F2C1;
 }
 
-#content
-{
-	margin-top:16px;
-}
+/* links */
 
 a:link, a:visited
 {
@@ -121,10 +126,19 @@ a:link, a:visited
 	color:gray;
 }
 
+/* no borders for some things (GOD DAMNIT WEBKIT) */
+
 img
 {
 	border:none;
 }
+
+input
+{
+	outline:0;
+}
+
+/* headings */
 
 h1,h2,h3,h4,h5
 {
@@ -139,6 +153,8 @@ h2
 {
 	font-size:medium;
 }
+
+/* general inputs */
 
 input[type=text], input[type=password], select
 {
@@ -157,7 +173,9 @@ select
 	padding:1px;
 }
 
-body.admin #global_wrapper
+/* everything admin! */
+
+body.admin #container
 {
 	padding-top:24px;
 }

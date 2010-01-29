@@ -10,11 +10,11 @@
 		
 		<?php $this->outputAdminMenu(); ?>
 		
-		<div id="global_wrapper">
+		<div id="container">
 			<header id="header">
 				<h1 id="title"><?php echo $this->sitename; ?></h1>
 				
-				<div id="menu_wrapper">
+				<div id="menu">
 					<nav>
 						<ul><?php
 						foreach ($this->getMenu() as $item)
