@@ -1,4 +1,4 @@
-/*
+/**
  * mintypublish theme - Flat Marble - 1.0
  * Copyright (c) a2h 2009, 2010
  */
@@ -231,7 +231,7 @@ body.admin #container
 	filter:alpha(opacity=25);
 }
 
-body.media #admin .mode.off
+body.page-media #admin .mode.off
 {
 	display:none;
 }
