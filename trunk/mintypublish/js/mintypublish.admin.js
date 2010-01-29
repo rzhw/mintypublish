@@ -316,6 +316,75 @@ $(document).ready(function() {
 					}
 				});
 				
+				/// FILE INFORMATION
+				
+				$("#admin_list_info").click(function() {
+					id = $.tree.focused().selected;
+					if (id)
+					{
+						$.tree.focused().lock(true);
+						
+						// don't use .get_text() because of how we formed the page nodes
+						var ft = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
+						var ff = $(id).find('.subtitle').text();
+						
+						$(drop).find(".more").hide().html('\
+							<p><b>File information</b></p>\
+							<p>\
+								<label for="file_filename">Filename:</label> <input type="text" id="file_filename" value="' + ff + '" /><br />\
+								<label for="file_title">Title:</label> <input type="text" id="file_title" value="' + ft + '" />\
+							</p>\
+							<p>\
+								<input type="button" value="save" />\
+								<input type="button" value="cancel" />\
+							</p>\
+						').slideDown();
+						
+						$(drop).find(".more input[type=button]:last").click(function() {
+							$.tree.focused().lock(false);
+							$(drop).find(".more").slideUp();
+						});
+						
+						$(drop).find(".more input[type=button]:first").click(function() {
+							/*$.ajax({
+								type: 'post',
+								url: loc['admin2'] + '/files.php?type=rename',
+								data: {
+									page_id: $(id).attr('id').replace(pidprefix,''),
+									file_filename: $("#file_filename").attr('value'),
+									file_title: $("#file_title").attr('value')
+								},
+								dataType: 'json',
+								beforeSend: function() {
+									$(drop).find(".more").slideUp();
+									$(drop).find(".status").show().text('working...');
+								},
+								success: function(data) {
+									$.tree.focused().lock(false);
+									
+									$(drop).find(".status").text(data.message);
+									
+									if (data.success)
+									{
+										$.tree.focused().refresh();
+									}
+									
+									setTimeout(function() {
+										$(drop).find(".status").fadeOut(2000);
+									}, 1000);
+								}
+							});*/
+							alert('Not implemented');
+							$.tree.focused().lock(false);
+							$(drop).find(".more").slideUp();
+						});
+					}
+					else
+					{
+						alert('You haven\'t selected anything!');
+					}
+				});
+				
 				/// FILE DELETING
 				
 				$("#admin_list_delete").click(function() {
