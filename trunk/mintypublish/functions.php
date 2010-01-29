@@ -222,12 +222,10 @@ function parsebbcode($buffer)
 	if (strchr($buffer,'<!-- noreplace -->') == false)
 	{
 		$find = array(
-			'/(\[mediainline\])(.+)(\[\/mediainline\])/',
-			'/(\[medialink\])(.+)(\[\/medialink\])/'
+			'/(\[mediainline\])(.+)(\[\/mediainline\])/'
 		);
 		$replace = array(
-			media_html('\\2'),
-			'<a href="index.php?p=media&id=\\2">View media (\\2)</a>'
+			media_html('\\2')
 		);
 		$string = preg_replace($find, $replace, $buffer);
 		return $string;

@@ -8,8 +8,14 @@
 <body>
 
 <form onsubmit="MediaSpongeDialog.insert();return false;" action="#">
-	<p>Click an item in the list to insert it.</p>
-	<p>
+	<p>Here is a list of media files. Inline insertion is the direct insertion of a media file into a page. Link insertion inserts a link to a page containing the media file in question by itself.</p>
+	<table style="width:100%;">
+		<tr>
+			<th>Filename</th>
+			<th style="text-align:left;">Type</th>
+			<th colspan="2">Insert</th>
+		</tr>
+	
 		<?php
 			include('../../../../config.php');
 			include('../../../../functions.php');
@@ -17,29 +23,66 @@
 			$mediaquery = mysql_query("SELECT * FROM files");
 			while ($row = mysql_fetch_array($mediaquery))
 			{
+				$filetype = filetypes('identify',$row['file_filename']);
+				
+				// start the row
+				echo '<tr>';
+				
 				// title
-				echo $row['file_filename'].' ('.filetypes('identify',$row['file_filename']).') - ';
+				echo '<td>' . $row['file_filename'] . '</td>';
 				
-				// is it an image?
-				if (filetypes('identify',$row['file_filename']) == 'image')
-				{
-					echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'<img src=\\\''.$location['files'].'/'.$row['file_filename'].'\\\' />\')">Insert inline</a>';
-				}
+				// filetype
+				echo '<td>' . filetypes('identify',$row['file_filename']) . '</td>';
 				
-				// is it an audio/video file?
-				else
-				{
-					echo '<a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[mediainline]'.$row['file_filename'].'[/mediainline]\');">Insert inline</a>
-					| <a href="javascript:void(0)" onclick="tinyMCE.execCommand(\'mceInsertContent\',false,\'[medialink]'.$row['file_filename'].'[/medialink]\');">Insert link</a>';
-				}
+				echo '<td><a href="javascript:void(0)" onclick="insertMedia(\'' . $filetype . '\', \'' . $row['file_filename'] . '\', ' . $row['file_id'] . ', true)">Inline</td>';
+				echo '<td><a href="javascript:void(0)" onclick="insertMedia(\'' . $filetype . '\', \'' . $row['file_filename'] . '\', ' . $row['file_id'] . ', false)">Link</td>';
 				
-				// newline
-				echo '<br />';
+				// end the row
+				echo '</tr>';
 			}
-			
-			mysql_close($sql_mysql_connection);
 		?>
-	</p>
+		
+		<script type="text/javascript">
+			function insertMedia(type, filename, id, inline)
+			{
+				var filedir = '<?php echo $location['files']; ?>';
+				var toinsert = '';
+				
+				if (inline)
+				{
+					switch (type)
+					{
+						case 'image':
+							toinsert = '<img src="' + filename + '" alt="' + filename + '" />';
+							break;
+						case 'video':
+						case 'audio':
+							toinsert = '[mediainline]' + filename + '[/mediainline]'; // fugly, must kill later D:<
+							break;
+						default:
+							inline = false;
+							break;
+					}
+				}
+				
+				if (!inline)
+				{
+					var linktext = prompt('Link text:', filename);
+					if (linktext)
+					{
+						toinsert = '<a href="index.php?p=media&id=' + id + '">' + linktext + '</a>';
+					}
+					else
+					{
+						return false;
+					}
+				}
+				
+				tinyMCE.execCommand('mceInsertContent', false, toinsert);
+			}
+		</script>
+		
+	</table>
 
 	<div class="mceActionPanel">
 		<div style="float: right">
