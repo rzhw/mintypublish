@@ -30,7 +30,15 @@ if ($zvfpcms)
 			$page->setTitle($row['file_filename']);
 			
 			echo '<h2>' . $row['file_filename'] . '</h2>';
-			echo media_html($row['file_filename']);
+			
+			if (filetypes('embeddable', $row['file_filename']))
+			{
+				echo media_html($row['file_filename']);
+			}
+			else
+			{
+				echo '<a href="' . $location['files'] . '/' . $row['file_filename'] . '">Download this file</a>';
+			}
 		}
 	}
 }

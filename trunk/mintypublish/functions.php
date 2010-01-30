@@ -86,27 +86,38 @@ function filetypes($whattodo,$value='',$bool=false)
 			'img' => array(
 				'name' => 'image',
 				'name_plural' => 'images',
-				'recognised' => array('gif','jpg','jpeg','png','apng','svg')
+				'recognised' => array('gif','jpg','jpeg','jpe','jfif','png','apng','svg','bmp','ico','psd','pdn','xcf','raw','tga','tif','tiff','vmt','vtf'),
+				'embeddable' => array('gif','jpg','jpeg','jpe','jfif','png','apng','svg')
 			),
 			'vid' => array(
 				'name' => 'video',
 				'name_plural' => 'videos',
-				'recognised' => array('flv','mp4')
+				'recognised' => array('flv','mp4','wmv','3gp','mpg','mp2','mp4','mov','avi','rm','mkv'),
+				'embeddable' => array('flv','mp4')
 			),
 			'aud' => array(
 				'name' => 'audio',
 				'name_plural' => 'audio',
-				'recognised' => array('mp3')
+				'recognised' => array('mp3','wav','aac','flac','ogg'),
+				'embeddable' => array('mp3')
+			),
+			'apt' => array(
+				'name' => 'applet',
+				'name_plural' => 'applets',
+				'recognised' => array('swf','jar','xap'), // flash, java, silverlight respectively
+				'embeddable' => array('swf') // for now
 			),
 			'doc' => array(
 				'name' => 'document',
 				'name_plural' => 'documents',
-				'recognised' => array('pdf','htm','html','txt','doc','docx','xls','xlsx','csv','ppt','pptx','pub','pubx','adb','adbx','odt','odp','ods')
+				'recognised' => array('pdf','htm','html','txt','doc','docx','xls','xlsx','csv','ppt','pptx','pub','pubx','adb','adbx','odt','odp','ods'),
+				'embeddable' => false
 			),
 			'oth' => array(
 				'name' => 'other',
 				'name_plural' => 'others',
-				'recognised' => array()
+				'recognised' => array(),
+				'embeddable' => false
 			)
 		);
 	}
@@ -160,6 +171,28 @@ function filetypes($whattodo,$value='',$bool=false)
 				return $filetypes['oth']['name'];
 			}
 			break;
+		case 'embeddable':
+			foreach ($filetypes as $filetype)
+			{
+				if (in_array(get_file_extension($value),$filetype['recognised']))
+				{
+					// if embeddable is true then everything in "recognised" is supported
+					if (is_bool($filetype['embeddable']) && $filetype['embeddable'])
+					{
+						return true;
+					}
+					// looks like we'll have to look a bit harder...
+					else
+					{
+						if (in_array(get_file_extension($value),$filetype['embeddable']))
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+			break;
 	}
 }
 
@@ -184,12 +217,14 @@ function media_html($fname)
 	$ftype = filetypes('identify', $fname);
 	$fpath = $location['files'].'/'.$fname;
 	
+	$embedtemp = 'embed' . substr(md5($fname), 0, 5);
+	
 	switch ($ftype)
 	{
 		case 'audio':
 		case 'video':
 			$toreturn .= '
-			<div id="video"></div>
+			<div id="' . $embedtemp . '"></div>
 			<script type="text/javascript">
 				var videovars = {
 					path: "' . ($ftype == 'video' ? '../' : '') /* bug in gsplayer forces these weird paths */ . $fpath . '",
@@ -200,12 +235,20 @@ function media_html($fname)
 					bgcolor: "#000000",
 					allowfullscreen: true
 				};
-				swfobject.embedSWF("' . $location['root'] . '/player.swf", "video", 800, ' . ($ftype == 'video' ? 450 : 27) . ', "9.0.0", null, videovars, videoparams);
+				swfobject.embedSWF("' . $location['root'] . '/player.swf", "' . $embedtemp . '", 800, ' . ($ftype == 'video' ? 450 : 27) . ', "9.0.0", null, videovars, videoparams);
 			</script>';
 			break;
 		
 		case 'image':
 			$toreturn .= '<img src="' . $fpath . '" alt="" />';
+			break;
+		
+		case 'applet': // only VERY VERY basic embedding is supported, maybe just go with the old object method so that tinymce can be happy and params can be configured!
+			$toreturn .= '
+			<div id="' . $embedtemp . '"></div>
+			<script type="text/javascript">
+				swfobject.embedSWF("' . $fpath . '", "' . $embedtemp . '", 640, 480, "9.0.0");
+			</script>';
 			break;
 		
 		default:

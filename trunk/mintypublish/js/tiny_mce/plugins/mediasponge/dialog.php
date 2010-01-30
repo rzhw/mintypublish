@@ -8,7 +8,10 @@
 <body>
 
 <form onsubmit="MediaSpongeDialog.insert();return false;" action="#">
-	<p>Here is a list of media files. Inline insertion is the direct insertion of a media file into a page. Link insertion inserts a link to a page containing the media file in question by itself.</p>
+	<p>Here is a list of files. Embedding is the direct insertion of a media file into a page.</p>
+	<p>Embeddable filetypes are: <b>images</b> gif, jpg (with variations), png, apng, svg <b>videos</b> flv, mp4 <b>audio</b> mp3 <b>applets</b> swf</p>
+	<p>If you insert a link to a file that does not support embedding, it will lead to a download page.</p>
+	
 	<table style="width:100%;">
 		<tr>
 			<th>Filename</th>
@@ -32,9 +35,17 @@
 				echo '<td>' . $row['file_filename'] . '</td>';
 				
 				// filetype
-				echo '<td>' . filetypes('identify',$row['file_filename']) . '</td>';
+				echo '<td>' . filetypes('identify', $row['file_filename']) . '</td>';
 				
-				echo '<td><a href="javascript:void(0)" onclick="insertMedia(\'' . $filetype . '\', \'' . $row['file_filename'] . '\', ' . $row['file_id'] . ', true)">Inline</td>';
+				if (filetypes('embeddable', $row['file_filename']))
+				{
+					echo '<td><a href="javascript:void(0)" onclick="insertMedia(\'' . $filetype . '\', \'' . $row['file_filename'] . '\', ' . $row['file_id'] . ', true)">Embed</td>';
+				}
+				else
+				{
+					echo '<td>--</td>';
+				}
+				
 				echo '<td><a href="javascript:void(0)" onclick="insertMedia(\'' . $filetype . '\', \'' . $row['file_filename'] . '\', ' . $row['file_id'] . ', false)">Link</td>';
 				
 				// end the row
@@ -43,12 +54,12 @@
 		?>
 		
 		<script type="text/javascript">
-			function insertMedia(type, filename, id, inline)
+			function insertMedia(type, filename, id, embed)
 			{
 				var filedir = '<?php echo $location['files']; ?>';
 				var toinsert = '';
 				
-				if (inline)
+				if (embed)
 				{
 					switch (type)
 					{

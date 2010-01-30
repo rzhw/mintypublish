@@ -303,6 +303,7 @@ $(document).ready(function() {
 							case 'images':
 							case 'videos':
 							case 'audio':
+							case 'applets':
 								location.href = 'index.php?p=media&id=' + $(id).attr('id').replace(fidprefix,'');
 								break;
 							default:
