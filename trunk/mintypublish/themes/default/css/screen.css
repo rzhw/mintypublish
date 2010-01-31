@@ -270,13 +270,9 @@ body.page-media #admin .mode.off
 	color:#000;
 	height:16px;
 	padding-bottom:4px;
+	*padding-bottom:0px;
 	font-size:9px;
 	text-align:center;
-}
-
-*:first-child+html #admin .drop button, * html #admin .drop button /* target ie7 and below */
-{
-	padding-bottom:0px;
 }
 
 #admin .drop .more

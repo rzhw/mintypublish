@@ -26,7 +26,7 @@ class PageBuilder
 {
 	private $title, $content, $stylesheets=array(), $javascripts=array(), $bodypre, $disabled=false, $sitename, $location, $bodyClasses;
 	
-	function PageBuilder()
+	function __construct()
 	{
 		global $sitename, $location;
 		
@@ -56,38 +56,38 @@ class PageBuilder
 		ob_start();
 	}
 	
-	function disableTemplate()
+	public function disableTemplate()
 	{
 		$this->disabled = true;
 	}
 	
-	function setTitle($title)
+	public function setTitle($title)
 	{
 		global $sitename;
 		$this->title = $title;
 	}
 	
-	function setType($type)
+	public function setType($type)
 	{
 		$this->type = $type;
 	}
 	
-	function addCSS($path)
+	public function addCSS($path)
 	{
 		$this->stylesheets[] = $path;
 	}
 	
-	function addJS($path)
+	public function addJS($path)
 	{
 		$this->javascripts[] = $path;
 	}
 	
-	function addBodyPre($content)
+	public function addBodyPre($content)
 	{
 		$this->bodypre .= $content;
 	}
 	
-	function addBodyPreInc($content)
+	public function addBodyPreInc($content)
 	{
 		global $location;
 		ob_start();
@@ -95,19 +95,19 @@ class PageBuilder
 		$this->bodypre .= ob_get_clean();
 	}
 	
-	function outputBodyPre()
+	public function outputBodyPre()
 	{
 		global $pid;
 		echo '<div id="pid" style="display:none;">' . $pid . '</div>'."\n";
 		echo $this->bodypre;
 	}
 	
-	function addBodyClass($class)
+	public function addBodyClass($class)
 	{
 		$this->bodyClasses[] = $class;
 	}
 	
-	function outputBodyClasses()
+	public function outputBodyClasses()
 	{
 		if (isloggedin())
 		{
@@ -125,13 +125,13 @@ class PageBuilder
 		}
 	}
 	
-	function getMenu()
+	public function getMenu()
 	{
 		global $menu;
 		return $menu;
 	}
 	
-	function outputHead()
+	public function outputHead()
 	{
 		echo '<title>'.$this->sitename.' | '.$this->title.'</title>'."\n";
 		
@@ -161,12 +161,12 @@ class PageBuilder
 		}
 	}
 	
-	function outputContent()
+	public function outputContent()
 	{
 		echo $this->content;
 	}
 	
-	function outputAdminMenu()
+	public function outputAdminMenu()
 	{
 		if (isloggedin())
 		{
@@ -183,7 +183,7 @@ class PageBuilder
 		}
 	}
 	
-	function build()
+	private function build()
 	{
 		if ($this->disabled)
 		{
@@ -199,7 +199,7 @@ class PageBuilder
 		}
 	}
 	
-	function outputAll()
+	public function outputAll()
 	{
 		// stop capturing everything
 		$this->content = ob_get_clean();
