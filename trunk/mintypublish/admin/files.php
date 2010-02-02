@@ -28,7 +28,7 @@ require_once('../functions.php');
 
 $filedir = $root . str_replace($location['root'],'',$location['files']);
 
-if (isloggedin())
+if ($auth->isLoggedIn())
 {
 	switch ($_GET['type'])
 	{

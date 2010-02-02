@@ -273,39 +273,6 @@ function parsebbcode($buffer)
 }
 
 /*
- * Summary:      Checks whether a given username/password pair is in the database
- * Parameters:   $uname as string
- *               $pwd as string
- * Return:       An array with the values $hit and the salt respectively.
- *               Possible $hit values:
- *                  -1 more than one match of the username for some reason
- *                   0 no match for both username/password
- *                   1 match for both username/password
- *                   2 match for username, no match for password
- *                   3 match for password, no match for username
- */
-function isexistinguser($uname,$pwd,$ishash=false)
-{
-	global $auth;
-	return $auth->isUser($uname,$pwd,$ishash,true);
-	echo '<p><big><big><big>This page is using a deprecated function isexistinguser()</big></big></big></p>';
-}
-
-/*
- * Summary:      Checks whether the current session has a logged in user
- *               Original from http://www.evolt.org/node/60265
- * Parameters:   None
- * Return:       Either true or false
- */
-
-function isloggedin()
-{
-	global $auth;
-	return $auth->isLoggedIn();
-	echo '<p><big><big><big>This page is using a deprecated function isloggedin()</big></big></big></p>';
-}
-
-/*
  * Summary:      Sets a persistent variable
  * Parameters:   $type as string - can be either 'session' or 'cookie'
  *               $variable as string OR array

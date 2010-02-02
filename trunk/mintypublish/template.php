@@ -28,7 +28,7 @@ class PageBuilder
 	
 	function __construct()
 	{
-		global $sitename, $location;
+		global $auth, $sitename, $location;
 		
 		// outside stuff
 		$this->sitename = $sitename;
@@ -43,7 +43,7 @@ class PageBuilder
 		$this->addJS($this->location['js'].'/swfobject.js');
 		
 		// admins need extra stuff loaded
-		if (isloggedin())
+		if ($auth->isLoggedIn())
 		{
 			$this->addJS($this->location['js'].'/tiny_mce/tiny_mce.js');
 			$this->addJS($this->location['js'].'/ajaxupload.min.js');
@@ -109,7 +109,9 @@ class PageBuilder
 	
 	public function outputBodyClasses()
 	{
-		if (isloggedin())
+		global $auth;
+		
+		if ($auth->isLoggedIn())
 		{
 			$this->bodyClasses[] = 'admin';
 		}
@@ -168,7 +170,9 @@ class PageBuilder
 	
 	public function outputAdminMenu()
 	{
-		if (isloggedin())
+		global $auth;
+		
+		if ($auth->isLoggedIn())
 		{
 			global $menu, $pid;
 			foreach ($menu as $menuitem)
