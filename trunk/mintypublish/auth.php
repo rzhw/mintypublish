@@ -22,7 +22,7 @@
  */
 
 class MPAuth
-{
+{	
 	public function generatePassword($salt, $password)
 	{
 		return hash('whirlpool', $salt.$password);
@@ -35,7 +35,7 @@ class MPAuth
 		if ($isuser)
 		{
 			$username2 = stripslashes($username);
-			$password2 = $this->generatePassword($isuser[1], $_POST['pwd']);
+			$password2 = $isuser;
 			
 			pset('session', array('uname' => $username2,'pwd' => $password2));
 			
@@ -86,7 +86,7 @@ class MPAuth
 		if (pisset('session', array('uname','pwd')))
 		{
 			// but is their user/pass pair correct?
-			if ($this->isUser($_SESSION['uname'], $_SESSION['pwd'], true))
+			if (!$this->isUser($_SESSION['uname'], $_SESSION['pwd'], true))
 			{
 				// NO? gtfo
 				punset('session', array('uname','pwd'));
@@ -105,7 +105,7 @@ class MPAuth
 	{		
 		$username2 = mysql_real_escape_string($username);
 		
-		$result = mysql_query("SELECT user_username,user_password,user_password_salt FROM users WHERE user_username = '$username2'") or die(mysql_error());
+		$result = mysql_query("SELECT user_id,user_username,user_password,user_password_salt FROM users WHERE user_username = '$username2'") or die(mysql_error());
 		
 		$hit = 0;
 		$gotone = false;
@@ -113,7 +113,7 @@ class MPAuth
 		
 		$isuser = false;
 		
-		while($row = mysql_fetch_array($result))
+		while ($row = mysql_fetch_array($result))
 		{
 			$salt = $row['user_password_salt'];
 			
@@ -159,7 +159,7 @@ class MPAuth
 		{
 			if ($hit === 1)
 			{
-				return true;
+				return $supposedpass; // always should be equated to true unless it's empty, which it shouldn't be
 			}
 			else
 			{
