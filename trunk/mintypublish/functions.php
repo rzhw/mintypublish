@@ -59,6 +59,10 @@ if (MP_LANGUAGE != 'english')
 	require_once($root . '/lang/' . MP_LANGUAGE . '.php');
 }
 
+// authorisation
+include("$root/auth.php");
+$auth = new MPAuth();
+
 // functions begin here
 
 /*
@@ -196,17 +200,6 @@ function filetypes($whattodo,$value='',$bool=false)
 	}
 }
 
-/*
- * Summary:      Generates a hash from a given password
- *               Original found at http://www.bigroom.co.uk/blog/php-password-security
- * Parameters:   $pwd as string - The password to generate a hash from
- * Return:       The new hash
- */
-function user_pass_generate($salt,$pwd)
-{
-	return hash('whirlpool',$salt.$pwd);
-}
-
 //
 function media_html($fname)
 {
@@ -293,54 +286,9 @@ function parsebbcode($buffer)
  */
 function isexistinguser($uname,$pwd,$ishash=false)
 {
-	global $location;
-	
-	$uname2 = mysql_real_escape_string($uname);
-	
-	$result = mysql_query("SELECT user_username,user_password,user_password_salt FROM users WHERE user_username = '$uname2'") or die(mysql_error());
-	
-	$hit = 0;
-	$rowcounted = false;
-	$salt = '';
-	
-	while($row = mysql_fetch_array($result))
-	{
-		$salt = $row['user_password_salt'];
-		
-		if (!$rowcounted && $hit != -1)
-		{
-			if ($uname == $row['user_username'])
-			{
-				$hit = 2;
-			}
-			
-			if (!$ishash)
-			{
-				$supposedpass = user_pass_generate($row['user_password_salt'],$pwd);
-			}
-			else
-			{
-				$supposedpass = $pwd;
-			}
-			
-			if ($supposedpass == $row['user_password'])
-			{
-				if ($hit == 2)
-					$hit = 1;
-				else
-					$hit = 3;
-			}
-		}
-		else
-		{
-			$hit = -1;
-		}
-		
-		// this is for debugging the mysql user handling system
-		//echo $hit.'<br /><br />'.user_pass_generate($row['user_password_salt'],$pwd).'<br /><br />';
-	}
-	
-	return array($hit,$salt);
+	global $auth;
+	return $auth->isUser($uname,$pwd,$ishash,true);
+	echo '<p><big><big><big>This page is using a deprecated function isexistinguser()</big></big></big></p>';
 }
 
 /*
@@ -352,29 +300,9 @@ function isexistinguser($uname,$pwd,$ishash=false)
 
 function isloggedin()
 {
-	// is the user set to remember?
-	if (pisset('cookie',array('cookuname','cookpwd')))
-	{
-		pset('session',array('uname'=>$_COOKIE['cookuname'],'pwd'=>$_COOKIE['cookpwd']));
-	}
-
-	// user's session is still active
-	if (pisset('session',array('uname','pwd')))
-	{
-		// but is their user/pass pair correct?
-		if (isexistinguser($_SESSION['uname'], $_SESSION['pwd'], true) == 1)
-		{
-			// NO? gtfo
-			punset('session',array('uname','pwd'));
-			return false;
-		}
-		return true;
-	}
-	// user isn't active D:
-	else
-	{
-		return false;
-	}
+	global $auth;
+	return $auth->isLoggedIn();
+	echo '<p><big><big><big>This page is using a deprecated function isloggedin()</big></big></big></p>';
 }
 
 /*

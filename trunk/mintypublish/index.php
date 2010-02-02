@@ -33,12 +33,12 @@ $showscreen = true;
 
 if (isset($_POST['sublogin']))
 {
-	$isuser = isexistinguser($_POST['uname'],$_POST['pwd']);
+	$isuser = $auth->isUser($_POST['uname'], $_POST['pwd']);
 	
-	if ($isuser[0] == 1)
+	if ($isuser)
 	{
 		$username = stripslashes($_POST['uname']);
-		$password = user_pass_generate($isuser[1],$_POST['pwd']);
+		$password = $auth->generatePassword($isuser[1], $_POST['pwd']);
 		
 		pset('session',array('uname' => $username,'pwd' => $password));
 		
