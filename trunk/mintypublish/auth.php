@@ -28,22 +28,68 @@ class MPAuth
 		return hash('whirlpool', $salt.$password);
 	}
 	
+	public function login($username, $password)
+	{		
+		$isuser = $this->isUser($username, $password);
+		
+		if ($isuser)
+		{
+			$username2 = stripslashes($username);
+			$password2 = $this->generatePassword($isuser[1], $_POST['pwd']);
+			
+			pset('session', array('uname' => $username2,'pwd' => $password2));
+			
+			if (isset($_POST['remember']))
+			{
+				pset('cookie', array('uname' => $username2,'pwd' => $password2));
+			}
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public function logout()
+	{
+		if ($this->isLoggedIn())
+		{
+			if (pisset('cookie',array('cookuname','cookpwd')))
+			{
+				punset('cookie',array('cookuname','cookpwd'));
+			}
+			
+			punset('session',array('uname','pwd'));
+			
+			$_SESSION = array();
+			session_destroy();
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	public function isLoggedIn()
 	{
 		// is the user set to remember?
-		if (pisset('cookie',array('cookuname','cookpwd')))
+		if (pisset('cookie', array('cookuname','cookpwd')))
 		{
-			pset('session',array('uname'=>$_COOKIE['cookuname'],'pwd'=>$_COOKIE['cookpwd']));
+			pset('session', array('uname'=>$_COOKIE['cookuname'],'pwd'=>$_COOKIE['cookpwd']));
 		}
 
 		// user's session is still active
-		if (pisset('session',array('uname','pwd')))
+		if (pisset('session', array('uname','pwd')))
 		{
 			// but is their user/pass pair correct?
 			if ($this->isUser($_SESSION['uname'], $_SESSION['pwd'], true))
 			{
 				// NO? gtfo
-				punset('session',array('uname','pwd'));
+				punset('session', array('uname','pwd'));
 				return false;
 			}
 			return true;
@@ -56,9 +102,7 @@ class MPAuth
 	}
 	
 	public function isUser($username, $password, $passwordishash=false, $debug=false)
-	{
-		global $location;
-		
+	{		
 		$username2 = mysql_real_escape_string($username);
 		
 		$result = mysql_query("SELECT user_username,user_password,user_password_salt FROM users WHERE user_username = '$username2'") or die(mysql_error());

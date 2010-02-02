@@ -21,24 +21,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (!isloggedin())
+if ($auth->logout())
 {
-	echo 'Congratulations, you have just created a paradox. A black hole is currently being formed behind you.';
+	header('Location: ./');
 }
 else
 {
-	// kill ze cookies
-	if (pisset('cookie',array('cookuname','cookpwd')))
-		punset('cookie',array('cookuname','cookpwd'));
-	
-	// kill ze session vars
-	punset('session',array('uname','pwd'));
-	
-	// kill ze session
-	$_SESSION = array();
-	session_destroy();
-	
-	// congraulations, you have helped destroy ze vorld!
-	header('Location: ./');
+	echo 'You couldn\'t be logged out, maybe because you\'re not logged in in the first place..?';
 }
 ?>

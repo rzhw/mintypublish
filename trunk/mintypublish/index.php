@@ -33,22 +33,9 @@ $showscreen = true;
 
 if (isset($_POST['sublogin']))
 {
-	$isuser = $auth->isUser($_POST['uname'], $_POST['pwd']);
-	
-	if ($isuser)
+	if ($auth->login($_POST['uname'], $_POST['pwd']))
 	{
-		$username = stripslashes($_POST['uname']);
-		$password = $auth->generatePassword($isuser[1], $_POST['pwd']);
-		
-		pset('session',array('uname' => $username,'pwd' => $password));
-		
-		if (isset($_POST['remember']))
-		{
-			pset('cookie',array('uname' => $username,'pwd' => $password));
-		}
-		
 		header('Location: ../');
-		
 		$showscreen = false;
 	}
 	else
