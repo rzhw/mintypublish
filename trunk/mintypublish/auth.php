@@ -28,6 +28,28 @@ class MPAuth
 		return hash('whirlpool', $salt.$password);
 	}
 	
+	public function loginForm()
+	{
+		global $txt;
+		return '<form action="" method="post">
+				<p>
+					<label for="username">' . $txt['user_username'] . '</label>
+					<input type="text" name="uname" id="username" value="" />
+				</p>
+				<p>
+					<label for="password">' . $txt['user_password'] . '</label>
+					<input type="password" name="pwd" id="password" value="" />
+				</p>
+				<p>
+					<input type="checkbox" name="remember" id="remember" />
+					<label for="remember">' . $txt['user_rememberme'] . '</label>
+				</p>
+				<p id="submit_wrap">
+					<input type="submit" name="sublogin" value="' . $txt['user_login'] . ' &raquo;" />
+				</p>
+			</form>'."\n";
+	}
+	
 	public function login($username, $password)
 	{		
 		$isuser = $this->isUser($username, $password);
