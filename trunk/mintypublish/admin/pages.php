@@ -172,10 +172,9 @@ if ($auth->isLoggedIn())
 		case 'reorder':
 			header('Content-type: application/json');
 			
-			// initial taking apart of the info we got
-			$params = json_decode(file_get_contents("php://input"), true);
-			$n = $params['nodes'];
-			$c = $params['parent'];
+			// info goes in
+			$n = $_POST['nodes'];
+			$c = $_POST['parent'];
 			$s = count($n);
 			
 			// reorder!

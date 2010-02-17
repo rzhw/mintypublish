@@ -462,10 +462,6 @@ $(document).ready(function() {
 					},
 				
 				/// PAGE REORDERING
-				/*!
-				 * jQuery 1.4 has changed the $.param method to make it possible to serialize objects/arrays deeper than a single level
-				 * once changing to it we can stop having PHP parse the raw POST input and the JSON plugin can be done away with
-				 */
 					callback : {
 						'onmove' : function(node, node_ref, movetype, tree_cur, tree_old) {
 							// if the node has a parent get that instead of the whole tree
@@ -504,10 +500,10 @@ $(document).ready(function() {
 							$.ajax({
 								type: 'post',
 								url: loc['admin2'] + '/pages.php?type=reorder',
-								data: $.toJSON({
+								data: { // using jQ 1.4 deep param, but need to be aware of change due to outcry from non php/ror devs
 									nodes: tempnodes,
 									parent: tempparent
-								}),
+								},
 								dataType: 'json',
 								beforeSend: function() {
 									$(drop).find(".status").show().text('working...');
