@@ -38,7 +38,7 @@ class PageBuilder
 		$this->title = 'Unnamed Page';
 		$this->addCSS($this->location['root'].'/global.css');
 		$this->addCSS($this->location['styles'].'/screen.css');
-		$this->addJS($this->location['js'].'/jquery-1.3.2.min.js');
+		$this->addJS($this->location['js'].'/jquery-1.4.1.min.js');
 		$this->addJS($this->location['js'].'/html5.js');
 		$this->addJS($this->location['js'].'/swfobject.js');
 		
@@ -55,6 +55,8 @@ class PageBuilder
 		// start capturing the content
 		ob_start();
 	}
+	
+	// look into __deconstruct
 	
 	public function disableTemplate()
 	{
