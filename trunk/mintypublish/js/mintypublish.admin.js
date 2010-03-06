@@ -58,8 +58,7 @@
 
 /// INITIALISE TINYMCE
 
-var pageChanged = false;
-var pageSaved = false;
+var pageChanged = false, pageSaved = false, pageSaving = false;
 tinyMCE.init({
 	mode: "none",
 	theme: "advanced",
@@ -144,41 +143,49 @@ $(document).ready(function() {
 						$("#content_editing").submit(function() {
 							/// PAGE SAVING
 							
-							pageSaved = true;
-							pageChanged = false;
-							
-							// temporary form disabling method until a better solution is available
-							$('<div id="'+ta+'_disabler">').appendTo("#content_editing").end().css({
-								'position': 'absolute',
-								'left': $("#"+ta+"_parent").offset().left,
-								'top': $("#"+ta+"_parent").offset().top,
-								'width': $("#"+ta+"_parent").width(),
-								'height': $("#"+ta+"_parent").height(),
-								'background': '#999',
-								'opacity': 0.5
-							});
-							
-							// off goes the data
-							$.ajax({
-								type: 'post',
-								url: loc['admin2'] + '/pages.php?type=edit',
-								data: {
-									page_id: $("#pid").text(),
-									content: tinyMCE.get(ta).getContent()
-								},
-								dataType: 'json',
-								success: function(data) {
-									if (!data.success)
-									{
-										tinyMCE.get(ta).windowManager.alert(data.message);
+							if (!pageSaving)
+							{
+								// to kill an infinite loop that appeared after upgrading to jQuery 1.4.x :/
+								pageSaving = true;
+								
+								// temporary form disabling method until a better solution is available
+								$('<div id="'+ta+'_disabler">').appendTo("#content_editing").css({
+									'position': 'absolute',
+									'left': $("#"+ta+"_parent").offset().left,
+									'top': $("#"+ta+"_parent").offset().top,
+									'width': $("#"+ta+"_parent").width(),
+									'height': $("#"+ta+"_parent").height(),
+									'background': '#999',
+									'opacity': 0.5
+								});
+								
+								// off goes the data
+								$.ajax({
+									type: 'post',
+									url: loc['admin2'] + '/pages.php?type=edit',
+									data: {
+										page_id: $("#pid").text(),
+										content: tinyMCE.get(ta).getContent()
+									},
+									dataType: 'json',
+									success: function(data) {
+										if (!data.success)
+										{
+											tinyMCE.get(ta).windowManager.alert(data.message);
+										}
+										
+										$("#"+ta+"_disabler").fadeOut(1000);
+										setTimeout(function() {
+											$("#"+ta+"_disabler").remove();
+										}, 1000);
+										
+										pageSaved = true;
+										pageChanged = false;
+										
+										pageSaving = false;
 									}
-									
-									$("#"+ta+"_disabler").fadeOut(1000);
-									setTimeout(function() {
-										$("#"+ta+"_disabler").remove();
-									}, 1000);
-								}
-							});
+								});
+							}
 							
 							return false;
 						});
