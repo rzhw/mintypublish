@@ -22,6 +22,7 @@
  */
 
 session_start();
+$zvfpcms = true;
 $root = '.';
 require_once('config.php');
 require_once('functions.php');

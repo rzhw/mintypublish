@@ -21,6 +21,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+$zvfpcms = true;
+
 session_start();
 $root = '..';
 require_once('../config.php');
