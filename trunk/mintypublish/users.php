@@ -1,1 +1,0 @@
-<?php /* [{"uname":"admin","level":"admin","pwd":"bfcebcbf651cf279058daa3dd6c14728b52cff8a4e0839a48a52cebe1639075467e4259f80308ffb0485f74bf75ad20f6ab44a6cde5240bddebdc2c6e98726eb"}] */ ?>
