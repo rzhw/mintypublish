@@ -35,30 +35,68 @@ if ($auth->isLoggedIn())
 		case 'get':
 			header('Content-type: application/json');
 			
-			// the parents
-			$parents = filetypes('list','names',true);
-			
-			// add the common stuff to the parents
+			// the overall array
 			$output = array();
-			$c = count($parents);
-			for ($i=0;$i<$c;$i++)
+			
+			// the target directory
+			$targetdir = '../media'; // change to use $location!
+			
+			if (isset($_GET['folder']))
 			{
-				$output[$i]['data'] = $parents[$i];
-				$output[$i]['attributes'] = array('rel' => 'root');
+				$targetdir .= '/' . $_GET['folder'];
 			}
 			
-			// add the files to the parents
-			$files = mysql_query("SELECT * FROM files ORDER BY file_filename ASC");
-			while ($file = mysql_fetch_array($files))
+			// get the files in the target directory
+			$targetdirfiles = scandir($targetdir);
+			
+			// prepare all the files and folders
+			$tempdirs = array();
+			$tempfiles = array();
+			foreach ($targetdirfiles as $filename)
 			{
-				$key = array_search(filetypes('identify',$file['file_filename'],true),$parents);
-				$output[$key]['children'][] = array(
-					'data' => $file['file_filename'],
-					'attributes' => array('rel' => 'file', 'id' => $_GET['fidprefix'] . $file['file_id'])
+				if ($filename != '.' && $filename != '..')
+				{
+					if (is_dir($targetdir . '/' . $filename))
+					{
+						$tempdirs[] = $filename;
+					}
+					else
+					{
+						$tempfiles[] = $filename;
+					}
+				}
+			}
+			
+			// output the folders
+			foreach($tempdirs as $filename)
+			{
+				$tempout = array(
+					'data' => $filename,
+					'attributes' => array(
+						'rel' => 'folder'
+					)
+				);
+				
+				if (count(scandir($targetdir . '/' . $filename)) > 2) // could this code be using unnecessary amounts of mem?
+				{
+					$tempout['attributes']['class'] = 'closed';
+				}
+				
+				$output[] = $tempout;
+			}
+			
+			// output the files
+			foreach($tempfiles as $filename)
+			{
+				$output[] = array(
+					'data' => $filename,
+					'attributes' => array(
+						'rel' => 'file'
+					)
 				);
 			}
 			
-			// finally!
+			// take the output and go!
 			echo json_encode($output);
 			
 			break;
@@ -66,6 +104,12 @@ if ($auth->isLoggedIn())
 		case 'upload':
 			// the ajaxupload script uses an iframe to get the response so this can't be used
 			//header('Content-type: application/json');
+			
+			// disallow uploading of potentially unsafe files
+			// perhaps see if a check can be done for installed languages
+			$disallowed = array(
+				'htm', 'html', 'shtml', 'php', 'php3', 'php4', 'php5', 'php6', 'js', 'cgi', 'rb', 'py', 'lua', 'asp', 'aspx'
+			);
 			
 			// work out the destination for the file (1, 1, 1, uh... 1!)
 			$filename = basename($_FILES['mintyupload']['name']);

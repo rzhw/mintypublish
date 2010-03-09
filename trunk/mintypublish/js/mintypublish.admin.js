@@ -249,21 +249,45 @@ $(document).ready(function() {
 				
 				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
-					data : { type : 'json' , opts : { url : loc['admin2'] + '/files.php?' + $.param({'type':'get','fidprefix':fidprefix}) } },
-					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
+					data: {
+						type: 'json',
+						async: true, // allow getting different data
+						opts: {
+							url: loc['admin2'] + '/files.php?' + $.param({
+								'type': 'get',
+								'fidprefix': fidprefix
+							})
+						}
+					},
+					callback: {
+						beforedata: function(node) {
+							// instead of returning the id attribute, return the name of the folder
+							/*! THIS CURRENTLY ONLY GOES ONE LEVEL DEEP */
+							var toreturn = {};
+							if ($(node).text().replace(' ','') != '')
+							{
+								toreturn.folder = $(node).text().replace(/^\s*/, ''); // remove whitespace at beginning of string
+							}
+							return toreturn;
+						}
+					},
+					ui : {
+						animation: 250,
+						theme_path: loc['tree'] + '/style.css'
+					},
 					types : {
-						'default' : {
-							draggable : false
+						'default': {
+							draggable: false
 						},
-						'root' : {
-							deletable : false,
-							renameable : false,
-							max_children : -1,
-							max_depth : 1
+						'folder': {
+							deletable: false,
+							renameable: false,
+							max_children: -1,
+							max_depth: 1
 						},
-						'file' : {
+						'file': {
 							max_children: 0,
-							icon : { image : loc['tree'] + '/file.png' }
+							icon: { image : loc['tree'] + '/file.png' }
 						}
 					}
 				});
@@ -333,14 +357,13 @@ $(document).ready(function() {
 						$.tree.focused().lock(true);
 						
 						// don't use .get_text() because of how we formed the page nodes
-						var ft = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
-						var ff = $(id).find('.subtitle').text();
+						//var ft = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
+						var ff = $.tree.focused().get_text(id);
 						
 						$(drop).find(".more").hide().html('\
 							<p><b>File information</b></p>\
 							<p>\
 								<label for="file_filename">Filename:</label> <input type="text" id="file_filename" value="' + ff + '" /><br />\
-								<label for="file_title">Title:</label> <input type="text" id="file_title" value="' + ft + '" />\
 							</p>\
 							<p>\
 								<input type="button" value="save" />\
