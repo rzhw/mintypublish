@@ -21,6 +21,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// if someone stumbles across here, send them back up to the root
+if (!$zvfpcms)
+{
+	header("HTTP/1.1 307 Temporary Redirect");
+	header("Location: ..");
+	exit();
+}
+
 class MPAuth
 {	
 	public function generatePassword($salt, $password)

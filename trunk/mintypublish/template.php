@@ -21,8 +21,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// http://ianburris.com/tutorials/oophp-template-engine/
-class PageBuilder
+// if someone stumbles across here, send them back up to the root
+if (!$zvfpcms)
+{
+	header("HTTP/1.1 307 Temporary Redirect");
+	header("Location: ..");
+	exit();
+}
+
+class PageBuilder // thanks to http://ianburris.com/tutorials/oophp-template-engine/
 {
 	private $title, $content, $stylesheets=array(), $javascripts=array(), $bodypre, $disabled=false, $sitename, $location, $bodyClasses;
 	
