@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="<?php echo $location['images']; ?>/favicon.ico" />
 		<?php $this->outputHead(); ?>
 	</head>
 	
