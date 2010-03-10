@@ -7,17 +7,17 @@
 	</div>
 	<div style="float:right;">
 		<div class="block button" data-type="files">
-			<img src="<?php echo $location['images']; ?>/admin_files.png" alt="Files" />
+			<img src="<?php echo $location['images']; ?>/admin_files.png" alt="Files" title="Files" />
 		</div>
 		<div class="block button" data-type="pages">
-			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="Pages" />
+			<img src="<?php echo $location['images']; ?>/admin_pages.png" alt="Pages" title="Pages" />
 		</div>
 		<div class="block button" data-type="config">
-			<img src="<?php echo $location['images']; ?>/admin_config.png" alt="Config" />
+			<img src="<?php echo $location['images']; ?>/admin_config.png" alt="Config" title="Configuration" />
 		</div>
 		<div class="sep"></div>
 		<div class="block button" data-type="profile">
-			<img src="<?php echo $location['images']; ?>/admin_user.png" alt="Logged in as " />
+			<img src="<?php echo $location['images']; ?>/admin_user.png" alt="Logged in as " title="Profile" />
 			<span><?php echo $_SESSION['uname']; ?></span>
 		</div>
 	</div>
