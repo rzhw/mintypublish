@@ -174,10 +174,9 @@ $(document).ready(function() {
 											tinyMCE.get(ta).windowManager.alert(data.message);
 										}
 										
-										$("#"+ta+"_disabler").fadeOut(1000);
-										setTimeout(function() {
-											$("#"+ta+"_disabler").remove();
-										}, 1000);
+										$("#"+ta+"_disabler").fadeOut(1000, function() {
+											$(this).remove();
+										});
 										
 										pageSaved = true;
 										pageChanged = false;
