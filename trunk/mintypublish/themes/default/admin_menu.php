@@ -17,7 +17,6 @@
 		<div class="block button" data-type="config">
 			<img src="<?php echo $location['images']; ?>/admin_config.png" alt="Config" title="Configuration" />
 		</div>
-		<div class="sep"></div>
 		<div class="block button" data-type="profile">
 			<img src="<?php echo $location['images']; ?>/admin_user.png" alt="Profile" title="Profile" />
 			<span style="display:none;"><?php echo $_SESSION['uname']; ?></span>
