@@ -71,7 +71,7 @@ tinyMCE.init({
 	theme_advanced_toolbar_align: "left",
 	theme_advanced_path: false,
 	theme_advanced_resizing: false,
-	content_css: loc['styles']+"/tinymce.css",
+	content_css: loc['styles']+"/screen.css",
 	onchange_callback: function() { pageChanged = true; }
 });
 

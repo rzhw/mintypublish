@@ -38,6 +38,14 @@ td
 	padding: 0;
 }
 
+/* tinymce */
+
+.mceContentBody
+{
+	text-align: left !important;
+	line-height: 20px;
+}
+
 /* wrappers */
 
 #container
