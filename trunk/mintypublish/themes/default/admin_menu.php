@@ -17,8 +17,8 @@
 		</div>
 		<div class="sep"></div>
 		<div class="block button" data-type="profile">
-			<img src="<?php echo $location['images']; ?>/admin_user.png" alt="Logged in as " title="Profile" />
-			<span><?php echo $_SESSION['uname']; ?></span>
+			<img src="<?php echo $location['images']; ?>/admin_user.png" alt="Profile" title="Profile" />
+			<span style="display:none;"><?php echo $_SESSION['uname']; ?></span>
 		</div>
 	</div>
 </aside>
