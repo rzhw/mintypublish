@@ -45,7 +45,7 @@ class PageBuilder // thanks to http://ianburris.com/tutorials/oophp-template-eng
 		$this->title = 'Unnamed Page';
 		$this->addCSS($this->location['root'].'/global.css');
 		$this->addCSS($this->location['styles'].'/screen.css');
-		$this->addJS($this->location['js'].'/jquery-1.4.1.min.js');
+		$this->addJS($this->location['js'].'/jquery-1.4.2.min.js');
 		$this->addJS($this->location['js'].'/html5.js');
 		$this->addJS($this->location['js'].'/swfobject.js');
 		
