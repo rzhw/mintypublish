@@ -35,9 +35,7 @@
 			</header>
 			
 			<section id="content">
-<!-- content start -->
 <?php $this->outputContent(); ?>
-<!-- content end -->
 			</section>
 			
 			<?php echo $footer['copyright']; ?>
