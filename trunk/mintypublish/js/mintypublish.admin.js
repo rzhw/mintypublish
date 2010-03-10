@@ -322,24 +322,10 @@ $(document).ready(function() {
 				
 				$("#admin_list_view").click(function() {
 					id = $.tree.focused().selected;
-					isaparent = $.tree.focused().selected.attr('rel') == 'root' ? true : false;
 					
-					if (id && !isaparent)
+					if (id)
 					{
-						var parent = $.tree.focused().get_text( $.tree.focused().selected.parent().parent() ).toLowerCase(); // amazing api
-						
-						switch (parent)
-						{
-							case 'images':
-							case 'videos':
-							case 'audio':
-							case 'applets':
-								location.href = 'index.php?p=media&id=' + $(id).attr('id').replace(fidprefix,'');
-								break;
-							default:
-								alert('Viewing this filetype is not supported currently');
-								break;
-						}
+						alert('Due to a recent change in the method with which file management operates, this function is temporarily unusable. Sorry for the inconvenience.');
 					}
 					else
 					{
