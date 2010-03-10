@@ -19,6 +19,29 @@ body, td
 	font-family: verdana;
 }
 
+/* floating */
+
+.left
+{
+	float: left;
+}
+.right
+{
+	float: right;
+}
+.clear
+{
+	clear: both;
+}
+.clear-left
+{
+	clear: left;
+}
+.clear-right
+{
+	clear: right;
+}
+
 /* html5 */
 
 header, section, footer, aside, nav, article, figure
@@ -202,6 +225,15 @@ body.admin #container
 	height: 24px;
 	text-align: left;
 	font-size: 10px;
+}
+
+#admin .blocks.left
+{
+	padding-left: 4px;
+}
+#admin .blocks.right
+{
+	padding-right: 4px;
 }
 
 #admin .sep
