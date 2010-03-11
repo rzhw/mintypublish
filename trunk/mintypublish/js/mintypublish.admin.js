@@ -216,7 +216,7 @@ $(document).ready(function() {
 	var drop = $('<div class="drop">\
 	              <div class="content"></div>\
 	              <div class="status"></div>\
-	              <div class="close"><a href="javascript:void(0)" onclick="$(this).parent().parent().hide()">close</a></div>\
+	              <div class="close"><a href="javascript:;" onclick="$.dropClose()">close</a></div>\
 	              </div>').appendTo("#admin").hide();
 	
 	var listing = '<div class="list"></div>\
@@ -228,16 +228,26 @@ $(document).ready(function() {
 	               </div>\
 	               <div class="more"></div>';
 	
+	$.dropClose = function() {
+		$(drop).slideUp(function() {
+			$("#admin .block.button").removeClass('on');
+		});
+	}
+	
 	$("#admin .block.button").click(function() {
+		// on/off
+		$("#admin .block.button").removeClass('on');
+		$(this).addClass('on');
+		
 		// variables
 		var type = $(this).attr('data-type');
 		
 		// prepare the drop
-		$(drop).show().css('width',192-16).css({
+		$(drop).css('width', 224-16).css({
 			'position': 'fixed',
-			'left': $(this).position().left + $(this).width() + 8 - $(drop).width(),
+			'left': $(window).width() - $(drop).width() - 16,
 			'top': $("#admin").height()
-		});
+		}).slideDown();
 		
 		// now what?
 		switch (type)

@@ -227,14 +227,7 @@ body.admin #container
 	font-size: 10px;
 }
 
-#admin .blocks.left
-{
-	padding-left: 4px;
-}
-#admin .blocks.right
-{
-	padding-right: 4px;
-}
+
 
 #admin .sep
 {
@@ -249,8 +242,7 @@ body.admin #container
 {
 	float: left;
 	color: #fff;
-	margin: 0 8px;
-	padding: 5px 4px;
+	padding: 5px 12px;
 	height: 24px;
 	background: transparent;
 }
@@ -262,14 +254,16 @@ body.admin #container
 {
 	margin-left: 8px;
 }
-#admin .block.on
-{
-	background: #fff;
-}
-#admin .block.off
+
+#admin .block.mode.off
 {
 	opacity: 0.25;
 	filter: alpha(opacity=25);
+}
+
+#admin .block.button.on
+{
+	background: #333;
 }
 
 body.page-media #admin .mode.off
@@ -281,10 +275,9 @@ body.page-media #admin .mode.off
 {
 	background: #333;
 	color: #fff;
-	box-shadow: 0 0 6px rgba(0,0,0,0.5);
-	-moz-box-shadow: 0 0 6px rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 0 6px rgba(0,0,0,0.5);
-	margin-top: 4px;
+	box-shadow: 0 0 6px rgba(24,24,24,0.5);
+	-moz-box-shadow: 0 0 6px rgba(24,24,24,0.5);
+	-webkit-box-shadow: 0 0 6px rgba(24,24,24,0.5);
 	padding: 8px;
 	font-size: 11px;
 	z-index: 2;
@@ -295,7 +288,7 @@ body.page-media #admin .mode.off
 	background: #bbb;
 	color: #151515;
 	overflow: auto;
-	height: 160px;
+	height: 192px;
 	margin-bottom: 8px;
 }
 #admin .drop .list .subtitle
@@ -347,8 +340,8 @@ body.page-media #admin .mode.off
 }
 #admin .drop .button4 button
 {
-	width: 40px;
-	margin-left: 5px;
+	width: 49px;
+	margin-left: 4px;
 }
 #admin .drop .button4 button:first-child
 {
