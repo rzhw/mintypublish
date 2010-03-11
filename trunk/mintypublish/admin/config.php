@@ -52,8 +52,7 @@ if ($auth->isLoggedIn())
 				';
 				$languages = array(
 					'english' => 'English',
-					'japanese' => 'Japanese (machine translated)',
-					'engrish' => 'Engrish'
+					'japanese' => 'Japanese (Google)'
 				);
 				foreach ($languages as $id => $name)
 				{
@@ -64,7 +63,7 @@ if ($auth->isLoggedIn())
 				Timezone:<br />
 				<select name="timezone">
 				';
-					$timezones = DateTimeZone::listIdentifiers();
+					$timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
 					foreach ($timezones as $tz)
 					{
 						$ret .= '<option value="' . $tz . '"' . ($tz == MP_TIMEZONE ? ' selected="selected"' : '') . '>' . $tz . '</option>';
