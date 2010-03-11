@@ -38,18 +38,19 @@ while($row = mysql_fetch_array($configquery))
 
 // define the paths
 $location = array(
-	'root'      => $root,
-	'admin'     => 'index.php?p=admin',
-	'admin2'    => $root . '/admin',
-	'files'     => $root . '/media',
-	'js'        => $root . '/js',
-	'themes'    => $root . '/themes',
-	'theme'     => $root . '/themes/' . MP_THEME,
-	'theme_nr'  => 'themes/' . MP_THEME,
-	'theme_def' => $root . '/themes/default',
-	'images'    => $root . '/themes/' . MP_THEME . '/img',
-	'styles'    => $root . '/themes/' . MP_THEME . '/css',
-	'tree'      => $root . '/themes/' . MP_THEME . '/tree'
+	'root'         => $root,
+	'admin'        => 'index.php?p=admin',
+	'admin2'       => $root . '/admin',
+	'files'        => $root . '/media',
+	'js'           => $root . '/js',
+	'themes'       => $root . '/themes',
+	'theme'        => $root . '/themes/' . MP_THEME,
+	'theme_nr'     => 'themes/' . MP_THEME,
+	'theme_def'    => $root . '/themes/default',
+	'theme_def_nr' => 'themes/default',
+	'images'       => $root . '/themes/' . MP_THEME . '/img',
+	'styles'       => $root . '/themes/' . MP_THEME . '/css',
+	'tree'         => $root . '/themes/' . MP_THEME . '/tree'
 );
 
 // include the language files

@@ -176,7 +176,7 @@ class PageBuilder // thanks to http://ianburris.com/tutorials/oophp-template-eng
 		echo $this->content;
 	}
 	
-	public function outputAdminMenu()
+	public function outputAdminMenu() // might want to split out the include functionality here
 	{
 		global $auth;
 		
@@ -191,7 +191,22 @@ class PageBuilder // thanks to http://ianburris.com/tutorials/oophp-template-eng
 				}
 			}
 			$location = $this->location;
-			include($this->location['theme_nr'].'/admin_menu.php');
+			
+			// are the php devs sadistic or what, because file_exists() is an amazingly poorly written function
+			$thminclude =
+				$_SERVER['DOCUMENT_ROOT']
+				. str_replace('/' . basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME'])
+				. '/' . $this->location['root']
+				. '/' . $this->location['theme_nr'] . '/admin_menu.php';
+			
+			if (file_exists($thminclude))
+			{
+				include($this->location['theme_nr'] . '/admin_menu.php');
+			}
+			else
+			{
+				include($this->location['theme_def_nr'] . '/admin_menu.php');
+			}
 		}
 	}
 	
