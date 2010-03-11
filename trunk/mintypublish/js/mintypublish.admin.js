@@ -765,9 +765,11 @@ $(document).ready(function() {
 			
 			case 'profile':
 				$(drop).find(".content").html('\
-					Hello there ' + $(this).find("span").text() + '!<br /><br />\
-					Sooner or later there will be profile related options here, not yet though.<br /><br />\
-					Though you could always <a href="index.php?p=logout">logout</a> if you want to.\
+					<img src="' + loc['images'] + '/defaultava.png" alt="" class="left avatar" />\
+					<h1 class="left">' + $(this).find("span").text() + '</h1>\
+					<span class="left logout"><a href="index.php?p=logout">logout</a></span>\
+					<div class="clear"></div>\
+					<p>Hey there, sooner or later there will be profile related options here, not yet though.</p>\
 				');
 				break;
 		}

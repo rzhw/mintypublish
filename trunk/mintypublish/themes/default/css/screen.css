@@ -283,6 +283,27 @@ body.page-media #admin .mode.off
 	z-index: 2;
 }
 
+#admin .drop .avatar
+{
+	margin-right: 12px;
+}
+#admin .drop .logout
+{
+	margin: 7px 8px;
+	font-size: 9px;
+	color: #aaa;
+}
+#admin .drop .logout a
+{
+	color: #aaa;
+}
+
+#admin .drop h1
+{
+	margin: 4px 0;
+	font-size: 14px;
+}
+
 #admin .drop .list
 {
 	background: #bbb;
