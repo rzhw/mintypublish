@@ -764,9 +764,14 @@ $(document).ready(function() {
 				break;
 			
 			case 'profile':
+				var usernameFull = $(this).find("span").text();
+				var usernameShort = usernameFull.substring(0, 15) == usernameFull ? false : usernameFull.substring(0, 15);
+				
 				$(drop).find(".content").html('\
 					<img src="' + loc['images'] + '/defaultava.png" alt="" class="left avatar" />\
-					<h1 class="left">' + $(this).find("span").text() + '</h1>\
+					<h1 class="left"' + (usernameShort ? ' title="' + usernameFull + '"' : '') + '>\
+						' + (usernameShort ? usernameShort + '...' : usernameFull) + '\
+					</h1>\
 					<span class="left logout"><a href="index.php?p=logout">logout</a></span>\
 					<div class="clear"></div>\
 					<p>Hey there, sooner or later there will be profile related options here, not yet though.</p>\
