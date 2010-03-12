@@ -1,0 +1,25 @@
+/**
+ * mintypublish theme - Flat Marble - 1.0
+ * Print stylesheet
+ * Copyright (c) a2h 2010
+ */
+
+body, td
+{
+	font-size: 9pt;
+}
+
+#menu
+{
+	display: none;
+}
+
+body.admin #container
+{
+	padding-top: 0;
+}
+
+#admin
+{
+	display: none;
+}

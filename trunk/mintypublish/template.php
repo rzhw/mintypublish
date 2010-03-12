@@ -43,8 +43,8 @@ class PageBuilder // thanks to http://ianburris.com/tutorials/oophp-template-eng
 		
 		// default stuff to output header
 		$this->title = 'Unnamed Page';
-		$this->addCSS($this->location['root'].'/global.css');
-		$this->addCSS($this->location['styles'].'/screen.css');
+		$this->addCSS($this->location['styles'].'/all.css', 'all');
+		$this->addCSS($this->location['styles'].'/print.css', 'print');
 		$this->addJS($this->location['js'].'/jquery-1.4.2.min.js');
 		$this->addJS($this->location['js'].'/html5.js');
 		$this->addJS($this->location['js'].'/swfobject.js');
@@ -80,9 +80,9 @@ class PageBuilder // thanks to http://ianburris.com/tutorials/oophp-template-eng
 		$this->type = $type;
 	}
 	
-	public function addCSS($path)
+	public function addCSS($path, $media='')
 	{
-		$this->stylesheets[] = $path;
+		$this->stylesheets[] = array('href' => $path, 'media' => $media);
 	}
 	
 	public function addJS($path)
@@ -163,7 +163,7 @@ class PageBuilder // thanks to http://ianburris.com/tutorials/oophp-template-eng
 		
 		foreach ($this->stylesheets as $stylesheet)
 		{
-			echo "\t\t".'<link rel="stylesheet" type="text/css" href="'.$stylesheet.'" />'."\n";
+			echo "\t\t".'<link rel="stylesheet" type="text/css"' . ($stylesheet['media'] ? ' media="'.$stylesheet['media'].'"' : '') . ' href="' . $stylesheet['href'] . '" />'."\n";
 		}
 		foreach ($this->javascripts as $javascript)
 		{
