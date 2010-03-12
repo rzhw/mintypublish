@@ -247,7 +247,7 @@ $(document).ready(function() {
 			'position': 'fixed',
 			'left': $(window).width() - $(drop).width() - 16,
 			'top': $("#admin").height()
-		}).slideDown();
+		});
 		
 		// now what?
 		switch (type)
@@ -778,5 +778,8 @@ $(document).ready(function() {
 				');
 				break;
 		}
+		
+		// drop!
+		$(drop).slideDown();
 	});
 });
