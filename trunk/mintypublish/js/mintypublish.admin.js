@@ -742,29 +742,47 @@ $(document).ready(function() {
 					</div>\
 					<div class="config"></div>\
 				');
-				$(drop).find(".config").load(loc['admin2'] + '/config.php?type=get&tab=general', function() {
-					$(this).append('<input type="submit" value="save" />').wrapInner('<form id="config-form"></form>');
-					
-					$("#config-form").submit(function() {
-						$.ajax({
-							type: 'post',
-							url: loc['admin2'] + '/config.php?type=set&tab=general',
-							data: $("#config_form").serialize(),
-							dataType: 'json',
-							beforeSend: function() {
-								$(drop).find(".status").show().text('working...');
-							},
-							success: function(data) {								
-								$(drop).find(".status").text(data.message);
-								
-								setTimeout(function() {
-									$(drop).find(".status").fadeOut(2000);
-								}, 1000);
-							}
-						});
-						return false;
-					});
+				
+				// switching tabs
+				$(drop).find(".tab").click(function() {
+					if ($(this).hasClass('off') && !$(this).hasClass('unimplemented'))
+					{
+						// switch states
+						$(drop).find(".tab.on").removeClass('on').addClass('off');
+						$(this).removeClass('off').addClass('on');
+						
+						// load the tab
+						$.mpConfigLoad($(this).attr('data-id'));
+					}
 				});
+				
+				// load stuff
+				$.mpConfigLoad = function(tab) {
+					$(drop).find(".config").load(loc['admin2'] + '/config.php?type=get&tab='+tab, function() {
+						$(this).append('<input type="submit" value="save" />').wrapInner('<form id="config-form"></form>');
+						
+						$("#config-form").submit(function() {
+							$.ajax({
+								type: 'post',
+								url: loc['admin2'] + '/config.php?type=set&tab='+tab,
+								data: $("#config-form").serialize(),
+								dataType: 'json',
+								beforeSend: function() {
+									$(drop).find(".status").show().text('working...');
+								},
+								success: function(data) {								
+									$(drop).find(".status").text(data.message);
+									
+									setTimeout(function() {
+										$(drop).find(".status").fadeOut(2000);
+									}, 1000);
+								}
+							});
+							return false;
+						});
+					});
+				};
+				$.mpConfigLoad('general');
 				break;
 			
 			case 'profile':

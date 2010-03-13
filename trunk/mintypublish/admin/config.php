@@ -33,73 +33,117 @@ if ($auth->isLoggedIn())
 	switch ($_GET['type'])
 	{
 		case 'get':
-			$ret = '
-				<label for="config-sitename">Site name</label>
-				<input type="text" id="config-sitename" name="sitename" value="' . MP_SITENAME . '" /><br /><br />
+			switch ($_GET['tab'])
+			{
+				case 'general':
+					$ret = '
+						<label for="config-sitename">Site name</label>
+						<input type="text" id="config-sitename" name="sitename" value="' . MP_SITENAME . '" /><br /><br />
+						
+						<label for="config-language">Language (incomplete)</label>
+						<select id="config-language" name="language">';
+							$languages = array(
+								'english' => 'English',
+								'japanese' => 'Japanese (Google Translate)'
+							);
+							foreach ($languages as $id => $name)
+							{
+								$ret .= '<option value="' . $id . '"' . ($id == MP_LANGUAGE ? ' selected="selected"' : '') . '>' . $name . '</option>';
+							}
+							$ret .= '
+						</select><br /><br />
+						
+						<label for="config-timezone">Timezone</label>
+						<select id="config-timezone" name="timezone">';
+							$timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+							foreach ($timezones as $tz)
+							{
+								$ret .= '<option value="' . $tz . '"' . ($tz == MP_TIMEZONE ? ' selected="selected"' : '') . '>' . $tz . '</option>';
+							}
+							$ret .= '
+						</select><br /><br />
+					';
+					break;
 				
-				<!--Theme (requires refresh after saving)<br />
-				<select name="theme">
-				';
-				foreach (glob($location['themes'] . '/*', GLOB_ONLYDIR) as $themedir)
-				{
-					$thm = basename($themedir);
-					$ret .= '<option value="' . $thm . '"' . ($thm == MP_THEME ? ' selected="selected"' : '') . '>' . $thm . '</option>';
-				}
-				$ret .= '</select><br /><br />-->
+				case 'appearance':
+					$ret = '						
+						<label for="config-theme">Theme (refresh after saving)</label>
+						<select id="config-theme" name="theme">';
+							foreach (glob($location['themes'] . '/*', GLOB_ONLYDIR) as $themedir)
+							{
+								$thm = basename($themedir);
+								$ret .= '<option value="' . $thm . '"' . ($thm == MP_THEME ? ' selected="selected"' : '') . '>' . $thm . '</option>';
+							}
+							$ret .= '
+						</select><br /><br />
+					';
+					break;
 				
-				<label for="config-language">Language (incomplete)</label>
-				<select id="config-language" name="language">
-				';
-				$languages = array(
-					'english' => 'English',
-					'japanese' => 'Japanese (Google Translate)'
-				);
-				foreach ($languages as $id => $name)
-				{
-					$ret .= '<option value="' . $id . '"' . ($id == MP_LANGUAGE ? ' selected="selected"' : '') . '>' . $name . '</option>';
-				}
-				$ret .= '</select><br /><br />
-				
-				<label for="config-timezone">Timezone</label>
-				<select id="config-timezone" name="timezone">
-				';
-					$timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
-					foreach ($timezones as $tz)
-					{
-						$ret .= '<option value="' . $tz . '"' . ($tz == MP_TIMEZONE ? ' selected="selected"' : '') . '>' . $tz . '</option>';
-					}
-					$ret .= '</select><br /><br />
-			';
+				default:
+					$notab = true;
+					break;
+			}
 			
-			echo str_replace(array("\r\n","\n","\t"),'',$ret);
+			if (!$notab)
+			{
+				echo str_replace(array("\r\n","\n","\t"),'',$ret);
+			}
+			else
+			{
+				echo 'That isn\'t a tab. Really, it isn\'t. No kidding.';
+			}
 			
 			break;
 		
 		case 'set':
 			header('Content-type: application/json');
 			
-			// info goes in
-			$sitename = escape_smart($_POST['sitename']);
-			//$theme = escape_smart($_POST['theme']);
-			$language = escape_smart($_POST['language']);
-			$timezone = escape_smart($_POST['timezone']);
-
-			// query time!
-			$success = true;
-			
-			mysql_query("UPDATE config SET config_value='$sitename' WHERE config_name='sitename'") or $success = false;
-			//mysql_query("UPDATE config SET config_value='$theme' WHERE config_name='theme'") or $success = false;
-			mysql_query("UPDATE config SET config_value='$language' WHERE config_name='language'") or $success = false;
-			mysql_query("UPDATE config SET config_value='$timezone' WHERE config_name='timezone'") or $success = false;
+			switch ($_GET['tab'])
+			{
+				case 'general':
+					// info goes in
+					$sitename = escape_smart($_POST['sitename']);
+					$language = escape_smart($_POST['language']);
+					$timezone = escape_smart($_POST['timezone']);
+					
+					// query time!
+					$success = true;
+					mysql_query("UPDATE config SET config_value='$sitename' WHERE config_name='sitename'") or $success = false;
+					mysql_query("UPDATE config SET config_value='$language' WHERE config_name='language'") or $success = false;
+					mysql_query("UPDATE config SET config_value='$timezone' WHERE config_name='timezone'") or $success = false;
+					
+					break;
+				
+				case 'appearance':
+					// info goes in
+					$theme = escape_smart($_POST['theme']);
+					
+					// query time!
+					$success = true;
+					mysql_query("UPDATE config SET config_value='$theme' WHERE config_name='theme'") or $success = false;
+					
+					break;
+				
+				default:
+					$notab = true;
+					break;
+			}
 			
 			// message
-			if ($success)
+			if ($success && !$notab)
 			{
 				$message = 'config saved!';
 			}
 			else
 			{
-				$message = 'config save failed!';
+				if ($notab)
+				{
+					$message = 'invalid tab';
+				}
+				else
+				{
+					$message = 'config save failed!';
+				}
 			}
 			
 			echo json_encode(array(
