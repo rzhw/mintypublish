@@ -735,16 +735,20 @@ $(document).ready(function() {
 			
 			case 'config':
 				$(drop).find(".content").html('\
-					<div class="list" style="font-size:10px;padding:8px;">Loading...</div>\
-					<span style="font-size:9px;">This method of configuration is temporary and will be changed once more configuration options are added</span>\
+					<div class="tabs">\
+						<span class="tab on" data-id="general">General</span>\
+						<span class="tab off" data-id="appearance">Appearance</span>\
+						<span class="tab off unimplemented">Plugins</span>\
+					</div>\
+					<div class="config"></div>\
 				');
-				$(drop).find(".list").load(loc['admin2'] + '/config.php?type=get', function() {
-					$(drop).find(".list").append('<button id="config_save">Save</button>').wrapInner('<form id="config_form"></form>');
+				$(drop).find(".config").load(loc['admin2'] + '/config.php?type=get&tab=general', function() {
+					$(this).append('<input type="submit" value="save" />').wrapInner('<form id="config-form"></form>');
 					
-					$("#config_save").click(function() {
+					$("#config-form").submit(function() {
 						$.ajax({
 							type: 'post',
-							url: loc['admin2'] + '/config.php?type=set',
+							url: loc['admin2'] + '/config.php?type=set&tab=general',
 							data: $("#config_form").serialize(),
 							dataType: 'json',
 							beforeSend: function() {

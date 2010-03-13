@@ -191,7 +191,7 @@ h2
 
 input[type=text], input[type=password], select
 {
-	border: 2px solid #c0c0c0;
+	border: 1px solid #c0c0c0;
 	font-family: verdana;
 	font-size: 11px;
 }
@@ -206,7 +206,7 @@ select
 	padding: 1px;
 }
 
-/* everything admin! */
+/* the admin bar itself */
 
 body.admin #container
 {
@@ -228,7 +228,12 @@ body.admin #container
 	font-size: 10px;
 }
 
+.unimplemented
+{
+	text-decoration: line-through;
+}
 
+/* blocks and seperators on the admin bar */
 
 #admin .sep
 {
@@ -267,10 +272,14 @@ body.admin #container
 	background: #333;
 }
 
+/* pages that shouldn't show the edit button */
+
 body.page-media #admin .mode.off
 {
 	display: none;
 }
+
+/* the admin drop itself */
 
 #admin .drop
 {
@@ -284,6 +293,73 @@ body.page-media #admin .mode.off
 	font-size: 11px;
 	z-index: 2;
 }
+
+#admin .drop h1
+{
+	margin: 4px 0;
+	font-size: 12px;
+}
+
+/* tree lists in the admin drop */
+
+#admin .drop .list
+{
+	background: #bbb;
+	color: #151515;
+	overflow: auto;
+	height: 224px;
+	margin-bottom: 8px;
+}
+#admin .drop .list .subtitle
+{
+	font-size: 8px;
+	padding-left: 4px;
+}
+
+/* tabs in the admin drop */
+
+#admin .drop .tabs
+{
+	margin-bottom: 12px;
+}
+#admin .drop .tab
+{
+	margin-right: 4px;
+}
+#admin .drop .tab.off
+{
+	cursor: pointer;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+#admin .drop .tab.off:hover
+{
+	text-shadow: 0px 0px 4px #fff;
+}
+#admin .drop .tab.on
+{
+	cursor: default;
+	text-shadow: 0px 0px 4px #fff;
+}
+
+/* the config admin drop */
+
+#admin .drop .config label
+{
+	display: block;
+	font-size: 10px;
+	margin-bottom: 2px;
+}
+#admin .drop .config input[type=text], #admin .drop .config input[type=password]
+{
+	width: 232px;
+}
+#admin .drop .config select 
+{
+	width: 240px;
+}
+
+/* the profile admin drop */
 
 #admin .drop .avatar
 {
@@ -300,25 +376,7 @@ body.page-media #admin .mode.off
 	color: #aaa;
 }
 
-#admin .drop h1
-{
-	margin: 4px 0;
-	font-size: 12px;
-}
-
-#admin .drop .list
-{
-	background: #bbb;
-	color: #151515;
-	overflow: auto;
-	height: 224px;
-	margin-bottom: 8px;
-}
-#admin .drop .list .subtitle
-{
-	font-size: 8px;
-	padding-left: 4px;
-}
+/* form elements in the admin drop */
 
 #admin .drop button
 {
@@ -331,31 +389,56 @@ body.page-media #admin .mode.off
 	font-size: 10px;
 	text-align: center;
 }
+#admin .drop input[type=text], #admin .drop input[type=password], #admin .drop select
+{
+	background: #ddd;
+	color: #333;
+}
+#admin .drop input[type=text], #admin .drop input[type=password]
+{
+	padding: 2px 3px;
+}
+#admin .drop input[type=button], #admin .drop input[type=submit], #admin .drop select
+{
+	padding: 1px;
+}
+#admin .drop input[type=text], #admin .drop input[type=password], #admin .drop select
+{
+	border: 1px solid #999;
+	margin-bottom: 2px;
+}
+#admin .drop input[type=button], #admin .drop input[type=submit]
+{
+	background: #ccc;
+	color: #3f3f3f;
+	font-size: 11px;
+	padding: 1px 4px;
+	border: 1px solid #777;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+/* sliding down sections in the admin drop */
 
 #admin .drop .more
 {
 	font-size: 9px;
 }
-#admin .drop .more input[type=text], #admin .drop .more input[type=button]
+#admin .drop .more input[type=text], #admin .drop input[type=password], #admin .drop .more input[type=button], #admin .drop .more input[type=submit]
 {
 	font-size: 9px;
-	background: #444;
-	color: #aaa;
+}
+#admin .drop .more input[type=button], #admin .drop .more input[type=submit]
+{
 	padding: 1px;
 }
 #admin .drop .more input[type=text]
 {
-	border: 1px solid #777;
 	width: 96px;
-	margin-bottom: 2px;
 }
-#admin .drop .more input[type=button]
-{
-	border: 1px solid #555;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
-}
+
+/* 4 button groups in the admin drop */
 
 #admin .drop .button4
 {
@@ -370,6 +453,8 @@ body.page-media #admin .mode.off
 {
 	margin-left: 0;
 }
+
+/* status/close areas in the admin drop */
 
 #admin .drop .status, #admin .drop .close
 {

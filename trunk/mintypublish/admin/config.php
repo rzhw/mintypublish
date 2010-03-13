@@ -34,10 +34,10 @@ if ($auth->isLoggedIn())
 	{
 		case 'get':
 			$ret = '
-				Site name:<br />
-				<input type="text" name="sitename" value="' . MP_SITENAME . '" /><br /><br />
+				<label for="config-sitename">Site name</label>
+				<input type="text" id="config-sitename" name="sitename" value="' . MP_SITENAME . '" /><br /><br />
 				
-				Theme (requires refresh after saving):<br />
+				<!--Theme (requires refresh after saving)<br />
 				<select name="theme">
 				';
 				foreach (glob($location['themes'] . '/*', GLOB_ONLYDIR) as $themedir)
@@ -45,14 +45,14 @@ if ($auth->isLoggedIn())
 					$thm = basename($themedir);
 					$ret .= '<option value="' . $thm . '"' . ($thm == MP_THEME ? ' selected="selected"' : '') . '>' . $thm . '</option>';
 				}
-				$ret .= '</select><br /><br />
+				$ret .= '</select><br /><br />-->
 				
-				Language:<br />
-				<select name="language">
+				<label for="config-language">Language (incomplete)</label>
+				<select id="config-language" name="language">
 				';
 				$languages = array(
 					'english' => 'English',
-					'japanese' => 'Japanese (Google)'
+					'japanese' => 'Japanese (Google Translate)'
 				);
 				foreach ($languages as $id => $name)
 				{
@@ -60,8 +60,8 @@ if ($auth->isLoggedIn())
 				}
 				$ret .= '</select><br /><br />
 				
-				Timezone:<br />
-				<select name="timezone">
+				<label for="config-timezone">Timezone</label>
+				<select id="config-timezone" name="timezone">
 				';
 					$timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
 					foreach ($timezones as $tz)
@@ -80,7 +80,7 @@ if ($auth->isLoggedIn())
 			
 			// info goes in
 			$sitename = escape_smart($_POST['sitename']);
-			$theme = escape_smart($_POST['theme']);
+			//$theme = escape_smart($_POST['theme']);
 			$language = escape_smart($_POST['language']);
 			$timezone = escape_smart($_POST['timezone']);
 
@@ -88,7 +88,7 @@ if ($auth->isLoggedIn())
 			$success = true;
 			
 			mysql_query("UPDATE config SET config_value='$sitename' WHERE config_name='sitename'") or $success = false;
-			mysql_query("UPDATE config SET config_value='$theme' WHERE config_name='theme'") or $success = false;
+			//mysql_query("UPDATE config SET config_value='$theme' WHERE config_name='theme'") or $success = false;
 			mysql_query("UPDATE config SET config_value='$language' WHERE config_name='language'") or $success = false;
 			mysql_query("UPDATE config SET config_value='$timezone' WHERE config_name='timezone'") or $success = false;
 			
