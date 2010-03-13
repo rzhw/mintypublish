@@ -62,6 +62,8 @@ if ($auth->isLoggedIn())
 							}
 							$ret .= '
 						</select><br /><br />
+						
+						<input type="submit" value="save" />
 					';
 					break;
 				
@@ -76,6 +78,17 @@ if ($auth->isLoggedIn())
 							}
 							$ret .= '
 						</select><br /><br />
+						
+						<input type="submit" value="save" />
+					';
+					break;
+				
+				case 'about':
+					$ret = '
+						<p>Thanks for using mintypublish ' . MP_VERSION . '!</p>
+						<p>This stuff is open source goodness hosted on GitHub! Check out <a href="http://github.com/a2h/mintypublish">the repository</a>!</p>
+						<p id="tinymce-version"></p>
+						<script type="text/javascript">$("#tinymce-version").html(\'Included TinyMCE version is \' + tinymce.majorVersion + \'.\' + tinymce.minorVersion)</script>
 					';
 					break;
 				

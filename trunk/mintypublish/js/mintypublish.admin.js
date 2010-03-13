@@ -739,6 +739,7 @@ $(document).ready(function() {
 						<span class="tab on" data-id="general">General</span>\
 						<span class="tab off" data-id="appearance">Appearance</span>\
 						<span class="tab off unimplemented">Plugins</span>\
+						<span class="tab off" data-id="about">About</span>\
 					</div>\
 					<div class="config"></div>\
 				');
@@ -759,7 +760,7 @@ $(document).ready(function() {
 				// load stuff
 				$.mpConfigLoad = function(tab) {
 					$(drop).find(".config").load(loc['admin2'] + '/config.php?type=get&tab='+tab, function() {
-						$(this).append('<input type="submit" value="save" />').wrapInner('<form id="config-form"></form>');
+						$(this).wrapInner('<form id="config-form"></form>');
 						
 						$("#config-form").submit(function() {
 							$.ajax({
