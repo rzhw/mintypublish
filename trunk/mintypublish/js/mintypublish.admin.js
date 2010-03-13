@@ -243,7 +243,7 @@ $(document).ready(function() {
 		var type = $(this).attr('data-type');
 		
 		// prepare the drop
-		$(drop).css('width', 224-16).css({
+		$(drop).css({
 			'position': 'fixed',
 			'left': $(window).width() - $(drop).width() - 16,
 			'top': $("#admin").height()
@@ -765,7 +765,7 @@ $(document).ready(function() {
 			
 			case 'profile':
 				var usernameFull = $(this).find("span").text();
-				var usernameShort = usernameFull.substring(0, 15) == usernameFull ? false : usernameFull.substring(0, 15);
+				var usernameShort = usernameFull.substring(0, 18) == usernameFull ? false : usernameFull.substring(0, 18);
 				
 				$(drop).find(".content").html('\
 					<img src="' + loc['images'] + '/defaultava.png" alt="" class="left avatar" />\

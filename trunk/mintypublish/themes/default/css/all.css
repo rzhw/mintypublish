@@ -280,6 +280,7 @@ body.page-media #admin .mode.off
 	-moz-box-shadow: 0 0 6px rgba(24,24,24,0.5);
 	-webkit-box-shadow: 0 0 6px rgba(24,24,24,0.5);
 	padding: 8px;
+	width: 240px;
 	font-size: 11px;
 	z-index: 2;
 }
@@ -310,7 +311,7 @@ body.page-media #admin .mode.off
 	background: #bbb;
 	color: #151515;
 	overflow: auto;
-	height: 192px;
+	height: 224px;
 	margin-bottom: 8px;
 }
 #admin .drop .list .subtitle
@@ -327,7 +328,7 @@ body.page-media #admin .mode.off
 	height: 16px;
 	padding-bottom: 4px;
 	*padding-bottom: 0;
-	font-size: 9px;
+	font-size: 10px;
 	text-align: center;
 }
 
@@ -362,8 +363,8 @@ body.page-media #admin .mode.off
 }
 #admin .drop .button4 button
 {
-	width: 49px;
-	margin-left: 4px;
+	width: 56px;
+	margin-left: 5px;
 }
 #admin .drop .button4 button:first-child
 {
