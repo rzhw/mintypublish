@@ -20,6 +20,11 @@ body, td
 	font-family: verdana;
 }
 
+p
+{
+	margin: 12px 0;
+}
+
 /* floating */
 
 .left
@@ -82,9 +87,13 @@ td
 #content
 {
 	margin: 16px auto 32px;
+	*margin: 0 auto;
+	*padding: 16px 0 32px;
 	width: 1024px;
 	line-height: 20px;
 }
+
+/* the header */
 
 #header
 {
@@ -264,7 +273,8 @@ body.admin #container
 #admin .block.mode.off
 {
 	opacity: 0.25;
-	filter: alpha(opacity=25);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=25)";
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=25);
 }
 
 #admin .block.button.on
@@ -325,12 +335,14 @@ body.page-media #admin .mode.off
 #admin .drop .tab
 {
 	margin-right: 4px;
+	display: inline-block;
 }
 #admin .drop .tab.off
 {
 	cursor: pointer;
 	opacity: 0.5;
-	filter: alpha(opacity=50);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=50)";
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
 }
 #admin .drop .tab.off:hover
 {

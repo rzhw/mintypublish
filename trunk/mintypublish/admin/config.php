@@ -89,6 +89,17 @@ if ($auth->isLoggedIn())
 						<p>This stuff is open source goodness hosted on GitHub! Check out <a href="http://github.com/a2h/mintypublish">the repository</a>!</p>
 						<p id="tinymce-version"></p>
 						<script type="text/javascript">$("#tinymce-version").html(\'Included TinyMCE version is \' + tinymce.majorVersion + \'.\' + tinymce.minorVersion)</script>
+						';
+							// code from http://www.krizka.net/2008/03/15/how-to-detect-internet-exporer-version-with-php/
+							ereg('MSIE ([0-9]\.[0-9])', $_SERVER['HTTP_USER_AGENT'], $reg);
+							if (isset($reg[1]) && floatval($reg[1]) < 8)
+							{
+								$ret .= '
+								<p><b>mintypublish works best with a modern browser, such as <a href="http://www.mozilla.com/">Firefox</a>.
+								 It\'s faster, more secure, and more customisable. If you absolutely must use Internet Explorer, please upgrade to
+								 <a href="http://www.microsoft.com/ie/">Internet Explorer 8</a>.</b></p>';
+							}
+						$ret .= '
 					';
 					break;
 				
