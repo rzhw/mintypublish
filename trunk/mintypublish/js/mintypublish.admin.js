@@ -234,6 +234,36 @@ $(document).ready(function() {
 		});
 	}
 	
+	$.dropWorking = function() {
+		$(drop).find(".more").slideUp();
+		$(drop).find(".status").show().text('working...');
+	}
+	
+	$.dropSuccess = function(data) {
+		// unlock the tree
+		if ($.tree.focused() !== undefined)
+		{
+			$.tree.focused().lock(false);
+		}
+		
+		// stop animating if it still is
+		$(drop).find(".status").stop().css('opacity', 1);
+		
+		// change the text
+		$(drop).find(".status").text(data.message);
+		
+		// refresh the tree
+		if (data.success && $.tree.focused() !== undefined)
+		{
+			$.tree.focused().refresh();
+		}
+		
+		// fade out the status area
+		setTimeout(function() {
+			$(drop).find(".status").fadeOut(2000);
+		}, 1000);
+	}
+	
 	$("#admin .block.button").click(function() {
 		// on/off
 		$("#admin .block.button").removeClass('on');
@@ -321,24 +351,8 @@ $(document).ready(function() {
 					url: loc['admin2'] + '/files.php?type=upload',
 					name: 'mintyupload',
 					dataType: 'json',
-					beforeSend: function(file) {
-						$.tree.focused().lock(true);
-						$(drop).find(".status").show().text('working...');
-					},
-					success: function(data) {
-						$.tree.focused().lock(false);
-						
-						$(drop).find(".status").text(data.message);
-						
-						if (data.success)
-						{
-							$.tree.focused().refresh();
-						}
-						
-						setTimeout(function() {
-							$(drop).find(".status").fadeOut(2000);
-						}, 1000);
-					}
+					beforeSend: $.dropWorking,
+					success: $.dropSuccess
 				});
 				
 				/// FILE VIEWING
@@ -381,24 +395,8 @@ $(document).ready(function() {
 								to: $("#file_filename").attr('value')
 							},
 							dataType: 'json',
-							beforeSend: function() {
-								$(drop).find(".more").slideUp();
-								$(drop).find(".status").show().text('working...');
-							},
-							success: function(data) {
-								$.tree.focused().lock(false);
-								
-								$(drop).find(".status").text(data.message);
-								
-								if (data.success)
-								{
-									$.tree.focused().refresh();
-								}
-								
-								setTimeout(function() {
-									$(drop).find(".status").fadeOut(2000);
-								}, 1000);
-							}
+							beforeSend: $.dropWorking,
+							success: $.dropSuccess
 						});
 					});
 				});
@@ -434,24 +432,8 @@ $(document).ready(function() {
 								filename: $.tree.focused().get_text(id)
 							},
 							dataType: 'json',
-							beforeSend: function() {
-								$(drop).find(".more").slideUp();
-								$(drop).find(".status").show().text('working...');
-							},
-							success: function(data) {
-								$.tree.focused().lock(false);
-								
-								$(drop).find(".status").text(data.message);
-								
-								if (data.success)
-								{
-									$.tree.focused().refresh();
-								}
-								
-								setTimeout(function() {
-									$(drop).find(".status").fadeOut(2000);
-								}, 1000);
-							}
+							beforeSend: $.dropWorking,
+							success: $.dropSuccess
 						});
 					});
 				});
@@ -521,15 +503,8 @@ $(document).ready(function() {
 									parent: tempparent
 								},
 								dataType: 'json',
-								beforeSend: function() {
-									$(drop).find(".status").show().text('working...');
-								},
-								success: function(data) {
-									$(drop).find(".status").text(data.message);
-									setTimeout(function() {
-										$(drop).find(".status").fadeOut(2000);
-									}, 1000);
-								}
+								beforeSend: $.dropWorking,
+								success: $.dropSuccess
 							});
 						}
 					}
@@ -568,22 +543,8 @@ $(document).ready(function() {
 								title_short: $("#page_title_short").attr('value')
 							},
 							dataType: 'json',
-							beforeSend: function() {
-								$(drop).find(".more").slideUp();
-								$(drop).find(".status").show().text('working...');
-							},
-							success: function(data) {
-								$(drop).find(".status").text(data.message);
-								
-								if (data.success)
-								{
-									$.tree.focused().refresh();
-								}
-								
-								setTimeout(function() {
-									$(drop).find(".status").fadeOut(2000);
-								}, 1000);
-							}
+							beforeSend: $.dropWorking,
+							success: $.dropSuccess
 						});
 					});
 				});
@@ -633,24 +594,8 @@ $(document).ready(function() {
 								title_short: $("#page_title_short").attr('value')
 							},
 							dataType: 'json',
-							beforeSend: function() {
-								$(drop).find(".more").slideUp();
-								$(drop).find(".status").show().text('working...');
-							},
-							success: function(data) {
-								$.tree.focused().lock(false);
-								
-								$(drop).find(".status").text(data.message);
-								
-								if (data.success)
-								{
-									$.tree.focused().refresh();
-								}
-								
-								setTimeout(function() {
-									$(drop).find(".status").fadeOut(2000);
-								}, 1000);
-							}
+							beforeSend: $.dropWorking,
+							success: $.dropSuccess
 						});
 					});
 				});
@@ -686,24 +631,8 @@ $(document).ready(function() {
 								page_id: $(id).attr('id').replace(pidprefix,'')
 							},
 							dataType: 'json',
-							beforeSend: function() {
-								$(drop).find(".more").slideUp();
-								$(drop).find(".status").show().text('working...');
-							},
-							success: function(data) {
-								$.tree.focused().lock(false);
-								
-								$(drop).find(".status").text(data.message);
-								
-								if (data.success)
-								{
-									$.tree.focused().refresh();
-								}
-								
-								setTimeout(function() {
-									$(drop).find(".status").fadeOut(2000);
-								}, 1000);
-							}
+							beforeSend: $.dropWorking,
+							success: $.dropSuccess
 						});
 					});
 				});
@@ -745,16 +674,8 @@ $(document).ready(function() {
 								url: loc['admin2'] + '/config.php?type=set&tab='+tab,
 								data: $("#config-form").serialize(),
 								dataType: 'json',
-								beforeSend: function() {
-									$(drop).find(".status").show().text('working...');
-								},
-								success: function(data) {								
-									$(drop).find(".status").text(data.message);
-									
-									setTimeout(function() {
-										$(drop).find(".status").fadeOut(2000);
-									}, 1000);
-								}
+								beforeSend: $.dropWorking,
+								success: $.dropSuccess
 							});
 							return false;
 						});
