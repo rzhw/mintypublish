@@ -354,14 +354,12 @@ $(document).ready(function() {
 					
 					$.tree.focused().lock(true);
 					
-					// don't use .get_text() because of how we formed the page nodes
-					//var ft = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
-					var ff = $.tree.focused().get_text(id);
+					var filename = $.tree.focused().get_text(id);
 					
 					$(drop).find(".more").hide().html('\
 						<p><b>File information</b></p>\
 						<p>\
-							<label for="file_filename">Filename:</label> <input type="text" id="file_filename" value="' + ff + '" /><br />\
+							<label for="file_filename">Filename:</label> <input type="text" id="file_filename" value="' + filename + '" /><br />\
 						</p>\
 						<p>\
 							<input type="button" value="save" />\
@@ -375,13 +373,12 @@ $(document).ready(function() {
 					});
 					
 					$(drop).find(".more input[type=button]:first").click(function() {
-						/*$.ajax({
+						$.ajax({
 							type: 'post',
 							url: loc['admin2'] + '/files.php?type=rename',
 							data: {
-								page_id: $(id).attr('id').replace(pidprefix,''),
-								file_filename: $("#file_filename").attr('value'),
-								file_title: $("#file_title").attr('value')
+								from: filename,
+								to: $("#file_filename").attr('value')
 							},
 							dataType: 'json',
 							beforeSend: function() {
@@ -402,10 +399,7 @@ $(document).ready(function() {
 									$(drop).find(".status").fadeOut(2000);
 								}, 1000);
 							}
-						});*/
-						alert('Not implemented');
-						$.tree.focused().lock(false);
-						$(drop).find(".more").slideUp();
+						});
 					});
 				});
 				

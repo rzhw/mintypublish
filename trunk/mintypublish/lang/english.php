@@ -65,6 +65,8 @@ $txt['pages_order_failure']       = 'save failed!';
 // files
 $txt['files_add_success']         = 'file upload succeeded!';
 $txt['files_add_failure']         = 'file upload failed!';
+$txt['files_info_success']        = 'file info saved!';
+$txt['files_info_failure']        = 'file info save failed!';
 $txt['files_del_success']         = 'file deleted!';
 $txt['files_del_failure']         = 'file delete failed!';
 ?>

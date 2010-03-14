@@ -153,6 +153,43 @@ if ($auth->isLoggedIn())
 			
 			break;
 		
+		case 'rename':
+			header('Content-type: application/json');
+			
+			// info goes in
+			$from = $filedir . '/' . escape_smart($_POST['from']);
+			$to = $filedir . '/' . escape_smart($_POST['to']);
+			
+			// success tracking
+			$success = true;
+			
+			// rename the file
+			try
+			{
+				rename($from, $to);
+			}
+			catch (Exception $e)
+			{
+				$success = false;
+			}
+			
+			// message
+			if ($success)
+			{
+				$message = $txt['files_info_success'];
+			}
+			else
+			{
+				$message = $txt['files_info_failure'];
+			}
+			
+			echo json_encode(array(
+				'success' => $success,
+				'message' => $message
+			));
+			
+			break;
+		
 		case 'delete':
 			header('Content-type: application/json');
 			
@@ -162,7 +199,7 @@ if ($auth->isLoggedIn())
 			// success tracking
 			$success = true;
 			
-			// get the filename to delete
+			// delete the file
 			try
 			{
 				unlink($filedir . '/' . $filename);
