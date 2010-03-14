@@ -22,24 +22,14 @@
  */
 
 if ($zvfpcms)
-{	
-	while ($row = mysql_fetch_array($mediaquery))
+{
+	if (filetypes('embeddable', $_GET['filename']))
 	{
-		if ($row['file_id'] == $_GET['id'])
-		{
-			$page->setTitle($row['file_filename']);
-			
-			echo '<h2>' . $row['file_filename'] . '</h2>';
-			
-			if (filetypes('embeddable', $row['file_filename']))
-			{
-				echo media_html($row['file_filename']);
-			}
-			else
-			{
-				echo '<a href="' . $location['files'] . '/' . $row['file_filename'] . '">Download this file</a>';
-			}
-		}
+		echo media_html($_GET['filename']);
+	}
+	else
+	{
+		echo '<a href="' . $location['files'] . '/' . $_GET['filename'] . '">Download this file</a>';
 	}
 }
 ?>

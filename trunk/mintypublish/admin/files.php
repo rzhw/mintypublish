@@ -109,34 +109,41 @@ if ($auth->isLoggedIn())
 			// disallow uploading of potentially unsafe files
 			// perhaps see if a check can be done for installed languages
 			$disallowed = array(
-				'htm', 'html', 'shtml', 'php', 'php3', 'php4', 'php5', 'php6', 'js', 'cgi', 'rb', 'py', 'lua', 'asp', 'aspx'
+				'htm', 'html', 'shtml', 'phtml', 'php', 'php3', 'php4', 'php5', 'php6', 'js', 'cgi', 'rb', 'py', 'lua', 'asp', 'aspx'
 			);
 			
 			// work out the destination for the file (1, 1, 1, uh... 1!)
 			$filename = basename($_FILES['mintyupload']['name']);
 			$filedest = $filedir . '/' . $filename;
 			
-			// success tracking
-			$success = true;
+			// extension
+			$fileext = substr(strrchr($filename, '.'), 1);
 			
-			// incoming!
-			if (!move_uploaded_file($_FILES['mintyupload']['tmp_name'], $filedest))
+			if (!in_array($fileext, $disallowed))
+			{			
+				// success tracking
+				$success = true;
+				
+				// incoming!
+				if (!move_uploaded_file($_FILES['mintyupload']['tmp_name'], $filedest))
+				{
+					$success = false;
+				}
+				
+				// message
+				if ($success)
+				{
+					$message = $txt['files_add_success'] . ' (' . $filename . ')';
+				}
+				else
+				{
+					$message = $txt['files_add_failure'];
+				}
+			}
+			else
 			{
 				$success = false;
-			}
-			else
-			{
-				mysql_query("INSERT INTO files (file_filename) VALUES('" . escape_smart($filename) . "')") or $success = false;
-			}
-			
-			// message
-			if ($success)
-			{
-				$message = $txt['files_add_success'] . ' (' . $filename . ')';
-			}
-			else
-			{
-				$message = $txt['files_add_failure'];
+				$message = 'File extension disallowed';
 			}
 			
 			echo json_encode(array(
@@ -150,27 +157,20 @@ if ($auth->isLoggedIn())
 			header('Content-type: application/json');
 			
 			// info goes in
-			$fid = escape_smart($_POST['file_id']);
+			$filename = escape_smart($_POST['filename']);
 			
 			// success tracking
 			$success = true;
 			
 			// get the filename to delete
-			$filea = mysql_query("SELECT file_filename FROM files WHERE file_id = $fid LIMIT 1");
-			while ($file = mysql_fetch_array($filea))
+			try
 			{
-				try
-				{
-					unlink($filedir . '/' . $file['file_filename']);
-				}
-				catch (Exception $e)
-				{
-					$success = false;
-				}
+				unlink($filedir . '/' . $filename);
 			}
-			
-			// delete the file
-			mysql_query("DELETE FROM files WHERE file_id = $fid") or $success = false;
+			catch (Exception $e)
+			{
+				$success = false;
+			}
 			
 			// message
 			if ($success)

@@ -278,6 +278,14 @@ $(document).ready(function() {
 								toreturn.folder = $(node).text().replace(/^\s*/, ''); // remove whitespace at beginning of string
 							}
 							return toreturn;
+						},
+						onselect: function(node) {
+							// disable the view button if it's not a file we have
+							$("#admin_list_view").attr('disabled', $(node).attr('rel') == 'file' ? '' : 'disabled');
+							
+							// as soon as we select something we can enable the info/delete buttons
+							$("#admin_list_info").attr('disabled', '');
+							$("#admin_list_delete").attr('disabled', '');
 						}
 					},
 					ui : {
@@ -300,6 +308,11 @@ $(document).ready(function() {
 						}
 					}
 				});
+				
+				// disable the view, info and delete buttons when we don't have anything selected
+				$("#admin_list_view").attr('disabled', 'disabled');
+				$("#admin_list_info").attr('disabled', 'disabled');
+				$("#admin_list_delete").attr('disabled', 'disabled');
 				
 				/// FILE ADDING
 				
@@ -331,143 +344,122 @@ $(document).ready(function() {
 				/// FILE VIEWING
 				
 				$("#admin_list_view").click(function() {
-					id = $.tree.focused().selected;
-					
-					if (id)
-					{
-						alert('Due to a recent change in the method with which file management operates, this function is temporarily unusable. Sorry for the inconvenience.');
-					}
-					else
-					{
-						alert('You haven\'t selected anything!');
-					}
+					location.href = 'index.php?p=media&filename=' + escape( $.tree.focused().get_text( $.tree.focused().selected ) );
 				});
 				
 				/// FILE INFORMATION
 				
 				$("#admin_list_info").click(function() {
 					id = $.tree.focused().selected;
-					if (id)
-					{
-						$.tree.focused().lock(true);
-						
-						// don't use .get_text() because of how we formed the page nodes
-						//var ft = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
-						var ff = $.tree.focused().get_text(id);
-						
-						$(drop).find(".more").hide().html('\
-							<p><b>File information</b></p>\
-							<p>\
-								<label for="file_filename">Filename:</label> <input type="text" id="file_filename" value="' + ff + '" /><br />\
-							</p>\
-							<p>\
-								<input type="button" value="save" />\
-								<input type="button" value="cancel" />\
-							</p>\
-						').slideDown();
-						
-						$(drop).find(".more input[type=button]:last").click(function() {
-							$.tree.focused().lock(false);
-							$(drop).find(".more").slideUp();
-						});
-						
-						$(drop).find(".more input[type=button]:first").click(function() {
-							/*$.ajax({
-								type: 'post',
-								url: loc['admin2'] + '/files.php?type=rename',
-								data: {
-									page_id: $(id).attr('id').replace(pidprefix,''),
-									file_filename: $("#file_filename").attr('value'),
-									file_title: $("#file_title").attr('value')
-								},
-								dataType: 'json',
-								beforeSend: function() {
-									$(drop).find(".more").slideUp();
-									$(drop).find(".status").show().text('working...');
-								},
-								success: function(data) {
-									$.tree.focused().lock(false);
-									
-									$(drop).find(".status").text(data.message);
-									
-									if (data.success)
-									{
-										$.tree.focused().refresh();
-									}
-									
-									setTimeout(function() {
-										$(drop).find(".status").fadeOut(2000);
-									}, 1000);
+					
+					$.tree.focused().lock(true);
+					
+					// don't use .get_text() because of how we formed the page nodes
+					//var ft = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
+					var ff = $.tree.focused().get_text(id);
+					
+					$(drop).find(".more").hide().html('\
+						<p><b>File information</b></p>\
+						<p>\
+							<label for="file_filename">Filename:</label> <input type="text" id="file_filename" value="' + ff + '" /><br />\
+						</p>\
+						<p>\
+							<input type="button" value="save" />\
+							<input type="button" value="cancel" />\
+						</p>\
+					').slideDown();
+					
+					$(drop).find(".more input[type=button]:last").click(function() {
+						$.tree.focused().lock(false);
+						$(drop).find(".more").slideUp();
+					});
+					
+					$(drop).find(".more input[type=button]:first").click(function() {
+						/*$.ajax({
+							type: 'post',
+							url: loc['admin2'] + '/files.php?type=rename',
+							data: {
+								page_id: $(id).attr('id').replace(pidprefix,''),
+								file_filename: $("#file_filename").attr('value'),
+								file_title: $("#file_title").attr('value')
+							},
+							dataType: 'json',
+							beforeSend: function() {
+								$(drop).find(".more").slideUp();
+								$(drop).find(".status").show().text('working...');
+							},
+							success: function(data) {
+								$.tree.focused().lock(false);
+								
+								$(drop).find(".status").text(data.message);
+								
+								if (data.success)
+								{
+									$.tree.focused().refresh();
 								}
-							});*/
-							alert('Not implemented');
-							$.tree.focused().lock(false);
-							$(drop).find(".more").slideUp();
-						});
-					}
-					else
-					{
-						alert('You haven\'t selected anything!');
-					}
+								
+								setTimeout(function() {
+									$(drop).find(".status").fadeOut(2000);
+								}, 1000);
+							}
+						});*/
+						alert('Not implemented');
+						$.tree.focused().lock(false);
+						$(drop).find(".more").slideUp();
+					});
 				});
 				
 				/// FILE DELETING
 				
 				$("#admin_list_delete").click(function() {
 					id = $.tree.focused().selected;
-					if (id)
-					{
-						$.tree.focused().lock(true);
-						
-						$(drop).find(".more").hide().html('\
-							<p><b>Delete file</b></p>\
-							<p>\
-								Please confirm that you want to delete this file. It cannot be recovered after deletion.\
-							</p>\
-							<p>\
-								<input type="button" value="delete" />\
-								<input type="button" value="cancel" />\
-							</p>\
-						').slideDown();
-						
-						$(drop).find(".more input[type=button]:last").click(function() {
-							$.tree.focused().lock(false);
-							$(drop).find(".more").slideUp();
-						});
-						
-						$(drop).find(".more input[type=button]:first").click(function() {
-							$.ajax({
-								type: 'post',
-								url: loc['admin2'] + '/files.php?type=delete',
-								data: {
-									file_id: $(id).attr('id').replace(fidprefix,'')
-								},
-								dataType: 'json',
-								beforeSend: function() {
-									$(drop).find(".more").slideUp();
-									$(drop).find(".status").show().text('working...');
-								},
-								success: function(data) {
-									$.tree.focused().lock(false);
-									
-									$(drop).find(".status").text(data.message);
-									
-									if (data.success)
-									{
-										$.tree.focused().refresh();
-									}
-									
-									setTimeout(function() {
-										$(drop).find(".status").fadeOut(2000);
-									}, 1000);
+					
+					$.tree.focused().lock(true);
+					
+					$(drop).find(".more").hide().html('\
+						<p><b>Delete file</b></p>\
+						<p>\
+							Please confirm that you want to delete this file. It cannot be recovered after deletion.\
+						</p>\
+						<p>\
+							<input type="button" value="delete" />\
+							<input type="button" value="cancel" />\
+						</p>\
+					').slideDown();
+					
+					$(drop).find(".more input[type=button]:last").click(function() {
+						$.tree.focused().lock(false);
+						$(drop).find(".more").slideUp();
+					});
+					
+					$(drop).find(".more input[type=button]:first").click(function() {
+						$.ajax({
+							type: 'post',
+							url: loc['admin2'] + '/files.php?type=delete',
+							data: {
+								filename: $.tree.focused().get_text(id)
+							},
+							dataType: 'json',
+							beforeSend: function() {
+								$(drop).find(".more").slideUp();
+								$(drop).find(".status").show().text('working...');
+							},
+							success: function(data) {
+								$.tree.focused().lock(false);
+								
+								$(drop).find(".status").text(data.message);
+								
+								if (data.success)
+								{
+									$.tree.focused().refresh();
 								}
-							});
+								
+								setTimeout(function() {
+									$(drop).find(".status").fadeOut(2000);
+								}, 1000);
+							}
 						});
-					}
-					else
-					{
-						alert('You haven\'t selected anything!');
-					}
+					});
 				});
 				
 				break;
@@ -478,17 +470,22 @@ $(document).ready(function() {
 				
 				// create the tree
 				$(drop).find(".content").html(listing).find(".list").tree({
-					data : { type : 'json' , opts : { url : loc['admin2'] + '/pages.php?' + $.param({'type':'get','pidprefix':pidprefix}) } },
-					ui : { animation : 250, theme_path : loc['tree'] + '/style.css' },
-					types : {
-						'default' : {
-							icon : { image : loc['tree'] + '/file.png' }
+					data: { type : 'json' , opts : { url : loc['admin2'] + '/pages.php?' + $.param({'type':'get','pidprefix':pidprefix}) } },
+					ui: { animation : 250, theme_path : loc['tree'] + '/style.css' },
+					types: {
+						'default': {
+							icon: { image : loc['tree'] + '/file.png' }
 						}
 					},
-				
+					callback: {
+						onselect: function(node) {							
+							// as soon as we select something we can enable the view/info/delete buttons
+							$("#admin_list_view").attr('disabled', '');
+							$("#admin_list_info").attr('disabled', '');
+							$("#admin_list_delete").attr('disabled', '');
+						},
 				/// PAGE REORDERING
-					callback : {
-						'onmove' : function(node, node_ref, movetype, tree_cur, tree_old) {
+						onmove: function(node, node_ref, movetype, tree_cur, tree_old) {
 							// if the node has a parent get that instead of the whole tree
 							var toget = $.tree.focused().parent(node).length ? $.tree.focused().parent(node) : false;
 							
@@ -544,6 +541,11 @@ $(document).ready(function() {
 					}
 				});
 				
+				// disable the view, info and delete buttons when we don't have anything selected
+				$("#admin_list_view").attr('disabled', 'disabled');
+				$("#admin_list_info").attr('disabled', 'disabled');
+				$("#admin_list_delete").attr('disabled', 'disabled');
+				
 				/// PAGE ADDING
 				
 				$("#admin_list_add").click(function() {
@@ -596,139 +598,120 @@ $(document).ready(function() {
 				
 				$("#admin_list_view").click(function() {
 					id = $.tree.focused().selected;
-					if (id)
-					{
-						location.href = 'index.php?p=' + $(id).attr('id').replace(pidprefix,'');
-					}
-					else
-					{
-						alert('You haven\'t selected anything!');
-					}
+					location.href = 'index.php?p=' + $(id).attr('id').replace(pidprefix,'');
 				});
 				
 				/// PAGE EDITING
 				
 				$("#admin_list_info").click(function() {
 					id = $.tree.focused().selected;
-					if (id)
-					{
-						$.tree.focused().lock(true);
-						
-						// don't use .get_text() because of how we formed the page nodes
-						var tf = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
-						var ts = $(id).find('.subtitle').text();
-						
-						$(drop).find(".more").hide().html('\
-							<p><b>Page information</b></p>\
-							<p>\
-								<label for="page_title_full">Title (full):</label> <input type="text" id="page_title_full" value="' + tf + '" /><br />\
-								<label for="page_title_short">Title (short):</label> <input type="text" id="page_title_short" value="' + ts + '" />\
-							</p>\
-							<p>\
-								<input type="button" value="save" />\
-								<input type="button" value="cancel" />\
-							</p>\
-						').slideDown();
-						
-						$(drop).find(".more input[type=button]:last").click(function() {
-							$.tree.focused().lock(false);
-							$(drop).find(".more").slideUp();
-						});
-						
-						$(drop).find(".more input[type=button]:first").click(function() {
-							$.ajax({
-								type: 'post',
-								url: loc['admin2'] + '/pages.php?type=rename',
-								data: {
-									page_id: $(id).attr('id').replace(pidprefix,''),
-									title_full: $("#page_title_full").attr('value'),
-									title_short: $("#page_title_short").attr('value')
-								},
-								dataType: 'json',
-								beforeSend: function() {
-									$(drop).find(".more").slideUp();
-									$(drop).find(".status").show().text('working...');
-								},
-								success: function(data) {
-									$.tree.focused().lock(false);
-									
-									$(drop).find(".status").text(data.message);
-									
-									if (data.success)
-									{
-										$.tree.focused().refresh();
-									}
-									
-									setTimeout(function() {
-										$(drop).find(".status").fadeOut(2000);
-									}, 1000);
+					
+					$.tree.focused().lock(true);
+					
+					// don't use .get_text() because of how we formed the page nodes
+					var tf = $(id).find('a').clone().find('*').remove().end().text(); //thanks to vinse #jquery
+					var ts = $(id).find('.subtitle').text();
+					
+					$(drop).find(".more").hide().html('\
+						<p><b>Page information</b></p>\
+						<p>\
+							<label for="page_title_full">Title (full):</label> <input type="text" id="page_title_full" value="' + tf + '" /><br />\
+							<label for="page_title_short">Title (short):</label> <input type="text" id="page_title_short" value="' + ts + '" />\
+						</p>\
+						<p>\
+							<input type="button" value="save" />\
+							<input type="button" value="cancel" />\
+						</p>\
+					').slideDown();
+					
+					$(drop).find(".more input[type=button]:last").click(function() {
+						$.tree.focused().lock(false);
+						$(drop).find(".more").slideUp();
+					});
+					
+					$(drop).find(".more input[type=button]:first").click(function() {
+						$.ajax({
+							type: 'post',
+							url: loc['admin2'] + '/pages.php?type=rename',
+							data: {
+								page_id: $(id).attr('id').replace(pidprefix,''),
+								title_full: $("#page_title_full").attr('value'),
+								title_short: $("#page_title_short").attr('value')
+							},
+							dataType: 'json',
+							beforeSend: function() {
+								$(drop).find(".more").slideUp();
+								$(drop).find(".status").show().text('working...');
+							},
+							success: function(data) {
+								$.tree.focused().lock(false);
+								
+								$(drop).find(".status").text(data.message);
+								
+								if (data.success)
+								{
+									$.tree.focused().refresh();
 								}
-							});
+								
+								setTimeout(function() {
+									$(drop).find(".status").fadeOut(2000);
+								}, 1000);
+							}
 						});
-					}
-					else
-					{
-						alert('You haven\'t selected anything!');
-					}
+					});
 				});
 				
 				/// PAGE DELETING
 				
 				$("#admin_list_delete").click(function() {
 					id = $.tree.focused().selected;
-					if (id)
-					{
-						$.tree.focused().lock(true);
-						
-						$(drop).find(".more").hide().html('\
-							<p><b>Delete page</b></p>\
-							<p>\
-								Please confirm that you want to delete this page. It cannot be recovered after deletion.\
-							</p>\
-							<p>\
-								<input type="button" value="delete" />\
-								<input type="button" value="cancel" />\
-							</p>\
-						').slideDown();
-						
-						$(drop).find(".more input[type=button]:last").click(function() {
-							$.tree.focused().lock(false);
-							$(drop).find(".more").slideUp();
-						});
-						
-						$(drop).find(".more input[type=button]:first").click(function() {
-							$.ajax({
-								type: 'post',
-								url: loc['admin2'] + '/pages.php?type=delete',
-								data: {
-									page_id: $(id).attr('id').replace(pidprefix,'')
-								},
-								dataType: 'json',
-								beforeSend: function() {
-									$(drop).find(".more").slideUp();
-									$(drop).find(".status").show().text('working...');
-								},
-								success: function(data) {
-									$.tree.focused().lock(false);
-									
-									$(drop).find(".status").text(data.message);
-									
-									if (data.success)
-									{
-										$.tree.focused().refresh();
-									}
-									
-									setTimeout(function() {
-										$(drop).find(".status").fadeOut(2000);
-									}, 1000);
+					
+					$.tree.focused().lock(true);
+					
+					$(drop).find(".more").hide().html('\
+						<p><b>Delete page</b></p>\
+						<p>\
+							Please confirm that you want to delete this page. It cannot be recovered after deletion.\
+						</p>\
+						<p>\
+							<input type="button" value="delete" />\
+							<input type="button" value="cancel" />\
+						</p>\
+					').slideDown();
+					
+					$(drop).find(".more input[type=button]:last").click(function() {
+						$.tree.focused().lock(false);
+						$(drop).find(".more").slideUp();
+					});
+					
+					$(drop).find(".more input[type=button]:first").click(function() {
+						$.ajax({
+							type: 'post',
+							url: loc['admin2'] + '/pages.php?type=delete',
+							data: {
+								page_id: $(id).attr('id').replace(pidprefix,'')
+							},
+							dataType: 'json',
+							beforeSend: function() {
+								$(drop).find(".more").slideUp();
+								$(drop).find(".status").show().text('working...');
+							},
+							success: function(data) {
+								$.tree.focused().lock(false);
+								
+								$(drop).find(".status").text(data.message);
+								
+								if (data.success)
+								{
+									$.tree.focused().refresh();
 								}
-							});
+								
+								setTimeout(function() {
+									$(drop).find(".status").fadeOut(2000);
+								}, 1000);
+							}
 						});
-					}
-					else
-					{
-						alert('You haven\'t selected anything!');
-					}
+					});
 				});
 				
 				break;
