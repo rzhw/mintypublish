@@ -38,8 +38,6 @@ development cycles have a feature lock. Self-imposition for a hobbyist project i
 particularly easy.
 
 ### File management
-#### Placeholders
-* The info button
 
 #### What should probably be done
 * Inserting videos is **extremely** unflexible, as it imposes a 800x600 limit. TinyMCE has
