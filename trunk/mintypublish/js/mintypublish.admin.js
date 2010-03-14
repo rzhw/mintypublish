@@ -240,8 +240,11 @@ $(document).ready(function() {
 	}
 	
 	$.dropSuccess = function(data) {
+		// is there a tree here?
+		var treeExists = $(drop).find(".tree").length ? true : false;
+		
 		// unlock the tree
-		if ($.tree.focused() !== undefined)
+		if (treeExists)
 		{
 			$.tree.focused().lock(false);
 		}
@@ -253,7 +256,7 @@ $(document).ready(function() {
 		$(drop).find(".status").text(data.message);
 		
 		// refresh the tree
-		if (data.success && $.tree.focused() !== undefined)
+		if (data.success && treeExists)
 		{
 			$.tree.focused().refresh();
 		}
