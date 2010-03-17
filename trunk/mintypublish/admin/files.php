@@ -92,7 +92,8 @@ if ($auth->isLoggedIn())
 				$output[] = array(
 					'data' => $filename,
 					'attributes' => array(
-						'rel' => 'file'
+						'rel' => 'file',
+						'data-path' => (isset($_GET['folder']) ? $_GET['folder'] . '/' : '') . $filename
 					)
 				);
 			}

@@ -91,8 +91,8 @@ if ($auth->isLoggedIn())
 						<script type="text/javascript">$("#tinymce-version").html(\'Included TinyMCE version is \' + tinymce.majorVersion + \'.\' + tinymce.minorVersion)</script>
 						';
 							// code from http://www.krizka.net/2008/03/15/how-to-detect-internet-exporer-version-with-php/
-							ereg('MSIE ([0-9]\.[0-9])', $_SERVER['HTTP_USER_AGENT'], $reg);
-							if (isset($reg[1]) && floatval($reg[1]) < 8)
+							preg_match('/MSIE ([0-9]\.[0-9])/', $_SERVER['HTTP_USER_AGENT'], $matches);
+							if (isset($matches[1]) && floatval($matches[1]) < 8)
 							{
 								$ret .= '
 								<p><b>mintypublish works best with a modern browser, such as <a href="http://www.mozilla.com/">Firefox</a>.

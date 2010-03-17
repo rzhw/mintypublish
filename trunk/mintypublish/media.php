@@ -23,13 +23,15 @@
 
 if ($zvfpcms)
 {
-	if (filetypes('embeddable', $_GET['filename']))
+	echo '<h1>' . $_GET['path'] . '</h1>';
+	
+	if (filetypes('embeddable', $_GET['path']))
 	{
-		echo media_html($_GET['filename']);
+		echo media_html($_GET['path']);
 	}
 	else
 	{
-		echo '<a href="' . $location['files'] . '/' . $_GET['filename'] . '">Download this file</a>';
+		echo '<a href="' . $location['files'] . '/' . $_GET['path'] . '">Download this file</a>';
 	}
 }
 ?>

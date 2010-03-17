@@ -289,8 +289,17 @@ $(document).ready(function() {
 				// prefix for ids
 				var fidprefix = 'fid_';
 				
+				// put in all the html
+				$(drop).find(".content").html('\
+					<div class="tabs">\
+						<span class="tab on" data-id="files">File browser</span>\
+						<span class="tab off unimplemented">List manager</span>\
+					</div>\
+					' + listing
+				);
+				
 				// create the tree
-				$(drop).find(".content").html(listing).find(".list").tree({
+				$(drop).find(".list").tree({
 					data: {
 						type: 'json',
 						async: true, // allow getting different data
@@ -361,7 +370,7 @@ $(document).ready(function() {
 				/// FILE VIEWING
 				
 				$("#admin_list_view").click(function() {
-					location.href = 'index.php?p=media&filename=' + escape( $.tree.focused().get_text( $.tree.focused().selected ) );
+					location.href = 'index.php?p=media&path=' + escape( $.tree.focused().selected.attr('data-path') );
 				});
 				
 				/// FILE INFORMATION
