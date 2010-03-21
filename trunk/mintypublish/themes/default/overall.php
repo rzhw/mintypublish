@@ -13,7 +13,9 @@
 		
 		<div id="container">
 			<header id="header">
-				<h1 id="title"><?php echo $this->sitename; ?></h1>
+				<div id="title">
+					<h1><?php echo $this->sitename; ?></h1>
+				</div>
 				
 				<div id="menu">
 					<nav>
