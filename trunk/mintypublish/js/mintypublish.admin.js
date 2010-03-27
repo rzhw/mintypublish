@@ -276,10 +276,13 @@ $(document).ready(function() {
 		var type = $(this).attr('data-type');
 		
 		// prepare the drop
+		var dropx = $("#admin").position().left + $("#admin").width() - $(drop).width() - 16;
+		var dropy = $("#admin").position().top + $("#admin").height();
+		
 		$(drop).css({
 			'position': 'fixed',
-			'left': $(window).width() - $(drop).width() - 16,
-			'top': $("#admin").height()
+			'left': dropx >= 0 ? dropx : 0,
+			'top': dropy >= 0 ? dropy : 0
 		});
 		
 		// now what?
