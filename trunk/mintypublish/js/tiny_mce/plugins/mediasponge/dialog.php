@@ -20,6 +20,7 @@
 		</tr>
 	
 		<?php
+			$zvfpcms = true;
 			include('../../../../config.php');
 			include('../../../../functions.php');
 			
