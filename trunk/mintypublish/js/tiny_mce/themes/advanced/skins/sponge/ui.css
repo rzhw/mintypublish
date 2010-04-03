@@ -9,7 +9,7 @@
 .spongeSkin .mceToolbar {background:#F0F0EE;height:26px}
 
 /* External */
-.spongeSkin .mceExternalToolbar {position:absolute; border:1px solid #ABC6DD; border-bottom:0; display:none}
+.spongeSkin .mceExternalToolbar {display:none}
 .spongeSkin .mceExternalToolbar td.mceToolbar {padding-right:13px;}
 .spongeSkin .mceExternalClose {position:absolute; top:3px; right:3px; width:7px; height:7px; background:url(../../img/icons.gif) -820px 0}
 

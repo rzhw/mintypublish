@@ -71,7 +71,7 @@ tinyMCE.init({
 	theme_advanced_toolbar_align: "left",
 	theme_advanced_path: false,
 	theme_advanced_resizing: false,
-	content_css: loc['styles']+"/screen.css",
+	content_css: loc['styles']+"/all.css",
 	onchange_callback: function() { pageChanged = true; }
 });
 
@@ -196,15 +196,26 @@ $(document).ready(function() {
 						$("#content_editing").show();
 					}
 					
+					// drop in the container
 					var contwidth = $("#content").width();
 					var contheight = $("#content").height();
 					$("#"+ta).css({'width':contwidth});
 					tinyMCE.execCommand('mceAddControl', false, ta);
-					curmode = mode;
-					break;
-				
-				case 'structure':
-					alert('Structure mode has not been implemented yet.');
+					
+					// hello toolbar, let's make you BETTER.
+					$("#content_edit_external").wrap('<div id="editor-toolbar"></div>');
+					$("#content_edit_external").prepend('<div class="titlebar"></div>');
+					
+					$("#editor-toolbar").jqDrag($("#editor-toolbar .titlebar"));
+					
+					$("#editor-toolbar").css({
+						'z-index': 999,
+						'position': 'fixed',
+						'top': 32,
+						'left': 32
+					});
+					
+					// and our work here is done!
 					curmode = mode;
 					break;
 			}
