@@ -202,7 +202,7 @@ $(document).ready(function() {
 					$("#"+ta).css({'width':contwidth});
 					tinyMCE.execCommand('mceAddControl', false, ta);
 					
-					// hello toolbar, let's make you BETTER.
+					// hello toolbar, let's make you BETTER.					
 					$("#content_edit_external").wrap('<div id="editor-toolbar"></div>');
 					$("#content_edit_external").prepend('<div class="titlebar"></div>');
 					
@@ -210,8 +210,8 @@ $(document).ready(function() {
 					
 					$("#editor-toolbar").css({
 						'position': 'fixed',
-						'top': 32,
-						'left': 32
+						'top': 0,
+						'left': $("#content").position().left
 					});
 					
 					// and our work here is done!
