@@ -75,7 +75,7 @@ tinyMCE.init({
 	onchange_callback: function() { pageChanged = true; }
 });
 
-$(document).ready(function() {
+$(document).ready(function() {	
 	/// MODE BLOCKS
 	
 	var curmode = 'preview';
@@ -202,6 +202,9 @@ $(document).ready(function() {
 					$("#"+ta).css({'width':contwidth});
 					tinyMCE.execCommand('mceAddControl', false, ta);
 					
+					// alternate names for css stuff
+					$("#content_edit_ifr").contents().find("body").addClass('editor-content');
+					
 					// hello toolbar, let's make you BETTER.					
 					$("#content_edit_external").wrap('<div id="editor-toolbar"></div>');
 					$("#content_edit_external").prepend('<div class="titlebar"></div>');
@@ -223,7 +226,7 @@ $(document).ready(function() {
 	
 	/// BUTTON BLOCKS
 	
-	var drop = $('<div class="drop">\
+	var drop = $('<div id="admin-drop">\
 	              <div class="content"></div>\
 	              <div class="status"></div>\
 	              <div class="close"><a href="javascript:;" onclick="$.dropClose()">close</a></div>\

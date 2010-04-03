@@ -22,6 +22,7 @@ body, td
 p
 {
 	margin: 12px 0;
+	line-height: 20px;
 }
 
 /* floating */
@@ -66,14 +67,6 @@ td
 	padding: 0;
 }
 
-/* tinymce */
-
-.mceContentBody
-{
-	text-align: left !important;
-	line-height: 20px;
-}
-
 /* wrappers */
 
 #container
@@ -89,7 +82,6 @@ td
 	*margin: 0 auto;
 	*padding: 16px 0 32px;
 	width: 1024px;
-	line-height: 20px;
 }
 
 /* the header */
@@ -196,18 +188,30 @@ input, object
 
 /* headings */
 
-h1,h2,h3,h4,h5
+h1, h2, h3, h4, h5
 {
  	padding: 0 0;
 	margin: 16px 0;
 }
 h1
 {
-	font-size: large;
+	font-size: 18px;
 }
 h2
 {
-	font-size: medium;
+	font-size: 16px;
+}
+h3
+{
+	font-size: 14px;
+}
+h4
+{
+	font-size: 12px;
+}
+h5
+{
+	font-size: 11px;
 }
 
 /* general inputs */
@@ -306,7 +310,7 @@ body.page-media #admin .mode.off
 
 /* the admin drop itself */
 
-#admin .drop
+#admin-drop
 {
 	background: #333;
 	color: #fff;
@@ -319,15 +323,19 @@ body.page-media #admin .mode.off
 	z-index: 2;
 }
 
-#admin .drop h1
+#admin-drop h1
 {
 	margin: 4px 0;
 	font-size: 12px;
 }
+#admin-drop p
+{
+	line-height: 14px;
+}
 
 /* tree lists in the admin drop */
 
-#admin .drop .list
+#admin-drop .list
 {
 	background: #bbb;
 	color: #151515;
@@ -335,7 +343,7 @@ body.page-media #admin .mode.off
 	height: 224px;
 	margin-bottom: 8px;
 }
-#admin .drop .list .subtitle
+#admin-drop .list .subtitle
 {
 	font-size: 8px;
 	padding-left: 4px;
@@ -343,27 +351,27 @@ body.page-media #admin .mode.off
 
 /* tabs in the admin drop */
 
-#admin .drop .tabs
+#admin-drop .tabs
 {
 	margin-bottom: 12px;
 }
-#admin .drop .tab
+#admin-drop .tab
 {
 	margin-right: 4px;
 	display: inline-block;
 }
-#admin .drop .tab.off
+#admin-drop .tab.off
 {
 	cursor: pointer;
 	opacity: 0.5;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=50)";
 	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
 }
-#admin .drop .tab.off:hover
+#admin-drop .tab.off:hover
 {
 	text-shadow: 0px 0px 4px #fff;
 }
-#admin .drop .tab.on
+#admin-drop .tab.on
 {
 	cursor: default;
 	text-shadow: 0px 0px 4px #fff;
@@ -371,41 +379,41 @@ body.page-media #admin .mode.off
 
 /* the config admin drop */
 
-#admin .drop .config label
+#admin-drop .config label
 {
 	display: block;
 	font-size: 10px;
 	margin-bottom: 2px;
 }
-#admin .drop .config input[type=text], #admin .drop .config input[type=password]
+#admin-drop .config input[type=text], #admin-drop .config input[type=password]
 {
 	width: 232px;
 }
-#admin .drop .config select 
+#admin-drop .config select 
 {
 	width: 240px;
 }
 
 /* the profile admin drop */
 
-#admin .drop .avatar
+#admin-drop .avatar
 {
 	margin-right: 12px;
 }
-#admin .drop .logout
+#admin-drop .logout
 {
 	margin: 7px 8px;
 	font-size: 9px;
 	color: #aaa;
 }
-#admin .drop .logout a
+#admin-drop .logout a
 {
 	color: #aaa;
 }
 
 /* form elements in the admin drop */
 
-#admin .drop button
+#admin-drop button
 {
 	border: 0;
 	background: #eee;
@@ -416,32 +424,32 @@ body.page-media #admin .mode.off
 	font-size: 10px;
 	text-align: center;
 }
-#admin .drop button[disabled]
+#admin-drop button[disabled]
 {
 	opacity: 0.8;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=80)";
 	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=80);
 }
 
-#admin .drop input[type=text], #admin .drop input[type=password], #admin .drop select
+#admin-drop input[type=text], #admin-drop input[type=password], #admin-drop select
 {
 	background: #ddd;
 	color: #333;
 }
-#admin .drop input[type=text], #admin .drop input[type=password]
+#admin-drop input[type=text], #admin-drop input[type=password]
 {
 	padding: 2px 3px;
 }
-#admin .drop input[type=button], #admin .drop input[type=submit], #admin .drop select
+#admin-drop input[type=button], #admin-drop input[type=submit], #admin-drop select
 {
 	padding: 1px;
 }
-#admin .drop input[type=text], #admin .drop input[type=password], #admin .drop select
+#admin-drop input[type=text], #admin-drop input[type=password], #admin-drop select
 {
 	border: 1px solid #999;
 	margin-bottom: 2px;
 }
-#admin .drop input[type=button], #admin .drop input[type=submit]
+#admin-drop input[type=button], #admin-drop input[type=submit]
 {
 	background: #ccc;
 	color: #3f3f3f;
@@ -455,61 +463,65 @@ body.page-media #admin .mode.off
 
 /* sliding down sections in the admin drop */
 
-#admin .drop .more
+#admin-drop .more
 {
 	font-size: 9px;
 }
-#admin .drop .more input[type=text], #admin .drop input[type=password], #admin .drop .more input[type=button], #admin .drop .more input[type=submit]
+#admin-drop .more input[type=text], #admin-drop input[type=password], #admin-drop .more input[type=button], #admin-drop .more input[type=submit]
 {
 	font-size: 9px;
 }
-#admin .drop .more input[type=button], #admin .drop .more input[type=submit]
+#admin-drop .more input[type=button], #admin-drop .more input[type=submit]
 {
 	padding: 1px;
 }
-#admin .drop .more input[type=text]
+#admin-drop .more input[type=text]
 {
 	width: 96px;
 }
 
 /* 4 button groups in the admin drop */
 
-#admin .drop .button4
+#admin-drop .button4
 {
 	font-size: 0;
 }
-#admin .drop .button4 button
+#admin-drop .button4 button
 {
 	width: 56px;
 	margin-left: 5px;
 }
-#admin .drop .button4 button:first-child
+#admin-drop .button4 button:first-child
 {
 	margin-left: 0;
 }
 
 /* status/close areas in the admin drop */
 
-#admin .drop .status, #admin .drop .close
+#admin-drop .status, #admin-drop .close
 {
 	font-size: 9px;
 	padding: 8px 0 4px 0;
 }
-#admin .drop .status
+#admin-drop .status
 {
 	float: left;
 }
-#admin .drop .close
+#admin-drop .close
 {
 	float: right;
 }
-#admin .drop .close a
+#admin-drop .close a
 {
 	border-bottom: 1px #808080 dotted;
 }
 
 /* editor */
 
+.editor-content
+{
+	text-align: left !important;
+}
 #editor-toolbar
 {
 	z-index: 999;
