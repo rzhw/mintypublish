@@ -209,7 +209,6 @@ $(document).ready(function() {
 					$("#editor-toolbar").jqDrag($("#editor-toolbar .titlebar"));
 					
 					$("#editor-toolbar").css({
-						'z-index': 999,
 						'position': 'fixed',
 						'top': 32,
 						'left': 32

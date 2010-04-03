@@ -238,17 +238,18 @@ body.admin #container
 
 #admin
 {
-	background: #181818;
-	box-shadow: 0 0 6px #000;
-	-moz-box-shadow: 0 0 6px #000;
-	-webkit-box-shadow: 0 0 6px #000;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 24px;
-	text-align: left;
+	z-index: 999;
 	font-size: 10px;
+	text-align: left;
+	background: #181818;
+	box-shadow: 0 0 6px #000;
+	-moz-box-shadow: 0 0 6px #000;
+	-webkit-box-shadow: 0 0 6px #000;
 }
 
 .unimplemented
@@ -511,6 +512,7 @@ body.page-media #admin .mode.off
 
 #editor-toolbar
 {
+	z-index: 999;
 	box-shadow: 0 0 4px rgba(0,0,0,0.5);
 	-moz-box-shadow: 0 0 4px rgba(0,0,0,0.5);
 	-webkit-box-shadow: 0 0 4px rgba(0,0,0,0.5);
